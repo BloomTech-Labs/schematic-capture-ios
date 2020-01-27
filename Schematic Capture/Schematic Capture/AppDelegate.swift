@@ -9,12 +9,10 @@
 import UIKit
 import Firebase
 import FirebaseUI
-import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FUIAuthDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     
-
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -25,38 +23,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FUIAut
         let providers : [FUIAuthProvider] = [FUIGoogleAuth(), FUIEmailAuth()]
         authUI?.providers = providers
         
-//        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-//        GIDSignIn.sharedInstance().delegate = self
-        
         return true
-    }
-
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        } else {
-            guard let authentication = user.authentication else { return }
-            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-            Auth.auth().signIn(with: credential) { (authResult, error) in
-                if let error = error {
-                    return
-                }
-                // user is signed in
-                
-            }
-        }
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
         if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-          return true
+            return true
         }
-        // other URL handling goes here.
+        
         return false
-          //return GIDSignIn.sharedInstance().handle(url)
     }
+    
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        
+        // if successful login,
+        // send user info to our backend
+        // direct to main tableview
+    }
+    
     
     // MARK: UISceneSession Lifecycle
 
