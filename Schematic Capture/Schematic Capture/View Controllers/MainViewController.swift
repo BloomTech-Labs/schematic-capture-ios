@@ -1,5 +1,5 @@
 //
-//  SignInViewController.swift
+//  MainViewController.swift
 //  Schematic Capture
 //
 //  Created by Gi Pyo Kim on 1/24/20.
@@ -7,22 +7,13 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseUI
-import GoogleSignIn
 
-class SignInViewController: UIViewController {
-    
-
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        GIDSignIn.sharedInstance()?.presentingViewController = self
-//        GIDSignIn.sharedInstance().signIn()
-        
-        let authUI = FUIAuth.defaultAuthUI()
-        let authViewController = authUI!.authViewController()
-        show(authViewController, sender: nil)
+
+        // Do any additional setup after loading the view.
     }
     
 
@@ -37,4 +28,3 @@ class SignInViewController: UIViewController {
     */
 
 }
-

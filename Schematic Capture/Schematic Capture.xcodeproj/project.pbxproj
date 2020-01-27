@@ -16,6 +16,8 @@
 		A665836C23DAB50A006073DF /* Schematic_CaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */; };
 		A665837723DB6695006073DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665837623DB6695006073DF /* GoogleService-Info.plist */; };
 		A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665837823DB6E2D006073DF /* SignInViewController.swift */; };
+		A665837C23DB9101006073DF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665837B23DB9101006073DF /* MainViewController.swift */; };
+		A665837E23DB92E9006073DF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665837D23DB92E9006073DF /* SignUpViewController.swift */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +48,8 @@
 		A665836D23DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A665837623DB6695006073DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A665837823DB6E2D006073DF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		A665837B23DB9101006073DF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A665837D23DB92E9006073DF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -118,6 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				A665837823DB6E2D006073DF /* SignInViewController.swift */,
+				A665837B23DB9101006073DF /* MainViewController.swift */,
+				A665837D23DB92E9006073DF /* SignUpViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -332,6 +338,8 @@
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
 				A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */,
+				A665837C23DB9101006073DF /* MainViewController.swift in Sources */,
+				A665837E23DB92E9006073DF /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
