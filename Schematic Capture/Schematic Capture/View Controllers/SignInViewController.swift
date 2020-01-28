@@ -8,33 +8,33 @@
 
 import UIKit
 import Firebase
-import FirebaseUI
+import GoogleSignIn
 
 class SignInViewController: UIViewController {
     
     @IBOutlet weak var appLogo: UIImageView!
     
+    let userDefault = UserDefaults.standard
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        GIDSignIn.sharedInstance()?.presentingViewController = self
-//        GIDSignIn.sharedInstance().signIn()
-        
         // check network connection
+        if Reachability.isConnectedToNetwork() {
+            GIDSignIn.sharedInstance()?.presentingViewController = self
+            GIDSignIn.sharedInstance().signIn()
+        } else {
+            
+        }
         
-        showFirebaseUISignIn()
+        
     }
 
+
     @IBAction func signIn(_ sender: Any) {
-        showFirebaseUISignIn()
+        
     }
-    
-    private func showFirebaseUISignIn() {
-        let authUI = FUIAuth.defaultAuthUI()
-        let authViewController = authUI!.authViewController()
-        authViewController.modalPresentationStyle = .fullScreen
-        self.present(authViewController, animated: true, completion: nil)
-    }
+
     
     /*
     // MARK: - Navigation
