@@ -18,6 +18,9 @@
 		A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665837823DB6E2D006073DF /* SignInViewController.swift */; };
 		A665838323DFA06C006073DF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838223DFA06C006073DF /* Reachability.swift */; };
 		A665838623DFA50A006073DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838523DFA50A006073DF /* User.swift */; };
+		A665838923E0E1B2006073DF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838823E0E1B2006073DF /* LoginController.swift */; };
+		A665838C23E0E27C006073DF /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838B23E0E27C006073DF /* Bearer.swift */; };
+		A665838E23E0E384006073DF /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838D23E0E384006073DF /* Networking.swift */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,9 @@
 		A665837823DB6E2D006073DF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A665838223DFA06C006073DF /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A665838523DFA50A006073DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A665838823E0E1B2006073DF /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		A665838B23E0E27C006073DF /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		A665838D23E0E384006073DF /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -106,6 +112,7 @@
 				A665837A23DB6E32006073DF /* View Controllers */,
 				A665838423DFA070006073DF /* Helpers */,
 				A665838723E0B358006073DF /* Models */,
+				A665838A23E0E1C6006073DF /* Controllers */,
 			);
 			path = "Schematic Capture";
 			sourceTree = "<group>";
@@ -140,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				A665838223DFA06C006073DF /* Reachability.swift */,
+				A665838D23E0E384006073DF /* Networking.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -148,8 +156,17 @@
 			isa = PBXGroup;
 			children = (
 				A665838523DFA50A006073DF /* User.swift */,
+				A665838B23E0E27C006073DF /* Bearer.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A665838A23E0E1C6006073DF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A665838823E0E1B2006073DF /* LoginController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		A70A916E7742D130EC55F213 /* Pods */ = {
@@ -360,7 +377,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
+				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
 				A665838623DFA50A006073DF /* User.swift in Sources */,
+				A665838E23E0E384006073DF /* Networking.swift in Sources */,
+				A665838C23E0E27C006073DF /* Bearer.swift in Sources */,
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
 				A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */,
