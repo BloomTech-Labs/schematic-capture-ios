@@ -19,7 +19,7 @@ class LogInController {
     //var receipts: [Receipt] = []
     
     var bearer: Bearer?
-    private let loginBaseURL = URL(string: "")!
+    private let loginBaseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
 
     // MARK: - Sign Up  &  Log In Functions :
     

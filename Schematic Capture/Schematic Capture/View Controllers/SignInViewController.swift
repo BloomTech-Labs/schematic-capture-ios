@@ -13,38 +13,31 @@ import GoogleSignIn
 class SignInViewController: UIViewController {
     
     @IBOutlet weak var appLogo: UIImageView!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
-    let userDefault = UserDefaults.standard
-    
+    let loginController = LogInController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // check network connection
         if Reachability.isConnectedToNetwork() {
+            setUpUI()
             GIDSignIn.sharedInstance()?.presentingViewController = self
             GIDSignIn.sharedInstance().signIn()
         } else {
-            
+            let homeViewController = self.storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
+            view.window?.rootViewController = homeViewController
+            view.window?.makeKeyAndVisible()
         }
-        
-        
     }
 
-
-    @IBAction func signIn(_ sender: Any) {
-        
+    func setUpUI() {
+        Style.styleFilledButton(signUpButton)
+        Style.styleHollowButton(loginButton)
     }
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
