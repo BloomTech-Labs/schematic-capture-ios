@@ -14,4 +14,5 @@ struct User: Codable {
     let firstName: String
     let lastName: String
     let phoneNumber: String
+    let token: String
 }

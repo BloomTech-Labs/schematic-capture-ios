@@ -16,10 +16,11 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordVerificationTextField: UITextField!
+    @IBOutlet weak var tokenTextFIeld: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,11 +34,13 @@ class SignUpViewController: UIViewController {
         Style.styleTextField(phoneNumberTextField)
         Style.styleTextField(passwordTextField)
         Style.styleTextField(passwordVerificationTextField)
+        Style.styleTextField(tokenTextFIeld)
         Style.styleFilledButton(signUpButton)
         errorMessageLabel.alpha = 0
     }
     
     @IBAction func signUp(_ sender: Any) {
+        
     }
     
     

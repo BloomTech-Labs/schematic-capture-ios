@@ -146,7 +146,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="41" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axX-JB-8bS">
-                                <rect key="frame" x="40" y="128" width="334" height="424"/>
+                                <rect key="frame" x="40" y="128" width="334" height="478"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vwX-Bc-fDf">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -181,8 +181,13 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Paste Invite Token" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gcR-I1-Bii">
+                                        <rect key="frame" x="0.0" y="325" width="334" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ojx-Ul-NCO">
-                                        <rect key="frame" x="0.0" y="345" width="334" height="39"/>
+                                        <rect key="frame" x="0.0" y="399" width="334" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
@@ -190,7 +195,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayP-8g-reU">
-                                        <rect key="frame" x="0.0" y="403.5" width="334" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="457.5" width="334" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -199,11 +204,13 @@
                                 <constraints>
                                     <constraint firstItem="PTr-Jk-uZ3" firstAttribute="top" secondItem="MOA-uZ-ngn" secondAttribute="bottom" constant="20" id="2PY-AR-ZJz"/>
                                     <constraint firstItem="c0A-cn-tB0" firstAttribute="height" secondItem="vwX-Bc-fDf" secondAttribute="height" id="6ux-qt-aHr"/>
-                                    <constraint firstItem="ojx-Ul-NCO" firstAttribute="top" secondItem="PTr-Jk-uZ3" secondAttribute="bottom" constant="40" id="DNB-Yl-JYT"/>
+                                    <constraint firstItem="gcR-I1-Bii" firstAttribute="height" secondItem="vwX-Bc-fDf" secondAttribute="height" id="DQH-0t-iVX"/>
+                                    <constraint firstItem="gcR-I1-Bii" firstAttribute="top" secondItem="PTr-Jk-uZ3" secondAttribute="bottom" constant="20" id="Db4-Pq-ywO"/>
                                     <constraint firstItem="c0A-cn-tB0" firstAttribute="top" secondItem="JP8-8D-P9b" secondAttribute="bottom" constant="20" id="JAa-xV-egj"/>
                                     <constraint firstItem="JP8-8D-P9b" firstAttribute="top" secondItem="vwX-Bc-fDf" secondAttribute="bottom" constant="20" id="ZgR-LR-f6t"/>
                                     <constraint firstItem="bGi-aI-E4m" firstAttribute="top" secondItem="c0A-cn-tB0" secondAttribute="bottom" constant="20" id="ars-2k-x5K"/>
                                     <constraint firstItem="MOA-uZ-ngn" firstAttribute="height" secondItem="vwX-Bc-fDf" secondAttribute="height" id="d25-m8-F16"/>
+                                    <constraint firstItem="ojx-Ul-NCO" firstAttribute="top" secondItem="gcR-I1-Bii" secondAttribute="bottom" constant="40" id="dDq-nb-Gcd"/>
                                     <constraint firstItem="bGi-aI-E4m" firstAttribute="height" secondItem="vwX-Bc-fDf" secondAttribute="height" id="o3a-ri-43O"/>
                                     <constraint firstItem="MOA-uZ-ngn" firstAttribute="top" secondItem="bGi-aI-E4m" secondAttribute="bottom" constant="20" id="pWm-v1-MLX"/>
                                     <constraint firstItem="PTr-Jk-uZ3" firstAttribute="height" secondItem="vwX-Bc-fDf" secondAttribute="height" constant="1" id="uMt-Hx-WDh"/>
@@ -229,6 +236,7 @@
                         <outlet property="passwordVerificationTextField" destination="PTr-Jk-uZ3" id="r3G-zj-QEV"/>
                         <outlet property="phoneNumberTextField" destination="bGi-aI-E4m" id="H0H-PJ-pbX"/>
                         <outlet property="signUpButton" destination="ojx-Ul-NCO" id="Vkc-NB-LOw"/>
+                        <outlet property="tokenTextFIeld" destination="gcR-I1-Bii" id="2Yr-X7-tnF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nm3-5j-f4g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

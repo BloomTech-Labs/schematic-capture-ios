@@ -19,12 +19,17 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>schematiccapture</string>
 				<string>com.googleusercontent.apps.138524710398-bfkdqmd9fv6mjc467si515jc8tu17f2d</string>
 			</array>
+			<key>CFBundleURLName</key>
+			<string>com.Schematic-Capture.GIPGIP</string>
+			<key>CFBundleURLIconFile</key>
+			<string></string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
