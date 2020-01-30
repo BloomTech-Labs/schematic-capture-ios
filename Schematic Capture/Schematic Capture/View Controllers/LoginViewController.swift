@@ -22,6 +22,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         setUpUI()
+        
+        // TESTING
+        emailTextField.text = "bob_johnson@lambdaschool.com"
+        passwordTextField.text = "testing123!"
     }
     func setUpUI() {
         Style.styleTextField(emailTextField)
@@ -51,9 +55,15 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            let alert = SCLAlertView().showSuccess("Login Success!", subTitle: "Proceed to main page")
+            DispatchQueue.main.async {
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                let alert = SCLAlertView(appearance: appearance)
+                alert.addButton("Proceed to main page") {
+                    self.performSegue(withIdentifier: "MainPageSegue", sender: nil)
+                }
+                alert.showSuccess("Login Success!", subTitle: "")
+            }
             
-            // TODO: perform segue to main page
         }
     }
     

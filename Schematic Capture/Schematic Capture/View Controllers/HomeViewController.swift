@@ -11,6 +11,9 @@ import UIKit
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var loginLabel: UILabel!
+    
+    var loginController: LogInController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

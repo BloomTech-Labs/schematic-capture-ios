@@ -20,6 +20,7 @@ enum NetworkingError: Error {
     case noBearer
     case serverError(Error)
     case unexpectedStatusCode(Int)
+    case statusCodeMessage(String)
     case badDecode
     case badEncode
     case noRepresentation

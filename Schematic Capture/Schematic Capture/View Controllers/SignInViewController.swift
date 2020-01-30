@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import SCLAlertView
 
 class SignInViewController: UIViewController {
     
@@ -21,16 +22,19 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpUI()
         
         // check network connection
         if Reachability.isConnectedToNetwork() {
-            setUpUI()
             GIDSignIn.sharedInstance()?.presentingViewController = self
             GIDSignIn.sharedInstance().signIn()
         } else {
-            let homeViewController = self.storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
-            view.window?.rootViewController = homeViewController
-            view.window?.makeKeyAndVisible()
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+            let alert = SCLAlertView(appearance: appearance)
+            alert.addButton("OK") {
+                self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
+            }
+            alert.showWarning("No Internet Connection!", subTitle: "Unable to download or upload")
         }
     }
 
@@ -47,6 +51,10 @@ class SignInViewController: UIViewController {
         } else if segue.identifier == "LoginSegue" {
             if let loginVC = segue.destination as? LoginViewController {
                 loginVC.loginController = loginController
+            }
+        } else if segue.identifier == "HomeVCSegue" {
+            if let homeVC = segue.destination as? HomeViewController {
+                homeVC.loginController = loginController
             }
         }
     }

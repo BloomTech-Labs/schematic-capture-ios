@@ -19,6 +19,7 @@ class LogInController {
     //var receipts: [Receipt] = []
     
     var bearer: Bearer?
+    var user: User?
     private let loginBaseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
 
     // MARK: - Sign Up  &  Log In Functions :
@@ -41,7 +42,7 @@ class LogInController {
             request.httpBody = try encoder.encode(user)
             print(String(data: request.httpBody!, encoding: .utf8)!)
         } catch {
-            NSLog("Error encoding user object: \(error)")
+            print("Error encoding user object: \(error)")
             completion(.badEncode)
             return
         }
@@ -50,16 +51,50 @@ class LogInController {
             
             // Handle errors
             if let error = error {
-                NSLog("Error signing up user: \(error)")
-                completion(.noData)
+                print("Error signing up user: \(error)")
+                completion(.serverError(error))
                 return
             }
             
             if let response = response as? HTTPURLResponse, response.statusCode != 201 {
-                
+                print("Error unexpected status Code: \(response.statusCode)")
+                if let data = data {
+                    if let responseData = String(data: data, encoding: String.Encoding.utf8) {
+                        completion(.statusCodeMessage(responseData))
+                        return
+                    }
+                }
                 completion(.unexpectedStatusCode(response.statusCode))
                 return
             }
+            
+            guard let data = data else {
+                print("No data returned from data task")
+                completion(.noData)
+                return
+            }
+            
+            // Decode User
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                self.user = user
+                print("\n\nUSER: \(user)\n\n")
+            } catch {
+                print("Error decoding the user: \(error)")
+                completion(.badDecode)
+            }
+            
+            // Decode bearer
+            do {
+                let bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                self.bearer = bearer
+                print("\n\nTOKEN: \(bearer.token)\n\n")
+            } catch {
+                print("Error decoding the bearer token: \(error)")
+                completion(.noBearer)
+                return
+            }
+            
             completion(nil)
         }.resume()
     }
@@ -67,7 +102,7 @@ class LogInController {
     //MARK: - Log In URLSessionDataTask
     func logIn(with user: User, completion: @escaping (NetworkingError?) -> Void) {
         
-        let requestURL = loginBaseURL.appendingPathComponent("login")
+        let requestURL = loginBaseURL.appendingPathComponent("auth").appendingPathComponent("login")
         
         var request = URLRequest(url: requestURL)
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
@@ -105,7 +140,7 @@ class LogInController {
             do {
                 let bearer = try JSONDecoder().decode(Bearer.self, from: data)
                 self.bearer = bearer
-                print(bearer.token)
+                print("\n\nTOKEN: \(bearer.token)\n\n")
             } catch {
                 NSLog("Error decoding the bearer token: \(error)")
                 completion(.noBearer)
