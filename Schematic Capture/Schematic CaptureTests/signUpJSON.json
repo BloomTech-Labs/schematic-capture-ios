@@ -1,0 +1,12 @@
+{
+    "id": "fjCA8ocGzQTpBmTJXq0yFqwWUyu2",
+    "organization_id": 1,
+    "role_id": 1,
+    "email": "john3@lambda.com",
+    "first_name": "John",
+    "last_name": "Kim",
+    "phone": "1231231234",
+    "role": "admin",
+    "organization": "Alloy Technology Solutions",
+    "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1OTc0MmQyNjlhY2IzNWZiNjU3YzBjNGRkMmM3YjcyYWEzMTRiNTAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2NoZW1hdGljLWNhcHR1cmUiLCJhdWQiOiJzY2hlbWF0aWMtY2FwdHVyZSIsImF1dGhfdGltZSI6MTU4MDQxMzIxNywidXNlcl9pZCI6ImZqQ0E4b2NHelFUcEJtVEpYcTB5RnF3V1V5dTIiLCJzdWIiOiJmakNBOG9jR3pRVHBCbVRKWHEweUZxd1dVeXUyIiwiaWF0IjoxNTgwNDEzMjE3LCJleHAiOjE1ODA0MTY4MTcsImVtYWlsIjoiam9objNAbGFtYmRhLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJqb2huM0BsYW1iZGEuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.AXprBEGr0uwvEubfkCUYrTOV3GNWTQ0kk0oKEw8uHmMuKs1oF6tpMt9r9pa876ldiXt5TtN4uQzPSoWBPZg_wACrI6uCCTKXD9vKmporKc_Fba9PPuPeMYwfZmK1CLRAJ1rbaVuP_GU7SkxGOCXG8xcmhn9sxa-UdxFwsIZCVFjY2_-75ZC7undYImNRx_NBqHx-ugB87qp--DcWI7LFWyM_RAUS5JK28MJAbJaZ0hOOOBRk028_FZUrXpZb0OWDrTFyjSpCtr5SK7v9Mp743hr6012mEQSqtXI_G-5ZePjx-7tfh1C5mChMgpRj1GQQgJnf2HZn_AdayxCz-gWXIQ"
+}

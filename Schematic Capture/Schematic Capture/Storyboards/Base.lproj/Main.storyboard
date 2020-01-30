@@ -20,15 +20,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tPW-Nu-gbc" customClass="GIDSignInButton">
-                                <rect key="frame" x="40" y="624" width="334" height="40"/>
+                                <rect key="frame" x="40" y="631" width="334" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="7Ib-Nf-aPC"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mf0-wM-W9W">
-                                <rect key="frame" x="40" y="704" width="334" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <rect key="frame" x="40" y="711" width="334" height="32"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <segue destination="61k-bz-pSZ" kind="show" identifier="SignUpSegue" id="4ue-es-yGv"/>
@@ -64,7 +64,7 @@
                         <outlet property="appLogo" destination="FLQ-gN-IEA" id="R3r-3h-EmR"/>
                         <outlet property="loginButton" destination="4Tk-g5-HBQ" id="4SC-pa-IEF"/>
                         <outlet property="signUpButton" destination="mf0-wM-W9W" id="UWs-eR-mfK"/>
-                        <segue destination="7K4-j5-uJg" kind="show" identifier="HomeVCSegue" id="Ta4-gb-6nR"/>
+                        <segue destination="7K4-j5-uJg" kind="presentation" identifier="HomeVCSegue" modalPresentationStyle="fullScreen" id="Ta4-gb-6nR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="imr-yb-4M2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -103,7 +103,7 @@
                                             <action selector="login:" destination="va9-eE-gTT" eventType="touchUpInside" id="U2c-Kt-wbK"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMW-0z-BbO">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMW-0z-BbO">
                                         <rect key="frame" x="0.0" y="184.5" width="334" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -131,7 +131,7 @@
                         <outlet property="errorMessageLabel" destination="VMW-0z-BbO" id="XRo-Vs-C7m"/>
                         <outlet property="loginButton" destination="xW2-wU-sKh" id="d4h-gK-ELy"/>
                         <outlet property="passwordTextField" destination="8Ke-1Q-c5i" id="58k-s4-oxR"/>
-                        <segue destination="7K4-j5-uJg" kind="show" id="fbo-wI-3oo"/>
+                        <segue destination="7K4-j5-uJg" kind="show" identifier="MainPageSegue" id="fbo-wI-3oo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dt-Pl-Beh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -177,7 +177,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Retype Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PTr-Jk-uZ3">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PTr-Jk-uZ3">
                                         <rect key="frame" x="0.0" y="270" width="334" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
@@ -195,7 +195,7 @@
                                             <action selector="signUp:" destination="61k-bz-pSZ" eventType="touchUpInside" id="xFn-H6-iwo"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayP-8g-reU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayP-8g-reU">
                                         <rect key="frame" x="0.0" y="457.5" width="334" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -229,16 +229,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="Sign Up" largeTitleDisplayMode="always" id="Q2W-xS-7ks"/>
                     <connections>
+                        <outlet property="confirmPasswordTextField" destination="PTr-Jk-uZ3" id="r3G-zj-QEV"/>
                         <outlet property="emailTextField" destination="c0A-cn-tB0" id="icL-RU-cyM"/>
                         <outlet property="errorMessageLabel" destination="ayP-8g-reU" id="dhw-Bn-cip"/>
                         <outlet property="firstNameTextField" destination="vwX-Bc-fDf" id="IbM-1Q-qWZ"/>
                         <outlet property="lastNameTextField" destination="JP8-8D-P9b" id="Thd-Rv-POX"/>
                         <outlet property="passwordTextField" destination="MOA-uZ-ngn" id="YCn-Mg-mGf"/>
-                        <outlet property="passwordVerificationTextField" destination="PTr-Jk-uZ3" id="r3G-zj-QEV"/>
                         <outlet property="phoneTextField" destination="bGi-aI-E4m" id="H0H-PJ-pbX"/>
                         <outlet property="signUpButton" destination="ojx-Ul-NCO" id="Vkc-NB-LOw"/>
                         <outlet property="tokenTextFIeld" destination="gcR-I1-Bii" id="2Yr-X7-tnF"/>
-                        <segue destination="7K4-j5-uJg" kind="show" id="ZVI-lR-TtB"/>
+                        <segue destination="7K4-j5-uJg" kind="show" identifier="MainPageSegue" id="ZVI-lR-TtB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nm3-5j-f4g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -248,7 +248,7 @@
         <!--Home View Controller-->
         <scene sceneID="KkQ-pK-Ztt">
             <objects>
-                <viewController storyboardIdentifier="HomeVC" id="YoB-cz-1k2" customClass="HomeViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeVC" modalPresentationStyle="fullScreen" id="YoB-cz-1k2" customClass="HomeViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HNR-0g-JWn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -294,7 +294,7 @@
         <!--Navigation Controller-->
         <scene sceneID="SZM-4b-YcU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7K4-j5-uJg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="7K4-j5-uJg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Ius-zF-MAx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ppP-He-5h6">
@@ -312,6 +312,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ta4-gb-6nR"/>
+        <segue reference="fbo-wI-3oo"/>
     </inferredMetricsTieBreakers>
 </document>

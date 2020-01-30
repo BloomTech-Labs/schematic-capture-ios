@@ -25,6 +25,7 @@
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
 		A665839423E0E607006073DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839323E0E607006073DF /* HomeViewController.swift */; };
 		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
+		A6A9D23623E395000026D5E4 /* signUpJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23523E395000026D5E4 /* signUpJSON.json */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A665839323E0E607006073DF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A6A9D23523E395000026D5E4 /* signUpJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = signUpJSON.json; sourceTree = "<group>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -130,6 +132,7 @@
 			children = (
 				A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */,
 				A665836D23DAB50A006073DF /* Info.plist */,
+				A6A9D23523E395000026D5E4 /* signUpJSON.json */,
 			);
 			path = "Schematic CaptureTests";
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6A9D23623E395000026D5E4 /* signUpJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,7 +566,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FLZ8CLXX64;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				INFOPLIST_FILE = "Schematic Capture/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -583,7 +587,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FLZ8CLXX64;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				INFOPLIST_FILE = "Schematic Capture/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -30,5 +30,19 @@ class Schematic_CaptureTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testSignUpDecode() {
+        let bundle = Bundle(for: type(of: self))
+        let fileUrl = bundle.url(forResource: "signUpJSON", withExtension: "json")
+        let data = try! Data(contentsOf: fileUrl!)
+        do {
+            let user = try JSONDecoder().decode(User.self, from: data)
+            XCTAssertNotNil(user)
+            let token = try JSONDecoder().decode(Bearer.self, from: data)
+            XCTAssertNotNil(token)
+        }catch {
+            XCTFail("\(error)")
+        }
+    }
 
 }

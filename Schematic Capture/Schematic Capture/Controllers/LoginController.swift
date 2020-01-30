@@ -137,6 +137,17 @@ class LogInController {
                 return
             }
             
+            // Decode User
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                self.user = user
+                print("\n\nUSER: \(user)\n\n")
+            } catch {
+                print("Error decoding the user: \(error)")
+                completion(.badDecode)
+            }
+            
+            // Decode Bearer
             do {
                 let bearer = try JSONDecoder().decode(Bearer.self, from: data)
                 self.bearer = bearer

@@ -16,7 +16,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var passwordVerificationTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var tokenTextFIeld: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
@@ -27,6 +27,15 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
 
         setUpUI()
+        
+        // TESTING
+        firstNameTextField.text = "John"
+        lastNameTextField.text = "Kim"
+        emailTextField.text = "john@lambda.com"
+        phoneTextField.text = "1231231234"
+        passwordTextField.text = "testing123!"
+        confirmPasswordTextField.text = "testing123!"
+        tokenTextFIeld.text = ""
     }
     
     func setUpUI() {
@@ -35,7 +44,7 @@ class SignUpViewController: UIViewController {
         Style.styleTextField(emailTextField)
         Style.styleTextField(phoneTextField)
         Style.styleTextField(passwordTextField)
-        Style.styleTextField(passwordVerificationTextField)
+        Style.styleTextField(confirmPasswordTextField)
         Style.styleTextField(tokenTextFIeld)
         Style.styleFilledButton(signUpButton)
         errorMessageLabel.alpha = 0
@@ -55,32 +64,44 @@ class SignUpViewController: UIViewController {
         
         let email = emailTextField.text!
         let password = passwordTextField.text!
+        let confirmPassword = confirmPasswordTextField.text!
         let firstName = firstNameTextField.text!
         let lastName = lastNameTextField.text!
         let phone = phoneTextField.text!
-        let inviteToken = tokenTextFIeld.text!
+        let inviteToken = tokenTextFIeld.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        let user = User(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
+        let user = User(email: email, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         
-        loginController.logIn(with: user) { (error) in
+        loginController.signUp(with: user) { (error) in
             if let error = error {
-                NSLog(error.localizedDescription)
+                NSLog("Error: \(error)")
+                
+                let errorMessage = "\(error)"
+                guard let firstIndex = errorMessage.lastIndex(of: ":"),
+                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
+                
+                let subString = errorMessage[firstIndex..<lastIndex]
+                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
+                let result = subString[startIndex..<subString.endIndex]
+                
+                DispatchQueue.main.async {
+                    self.errorMessageLabel.text = String(result)
+                    self.errorMessageLabel.alpha = 1
+                }
                 return
             }
             
-            self.errorMessageLabel.alpha = 0
-            
-            let alertView: SCLAlertView = SCLAlertView()
-            alertView.addButton("Login", backgroundColor: Style.anakiwa, textColor: Style.thunder, showTimeout: .none) {
-                let loginUser = User(email: user.email, password: user.password)
-                loginController.logIn(with: loginUser) { (error) in
-                    // TODO: perform segue to main page
+            DispatchQueue.main.async {
+                self.errorMessageLabel.alpha = 0
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                let alert = SCLAlertView(appearance: appearance)
+                alert.addButton("Proceed to main page") {
+                    self.performSegue(withIdentifier: "MainPageSegue", sender: nil)
                 }
+                alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
             }
-            alertView.showSuccess("Congratulations", subTitle: "You have successfully signed up")
-            print("User sign up successful!")
+
         }
-        
     }
     
     func validateTextFields() -> String? {
@@ -89,7 +110,7 @@ class SignUpViewController: UIViewController {
             emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            passwordVerificationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             tokenTextFIeld.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return "Please fill in all fields."
         }
@@ -99,7 +120,7 @@ class SignUpViewController: UIViewController {
         }
         
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let password2 = passwordVerificationTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password2 = confirmPasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if password.count < 8 {
             return "Password must be atleast 8 characters long."
@@ -117,6 +138,14 @@ class SignUpViewController: UIViewController {
 
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MainPageSegue" {
+            if let homeVC = segue.destination as? HomeViewController {
+                homeVC.loginController = loginController
+            }
+        }
     }
 
 }
