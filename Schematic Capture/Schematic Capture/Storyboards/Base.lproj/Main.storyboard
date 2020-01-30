@@ -31,7 +31,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
-                                    <segue destination="61k-bz-pSZ" kind="show" id="4ue-es-yGv"/>
+                                    <segue destination="61k-bz-pSZ" kind="show" identifier="SignUpSegue" id="4ue-es-yGv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Tk-g5-HBQ">
@@ -39,7 +39,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <segue destination="va9-eE-gTT" kind="show" id="oR8-KV-OEF"/>
+                                    <segue destination="va9-eE-gTT" kind="show" identifier="LoginSegue" id="oR8-KV-OEF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -131,6 +131,7 @@
                         <outlet property="errorMessageLabel" destination="VMW-0z-BbO" id="XRo-Vs-C7m"/>
                         <outlet property="loginButton" destination="xW2-wU-sKh" id="d4h-gK-ELy"/>
                         <outlet property="passwordTextField" destination="8Ke-1Q-c5i" id="58k-s4-oxR"/>
+                        <segue destination="7K4-j5-uJg" kind="show" id="fbo-wI-3oo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dt-Pl-Beh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -234,9 +235,10 @@
                         <outlet property="lastNameTextField" destination="JP8-8D-P9b" id="Thd-Rv-POX"/>
                         <outlet property="passwordTextField" destination="MOA-uZ-ngn" id="YCn-Mg-mGf"/>
                         <outlet property="passwordVerificationTextField" destination="PTr-Jk-uZ3" id="r3G-zj-QEV"/>
-                        <outlet property="phoneNumberTextField" destination="bGi-aI-E4m" id="H0H-PJ-pbX"/>
+                        <outlet property="phoneTextField" destination="bGi-aI-E4m" id="H0H-PJ-pbX"/>
                         <outlet property="signUpButton" destination="ojx-Ul-NCO" id="Vkc-NB-LOw"/>
                         <outlet property="tokenTextFIeld" destination="gcR-I1-Bii" id="2Yr-X7-tnF"/>
+                        <segue destination="7K4-j5-uJg" kind="show" id="ZVI-lR-TtB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nm3-5j-f4g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -309,4 +311,7 @@
             <point key="canvasLocation" x="2480" y="-34"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ta4-gb-6nR"/>
+    </inferredMetricsTieBreakers>
 </document>

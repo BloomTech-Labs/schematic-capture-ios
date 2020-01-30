@@ -27,7 +27,7 @@ class LogInController {
     func signUp(with user: User, completion: @escaping (NetworkingError?) -> Void) {
         
         // Building the URL
-        let requestURL = loginBaseURL.appendingPathComponent("register")
+        let requestURL = loginBaseURL.appendingPathComponent("auth").appendingPathComponent("register")
         
         // Building the request
         var request = URLRequest(url: requestURL)
@@ -55,7 +55,7 @@ class LogInController {
                 return
             }
             
-            if let response = response as? HTTPURLResponse, response.statusCode != 200, response.statusCode != 201 {
+            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
                 
                 completion(.unexpectedStatusCode(response.statusCode))
                 return

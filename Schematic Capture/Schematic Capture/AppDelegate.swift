@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        GIDSignIn.sharedInstance().handle(url)
         let alertController = UIAlertController(title: "Opended through link", message: "Hi", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
@@ -36,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         print(url.absoluteString)
         
+        GIDSignIn.sharedInstance().handle(url)
         return true
     }
         

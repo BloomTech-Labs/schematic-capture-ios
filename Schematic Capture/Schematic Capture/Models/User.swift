@@ -13,6 +13,17 @@ struct User: Codable {
     let password: String
     let firstName: String
     let lastName: String
-    let phoneNumber: String
-    let token: String
+    let phone: String
+    let inviteToken: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case email
+        case password
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case phone
+        case inviteToken = "invite_token"
+    }
 }
+
+
