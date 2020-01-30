@@ -38,8 +38,8 @@ class LogInController {
         let encoder = JSONEncoder()
         
         do {
-            let userJSON = try encoder.encode(user)
-            request.httpBody = userJSON
+            request.httpBody = try encoder.encode(user)
+            print(String(data: request.httpBody!, encoding: .utf8)!)
         } catch {
             NSLog("Error encoding user object: \(error)")
             completion(.badEncode)
@@ -75,6 +75,7 @@ class LogInController {
         
         do {
             request.httpBody = try JSONEncoder().encode(user)
+            print(String(data: request.httpBody!, encoding: .utf8)!)
         } catch {
             NSLog("Error encoding user for sign in: \(error)")
             completion(.badEncode)

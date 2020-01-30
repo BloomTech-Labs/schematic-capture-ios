@@ -7,11 +7,10 @@ target 'Schematic Capture' do
 
   # Pods for Schematic Capture
 pod 'Firebase/Core'
-pod 'Firebase/Database'
-pod 'Firebase/Storage'
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
-pod 'FirebaseUI'
+pod 'GoogleSignIn'
+pod 'SCLAlertView'
 
 
   target 'Schematic CaptureTests' do

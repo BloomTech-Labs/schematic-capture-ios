@@ -10,6 +10,24 @@ import Foundation
 import UIKit
 
 class Style {
+    
+    // Primary Colors
+    static let toryBlue: UIColor = hexStringToUIColor(hex: "#1165A8")
+    static let tarawera: UIColor = hexStringToUIColor(hex: "#072F50")
+    static let anakiwa: UIColor = hexStringToUIColor(hex: "#8DCDFF")
+    
+    // Documentation Colors
+    static let rose: UIColor = hexStringToUIColor(hex: "#FF005C")
+    static let sunshade: UIColor = hexStringToUIColor(hex: "#FFA928")
+    static let parisDaisy: UIColor = hexStringToUIColor(hex: "#FFF972")
+    static let springGreen: UIColor = hexStringToUIColor(hex: "#23FF53")
+    
+    // Neutral Colors
+    static let thunder: UIColor = hexStringToUIColor(hex: "#231F20")
+    static let shipGray: UIColor = hexStringToUIColor(hex: "#424244")
+    static let osloGray: UIColor = hexStringToUIColor(hex: "#939598")
+    static let iron: UIColor = hexStringToUIColor(hex: "#D5D8DC")
+    
     static func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 

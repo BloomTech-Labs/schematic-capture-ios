@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class SignUpViewController: UIViewController {
     
@@ -41,11 +42,10 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUp(_ sender: Any) {
-        let error = validateTextFields()
-        
-        if error != nil {
+        if let error = validateTextFields() {
             errorMessageLabel.alpha = 1
             errorMessageLabel.text = error
+            return
         }
         
         guard let loginController = loginController else {
@@ -68,6 +68,16 @@ class SignUpViewController: UIViewController {
                 return
             }
             
+            self.errorMessageLabel.alpha = 0
+            
+            let alertView: SCLAlertView = SCLAlertView()
+            alertView.addButton("Login", backgroundColor: Style.anakiwa, textColor: Style.thunder, showTimeout: .none) {
+                let loginUser = User(email: user.email, password: user.password)
+                loginController.logIn(with: loginUser) { (error) in
+                    // TODO: perform segue to main page
+                }
+            }
+            alertView.showSuccess("Congratulations", subTitle: "You have successfully signed up")
             print("User sign up successful!")
         }
         
