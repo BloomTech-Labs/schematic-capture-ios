@@ -72,13 +72,7 @@ class Style {
             button.backgroundColor = hexStringToUIColor(hex: "#1165A8")
             button.layer.cornerRadius = 2
             button.tintColor = UIColor.white
-            
-            // Shadow
-//            button.layer.shadowColor = UIColor.gray.cgColor
-//            button.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-//            button.layer.shadowRadius = 5
-//            button.layer.shadowOpacity = 1
-//            button.layer.masksToBounds = false
+            button.titleLabel?.font = UIFont(name: "OpenSans-Regular", size: 20)
         }
     }
     
@@ -86,16 +80,10 @@ class Style {
         DispatchQueue.main.async {
             // Hollow rounded corner style
             button.layer.borderWidth = 2
-            button.layer.borderColor = hexStringToUIColor(hex: "#231F20").cgColor
+            button.layer.borderColor = toryBlue.cgColor
             button.layer.cornerRadius = 3
-            button.tintColor = hexStringToUIColor(hex: "#231F20")
-            
-            // Shadow
-//            button.layer.shadowColor = UIColor.gray.cgColor
-//            button.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-//            button.layer.shadowRadius = 5
-//            button.layer.shadowOpacity = 1
-//            button.layer.masksToBounds = false
+            button.tintColor = tarawera
+            button.titleLabel?.font = UIFont(name: "OpenSans-Bold", size: 20)
         }
     }
 }
