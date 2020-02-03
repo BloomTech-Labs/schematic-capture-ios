@@ -11,8 +11,7 @@ import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-    
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
@@ -21,46 +20,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         FirebaseApp.configure()
         
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
+//        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+//        GIDSignIn.sharedInstance().delegate = self
         
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let alertController = UIAlertController(title: "Opended through link", message: "Hi", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-        
-        print(url.absoluteString)
-        
-        GIDSignIn.sharedInstance().handle(url)
-        return true
+        return GIDSignIn.sharedInstance().handle(url)
     }
         
     // for iOS8 and older
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        return GIDSignIn.sharedInstance().handle(url)
-//    }
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        } else {
-            guard let authentication = user.authentication else { return }
-            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-            Auth.auth().signIn(with: credential) { (authResult, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                // user is signed in
-                print("User signed in")
-            }
-        }
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
     }
+    
+//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+//        if let error = error {
+//            print(error.localizedDescription)
+//            return
+//        } else {
+//            guard let authentication = user.authentication else { return }
+//            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+//            Auth.auth().signIn(with: credential) { (authResult, error) in
+//                if let error = error {
+//                    print("\(error)")
+//                    return
+//                }
+//            }
+//        }
+//    }
     
     // MARK: UISceneSession Lifecycle
 

@@ -11,9 +11,9 @@ import Firebase
 import GoogleSignIn
 import SCLAlertView
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, GIDSignInDelegate {
     
-    @IBOutlet weak var appLogo: UIImageView!
+    @IBOutlet weak var loginImage: UIImageView!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
@@ -21,11 +21,14 @@ class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         setUpUI()
         
         // check network connection
         if Reachability.isConnectedToNetwork() {
+            GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+            GIDSignIn.sharedInstance().delegate = self
             GIDSignIn.sharedInstance()?.presentingViewController = self
             GIDSignIn.sharedInstance().signIn()
         } else {
@@ -40,9 +43,79 @@ class SignInViewController: UIViewController {
 
     func setUpUI() {
         Style.styleFilledButton(signUpButton)
-        Style.styleHollowButton(loginButton)
+        Style.styleFilledButton(loginButton)
+        
+        self.navigationController?.view.backgroundColor = .clear
+        
+        guard let imageURL = URL(string: "https://raw.githubusercontent.com/Lambda-School-Labs/schematic-capture-fe/google-auth/public/assets/8609f4b9daabe355452ccd4ea682f37e.jpg") else { return }
+        do {
+            let imageData = try Data(contentsOf: imageURL)
+            loginImage.image = UIImage(data: imageData)
+        } catch {
+            return
+        }
+        
     }
     
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        } else {
+            guard let authentication = user.authentication else { return }
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                if let error = error {
+                    print("\(error)")
+                    return
+                }
+                
+                guard authResult != nil else {
+                    print("No auth result.")
+                    return
+                }
+                
+                // Get token from our firebase backend
+                Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
+                   if let error = error {
+                        print("\(error)")
+                        return
+                    }
+                    guard let token = token else { return }
+                    
+                    print("TOKEN: \(token)")
+                    
+                    self.loginController.googleLogIn(with: token, completion: { (error) in
+                        if let error = error {
+                            if error == NetworkingError.needRegister {
+                                let firstName = user.profile.givenName
+                                let lastName = user.profile.familyName
+                                self.loginController.user = User(firstName: firstName ?? "", lastName: lastName ?? "", phone: nil, inviteToken: nil)
+                                self.performSegue(withIdentifier: "GoogleSegue", sender: nil)
+                                return
+                            } else {
+                                print("\(error)")
+                                return
+                            }
+                        }
+                        
+                        // Login successful, user info in the database
+                        DispatchQueue.main.async {
+                            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                            let alert = SCLAlertView(appearance: appearance)
+                            alert.addButton("Proceed to main page") {
+                                self.performSegue(withIdentifier: "MainPageSegue", sender: nil)
+                            }
+                            alert.showSuccess("Login Success!", subTitle: "")
+                        }
+                        
+                    })
+                })
+            }
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SignUpSegue" {
             if let signUpVC = segue.destination as? SignUpViewController {
@@ -56,8 +129,11 @@ class SignInViewController: UIViewController {
             if let homeVC = segue.destination as? HomeViewController {
                 homeVC.loginController = loginController
             }
+        } else if segue.identifier == "GoogleSegue" {
+            if let googleVC = segue.destination as? GoogleSignUpViewController {
+                googleVC.loginController = loginController
+            }
         }
     }
-
 }
 

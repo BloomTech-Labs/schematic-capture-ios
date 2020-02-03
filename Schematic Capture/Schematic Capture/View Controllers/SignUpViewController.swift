@@ -17,7 +17,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    @IBOutlet weak var tokenTextFIeld: UITextField!
+    @IBOutlet weak var tokenTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController {
         phoneTextField.text = "1231231234"
         passwordTextField.text = "testing123!"
         confirmPasswordTextField.text = "testing123!"
-        tokenTextFIeld.text = ""
+        tokenTextField.text = ""
     }
     
     func setUpUI() {
@@ -45,7 +45,7 @@ class SignUpViewController: UIViewController {
         Style.styleTextField(phoneTextField)
         Style.styleTextField(passwordTextField)
         Style.styleTextField(confirmPasswordTextField)
-        Style.styleTextField(tokenTextFIeld)
+        Style.styleTextField(tokenTextField)
         Style.styleFilledButton(signUpButton)
         errorMessageLabel.alpha = 0
     }
@@ -68,7 +68,7 @@ class SignUpViewController: UIViewController {
         let firstName = firstNameTextField.text!
         let lastName = lastNameTextField.text!
         let phone = phoneTextField.text!
-        let inviteToken = tokenTextFIeld.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let inviteToken = tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         let user = User(email: email, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         
@@ -111,7 +111,7 @@ class SignUpViewController: UIViewController {
             phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            tokenTextFIeld.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            tokenTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return "Please fill in all fields."
         }
         
