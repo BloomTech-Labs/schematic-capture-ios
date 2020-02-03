@@ -27,11 +27,13 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         
         // check network connection
         if Reachability.isConnectedToNetwork() {
+            // if wifi/data is available, setup Google sign in
             GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
             GIDSignIn.sharedInstance().delegate = self
             GIDSignIn.sharedInstance()?.presentingViewController = self
             GIDSignIn.sharedInstance().signIn()
         } else {
+            // if wifi/data is NOT available, skip the login page and direct to the main page
             let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
             let alert = SCLAlertView(appearance: appearance)
             alert.addButton("OK") {
@@ -57,7 +59,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         
     }
     
-    
+    // Called when the user is signed in with their Google account
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             print(error.localizedDescription)
@@ -65,6 +67,8 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         } else {
             guard let authentication = user.authentication else { return }
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+            
+            // With user's Google account, sign in to our firebase
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print("\(error)")
@@ -76,7 +80,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                     return
                 }
                 
-                // Get token from our firebase backend
+                // Get ID token (different from authentication.idToken) from our firebase backend
                 Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
                    if let error = error {
                         print("\(error)")
@@ -86,8 +90,11 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                     
                     print("TOKEN: \(token)")
                     
+                    // Try loging in first
                     self.loginController.googleLogIn(with: token, completion: { (error) in
                         if let error = error {
+                            // If "need register" is returned, create an user with Google's provided name
+                            // and direct to google sign up view
                             if error == NetworkingError.needRegister {
                                 let firstName = user.profile.givenName
                                 let lastName = user.profile.familyName
@@ -100,7 +107,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                             }
                         }
                         
-                        // Login successful, user info in the database
+                        // Login successful, direct to the main page
                         DispatchQueue.main.async {
                             let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
                             let alert = SCLAlertView(appearance: appearance)

@@ -102,6 +102,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A6613BF823E89DDE004A11B2 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				A665835423DAB508006073DF /* AppDelegate.swift */,
+				A665835623DAB508006073DF /* SceneDelegate.swift */,
+				A665837623DB6695006073DF /* GoogleService-Info.plist */,
+				A665836223DAB50A006073DF /* Info.plist */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
 		A665834823DAB508006073DF = {
 			isa = PBXGroup;
 			children = (
@@ -125,12 +136,9 @@
 		A665835323DAB508006073DF /* Schematic Capture */ = {
 			isa = PBXGroup;
 			children = (
-				A6A9D23723E4A86E0026D5E4 /* Fonts */,
-				A665837623DB6695006073DF /* GoogleService-Info.plist */,
-				A665835423DAB508006073DF /* AppDelegate.swift */,
-				A665835623DAB508006073DF /* SceneDelegate.swift */,
 				A665835D23DAB50A006073DF /* Assets.xcassets */,
-				A665836223DAB50A006073DF /* Info.plist */,
+				A6A9D23723E4A86E0026D5E4 /* Fonts */,
+				A6613BF823E89DDE004A11B2 /* System */,
 				A665837F23DF8CC8006073DF /* Storyboards */,
 				A665837A23DB6E32006073DF /* View Controllers */,
 				A665838423DFA070006073DF /* Helpers */,

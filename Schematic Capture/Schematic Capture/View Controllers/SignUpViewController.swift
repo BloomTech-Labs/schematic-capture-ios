@@ -77,6 +77,7 @@ class SignUpViewController: UIViewController {
                 NSLog("Error: \(error)")
                 
                 let errorMessage = "\(error)"
+                // Get rid of extra characters
                 guard let firstIndex = errorMessage.lastIndex(of: ":"),
                     let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
                 
@@ -122,8 +123,8 @@ class SignUpViewController: UIViewController {
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password2 = confirmPasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if password.count < 8 {
-            return "Password must be atleast 8 characters long."
+        if !isValidPassword(password) {
+            return "Password must be minimum of 8 characters containing at least 1 alphabet, 1 number and 1 speical character."
         }
         
         if password != password2 {
@@ -138,6 +139,11 @@ class SignUpViewController: UIViewController {
 
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
+    }
+    
+    func isValidPassword(_ password: String) -> Bool {
+        let passwordRegEx = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$"
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegEx).evaluate(with: password)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
