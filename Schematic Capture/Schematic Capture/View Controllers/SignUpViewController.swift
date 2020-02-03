@@ -25,7 +25,8 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setUpTextFieldDelegate()
         setUpUI()
         
         // TESTING
@@ -48,6 +49,16 @@ class SignUpViewController: UIViewController {
         Style.styleTextField(tokenTextField)
         Style.styleFilledButton(signUpButton)
         errorMessageLabel.alpha = 0
+    }
+    
+    func setUpTextFieldDelegate() {
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
+        phoneTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+        tokenTextField.delegate = self
     }
     
     @IBAction func signUp(_ sender: Any) {
@@ -154,4 +165,16 @@ class SignUpViewController: UIViewController {
         }
     }
 
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
+    }
 }

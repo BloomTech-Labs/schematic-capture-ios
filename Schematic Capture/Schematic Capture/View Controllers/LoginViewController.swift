@@ -21,17 +21,24 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpTextFieldDelegate()
         setUpUI()
         
         // TESTING
         emailTextField.text = "bob_johnson@lambdaschool.com"
         passwordTextField.text = "testing123!"
     }
+    
     func setUpUI() {
         Style.styleTextField(emailTextField)
         Style.styleTextField(passwordTextField)
         Style.styleFilledButton(loginButton)
         errorMessageLabel.alpha = 0
+    }
+    
+    func setUpTextFieldDelegate() {
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     
@@ -75,3 +82,16 @@ class LoginViewController: UIViewController {
         return nil
     }
 }
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
+    }
+}
+

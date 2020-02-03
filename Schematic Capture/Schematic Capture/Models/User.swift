@@ -9,17 +9,17 @@
 import Foundation
 
 struct User: Codable {
-    let email: String?
-    let password: String?
-    let confirmPassword: String?
-    let firstName: String?
-    let lastName: String?
-    let phone: String?
-    let inviteToken: String?
-    let organizationID: Int?
-    let organization: String?
-    let roleID: Int?
-    let role: String?
+    var email: String?
+    var password: String?
+    var confirmPassword: String?
+    var firstName: String?
+    var lastName: String?
+    var phone: String?
+    var inviteToken: String?
+    var organizationID: Int?
+    var organization: String?
+    var roleID: Int?
+    var role: String?
     
     init(email: String, password: String) {
         self.email = email

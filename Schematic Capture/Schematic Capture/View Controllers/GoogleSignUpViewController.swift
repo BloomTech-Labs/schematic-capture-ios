@@ -23,6 +23,7 @@ class GoogleSignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpTextFieldDelegate()
         setUpUI()
     }
     
@@ -34,7 +35,7 @@ class GoogleSignUpViewController: UIViewController {
         }
         
         guard let loginController = loginController,
-            let user = loginController.user else {
+            var googleUser = loginController.user else {
             NSLog("Invalid login controller or invalid user")
             return
         }
@@ -43,8 +44,11 @@ class GoogleSignUpViewController: UIViewController {
         let lastName = lastNameTextField.text!
         let phone = phoneTextField.text!
         let inviteToken = inviteTokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        googleUser.firstName = firstName
+        googleUser.lastName = lastName
+        googleUser.phone = phone
+        googleUser.inviteToken = inviteToken
         
-        let googleUser = User(firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         loginController.signUp(with: googleUser) { (error) in
             if let error = error {
                 NSLog("Error: \(error)")
@@ -90,6 +94,13 @@ class GoogleSignUpViewController: UIViewController {
         lastNameTextField.text = loginController.user?.lastName
     }
     
+    func setUpTextFieldDelegate() {
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        phoneTextField.delegate = self
+        inviteTokenTextField.delegate = self
+    }
+    
     func validateTextFields() -> String? {
         if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -101,4 +112,16 @@ class GoogleSignUpViewController: UIViewController {
         return nil
     }
 
+}
+
+extension GoogleSignUpViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
+    }
 }

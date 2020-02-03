@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		203A5C168218CC2EF860A488 /* Pods_Schematic_CaptureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */; };
 		A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6613BF623E4CAFC004A11B2 /* GoogleSignUpViewController.swift */; };
+		A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835A23DAB508006073DF /* Main.storyboard */; };
+		A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835F23DAB50A006073DF /* LaunchScreen.storyboard */; };
+		A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665837623DB6695006073DF /* GoogleService-Info.plist */; };
+		A6613BFD23E8BFCB004A11B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665836223DAB50A006073DF /* Info.plist */; };
 		A665835523DAB508006073DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835423DAB508006073DF /* AppDelegate.swift */; };
 		A665835723DAB508006073DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835623DAB508006073DF /* SceneDelegate.swift */; };
-		A665835C23DAB508006073DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835A23DAB508006073DF /* Main.storyboard */; };
 		A665835E23DAB50A006073DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A665835D23DAB50A006073DF /* Assets.xcassets */; };
-		A665836123DAB50A006073DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835F23DAB50A006073DF /* LaunchScreen.storyboard */; };
 		A665836C23DAB50A006073DF /* Schematic_CaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */; };
-		A665837723DB6695006073DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665837623DB6695006073DF /* GoogleService-Info.plist */; };
 		A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665837823DB6E2D006073DF /* SignInViewController.swift */; };
 		A665838323DFA06C006073DF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838223DFA06C006073DF /* Reachability.swift */; };
 		A665838623DFA50A006073DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838523DFA50A006073DF /* User.swift */; };
@@ -57,7 +58,7 @@
 		A665835B23DAB508006073DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A665835D23DAB50A006073DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A665836023DAB50A006073DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A665836223DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A665836223DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Schematic Capture/System/Info.plist"; sourceTree = SOURCE_ROOT; };
 		A665836723DAB50A006073DF /* Schematic CaptureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureTests.swift; sourceTree = "<group>"; };
 		A665836D23DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,8 +165,8 @@
 				A665837823DB6E2D006073DF /* SignInViewController.swift */,
 				A665838F23E0E5F1006073DF /* SignUpViewController.swift */,
 				A665839123E0E5FF006073DF /* LoginViewController.swift */,
-				A665839323E0E607006073DF /* HomeViewController.swift */,
 				A6613BF623E4CAFC004A11B2 /* GoogleSignUpViewController.swift */,
+				A665839323E0E607006073DF /* HomeViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -323,15 +324,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */,
+				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
+				A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */,
+				A6613BFD23E8BFCB004A11B2 /* Info.plist in Resources */,
 				A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */,
 				A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */,
 				A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */,
 				A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */,
 				A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */,
-				A665836123DAB50A006073DF /* LaunchScreen.storyboard in Resources */,
 				A665835E23DAB50A006073DF /* Assets.xcassets in Resources */,
-				A665835C23DAB508006073DF /* Main.storyboard in Resources */,
-				A665837723DB6695006073DF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,7 +609,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
-				INFOPLIST_FILE = "Schematic Capture/Info.plist";
+				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -628,7 +630,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
-				INFOPLIST_FILE = "Schematic Capture/Info.plist";
+				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
