@@ -15,7 +15,11 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-enum NetworkingError: Error {
+enum NetworkingError: Error, Equatable {
+    static func == (lhs: NetworkingError, rhs: NetworkingError) -> Bool {
+        return lhs.localizedDescription == rhs.localizedDescription
+    }
+    
     case noData
     case noBearer
     case serverError(Error)
@@ -24,4 +28,5 @@ enum NetworkingError: Error {
     case badDecode
     case badEncode
     case noRepresentation
+    case needRegister
 }

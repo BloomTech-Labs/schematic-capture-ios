@@ -9,7 +9,7 @@
 import Foundation
 
 struct User: Codable {
-    let email: String
+    let email: String?
     let password: String?
     let confirmPassword: String?
     let firstName: String?
@@ -39,6 +39,20 @@ struct User: Codable {
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phone = phone
+        self.inviteToken = inviteToken
+        self.organizationID = nil
+        self.organization = nil
+        self.roleID = nil
+        self.role = nil
+    }
+    
+    init(firstName: String, lastName: String, phone: String?, inviteToken: String?) {
+        self.email = nil
+        self.password = nil
+        self.confirmPassword = nil
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone

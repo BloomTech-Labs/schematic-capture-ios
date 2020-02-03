@@ -15,16 +15,14 @@ enum HeaderNames: String {
 }
 
 class LogInController {
-
-    //var receipts: [Receipt] = []
     
     var bearer: Bearer?
     var user: User?
     private let loginBaseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+//    private let loginBaseURL = URL(string: "http://localhost:5000/api")!
 
-    // MARK: - Sign Up  &  Log In Functions :
     
-    // MARK: - Sign Up URLSessionDataTask
+    // MARK: - Sign Up
     func signUp(with user: User, completion: @escaping (NetworkingError?) -> Void) {
         
         // Building the URL
@@ -88,7 +86,7 @@ class LogInController {
             do {
                 let bearer = try JSONDecoder().decode(Bearer.self, from: data)
                 self.bearer = bearer
-                print("\n\nTOKEN: \(bearer.token)\n\n")
+                print("\n\nTOKEN: \(bearer.idToken)\n\n")
             } catch {
                 print("Error decoding the bearer token: \(error)")
                 completion(.noBearer)
@@ -99,7 +97,7 @@ class LogInController {
         }.resume()
     }
     
-    //MARK: - Log In URLSessionDataTask
+    //MARK: - Log In Email / Password
     func logIn(with user: User, completion: @escaping (NetworkingError?) -> Void) {
         
         let requestURL = loginBaseURL.appendingPathComponent("auth").appendingPathComponent("login")
@@ -120,13 +118,85 @@ class LogInController {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
+                print("Error signing in user: \(error)")
+                completion(.noData)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                if response.statusCode == 203 {
+                    completion(.needRegister)
+                    return
+                }
+                completion(.unexpectedStatusCode(response.statusCode))
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned from data task")
+                completion(.noData)
+                return
+            }
+            
+            // Decode User
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                self.user = user
+                print("\n\nUSER: \(user)\n\n")
+            } catch {
+                print("Error decoding the user: \(error)")
+                completion(.badDecode)
+            }
+            
+            // Decode Bearer
+            do {
+                let bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                self.bearer = bearer
+                print("\n\nTOKEN: \(bearer.idToken)\n\n")
+            } catch {
+                NSLog("Error decoding the bearer token: \(error)")
+                completion(.noBearer)
+                return
+            }
+            completion(nil)
+            
+        }.resume()
+    }
+    
+    //MARK: - Google Login
+    func googleLogIn(with token: String, completion: @escaping (NetworkingError?) -> Void) {
+        
+        let googleBearer = Bearer(idToken: token)
+        self.bearer = googleBearer
+        
+        let requestURL = loginBaseURL.appendingPathComponent("auth").appendingPathComponent("login")
+        
+        var request = URLRequest(url: requestURL)
+        request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
+        request.httpMethod = HTTPMethod.post.rawValue
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(self.bearer)
+            print(String(data: request.httpBody!, encoding: .utf8)!)
+        } catch {
+            NSLog("Error encoding user for sign in: \(error)")
+            completion(.badEncode)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
                 NSLog("Error signing in user: \(error)")
                 completion(.noData)
                 return
             }
             
             if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                
+                if response.statusCode == 203 {
+                    completion(.needRegister)
+                    return
+                }
                 completion(.unexpectedStatusCode(response.statusCode))
                 return
             }
@@ -151,7 +221,7 @@ class LogInController {
             do {
                 let bearer = try JSONDecoder().decode(Bearer.self, from: data)
                 self.bearer = bearer
-                print("\n\nTOKEN: \(bearer.token)\n\n")
+                print("\n\nTOKEN: \(bearer.idToken)\n\n")
             } catch {
                 NSLog("Error decoding the bearer token: \(error)")
                 completion(.noBearer)

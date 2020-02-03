@@ -9,5 +9,5 @@
 import Foundation
 
 struct Bearer: Codable {
-    let token: String
+    let idToken: String
 }
