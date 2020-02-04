@@ -8,8 +8,9 @@
 
 import UIKit
 import SCLAlertView
+import WebKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, WKUIDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -18,7 +19,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var baseConstraint: NSLayoutConstraint!
     
     var loginController: LogInController?
-
+    var webView: WKWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +39,12 @@ class LoginViewController: UIViewController {
         Style.styleTextField(passwordTextField)
         Style.styleFilledButton(loginButton)
         errorMessageLabel.alpha = 0
+        
+        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+        webView.uiDelegate = self
+        if let url = Bundle.main.url(forResource: "Pulse-1s-200px", withExtension: "svg") {
+            webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
+        }
     }
     
     func setUpTextFieldDelegate() {
@@ -44,22 +52,51 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
     }
     
+    func startLoadingScreen() {
+        guard let webView = webView else { return }
+        
+        DispatchQueue.main.async {
+            webView.translatesAutoresizingMaskIntoConstraints = false
+            webView.backgroundColor = .clear
+            self.view.addSubview(webView)
+            
+            webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.2).isActive = true
+            webView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -15).isActive = true
+        }
+    }
+    
+    func stopLoadingScreen() {
+        guard let webView = webView else { return }
+        
+        DispatchQueue.main.async {
+            webView.removeFromSuperview()
+            self.webView = nil
+        }
+    }
     
     @IBAction func login(_ sender: Any) {
+        startLoadingScreen()
+        
         if let error = validateTextFields() {
             errorMessageLabel.alpha = 1
             errorMessageLabel.text = error
+            stopLoadingScreen()
             return
         }
         
         guard let loginController = loginController else {
             NSLog("LoginController not found")
+            stopLoadingScreen()
             return
         }
         
         let user = User(email: emailTextField.text!, password: passwordTextField.text!)
         
         loginController.logIn(with: user) { (error) in
+            self.stopLoadingScreen()
+            
             if let error = error {
                 NSLog("\(error)")
                 return

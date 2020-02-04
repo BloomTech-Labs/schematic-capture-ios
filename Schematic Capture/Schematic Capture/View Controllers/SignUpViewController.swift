@@ -8,8 +8,9 @@
 
 import UIKit
 import SCLAlertView
+import WebKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, WKUIDelegate {
     
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -23,6 +24,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var baseConstraint: NSLayoutConstraint!
     
     var loginController: LogInController?
+    var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +54,36 @@ class SignUpViewController: UIViewController {
         Style.styleTextField(tokenTextField)
         Style.styleFilledButton(signUpButton)
         errorMessageLabel.alpha = 0
+        
+        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+        webView.uiDelegate = self
+        if let url = Bundle.main.url(forResource: "Pulse-1s-200px", withExtension: "svg") {
+            webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
+        }
+    }
+    
+    func startLoadingScreen() {
+        guard let webView = webView else { return }
+        
+        DispatchQueue.main.async {
+            webView.translatesAutoresizingMaskIntoConstraints = false
+            webView.backgroundColor = .clear
+            self.view.addSubview(webView)
+            
+            webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.2).isActive = true
+            webView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -15).isActive = true
+        }
+    }
+    
+    func stopLoadingScreen() {
+        guard let webView = webView else { return }
+        
+        DispatchQueue.main.async {
+            webView.removeFromSuperview()
+            self.webView = nil
+        }
     }
     
     func setUpTextFieldDelegate() {
@@ -65,17 +97,20 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUp(_ sender: Any) {
+        startLoadingScreen()
         
         if let error = validateTextFields() {
             DispatchQueue.main.async {
                 self.errorMessageLabel.alpha = 1
                 self.errorMessageLabel.text = error
             }
+            stopLoadingScreen()
             return
         }
         
         guard let loginController = loginController else {
             NSLog("LoginController not found")
+            stopLoadingScreen()
             return
         }
         
@@ -90,6 +125,7 @@ class SignUpViewController: UIViewController {
         let user = User(email: email, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         
         loginController.signUp(with: user) { (error) in
+            self.stopLoadingScreen()
             if let error = error {
                 NSLog("Error: \(error)")
                 

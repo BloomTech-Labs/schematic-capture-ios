@@ -14,6 +14,7 @@
 		A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665837623DB6695006073DF /* GoogleService-Info.plist */; };
 		A6613BFD23E8BFCB004A11B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665836223DAB50A006073DF /* Info.plist */; };
 		A6613C0523E9340E004A11B2 /* Schematic_CaptureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */; };
+		A6613C0D23EA1417004A11B2 /* Pulse-1s-200px.svg in Resources */ = {isa = PBXBuildFile; fileRef = A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */; };
 		A665835523DAB508006073DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835423DAB508006073DF /* AppDelegate.swift */; };
 		A665835723DAB508006073DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835623DAB508006073DF /* SceneDelegate.swift */; };
 		A665835E23DAB50A006073DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A665835D23DAB50A006073DF /* Assets.xcassets */; };
@@ -28,7 +29,6 @@
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
 		A665839423E0E607006073DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839323E0E607006073DF /* HomeViewController.swift */; };
 		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
-		A6A9D23623E395000026D5E4 /* signUpJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23523E395000026D5E4 /* signUpJSON.json */; };
 		A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */; };
 		A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */; };
 		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
@@ -63,6 +63,7 @@
 		A6613C0223E9340E004A11B2 /* Schematic CaptureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureUITests.swift; sourceTree = "<group>"; };
 		A6613C0623E9340E004A11B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Pulse-1s-200px.svg"; sourceTree = "<group>"; };
 		A665835123DAB508006073DF /* Schematic Capture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Schematic Capture.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A665835423DAB508006073DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A665835623DAB508006073DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A665839323E0E607006073DF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		A6A9D23523E395000026D5E4 /* signUpJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = signUpJSON.json; sourceTree = "<group>"; };
 		A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
@@ -167,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				A665835D23DAB50A006073DF /* Assets.xcassets */,
+				A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */,
 				A6A9D23723E4A86E0026D5E4 /* Fonts */,
 				A6613BF823E89DDE004A11B2 /* System */,
 				A665837F23DF8CC8006073DF /* Storyboards */,
@@ -183,7 +184,6 @@
 			children = (
 				A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */,
 				A665836D23DAB50A006073DF /* Info.plist */,
-				A6A9D23523E395000026D5E4 /* signUpJSON.json */,
 			);
 			path = "Schematic CaptureTests";
 			sourceTree = "<group>";
@@ -390,6 +390,7 @@
 				A6613BFD23E8BFCB004A11B2 /* Info.plist in Resources */,
 				A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */,
 				A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */,
+				A6613C0D23EA1417004A11B2 /* Pulse-1s-200px.svg in Resources */,
 				A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */,
 				A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */,
 				A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -401,7 +402,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A9D23623E395000026D5E4 /* signUpJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

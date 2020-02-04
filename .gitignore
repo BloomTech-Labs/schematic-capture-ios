@@ -43,6 +43,9 @@ docs/_build
 # clangd
 .clangd
 
+# UserInterfaceState
+*/UserInterfaceState
+
 #==============================================================================#
 # Ignore CMake temporary files
 #==============================================================================#

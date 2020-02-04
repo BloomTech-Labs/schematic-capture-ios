@@ -8,8 +8,9 @@
 
 import UIKit
 import SCLAlertView
+import WebKit
 
-class GoogleSignUpViewController: UIViewController {
+class GoogleSignUpViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
@@ -20,6 +21,7 @@ class GoogleSignUpViewController: UIViewController {
     
     var loginController: LogInController?
     var accessToken: String?
+    var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +34,19 @@ class GoogleSignUpViewController: UIViewController {
     }
     
     @IBAction func signUp(_ sender: Any) {
+        startLoadingScreen()
+        
         if let error = validateTextFields() {
             errorMessageLabel.alpha = 1
             errorMessageLabel.text = error
+            stopLoadingScreen()
             return
         }
         
         guard let loginController = loginController,
             var googleUser = loginController.user else {
             NSLog("Invalid login controller or invalid user")
+                stopLoadingScreen()
             return
         }
         
@@ -54,6 +60,8 @@ class GoogleSignUpViewController: UIViewController {
         googleUser.inviteToken = inviteToken
         
         loginController.signUp(with: googleUser) { (error) in
+            self.stopLoadingScreen()
+            
             if let error = error {
                 NSLog("Error: \(error)")
                 
@@ -93,9 +101,39 @@ class GoogleSignUpViewController: UIViewController {
         Style.styleFilledButton(signUpButton)
         errorMessageLabel.alpha = 0
         
+        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+        webView.uiDelegate = self
+        if let url = Bundle.main.url(forResource: "Pulse-1s-200px", withExtension: "svg") {
+            webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
+        }
+        
         guard let loginController = loginController else { return }
         firstNameTextField.text = loginController.user?.firstName
         lastNameTextField.text = loginController.user?.lastName
+    }
+    
+    func startLoadingScreen() {
+        guard let webView = webView else { return }
+        
+        DispatchQueue.main.async {
+            webView.translatesAutoresizingMaskIntoConstraints = false
+            webView.backgroundColor = .clear
+            self.view.addSubview(webView)
+            
+            webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.2).isActive = true
+            webView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -15).isActive = true
+        }
+    }
+    
+    func stopLoadingScreen() {
+        guard let webView = webView else { return }
+        
+        DispatchQueue.main.async {
+            webView.removeFromSuperview()
+            self.webView = nil
+        }
     }
     
     func setUpTextFieldDelegate() {
