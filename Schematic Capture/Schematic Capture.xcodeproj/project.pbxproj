@@ -15,6 +15,7 @@
 		A6613BFD23E8BFCB004A11B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665836223DAB50A006073DF /* Info.plist */; };
 		A6613C0523E9340E004A11B2 /* Schematic_CaptureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */; };
 		A6613C0D23EA1417004A11B2 /* Pulse-1s-200px.svg in Resources */ = {isa = PBXBuildFile; fileRef = A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */; };
+		A6613C1323EA3204004A11B2 /* signUpEncode.json in Resources */ = {isa = PBXBuildFile; fileRef = A6613C1223EA3203004A11B2 /* signUpEncode.json */; };
 		A665835523DAB508006073DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835423DAB508006073DF /* AppDelegate.swift */; };
 		A665835723DAB508006073DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835623DAB508006073DF /* SceneDelegate.swift */; };
 		A665835E23DAB50A006073DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A665835D23DAB50A006073DF /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureUITests.swift; sourceTree = "<group>"; };
 		A6613C0623E9340E004A11B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Pulse-1s-200px.svg"; sourceTree = "<group>"; };
+		A6613C1223EA3203004A11B2 /* signUpEncode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = signUpEncode.json; path = ../../../../../Downloads/signUpEncode.json; sourceTree = "<group>"; };
 		A665835123DAB508006073DF /* Schematic Capture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Schematic Capture.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A665835423DAB508006073DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A665835623DAB508006073DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */,
+				A6613C1223EA3203004A11B2 /* signUpEncode.json */,
 				A665836D23DAB50A006073DF /* Info.plist */,
 			);
 			path = "Schematic CaptureTests";
@@ -402,6 +405,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6613C1323EA3204004A11B2 /* signUpEncode.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
