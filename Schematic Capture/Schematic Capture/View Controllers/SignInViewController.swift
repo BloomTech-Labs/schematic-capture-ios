@@ -115,7 +115,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                             let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
                             let alert = SCLAlertView(appearance: appearance)
                             alert.addButton("Proceed to main page") {
-                                self.performSegue(withIdentifier: "MainPageSegue", sender: nil)
+                                self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
                             }
                             alert.showSuccess("Login Success!", subTitle: "")
                         }
