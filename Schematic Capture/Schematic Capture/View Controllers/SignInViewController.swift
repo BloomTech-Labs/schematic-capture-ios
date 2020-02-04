@@ -98,8 +98,11 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                             if error == NetworkingError.needRegister {
                                 let firstName = user.profile.givenName
                                 let lastName = user.profile.familyName
-                                self.loginController.user = User(firstName: firstName ?? "", lastName: lastName ?? "", phone: nil, inviteToken: nil)
-                                self.performSegue(withIdentifier: "GoogleSegue", sender: nil)
+                                self.loginController.user = User(firstName: firstName ?? "", lastName: lastName ?? "", phone: nil, inviteToken: nil, idToken: token)
+                                
+                                DispatchQueue.main.async {
+                                    self.performSegue(withIdentifier: "GoogleSegue", sender: nil)
+                                }
                                 return
                             } else {
                                 print("\(error)")

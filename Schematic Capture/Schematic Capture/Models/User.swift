@@ -16,10 +16,11 @@ struct User: Codable {
     var lastName: String?
     var phone: String?
     var inviteToken: String?
-    var organizationID: Int?
+    var organizationId: Int?
     var organization: String?
-    var roleID: Int?
+    var roleId: Int?
     var role: String?
+    var idToken: String?
     
     init(email: String, password: String) {
         self.email = email
@@ -29,10 +30,11 @@ struct User: Codable {
         self.lastName = nil
         self.phone = nil
         self.inviteToken = nil
-        self.organizationID = nil
+        self.organizationId = nil
         self.organization = nil
-        self.roleID = nil
+        self.roleId = nil
         self.role = nil
+        self.idToken = nil
     }
     
     init(email: String, password: String, confirmPassword: String, firstName: String, lastName: String, phone: String, inviteToken: String) {
@@ -43,13 +45,14 @@ struct User: Codable {
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = inviteToken
-        self.organizationID = nil
+        self.organizationId = nil
         self.organization = nil
-        self.roleID = nil
+        self.roleId = nil
         self.role = nil
+        self.idToken = nil
     }
     
-    init(firstName: String, lastName: String, phone: String?, inviteToken: String?) {
+    init(firstName: String, lastName: String, phone: String?, inviteToken: String?, idToken: String) {
         self.email = nil
         self.password = nil
         self.confirmPassword = nil
@@ -57,13 +60,14 @@ struct User: Codable {
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = inviteToken
-        self.organizationID = nil
+        self.organizationId = nil
         self.organization = nil
-        self.roleID = nil
+        self.roleId = nil
         self.role = nil
+        self.idToken = idToken
     }
     
-    init(email: String, firstName: String, lastName: String, phone: String, organizationID: Int, organization: String, roleID: Int, role: String) {
+    init(email: String, firstName: String, lastName: String, phone: String, organizationId: Int, organization: String, roleId: Int, role: String) {
         self.email = email
         self.password = nil
         self.confirmPassword = nil
@@ -71,24 +75,26 @@ struct User: Codable {
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = nil
-        self.organizationID = organizationID
+        self.organizationId = organizationId
         self.organization = organization
-        self.roleID = roleID
+        self.roleId = roleId
         self.role = role
+        self.idToken = nil
     }
     
     private enum CodingKeys: String, CodingKey {
         case email
         case password
         case confirmPassword
-        case firstName = "first_name"
-        case lastName = "last_name"
+        case firstName
+        case lastName
         case phone
-        case inviteToken = "invite_token"
-        case organizationID = "organization_id"
+        case inviteToken
+        case organizationId
         case organization
-        case roleID = "role_id"
+        case roleId
         case role
+        case idToken
     }
 }
 

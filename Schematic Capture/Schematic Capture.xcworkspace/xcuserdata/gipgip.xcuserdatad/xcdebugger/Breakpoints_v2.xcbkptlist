@@ -23,49 +23,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DF977566-D3E6-433C-A2BA-5A21AE1A077F"
+            uuid = "B1AE4EC8-D169-468E-A751-B51768C92D12"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Schematic Capture/View Controllers/SignInViewController.swift"
+            filePath = "Schematic Capture/Controllers/LoginController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "sign(_:didSignInFor:withError:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "signUp(with:completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "DF977566-D3E6-433C-A2BA-5A21AE1A077F - 6c945e435211ccae"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Schematic_Capture.SignInViewController.sign(_: Swift.Optional&lt;__C.GIDSignIn&gt;, didSignInFor: Swift.Optional&lt;__C.GIDGoogleUser&gt;, withError: Swift.Optional&lt;Swift.Error&gt;) -&gt; ()"
-                  moduleName = "Schematic Capture"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gipgip/Development/Schematic-Capture/schematic-capture-ios/Schematic%20Capture/Schematic%20Capture/View%20Controllers/SignInViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "863">
-               </Location>
-               <Location
-                  uuid = "DF977566-D3E6-433C-A2BA-5A21AE1A077F - a2015117def5aa41"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Schematic_Capture.SignInViewController.sign(_: Swift.Optional&lt;__C.GIDSignIn&gt;, didSignInFor: Swift.Optional&lt;__C.GIDGoogleUser&gt;, withError: Swift.Optional&lt;Swift.Error&gt;) -&gt; ()"
-                  moduleName = "Schematic Capture"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/gipgip/Development/Schematic-Capture/schematic-capture-ios/Schematic%20Capture/Schematic%20Capture/View%20Controllers/SignInViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "324">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

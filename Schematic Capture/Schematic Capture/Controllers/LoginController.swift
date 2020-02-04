@@ -19,7 +19,7 @@ class LogInController {
     var bearer: Bearer?
     var user: User?
     private let loginBaseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
-//    private let loginBaseURL = URL(string: "http://localhost:5000/api")!
+//    private let loginBaseURL = URL(string: "https://localhost:5000/api")!
 
     
     // MARK: - Sign Up
@@ -72,6 +72,8 @@ class LogInController {
                 return
             }
             
+            print(String(data: data, encoding: String.Encoding.utf8)!)
+            
             // Decode User
             do {
                 let user = try JSONDecoder().decode(User.self, from: data)
@@ -119,7 +121,7 @@ class LogInController {
             
             if let error = error {
                 print("Error signing in user: \(error)")
-                completion(.noData)
+                completion(.serverError(error))
                 return
             }
             
