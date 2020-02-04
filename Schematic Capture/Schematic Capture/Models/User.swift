@@ -21,6 +21,7 @@ struct User: Codable {
     var roleId: Int?
     var role: String?
     var idToken: String?
+    var id: String?
     
     init(email: String, password: String) {
         self.email = email
@@ -35,6 +36,7 @@ struct User: Codable {
         self.roleId = nil
         self.role = nil
         self.idToken = nil
+        self.id = nil
     }
     
     init(email: String, password: String, confirmPassword: String, firstName: String, lastName: String, phone: String, inviteToken: String) {
@@ -50,6 +52,7 @@ struct User: Codable {
         self.roleId = nil
         self.role = nil
         self.idToken = nil
+        self.id = nil
     }
     
     init(firstName: String, lastName: String, phone: String?, inviteToken: String?, idToken: String) {
@@ -65,6 +68,7 @@ struct User: Codable {
         self.roleId = nil
         self.role = nil
         self.idToken = idToken
+        self.id = nil
     }
     
     init(email: String, firstName: String, lastName: String, phone: String, organizationId: Int, organization: String, roleId: Int, role: String) {
@@ -80,6 +84,7 @@ struct User: Codable {
         self.roleId = roleId
         self.role = role
         self.idToken = nil
+        self.id = nil
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -95,6 +100,7 @@ struct User: Codable {
         case roleId
         case role
         case idToken
+        case id
     }
 }
 

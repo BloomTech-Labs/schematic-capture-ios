@@ -40,14 +40,4 @@ class Schematic_CaptureUITests: XCTestCase {
             }
         }
     }
-    
-    func testLogin() {
-        let app = XCUIApplication()
-        app.launch()
-        
-        let loginButton = XCUIApplication().buttons["Login"]
-        loginButton.tap()
-        loginButton.tap()
-        
-    }
 }

@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var tokenTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var baseConstraint: NSLayoutConstraint!
     
     var loginController: LogInController?
     
@@ -28,6 +29,8 @@ class SignUpViewController: UIViewController {
         
         setUpTextFieldDelegate()
         setUpUI()
+        addTapGesture()
+        addKeyboardNotification()
         
         // TESTING
         firstNameTextField.text = "John"
@@ -62,9 +65,12 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUp(_ sender: Any) {
+        
         if let error = validateTextFields() {
-            errorMessageLabel.alpha = 1
-            errorMessageLabel.text = error
+            DispatchQueue.main.async {
+                self.errorMessageLabel.alpha = 1
+                self.errorMessageLabel.text = error
+            }
             return
         }
         
@@ -112,7 +118,7 @@ class SignUpViewController: UIViewController {
                 }
                 alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
             }
-
+            
         }
     }
     
@@ -147,7 +153,7 @@ class SignUpViewController: UIViewController {
     
     func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+        
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
@@ -157,6 +163,64 @@ class SignUpViewController: UIViewController {
         return NSPredicate(format: "SELF MATCHES %@", passwordRegEx).evaluate(with: password)
     }
     
+    // Dismiss Keyboard
+    func addTapGesture() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func addKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func animateWithKeyboard(notification: NSNotification) {
+        
+        let userInfo = notification.userInfo!
+        let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        let curve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+        let moveUp = (notification.name == UIResponder.keyboardWillShowNotification)
+        
+        let viewHeight = self.view.safeAreaLayoutGuide.layoutFrame.height
+        var displacement: CGFloat = 0
+        
+        if let textField = getActiveTextField() {
+            displacement = viewHeight - (textField.frame.origin.y + keyboardHeight + 15)
+        }
+        
+        baseConstraint.constant = moveUp ? displacement : 40
+        
+        let options = UIView.AnimationOptions(rawValue: curve << 16)
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: { self.view.layoutIfNeeded() },
+                       completion: nil)
+    }
+    
+    func getActiveTextField() -> UITextField? {
+        if firstNameTextField.isFirstResponder {
+            return firstNameTextField
+        } else if lastNameTextField.isFirstResponder {
+            return lastNameTextField
+        } else if emailTextField.isFirstResponder {
+            return emailTextField
+        } else if phoneTextField.isFirstResponder {
+            return phoneTextField
+        } else if passwordTextField.isFirstResponder {
+            return passwordTextField
+        } else if confirmPasswordTextField.isFirstResponder {
+            return confirmPasswordTextField
+        } else if tokenTextField.isFirstResponder {
+            return tokenTextField
+        }
+        return nil
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MainPageSegue" {
             if let homeVC = segue.destination as? HomeViewController {
@@ -164,7 +228,7 @@ class SignUpViewController: UIViewController {
             }
         }
     }
-
+    
 }
 
 extension SignUpViewController: UITextFieldDelegate {

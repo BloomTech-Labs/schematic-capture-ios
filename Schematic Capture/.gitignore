@@ -68,7 +68,7 @@ iOSInjectionProject/
 
 ### OSX ###
 # General
-.DS_Store
+*.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -98,7 +98,8 @@ Temporary Items
 # Xcode
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-
+#json files
+*.json
 
 
 

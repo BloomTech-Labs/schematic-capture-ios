@@ -129,14 +129,15 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Kqd-Fd-K6F" firstAttribute="top" secondItem="bgX-VN-hWS" secondAttribute="top" constant="40" id="4RO-bt-fOR"/>
                             <constraint firstItem="Kqd-Fd-K6F" firstAttribute="leading" secondItem="bgX-VN-hWS" secondAttribute="leading" constant="40" id="AvJ-ke-lw5"/>
+                            <constraint firstItem="Kqd-Fd-K6F" firstAttribute="top" secondItem="bgX-VN-hWS" secondAttribute="top" constant="40" id="iVo-Hk-W6o"/>
                             <constraint firstItem="bgX-VN-hWS" firstAttribute="trailing" secondItem="Kqd-Fd-K6F" secondAttribute="trailing" constant="40" id="t9x-tG-fxc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bgX-VN-hWS"/>
                     </view>
                     <navigationItem key="navigationItem" title="Login" largeTitleDisplayMode="always" id="9Vo-ie-Ub8"/>
                     <connections>
+                        <outlet property="baseConstraint" destination="iVo-Hk-W6o" id="Otx-ed-r4p"/>
                         <outlet property="emailTextField" destination="l8P-Cq-zYy" id="NjG-8f-nTY"/>
                         <outlet property="errorMessageLabel" destination="VMW-0z-BbO" id="XRo-Vs-C7m"/>
                         <outlet property="loginButton" destination="xW2-wU-sKh" id="d4h-gK-ELy"/>
@@ -212,13 +213,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Ich-RZ-bSX" firstAttribute="trailing" secondItem="xFl-ZV-9Xz" secondAttribute="trailing" constant="40" id="3RI-Ch-dWe"/>
-                            <constraint firstItem="xFl-ZV-9Xz" firstAttribute="top" secondItem="Ich-RZ-bSX" secondAttribute="top" constant="40" id="p8y-gQ-pWA"/>
+                            <constraint firstItem="xFl-ZV-9Xz" firstAttribute="top" secondItem="Ich-RZ-bSX" secondAttribute="top" constant="40" id="c2d-Mb-0LB"/>
                             <constraint firstItem="xFl-ZV-9Xz" firstAttribute="leading" secondItem="Ich-RZ-bSX" secondAttribute="leading" constant="40" id="xVy-fw-ETY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ich-RZ-bSX"/>
                     </view>
                     <navigationItem key="navigationItem" title="Just few more things..." id="HMt-dY-sRO"/>
                     <connections>
+                        <outlet property="baseConstraint" destination="c2d-Mb-0LB" id="bD5-dJ-sUM"/>
                         <outlet property="errorMessageLabel" destination="J64-Zs-ukg" id="VUG-6P-dC3"/>
                         <outlet property="firstNameTextField" destination="dGv-lI-k5A" id="rDQ-aT-C0l"/>
                         <outlet property="inviteTokenTextField" destination="G7O-qP-ZvD" id="b4h-Ai-7nJ"/>
@@ -315,14 +317,15 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="axX-JB-8bS" firstAttribute="top" secondItem="GCu-8V-VMs" secondAttribute="top" constant="40" id="Map-3H-oix"/>
                             <constraint firstItem="GCu-8V-VMs" firstAttribute="trailing" secondItem="axX-JB-8bS" secondAttribute="trailing" constant="40" id="Vwf-bP-fg1"/>
+                            <constraint firstItem="axX-JB-8bS" firstAttribute="top" secondItem="GCu-8V-VMs" secondAttribute="top" constant="40" id="WbC-NT-7gn"/>
                             <constraint firstItem="axX-JB-8bS" firstAttribute="leading" secondItem="GCu-8V-VMs" secondAttribute="leading" constant="40" id="jiU-NH-2JQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GCu-8V-VMs"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign Up" largeTitleDisplayMode="always" id="Q2W-xS-7ks"/>
                     <connections>
+                        <outlet property="baseConstraint" destination="WbC-NT-7gn" id="Q5L-x6-AoR"/>
                         <outlet property="confirmPasswordTextField" destination="PTr-Jk-uZ3" id="r3G-zj-QEV"/>
                         <outlet property="emailTextField" destination="c0A-cn-tB0" id="icL-RU-cyM"/>
                         <outlet property="errorMessageLabel" destination="ayP-8g-reU" id="dhw-Bn-cip"/>
@@ -406,6 +409,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fbo-wI-3oo"/>
+        <segue reference="9wJ-Bp-B7Y"/>
     </inferredMetricsTieBreakers>
 </document>
