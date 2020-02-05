@@ -27,6 +27,8 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/LFAlertController.svg)  
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+![Maintainability](https://api.codeclimate.com/v1/badges/1257e90eac623ca12586/maintainability)
+![Test Coverage](https://api.codeclimate.com/v1/badges/1257e90eac623ca12586/test_coverage)
 
 🚫 more info on using badges [here](https://github.com/badges/shields)
 
