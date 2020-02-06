@@ -36,7 +36,7 @@
 
 1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+1️⃣ [Trello Board](https://trello.com/b/Amx4wIKW/labs-20-schematic-capture)
 
 1️⃣ [Product Canvas](🚫add link to product canvas here)
 
