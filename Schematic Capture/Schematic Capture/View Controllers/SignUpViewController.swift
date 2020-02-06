@@ -34,14 +34,6 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         addTapGesture()
         addKeyboardNotification()
         
-        // TESTING
-        firstNameTextField.text = "John"
-        lastNameTextField.text = "Kim"
-        emailTextField.text = "john@lambda.com"
-        phoneTextField.text = "1231231234"
-        passwordTextField.text = "testing123!"
-        confirmPasswordTextField.text = "testing123!"
-        tokenTextField.text = ""
     }
     
     func setUpUI() {
