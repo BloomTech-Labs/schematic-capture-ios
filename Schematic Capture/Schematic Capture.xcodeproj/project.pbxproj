@@ -35,6 +35,13 @@
 		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
 		A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */; };
 		A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */; };
+		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
+		A6F1C9E923ECCD5900E0D583 /* JobSheet+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* JobSheet+Convenience.swift */; };
+		A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */; };
+		A6F1C9ED23ECD37D00E0D583 /* Job+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EC23ECD37D00E0D583 /* Job+Convenience.swift */; };
+		A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */; };
+		A6F1C9F123ECD6D300E0D583 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F023ECD6D300E0D583 /* Client.swift */; };
+		A6F1C9F323ECD78D00E0D583 /* Organization+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F223ECD78D00E0D583 /* Organization+Convenience.swift */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +99,13 @@
 		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture.xcdatamodel"; sourceTree = "<group>"; };
+		A6F1C9E823ECCD5900E0D583 /* JobSheet+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JobSheet+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9EC23ECD37D00E0D583 /* Job+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Job+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9F023ECD6D300E0D583 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		A6F1C9F223ECD78D00E0D583 /* Organization+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+Convenience.swift"; sourceTree = "<group>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				A665835323DAB508006073DF /* Schematic Capture */,
+				A6F1C9CB23ECB21A00E0D583 /* Core Data */,
 				A665836A23DAB50A006073DF /* Schematic CaptureTests */,
 				A6613C0323E9340E004A11B2 /* Schematic CaptureUITests */,
 				A665835223DAB508006073DF /* Products */,
@@ -176,6 +191,7 @@
 				A665837A23DB6E32006073DF /* View Controllers */,
 				A665838423DFA070006073DF /* Helpers */,
 				A665838723E0B358006073DF /* Models */,
+				A6F1C9E723ECCD4800E0D583 /* Core Data Models */,
 				A665838A23E0E1C6006073DF /* Controllers */,
 			);
 			path = "Schematic Capture";
@@ -249,6 +265,27 @@
 				A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A6F1C9CB23ECB21A00E0D583 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		A6F1C9E723ECCD4800E0D583 /* Core Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				A6F1C9E823ECCD5900E0D583 /* JobSheet+Convenience.swift */,
+				A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */,
+				A6F1C9EC23ECD37D00E0D583 /* Job+Convenience.swift */,
+				A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */,
+				A6F1C9F023ECD6D300E0D583 /* Client.swift */,
+				A6F1C9F223ECD78D00E0D583 /* Organization+Convenience.swift */,
+			);
+			path = "Core Data Models";
 			sourceTree = "<group>";
 		};
 		A70A916E7742D130EC55F213 /* Pods */ = {
@@ -507,16 +544,23 @@
 			files = (
 				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
+				A6F1C9ED23ECD37D00E0D583 /* Job+Convenience.swift in Sources */,
 				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
 				A665838623DFA50A006073DF /* User.swift in Sources */,
+				A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */,
 				A665838E23E0E384006073DF /* Networking.swift in Sources */,
 				A665838C23E0E27C006073DF /* Bearer.swift in Sources */,
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
+				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
 				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
+				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
+				A6F1C9E923ECCD5900E0D583 /* JobSheet+Convenience.swift in Sources */,
 				A665839423E0E607006073DF /* HomeViewController.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
+				A6F1C9F123ECD6D300E0D583 /* Client.swift in Sources */,
 				A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */,
+				A6F1C9F323ECD78D00E0D583 /* Organization+Convenience.swift in Sources */,
 				A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -844,6 +888,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */,
+			);
+			currentVersion = A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */;
+			path = "Schematic Capture.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A665834923DAB508006073DF /* Project object */;
 }
