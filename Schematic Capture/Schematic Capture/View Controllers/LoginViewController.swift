@@ -29,9 +29,6 @@ class LoginViewController: UIViewController, WKUIDelegate {
         addTapGesture()
         addKeyboardNotification()
         
-        // TESTING
-        emailTextField.text = "bob_johnson@lambdaschool.com"
-        passwordTextField.text = "testing123!"
     }
     
     func setUpUI() {
