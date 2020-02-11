@@ -77,7 +77,7 @@ class LogInController {
         // Building the request
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("\(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
+        request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
         
         //TODO: debug statement
@@ -204,7 +204,7 @@ class LogInController {
                     print("googleLogin()::getIdToken(): No ID Token returned")
                     return completion(.error("No ID Token returned"), nil)
                 }
-                
+
                 return completion(nil, Bearer(idToken: idToken))
             }
         }
@@ -226,15 +226,15 @@ class LogInController {
             }
             
             self.bearer = bearer
-            
-            
+            print("\n\n")
+            print(bearer.idToken)
             
             // set up URL
             let requestURL = self.loginBaseURL.appendingPathComponent("auth").appendingPathComponent("login")
             
             var request = URLRequest(url: requestURL)
             request.httpMethod = HTTPMethod.post.rawValue
-            request.setValue("\(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
+            request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
             request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
             
             //TODO: Do not need http body
@@ -357,7 +357,7 @@ class LogInController {
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("\(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
+        request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
         
         //TODO: Do not need to encode user in the http body
