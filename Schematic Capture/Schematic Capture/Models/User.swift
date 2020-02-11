@@ -11,6 +11,10 @@ import Foundation
 struct Organization: Codable {
     let id: Int
     let name: String
+    let phone: String?
+    let street: String?
+    let city: String?
+    let zip: String?
 }
 
 struct Role: Codable {
