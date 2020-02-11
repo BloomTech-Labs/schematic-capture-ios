@@ -91,22 +91,22 @@ struct User: Codable {
         self.id = nil
     }
     
-    /// Initializer for core data
-    init(email: String, firstName: String, lastName: String, phone: String, organizationId: Int16, organization: String, roleId: Int16, role: String, idToken: String, id: String) {
-        self.email = email
-        self.password = nil
-        self.confirmPassword = nil
-        self.firstName = firstName
-        self.lastName = lastName
-        self.phone = phone
-        self.inviteToken = nil
-        self.organizationId = Int(organizationId)
-        self.organization = organization
-        self.roleId = Int(roleId)
-        self.role = role
-        self.idToken = idToken
-        self.id = id
-    }
+    ///Initializer for core data
+//    init(email: String, firstName: String, lastName: String, phone: String, organizationId: Int16, organization: String, roleId: Int16, role: String, idToken: String, id: String) {
+//        self.email = email
+//        self.password = nil
+//        self.confirmPassword = nil
+//        self.firstName = firstName
+//        self.lastName = lastName
+//        self.phone = phone
+//        self.inviteToken = nil
+//        self.organizationId = Int(organizationId)
+//        self.organization = organization
+//        self.roleId = Int(roleId)
+//        self.role = role
+//        self.idToken = idToken
+//        self.id = id
+//    }
     
     private enum CodingKeys: String, CodingKey {
         case email

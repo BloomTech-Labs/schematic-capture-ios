@@ -68,7 +68,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         } else {
             guard let authentication = user.authentication else { return }
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-            print("\(credential)")
             
             // With user's Google account, sign in to our firebase
             Auth.auth().signIn(with: credential) { (authResult, error) in

@@ -6,8 +6,9 @@
 //  Copyright © 2020 GIPGIP Studio. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Firebase
+import GoogleSignIn
 
 enum HeaderNames: String {
     case authorization = "Authorization"
@@ -100,6 +101,37 @@ class LogInController {
             completion(nil)
         }.resume()
     }
+    
+    //MARK: - Google Sign Up
+    func googleSignUp(with email: String, Password: String, completion: @escaping (NetworkingError?, Bearer?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: Password) { (authResult, error) in
+            if let error = error {
+                print(error)
+                return completion(.serverError(error), nil)
+            }
+            
+            guard let authResult = authResult else {
+                print("googleSignUp(): No auth result returned")
+                return completion(.error("No auth result returned"), nil)
+            }
+            
+            authResult.user.getIDToken { (idToken, error) in
+                if let error = error {
+                    print(error)
+                    return completion(.serverError(error), nil)
+                }
+                
+                guard let idToken = idToken else {
+                    print("googleSignUp()::getIdToken(): No ID Token returned")
+                    return completion(.error("No ID Token returned"), nil)
+                }
+                
+                return completion(nil, Bearer(idToken: idToken))
+            }
+        }
+    }
+
+    
     
     //MARK: - Log In Email / Password
     func logIn(with user: User, completion: @escaping (NetworkingError?) -> Void) {

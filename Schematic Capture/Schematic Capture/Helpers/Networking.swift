@@ -29,4 +29,5 @@ enum NetworkingError: Error, Equatable {
     case badEncode
     case noRepresentation
     case needRegister
+    case error(String)
 }
