@@ -108,13 +108,13 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        let confirmPassword = confirmPasswordTextField.text!
         let firstName = firstNameTextField.text!
         let lastName = lastNameTextField.text!
         let phone = phoneTextField.text!
         let inviteToken = tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        let user = User(email: email, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
+        //TODO: confirm password needed in user?
+        let user = User(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         
         
         loginController.signUp(with: user) { (error) in
