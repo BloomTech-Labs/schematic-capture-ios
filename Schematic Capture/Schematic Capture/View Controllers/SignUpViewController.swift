@@ -151,9 +151,6 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    func signUp(with user: User, bearer: Bearer) {
-        
-    }
     
     func validateTextFields() -> String? {
         if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||

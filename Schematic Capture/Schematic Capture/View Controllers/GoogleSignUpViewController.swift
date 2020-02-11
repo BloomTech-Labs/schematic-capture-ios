@@ -20,7 +20,6 @@ class GoogleSignUpViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var baseConstraint: NSLayoutConstraint!
     
     var loginController: LogInController?
-    var accessToken: String?
     var webView: WKWebView!
 
     override func viewDidLoad() {

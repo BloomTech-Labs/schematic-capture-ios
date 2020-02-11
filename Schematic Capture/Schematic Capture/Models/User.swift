@@ -59,7 +59,7 @@ struct User: Codable {
     }
     
     /// Initializer for Google sign up
-    init(firstName: String, lastName: String, phone: String?, inviteToken: String?, idToken: String) {
+    init(firstName: String, lastName: String, phone: String?, inviteToken: String?) {
         self.email = nil
         self.password = nil
         self.firstName = firstName

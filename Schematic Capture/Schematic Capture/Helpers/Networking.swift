@@ -15,6 +15,11 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
+enum HeaderNames: String {
+    case authorization = "Authorization"
+    case contentType = "Content-Type"
+}
+
 enum NetworkingError: Error, Equatable {
     static func == (lhs: NetworkingError, rhs: NetworkingError) -> Bool {
         return lhs.localizedDescription == rhs.localizedDescription
