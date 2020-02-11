@@ -23,6 +23,7 @@ struct User: Codable {
     var idToken: String?
     var id: String?
     
+    /// Initializer for log in
     init(email: String, password: String) {
         self.email = email
         self.password = password
@@ -39,6 +40,7 @@ struct User: Codable {
         self.id = nil
     }
     
+    /// Initializer for sign up
     init(email: String, password: String, confirmPassword: String, firstName: String, lastName: String, phone: String, inviteToken: String) {
         self.email = email
         self.password = password
@@ -55,6 +57,7 @@ struct User: Codable {
         self.id = nil
     }
     
+    /// Initializer for Google sign up
     init(firstName: String, lastName: String, phone: String?, inviteToken: String?, idToken: String) {
         self.email = nil
         self.password = nil
@@ -71,6 +74,7 @@ struct User: Codable {
         self.id = nil
     }
     
+    /// Initializer for Google sign in
     init(email: String, firstName: String, lastName: String, phone: String, organizationId: Int, organization: String, roleId: Int, role: String) {
         self.email = email
         self.password = nil
@@ -85,6 +89,23 @@ struct User: Codable {
         self.role = role
         self.idToken = nil
         self.id = nil
+    }
+    
+    /// Initializer for core data
+    init(email: String, firstName: String, lastName: String, phone: String, organizationId: Int16, organization: String, roleId: Int16, role: String, idToken: String, id: String) {
+        self.email = email
+        self.password = nil
+        self.confirmPassword = nil
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phone = phone
+        self.inviteToken = nil
+        self.organizationId = Int(organizationId)
+        self.organization = organization
+        self.roleId = Int(roleId)
+        self.role = role
+        self.idToken = idToken
+        self.id = id
     }
     
     private enum CodingKeys: String, CodingKey {

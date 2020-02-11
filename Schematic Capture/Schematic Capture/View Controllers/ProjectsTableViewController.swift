@@ -1,5 +1,5 @@
 //
-//  ClientsTableViewController.swift
+//  ProjectsTableViewController.swift
 //  Schematic Capture
 //
 //  Created by Gi Pyo Kim on 2/7/20.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ClientsTableViewController: UITableViewController {
+class ProjectsTableViewController: UITableViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController<Client> = {
         let fetchRequest: NSFetchRequest<Client> = Client.fetchRequest()
@@ -106,7 +106,7 @@ class ClientsTableViewController: UITableViewController {
 
 }
 
-extension ClientsTableViewController: NSFetchedResultsControllerDelegate {
+extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }

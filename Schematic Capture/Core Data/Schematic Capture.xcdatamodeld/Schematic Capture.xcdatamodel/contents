@@ -30,24 +30,20 @@
         <attribute name="stockCode" optional="YES" attributeType="String"/>
         <attribute name="storePartNumber" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Organization" representedClassName="Organization" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client"/>
-    </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="imageData" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" attributeType="String"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES" codeGenerationType="class">
+        <attribute name="client" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="jobs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Job"/>
     </entity>
     <elements>
-        <element name="Photo" positionX="-100.1796875" positionY="502.03125" width="128" height="73"/>
-        <element name="JobSheet" positionX="40.84375" positionY="453.30078125" width="128" height="298"/>
-        <element name="Job" positionX="-180.0234375" positionY="377.953125" width="128" height="103"/>
-        <element name="Project" positionX="-235.46875" positionY="274.05859375" width="128" height="73"/>
-        <element name="Organization" positionX="-367.3984375" positionY="71.109375" width="128" height="73"/>
         <element name="Client" positionX="-303.37890625" positionY="161.96484375" width="128" height="88"/>
+        <element name="Job" positionX="-180.0234375" positionY="377.953125" width="128" height="103"/>
+        <element name="JobSheet" positionX="40.84375" positionY="453.30078125" width="128" height="298"/>
+        <element name="Photo" positionX="-100.1796875" positionY="502.03125" width="128" height="73"/>
+        <element name="Project" positionX="-235.46875" positionY="274.05859375" width="128" height="88"/>
     </elements>
 </model>

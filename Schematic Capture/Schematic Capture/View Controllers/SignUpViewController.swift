@@ -116,6 +116,7 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         
         let user = User(email: email, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         
+        
         loginController.signUp(with: user) { (error) in
             self.stopLoadingScreen()
             if let error = error {

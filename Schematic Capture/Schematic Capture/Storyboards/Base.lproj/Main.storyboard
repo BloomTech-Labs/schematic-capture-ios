@@ -387,10 +387,10 @@
             </objects>
             <point key="canvasLocation" x="3220" y="-34"/>
         </scene>
-        <!--Clients Table View Controller-->
+        <!--Projects Table View Controller-->
         <scene sceneID="deu-49-Ufi">
             <objects>
-                <tableViewController id="pkd-zm-3Me" customClass="ClientsTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="pkd-zm-3Me" customClass="ProjectsTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wnd-Zc-spw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -410,13 +410,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boeing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvi-0V-A4I">
-                                            <rect key="frame" x="83" y="6" width="71.5" height="30"/>
+                                            <rect key="frame" x="83" y="6" width="69.5" height="26"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Projects" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-3t-vmw">
-                                            <rect key="frame" x="83" y="48.5" width="64" height="19.5"/>
+                                            <rect key="frame" x="83" y="51.5" width="63" height="16.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
