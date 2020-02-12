@@ -11,12 +11,14 @@ import CoreData
 
 extension JobSheet {
     
-    @discardableResult convenience init(name: String,
+    @discardableResult convenience init(id: Int,
+                                        name: String,
                                         components: [Component]?,
                                         schematic: Data?,
                                         photos: [Photo]?,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
+        self.id = Int32(id)
         self.name = name
         self.components = components != nil ? NSSet(array: components!) : nil
         self.schematic = schematic

@@ -387,10 +387,10 @@
             </objects>
             <point key="canvasLocation" x="3220" y="-34"/>
         </scene>
-        <!--Projects Table View Controller-->
+        <!--Projects-->
         <scene sceneID="deu-49-Ufi">
             <objects>
-                <tableViewController id="pkd-zm-3Me" customClass="ProjectsTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="fullScreen" id="pkd-zm-3Me" customClass="ProjectsTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wnd-Zc-spw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -409,14 +409,14 @@
                                                 <constraint firstAttribute="width" secondItem="Itg-AC-ey5" secondAttribute="height" multiplier="1:1" id="LsH-uG-LXw"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boeing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvi-0V-A4I">
-                                            <rect key="frame" x="83" y="6" width="69.5" height="26"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvi-0V-A4I">
+                                            <rect key="frame" x="83" y="6" width="90" height="30"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Projects" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-3t-vmw">
-                                            <rect key="frame" x="83" y="51.5" width="63" height="16.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boeing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-3t-vmw">
+                                            <rect key="frame" x="83" y="48.5" width="45.5" height="19.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -436,6 +436,7 @@
                                     <outlet property="clientLogo" destination="Itg-AC-ey5" id="8Vt-aJ-k3o"/>
                                     <outlet property="nameLabel" destination="Kvi-0V-A4I" id="8Rl-yt-0HZ"/>
                                     <outlet property="numbOfProjectsLabel" destination="I1Z-3t-vmw" id="LXv-yy-V6w"/>
+                                    <segue destination="iz8-F7-Mky" kind="show" id="k7R-SM-WpB"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -444,11 +445,40 @@
                             <outlet property="delegate" destination="pkd-zm-3Me" id="dCr-aU-GoU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fiH-zz-p1L"/>
+                    <navigationItem key="navigationItem" title="Projects" id="fiH-zz-p1L"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Tu-gw-nZt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4111.594202898551" y="-34.151785714285715"/>
+        </scene>
+        <!--Jobs-->
+        <scene sceneID="QXA-Se-3H4">
+            <objects>
+                <tableViewController modalPresentationStyle="fullScreen" id="iz8-F7-Mky" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GTr-rh-xAo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="w1u-TR-dpn">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w1u-TR-dpn" id="DD6-Bl-6Xh">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iz8-F7-Mky" id="V27-zN-nHK"/>
+                            <outlet property="delegate" destination="iz8-F7-Mky" id="mLT-Yl-wRH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Jobs" id="Q7z-Q4-8E6"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MM2-pg-ALA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4935" y="-34"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="5Mf-aT-5Gl">

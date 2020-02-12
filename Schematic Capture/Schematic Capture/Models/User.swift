@@ -29,9 +29,9 @@ struct User: Codable {
     var lastName: String?
     var phone: String?
     var inviteToken: String?
-    var organizations: [Organization]
+    var organizations: [Organization]?
     var roleId: Int?
-    var role: [Role]
+    var role: [Role]?
     var id: String?
     
     /// Initializer for log in
@@ -42,7 +42,7 @@ struct User: Codable {
         self.lastName = nil
         self.phone = nil
         self.inviteToken = nil
-        self.organizations = []
+        self.organizations = nil
         self.roleId = nil
         self.role = []
         self.id = nil
@@ -56,7 +56,7 @@ struct User: Codable {
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = inviteToken
-        self.organizations = []
+        self.organizations = nil
         self.roleId = nil
         self.role = []
         self.id = nil
@@ -70,8 +70,8 @@ struct User: Codable {
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = inviteToken
-        self.organizations = []
-        self.role = []
+        self.organizations = nil
+        self.role = nil
         self.id = nil
     }
     

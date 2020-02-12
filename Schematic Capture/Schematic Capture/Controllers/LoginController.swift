@@ -1,4 +1,3 @@
-//
 //  LoginController.swift
 //  Schematic Capture
 //
@@ -17,8 +16,8 @@ class LogInController {
     var bearer: Bearer?
     var user: User?
     
-    private let loginBaseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
-    //    private let loginBaseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+//    private let loginBaseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
+        private let loginBaseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
     //    private let loginBaseURL = URL(string: "https://localhost:5000/api")!
     
     
@@ -232,16 +231,6 @@ class LogInController {
             request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
             request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
             
-            //TODO: Do not need http body
-            //            do {
-            //                request.httpBody = try JSONEncoder().encode(user)
-            //                print(String(data: request.httpBody!, encoding: .utf8)!)
-            //            } catch {
-            //                NSLog("Error encoding user for sign in: \(error)")
-            //                completion(.badEncode)
-            //                return
-            //            }
-            
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
                 if let error = error {
@@ -277,18 +266,6 @@ class LogInController {
                     print("Error decoding the user: \(error)")
                     completion(.badDecode)
                 }
-                
-                //TODO: Do not need to decode bearer (?)
-                // Decode Bearer
-                //                do {
-                //                    let bearer = try JSONDecoder().decode(Bearer.self, from: data)
-                //                    self.bearer = bearer
-                //                    print("\n\nTOKEN: \(bearer.idToken)\n\n")
-                //                } catch {
-                //                    NSLog("Error decoding the bearer token: \(error)")
-                //                    completion(.noBearer)
-                //                    return
-                //                }
                 
                 completion(nil)
             }.resume()
@@ -358,16 +335,6 @@ class LogInController {
         request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
         
-        //TODO: Do not need to encode user in the http body
-        //        do {
-        //            request.httpBody = try JSONEncoder().encode(self.bearer)
-        //            print(String(data: request.httpBody!, encoding: .utf8)!)
-        //        } catch {
-        //            NSLog("Error encoding user for sign in: \(error)")
-        //            completion(.badEncode)
-        //            return
-        //        }
-        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
@@ -400,18 +367,6 @@ class LogInController {
                 print("Error decoding the user: \(error)")
                 completion(.badDecode)
             }
-            
-            //TODO: Do not need to decode the bearer
-            // Decode Bearer
-            //            do {
-            //                let bearer = try JSONDecoder().decode(Bearer.self, from: data)
-            //                self.bearer = bearer
-            //                print("\n\nTOKEN: \(bearer.idToken)\n\n")
-            //            } catch {
-            //                NSLog("Error decoding the bearer token: \(error)")
-            //                completion(.noBearer)
-            //                return
-            //            }
             completion(nil)
             
         }.resume()
@@ -421,12 +376,12 @@ class LogInController {
     private func updateUser(user: User) {
         guard let firstName = user.firstName,
             let lastName = user.lastName,
-            !user.organizations.isEmpty,
-            !user.role.isEmpty else { return }
+            let organizations = user.organizations,
+            let role = user.role else { return }
         
         defaults.set(firstName, forKey: "firstName")
         defaults.set(lastName, forKey: "lastName")
-        defaults.set(user.organizations, forKey: "organizations")
-        defaults.set(user.role, forKey: "role")
+        defaults.set(organizations, forKey: "organizations")
+        defaults.set(role, forKey: "role")
     }
 }
