@@ -22,7 +22,6 @@ class LogInController {
     //    private let loginBaseURL = URL(string: "https://localhost:5000/api")!
     
     
-    
     // MARK: - Sign Up
     func signUp(with user: User, completion: @escaping (NetworkingError?) -> Void) {
         

@@ -12,10 +12,10 @@ import CoreData
 extension Project {
     
     @discardableResult convenience init(name: String,
-                                        jobs: [Job]?,
+                                        jobSheets: [JobSheet]?,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.name = name
-        self.jobs = jobs != nil ? NSSet(array: jobs!) : nil
+        self.jobSheets = jobSheets != nil ? NSSet(array: jobSheets!) : nil
     }
 }

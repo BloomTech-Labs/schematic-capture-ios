@@ -3,15 +3,9 @@
     <entity name="Client" representedClassName="Client" syncable="YES" codeGenerationType="class">
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="name" attributeType="String"/>
-        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="ownedClient" inverseEntity="Project"/>
     </entity>
-    <entity name="Job" representedClassName="Job" syncable="YES" codeGenerationType="class">
-        <attribute name="name" attributeType="String"/>
-        <attribute name="schematic" optional="YES" attributeType="Binary"/>
-        <relationship name="jobSheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobSheet"/>
-        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo"/>
-    </entity>
-    <entity name="JobSheet" representedClassName="JobSheet" syncable="YES" codeGenerationType="class">
+    <entity name="Component" representedClassName="Component" syncable="YES" codeGenerationType="class">
         <attribute name="componentApplication" optional="YES" attributeType="String"/>
         <attribute name="componentDescription" optional="YES" attributeType="String"/>
         <attribute name="componentId" attributeType="String"/>
@@ -26,24 +20,34 @@
         <attribute name="rlCategory" optional="YES" attributeType="String"/>
         <attribute name="rlNumber" optional="YES" attributeType="String"/>
         <attribute name="settings" optional="YES" attributeType="String"/>
-        <attribute name="status" attributeType="String" defaultValueString="incomplete"/>
+        <attribute name="status" attributeType="String"/>
         <attribute name="stockCode" optional="YES" attributeType="String"/>
         <attribute name="storePartNumber" optional="YES" attributeType="String"/>
+        <relationship name="ownedJobSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="components" inverseEntity="JobSheet"/>
+    </entity>
+    <entity name="JobSheet" representedClassName="JobSheet" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="schematic" optional="YES" attributeType="Binary"/>
+        <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="ownedJobSheet" inverseEntity="Component"/>
+        <relationship name="ownedProject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="jobSheets" inverseEntity="Project"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="ownedJobSheet" inverseEntity="Photo"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="imageData" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" attributeType="String"/>
+        <relationship name="ownedJobSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="photos" inverseEntity="JobSheet"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES" codeGenerationType="class">
         <attribute name="client" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="jobs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Job"/>
+        <relationship name="jobSheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="ownedProject" inverseEntity="JobSheet"/>
+        <relationship name="ownedClient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="projects" inverseEntity="Client"/>
     </entity>
     <elements>
         <element name="Client" positionX="-303.37890625" positionY="161.96484375" width="128" height="88"/>
-        <element name="Job" positionX="-180.0234375" positionY="377.953125" width="128" height="103"/>
-        <element name="JobSheet" positionX="40.84375" positionY="453.30078125" width="128" height="298"/>
-        <element name="Photo" positionX="-100.1796875" positionY="502.03125" width="128" height="73"/>
-        <element name="Project" positionX="-235.46875" positionY="274.05859375" width="128" height="88"/>
+        <element name="JobSheet" positionX="-180.0234375" positionY="377.953125" width="128" height="118"/>
+        <element name="Component" positionX="40.84375" positionY="453.30078125" width="128" height="313"/>
+        <element name="Photo" positionX="-100.1796875" positionY="502.03125" width="128" height="88"/>
+        <element name="Project" positionX="-235.46875" positionY="274.05859375" width="128" height="103"/>
     </elements>
 </model>

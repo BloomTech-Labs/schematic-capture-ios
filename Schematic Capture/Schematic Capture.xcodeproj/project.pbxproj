@@ -36,9 +36,9 @@
 		A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */; };
 		A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */; };
 		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
-		A6F1C9E923ECCD5900E0D583 /* JobSheet+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* JobSheet+Convenience.swift */; };
+		A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */; };
 		A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */; };
-		A6F1C9ED23ECD37D00E0D583 /* Job+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EC23ECD37D00E0D583 /* Job+Convenience.swift */; };
+		A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */; };
 		A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */; };
 		A6F1C9F123ECD6D300E0D583 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F023ECD6D300E0D583 /* Client.swift */; };
 		A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */; };
@@ -102,9 +102,9 @@
 		A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture.xcdatamodel"; sourceTree = "<group>"; };
-		A6F1C9E823ECCD5900E0D583 /* JobSheet+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JobSheet+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Convenience.swift"; sourceTree = "<group>"; };
 		A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+Convenience.swift"; sourceTree = "<group>"; };
-		A6F1C9EC23ECD37D00E0D583 /* Job+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Job+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JobSheet+Convenience.swift"; sourceTree = "<group>"; };
 		A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Convenience.swift"; sourceTree = "<group>"; };
 		A6F1C9F023ECD6D300E0D583 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -284,9 +284,9 @@
 		A6F1C9E723ECCD4800E0D583 /* Core Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				A6F1C9E823ECCD5900E0D583 /* JobSheet+Convenience.swift */,
+				A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */,
 				A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */,
-				A6F1C9EC23ECD37D00E0D583 /* Job+Convenience.swift */,
+				A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */,
 				A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */,
 				A6F1C9F023ECD6D300E0D583 /* Client.swift */,
 				A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */,
@@ -560,7 +560,7 @@
 				A6F1C9FC23EE0EA900E0D583 /* ClientTableViewCell.swift in Sources */,
 				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
-				A6F1C9ED23ECD37D00E0D583 /* Job+Convenience.swift in Sources */,
+				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
 				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
 				A665838623DFA50A006073DF /* User.swift in Sources */,
 				A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */,
@@ -572,7 +572,7 @@
 				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
 				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
-				A6F1C9E923ECCD5900E0D583 /* JobSheet+Convenience.swift in Sources */,
+				A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */,
 				A665839423E0E607006073DF /* HomeViewController.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
 				A6F1C9F123ECD6D300E0D583 /* Client.swift in Sources */,
