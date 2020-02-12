@@ -33,6 +33,7 @@ class LogInController {
             user.phone != nil,
             user.inviteToken != nil {
             
+            self.user = user
             googleSignUp(withEmail: email, Password: password) { (error, bearer) in
                 if let error = error {
                     completion(error)
@@ -59,6 +60,7 @@ class LogInController {
             user.lastName != nil,
             user.phone != nil,
             user.inviteToken != nil {
+            self.user = user
             registerHttpRequest(bearer: bearer) { (error) in
                 if let error = error {
                     completion(error)
@@ -81,7 +83,7 @@ class LogInController {
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
         
         //TODO: debug statement
-        print("\n\n \(request.httpMethod!) \n\n")
+        print("\n\n \(bearer.idToken) \n\n")
         
         let encoder = JSONEncoder()
         
@@ -136,21 +138,11 @@ class LogInController {
                 print("Error decoding the user: \(error)")
                 completion(.badDecode)
             }
-            // TODO: do not nee this?
-            // Decode bearer
-            //                do {
-            //                    let bearer = try JSONDecoder().decode(Bearer.self, from: data)
-            //                    self.bearer = bearer
-            //                    print("\n\nTOKEN: \(bearer.idToken)\n\n")
-            //                } catch {
-            //                    print("Error decoding the bearer token: \(error)")
-            //                    completion(.noBearer)
-            //                    return
-            //                }
             
             completion(nil)
         }.resume()
     }
+
     
     //MARK: - Google Sign Up
     private func googleSignUp(withEmail email: String, Password: String, completion: @escaping (NetworkingError?, Bearer?) -> Void) {
@@ -165,6 +157,8 @@ class LogInController {
                 return completion(.error("No auth result returned"), nil)
             }
             
+            
+            
             authResult.user.getIDToken { (idToken, error) in
                 if let error = error {
                     print(error)
@@ -175,6 +169,8 @@ class LogInController {
                     print("googleSignUp()::getIdToken(): No ID Token returned")
                     return completion(.error("No ID Token returned"), nil)
                 }
+                
+                
                 
                 return completion(nil, Bearer(idToken: idToken))
             }
@@ -256,7 +252,7 @@ class LogInController {
                 }
                 
                 if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                    if response.statusCode == 203 {
+                    if response.statusCode == 400 {
                         completion(.needRegister)
                         return
                     }
@@ -353,6 +349,9 @@ class LogInController {
         
         self.bearer = bearer
         
+        //TODO: Delete
+        print(bearer.idToken)
+        
         let requestURL = loginBaseURL.appendingPathComponent("auth").appendingPathComponent("login")
         
         var request = URLRequest(url: requestURL)
@@ -379,7 +378,7 @@ class LogInController {
             }
             
             if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                if response.statusCode == 203 {
+                if response.statusCode == 400 {
                     completion(.needRegister)
                     return
                 }
