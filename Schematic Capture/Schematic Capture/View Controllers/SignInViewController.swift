@@ -113,6 +113,8 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         } else if segue.identifier == "HomeVCSegue" {
             if let homeVC = segue.destination as? HomeViewController {
                 homeVC.loginController = loginController
+                homeVC.projectController.user = loginController.user
+                homeVC.projectController.bearer = loginController.bearer
             }
         } else if segue.identifier == "GoogleSegue" {
             if let googleVC = segue.destination as? GoogleSignUpViewController {

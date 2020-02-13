@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FLQ-gN-IEA">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tPW-Nu-gbc" customClass="GIDSignInButton">
                                 <rect key="frame" x="40" y="568" width="334" height="40"/>
@@ -93,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="39" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-Fd-K6F">
-                                <rect key="frame" x="40" y="40" width="334" height="205"/>
+                                <rect key="frame" x="40" y="96" width="334" height="205"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l8P-Cq-zYy">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -145,7 +145,7 @@
                         <outlet property="errorMessageLabel" destination="VMW-0z-BbO" id="XRo-Vs-C7m"/>
                         <outlet property="loginButton" destination="xW2-wU-sKh" id="d4h-gK-ELy"/>
                         <outlet property="passwordTextField" destination="8Ke-1Q-c5i" id="58k-s4-oxR"/>
-                        <segue destination="7K4-j5-uJg" kind="show" identifier="MainPageSegue" id="fbo-wI-3oo"/>
+                        <segue destination="7K4-j5-uJg" kind="show" identifier="HomeVCSegue" id="fbo-wI-3oo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dt-Pl-Beh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -161,7 +161,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="41" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFl-ZV-9Xz">
-                                <rect key="frame" x="40" y="40" width="334" height="315"/>
+                                <rect key="frame" x="40" y="96" width="334" height="315"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGv-lI-k5A">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -230,7 +230,7 @@
                         <outlet property="lastNameTextField" destination="dlD-cQ-aqY" id="3LB-k5-G4L"/>
                         <outlet property="phoneTextField" destination="glW-B7-zV3" id="LMh-RP-fFZ"/>
                         <outlet property="signUpButton" destination="ydZ-WL-ziP" id="RHi-Sz-DQA"/>
-                        <segue destination="7K4-j5-uJg" kind="show" identifier="MainPageSegue" id="9wJ-Bp-B7Y"/>
+                        <segue destination="7K4-j5-uJg" kind="show" identifier="HomeVCSegue" id="9wJ-Bp-B7Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rie-p9-nAd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -246,7 +246,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="41" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axX-JB-8bS">
-                                <rect key="frame" x="40" y="40" width="334" height="478"/>
+                                <rect key="frame" x="40" y="96" width="334" height="478"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vwX-Bc-fDf">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -338,7 +338,7 @@
                         <outlet property="phoneTextField" destination="bGi-aI-E4m" id="H0H-PJ-pbX"/>
                         <outlet property="signUpButton" destination="ojx-Ul-NCO" id="Vkc-NB-LOw"/>
                         <outlet property="tokenTextField" destination="gcR-I1-Bii" id="2Yr-X7-tnF"/>
-                        <segue destination="7K4-j5-uJg" kind="show" identifier="MainPageSegue" id="ZVI-lR-TtB"/>
+                        <segue destination="7K4-j5-uJg" kind="show" identifier="HomeVCSegue" id="ZVI-lR-TtB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nm3-5j-f4g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -575,7 +575,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9wJ-Bp-B7Y"/>
+        <segue reference="fbo-wI-3oo"/>
         <segue reference="20c-WC-uBS"/>
     </inferredMetricsTieBreakers>
 </document>

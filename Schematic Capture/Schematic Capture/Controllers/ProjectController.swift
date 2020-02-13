@@ -11,6 +11,8 @@ import CoreData
 
 class ProjectController {
     
+    var bearer: Bearer?
+    var user: User?
     var projects: [Project] = []
     
     //    private let loginBaseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!

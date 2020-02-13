@@ -152,7 +152,7 @@ class SignUpViewController: UIViewController, WKUIDelegate {
                 let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
                 let alert = SCLAlertView(appearance: appearance)
                 alert.addButton("Proceed to main page") {
-                    self.performSegue(withIdentifier: "MainPageSegue", sender: nil)
+                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
                 }
                 alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
             }
@@ -261,9 +261,11 @@ class SignUpViewController: UIViewController, WKUIDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MainPageSegue" {
+        if segue.identifier == "HomeVCSegue" {
             if let homeVC = segue.destination as? HomeViewController {
                 homeVC.loginController = loginController
+                homeVC.projectController.user = loginController?.user
+                homeVC.projectController.bearer = loginController?.bearer
             }
         }
     }

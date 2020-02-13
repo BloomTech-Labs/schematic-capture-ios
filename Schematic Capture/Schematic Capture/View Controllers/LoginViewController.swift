@@ -103,7 +103,7 @@ class LoginViewController: UIViewController, WKUIDelegate {
                 let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
                 let alert = SCLAlertView(appearance: appearance)
                 alert.addButton("Proceed to main page") {
-                    self.performSegue(withIdentifier: "MainPageSegue", sender: nil)
+                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
                 }
                 alert.showSuccess("Login Success!", subTitle: "")
             }
@@ -164,6 +164,16 @@ class LoginViewController: UIViewController, WKUIDelegate {
             return passwordTextField
         }
         return nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "HomeVCSegue" {
+            if let homeVC = segue.destination as? HomeViewController {
+                homeVC.loginController = loginController
+                homeVC.projectController.user = loginController?.user
+                homeVC.projectController.bearer = loginController?.bearer
+            }
+        }
     }
 }
 

@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var loginLabel: UILabel!
     
     var loginController: LogInController?
+    var projectController = ProjectController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
