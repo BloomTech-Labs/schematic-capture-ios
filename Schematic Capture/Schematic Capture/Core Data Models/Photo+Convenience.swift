@@ -11,11 +11,23 @@ import CoreData
 
 extension Photo {
     
+    var photoRepresentation: PhotoRepresentation? {
+        guard let name = name, let imageData = imageData else { return nil }
+        return PhotoRepresentation(name: name,
+                                   imageData: imageData)
+    }
+    
     @discardableResult convenience init(name: String,
                                         imageData: Data,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.name = name
         self.imageData = imageData
+    }
+    
+    @discardableResult convenience init(photoRepresentation: PhotoRepresentation, context: NSManagedObjectContext) {
+        self.init(name: photoRepresentation.name,
+                  imageData: photoRepresentation.imageData,
+                  context: context)
     }
 }

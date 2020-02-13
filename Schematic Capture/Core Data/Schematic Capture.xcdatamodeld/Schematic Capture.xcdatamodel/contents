@@ -21,10 +21,11 @@
         <relationship name="ownedJobSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="components" inverseEntity="JobSheet"/>
     </entity>
     <entity name="JobSheet" representedClassName="JobSheet" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="schematic" optional="YES" attributeType="Binary"/>
-        <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="ownedJobSheet" inverseEntity="Component"/>
+        <attribute name="updatedAt" attributeType="String"/>
+        <relationship name="components" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="ownedJobSheet" inverseEntity="Component"/>
         <relationship name="ownedProject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="jobSheets" inverseEntity="Project"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="ownedJobSheet" inverseEntity="Photo"/>
     </entity>
@@ -34,14 +35,14 @@
         <relationship name="ownedJobSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="photos" inverseEntity="JobSheet"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES" codeGenerationType="class">
-        <attribute name="client" optional="YES" attributeType="String"/>
-        <attribute name="clientId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="jobSheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="ownedProject" inverseEntity="JobSheet"/>
+        <attribute name="client" attributeType="String"/>
+        <attribute name="clientId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="jobSheets" toMany="YES" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="ownedProject" inverseEntity="JobSheet"/>
     </entity>
     <elements>
-        <element name="JobSheet" positionX="-193.85546875" positionY="447.04296875" width="128" height="133"/>
+        <element name="JobSheet" positionX="-193.85546875" positionY="447.04296875" width="128" height="148"/>
         <element name="Component" positionX="1.90625" positionY="223.30078125" width="128" height="313"/>
         <element name="Photo" positionX="-1.5390625" positionY="555.26953125" width="128" height="88"/>
         <element name="Project" positionX="-270.75" positionY="291.8984375" width="128" height="118"/>

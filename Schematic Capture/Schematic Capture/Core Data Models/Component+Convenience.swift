@@ -17,6 +17,42 @@ enum JobSheetStatus: String, CaseIterable {
 
 extension Component {
     
+    var componentRepresentation: ComponentRepresentation? {
+        guard let componentId = componentId,
+            let manufacturer = manufacturer,
+            let partNumber = partNumber,
+            let rlCategory = rlCategory,
+            let rlNumber = rlNumber,
+            let stockCode = stockCode,
+            let electricalAddress = electricalAddress,
+            let componentApplication = componentApplication,
+            let referenceTag = referenceTag,
+            let settings = settings,
+            let image = image,
+            let resources = resources,
+            let cutSheet = cutSheet,
+            let maintenanceVideo = maintenanceVideo,
+            let storePartNumber = storePartNumber,
+            let status = status else { return nil }
+        
+        return ComponentRepresentation(componentId: componentId,
+                                       manufacturer: manufacturer,
+                                       partNumber: partNumber,
+                                       rlCategory: rlCategory,
+                                       rlNumber: rlNumber,
+                                       stockCode: stockCode,
+                                       electricalAddress: electricalAddress,
+                                       componentApplication: componentApplication,
+                                       referenceTag: referenceTag,
+                                       settings: settings,
+                                       image: image,
+                                       resources: resources,
+                                       cutSheet: cutSheet,
+                                       maintenanceVideo: maintenanceVideo,
+                                       storePartNumber: storePartNumber,
+                                       status: status)
+    }
+    
     @discardableResult convenience init(componentId: String,
                                         manufacturer: String?,
                                         partNumber: String?,
@@ -51,5 +87,26 @@ extension Component {
         self.maintenanceVideo = maintenanceVideo
         self.storePartNumber = storePartNumber
         self.status = status.rawValue
+    }
+    
+    @discardableResult convenience init(componentRepresentation: ComponentRepresentation, context: NSManagedObjectContext) {
+        
+        self.init(componentId: componentRepresentation.componentId,
+                  manufacturer: componentRepresentation.manufacturer,
+                  partNumber: componentRepresentation.partNumber,
+                  rlCategory: componentRepresentation.rlCategory,
+                  rlNumber: componentRepresentation.rlNumber,
+                  stockCode: componentRepresentation.stockCode,
+                  electricalAddress: componentRepresentation.electricalAddress,
+                  componentApplication: componentRepresentation.componentApplication,
+                  referenceTag: componentRepresentation.referenceTag,
+                  settings: componentRepresentation.settings,
+                  image: componentRepresentation.image,
+                  resources: componentRepresentation.resources,
+                  cutSheet: componentRepresentation.cutSheet,
+                  maintenanceVideo: componentRepresentation.maintenanceVideo,
+                  storePartNumber: componentRepresentation.storePartNumber,
+                  status: JobSheetStatus(rawValue: componentRepresentation.status) ?? JobSheetStatus.incomplete,
+                  context: context)
     }
 }
