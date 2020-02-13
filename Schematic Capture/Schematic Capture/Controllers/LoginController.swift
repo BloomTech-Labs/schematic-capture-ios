@@ -16,9 +16,9 @@ class LogInController {
     var bearer: Bearer?
     var user: User?
     
-//    private let loginBaseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
-        private let loginBaseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
-    //    private let loginBaseURL = URL(string: "https://localhost:5000/api")!
+    //    private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
+    private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+    //    private let baseURL = URL(string: "https://localhost:5000/api")!
     
     
     // MARK: - Sign Up
@@ -69,10 +69,36 @@ class LogInController {
         }
     }
     
+    //MARK: - Log In Email / Password
+    func logIn(with user: User, completion: @escaping (NetworkingError?) -> Void) {
+        // email and password have been already validated
+        googleLogin(withEmail: user.email!, password: user.password!) { (error, bearer) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            
+            guard let bearer = bearer else {
+                print("No bearer returned")
+                completion(.noBearer)
+                return
+            }
+            
+            self.loginHttpRequest(bearer: bearer) { (error) in
+                if let error = error {
+                    completion(error)
+                    return
+                }
+                
+                completion(nil)
+            }
+        }
+    }
+    
     // MARK: - Register HTTP Request
     private func registerHttpRequest(bearer: Bearer, completion: @escaping (NetworkingError?) -> Void) {
         // Building the URL
-        let requestURL = self.loginBaseURL.appendingPathComponent("auth").appendingPathComponent("register")
+        let requestURL = self.baseURL.appendingPathComponent("auth").appendingPathComponent("register")
         
         // Building the request
         var request = URLRequest(url: requestURL)
@@ -140,9 +166,64 @@ class LogInController {
             completion(nil)
         }.resume()
     }
-
     
-    //MARK: - Google Sign Up
+    //MARK: - Login HTTP Request
+    private func loginHttpRequest(bearer: Bearer, completion: @escaping (NetworkingError?) -> Void) {
+        
+        self.bearer = bearer
+        
+        //TODO: Delete
+        print(bearer.idToken)
+        
+        let requestURL = baseURL.appendingPathComponent("auth").appendingPathComponent("login")
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                NSLog("Error signing in user: \(error)")
+                completion(.serverError(error))
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                if response.statusCode == 400 {
+                    completion(.needRegister)
+                    return
+                }
+                completion(.unexpectedStatusCode(response.statusCode))
+                return
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from data task")
+                completion(.noData)
+                return
+            }
+            
+            // Decode User
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                self.user = user
+                
+                // Update user info
+                self.updateUser(user: user)
+                print("\n\nUSER: \(user)\n\n")
+            } catch {
+                print("Error decoding the user: \(error)")
+                completion(.badDecode)
+            }
+            completion(nil)
+            
+        }.resume()
+    }
+    
+    
+    
+    //MARK: - Google Sign Up with email and password
     private func googleSignUp(withEmail email: String, Password: String, completion: @escaping (NetworkingError?, Bearer?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: Password) { (authResult, error) in
             if let error = error {
@@ -175,7 +256,7 @@ class LogInController {
         }
     }
     
-    //MARK: - Google email/password Login
+    //MARK: - Google Sign In with email and password
     private func googleLogin(withEmail email: String, password: String, completion: @escaping (NetworkingError?, Bearer?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
@@ -198,79 +279,12 @@ class LogInController {
                     print("googleLogin()::getIdToken(): No ID Token returned")
                     return completion(.error("No ID Token returned"), nil)
                 }
-
+                
                 return completion(nil, Bearer(idToken: idToken))
             }
         }
     }
     
-    //MARK: - Log In Email / Password
-    func logIn(with user: User, completion: @escaping (NetworkingError?) -> Void) {
-        // email and password have been already validated
-        googleLogin(withEmail: user.email!, password: user.password!) { (error, bearer) in
-            if let error = error {
-                completion(error)
-                return
-            }
-            
-            guard let bearer = bearer else {
-                print("No bearer returned")
-                completion(.noBearer)
-                return
-            }
-            
-            self.bearer = bearer
-            print("\n\n")
-            print(bearer.idToken)
-            
-            // set up URL
-            let requestURL = self.loginBaseURL.appendingPathComponent("auth").appendingPathComponent("login")
-            
-            var request = URLRequest(url: requestURL)
-            request.httpMethod = HTTPMethod.post.rawValue
-            request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
-            request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
-            
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                
-                if let error = error {
-                    print("Error signing in user: \(error)")
-                    completion(.serverError(error))
-                    return
-                }
-                
-                if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                    if response.statusCode == 400 {
-                        completion(.needRegister)
-                        return
-                    }
-                    completion(.unexpectedStatusCode(response.statusCode))
-                    return
-                }
-                
-                guard let data = data else {
-                    print("No data returned from data task")
-                    completion(.noData)
-                    return
-                }
-                
-                // Decode User
-                do {
-                    let user = try JSONDecoder().decode(User.self, from: data)
-                    self.user = user
-                    
-                    // Update user info
-                    self.updateUser(user: user)
-                    print("\n\nUSER: \(user)\n\n")
-                } catch {
-                    print("Error decoding the user: \(error)")
-                    completion(.badDecode)
-                }
-                
-                completion(nil)
-            }.resume()
-        }
-    }
     
     //MARK: - Google Login with credential
     func googleLogin(withCredential credential: AuthCredential, completion: @escaping (NetworkingError?) -> Void) {
@@ -308,7 +322,7 @@ class LogInController {
                     return
                 }
                 
-                self.googleLogin(withBearer: Bearer(idToken: idToken)) { (error) in
+                self.loginHttpRequest(bearer: Bearer(idToken: idToken)) { (error) in
                     if let error = error {
                         completion(error)
                         return
@@ -320,57 +334,6 @@ class LogInController {
         }
     }
     
-    //MARK: - Google Login
-    private func googleLogin(withBearer bearer: Bearer, completion: @escaping (NetworkingError?) -> Void) {
-        
-        self.bearer = bearer
-        
-        //TODO: Delete
-        print(bearer.idToken)
-        
-        let requestURL = loginBaseURL.appendingPathComponent("auth").appendingPathComponent("login")
-        
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
-        request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            if let error = error {
-                NSLog("Error signing in user: \(error)")
-                completion(.noData)
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                if response.statusCode == 400 {
-                    completion(.needRegister)
-                    return
-                }
-                completion(.unexpectedStatusCode(response.statusCode))
-                return
-            }
-            
-            guard let data = data else {
-                NSLog("No data returned from data task")
-                completion(.noData)
-                return
-            }
-            
-            // Decode User
-            do {
-                let user = try JSONDecoder().decode(User.self, from: data)
-                self.user = user
-                print("\n\nUSER: \(user)\n\n")
-            } catch {
-                print("Error decoding the user: \(error)")
-                completion(.badDecode)
-            }
-            completion(nil)
-            
-        }.resume()
-    }
     
     //MARK: - Update User
     private func updateUser(user: User) {
