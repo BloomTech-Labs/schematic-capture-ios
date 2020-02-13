@@ -25,6 +25,7 @@ struct ComponentRepresentation: Codable {
     var maintenanceVideo: String?
     var storePartNumber: String?
     var status: String
+    let ownedJobSheet: JobSheetRepresentation
     
     private enum CodingKeys: String, CodingKey {
         case componentId
@@ -43,5 +44,6 @@ struct ComponentRepresentation: Codable {
         case maintenanceVideo
         case storePartNumber
         case status
+        case ownedJobSheet
     }
 }

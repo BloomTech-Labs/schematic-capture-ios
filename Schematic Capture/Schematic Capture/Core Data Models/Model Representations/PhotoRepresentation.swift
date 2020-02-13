@@ -11,9 +11,11 @@ import Foundation
 struct PhotoRepresentation: Codable {
     var name: String
     var imageData: Data
+    let ownedJobSheet: JobSheetRepresentation
     
     private enum CodingKeys: String, CodingKey {
         case name
         case imageData
+        case ownedJobSheet
     }
 }

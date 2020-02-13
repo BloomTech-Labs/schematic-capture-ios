@@ -15,6 +15,7 @@ struct JobSheetRepresentation: Codable {
     var schematic: Data?
     var photos: [PhotoRepresentation]?
     var updatedAt: String
+    let ownedProject: ProjectRepresentation
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -23,5 +24,6 @@ struct JobSheetRepresentation: Codable {
         case schematic
         case photos
         case updatedAt
+        case ownedProject
     }
 }

@@ -11,9 +11,11 @@ import CoreData
 
 extension JobSheet {
     
-    var jobSheetRepresentaion: JobSheetRepresentation? {
+    var jobSheetRepresentation: JobSheetRepresentation? {
         guard let name = name,
-            let updatedAt = updatedAt else { return nil }
+            let updatedAt = updatedAt,
+            let ownedProject = ownedProject,
+            let ownedProjectRep = ownedProject.projectRepresentation else { return nil }
         
         // Sort the job sheet array by component id
         let componentIdDescriptor = NSSortDescriptor(key: "componentId", ascending: true)
@@ -30,7 +32,8 @@ extension JobSheet {
                                       components: componentsArr,
                                       schematic: schematic,
                                       photos: photosArr,
-                                      updatedAt: updatedAt)
+                                      updatedAt: updatedAt,
+                                      ownedProject: ownedProjectRep)
     }
     
     @discardableResult convenience init(id: Int,
@@ -39,6 +42,7 @@ extension JobSheet {
                                         schematic: Data?,
                                         photos: [Photo]?,
                                         updatedAt: String,
+                                        ownedProject: Project,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
@@ -47,6 +51,7 @@ extension JobSheet {
         self.schematic = schematic
         self.photos = photos != nil ? NSSet(array: photos!) : nil
         self.updatedAt = updatedAt
+        self.ownedProject = ownedProject
     }
     
     @discardableResult convenience init(jobSheetRepresentation: JobSheetRepresentation, context: NSManagedObjectContext) {
@@ -61,6 +66,7 @@ extension JobSheet {
                   schematic: jobSheetRepresentation.schematic,
                   photos: photos,
                   updatedAt: jobSheetRepresentation.updatedAt,
+                  ownedProject: Project(projectRepresentation: jobSheetRepresentation.ownedProject, context: context),
                   context: context)
     }
 }

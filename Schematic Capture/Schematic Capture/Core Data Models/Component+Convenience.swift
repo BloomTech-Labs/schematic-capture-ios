@@ -33,7 +33,9 @@ extension Component {
             let cutSheet = cutSheet,
             let maintenanceVideo = maintenanceVideo,
             let storePartNumber = storePartNumber,
-            let status = status else { return nil }
+            let status = status,
+            let ownedJobSheet = ownedJobSheet,
+            let ownedJobSheetRep = ownedJobSheet.jobSheetRepresentation else { return nil }
         
         return ComponentRepresentation(componentId: componentId,
                                        manufacturer: manufacturer,
@@ -50,7 +52,8 @@ extension Component {
                                        cutSheet: cutSheet,
                                        maintenanceVideo: maintenanceVideo,
                                        storePartNumber: storePartNumber,
-                                       status: status)
+                                       status: status,
+                                       ownedJobSheet: ownedJobSheetRep)
     }
     
     @discardableResult convenience init(componentId: String,
@@ -69,6 +72,7 @@ extension Component {
                                         maintenanceVideo: String?,
                                         storePartNumber: String?,
                                         status: JobSheetStatus,
+                                        ownedJobSheet: JobSheet,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.componentId = componentId
@@ -87,6 +91,7 @@ extension Component {
         self.maintenanceVideo = maintenanceVideo
         self.storePartNumber = storePartNumber
         self.status = status.rawValue
+        self.ownedJobSheet = ownedJobSheet
     }
     
     @discardableResult convenience init(componentRepresentation: ComponentRepresentation, context: NSManagedObjectContext) {
@@ -107,6 +112,7 @@ extension Component {
                   maintenanceVideo: componentRepresentation.maintenanceVideo,
                   storePartNumber: componentRepresentation.storePartNumber,
                   status: JobSheetStatus(rawValue: componentRepresentation.status) ?? JobSheetStatus.incomplete,
+                  ownedJobSheet: JobSheet(jobSheetRepresentation: componentRepresentation.ownedJobSheet, context: context),
                   context: context)
     }
 }

@@ -18,7 +18,7 @@
         <attribute name="status" attributeType="String"/>
         <attribute name="stockCode" optional="YES" attributeType="String"/>
         <attribute name="storePartNumber" optional="YES" attributeType="String"/>
-        <relationship name="ownedJobSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="components" inverseEntity="JobSheet"/>
+        <relationship name="ownedJobSheet" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="components" inverseEntity="JobSheet"/>
     </entity>
     <entity name="JobSheet" representedClassName="JobSheet" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -26,13 +26,13 @@
         <attribute name="schematic" optional="YES" attributeType="Binary"/>
         <attribute name="updatedAt" attributeType="String"/>
         <relationship name="components" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="ownedJobSheet" inverseEntity="Component"/>
-        <relationship name="ownedProject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="jobSheets" inverseEntity="Project"/>
+        <relationship name="ownedProject" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="jobSheets" inverseEntity="Project"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="ownedJobSheet" inverseEntity="Photo"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
         <attribute name="imageData" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" attributeType="String"/>
-        <relationship name="ownedJobSheet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="photos" inverseEntity="JobSheet"/>
+        <relationship name="ownedJobSheet" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="photos" inverseEntity="JobSheet"/>
     </entity>
     <entity name="Project" representedClassName="Project" syncable="YES" codeGenerationType="class">
         <attribute name="client" attributeType="String"/>

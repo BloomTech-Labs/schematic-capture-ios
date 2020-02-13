@@ -33,7 +33,7 @@ extension Project {
         self.clientId = Int32(clientId)
     }
     
-    @discardableResult convenience init?(projectRepresentation: ProjectRepresentation, context: NSManagedObjectContext) {
+    @discardableResult convenience init(projectRepresentation: ProjectRepresentation, context: NSManagedObjectContext) {
         
         let jobSheets = projectRepresentation.jobSheets != nil ? projectRepresentation.jobSheets!.map { JobSheet(jobSheetRepresentation: $0, context: context) } : nil
         
