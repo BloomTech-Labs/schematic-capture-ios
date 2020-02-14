@@ -127,7 +127,7 @@ class ProjectController {
     // Download schematic from firebase storage
     func downloadSchematics(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
         
-        guard let user = user, let bearer = bearer else {
+        guard let user = user, let _ = bearer else {
             completion(.noBearer)
             return
         }
@@ -196,8 +196,8 @@ class ProjectController {
                             return
                         }
                         
-                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematic = data
-                        
+                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicData = data
+                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicName = pdfNameString
                     }
                     
                 }

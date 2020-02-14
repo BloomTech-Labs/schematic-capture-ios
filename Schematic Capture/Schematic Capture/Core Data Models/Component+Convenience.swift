@@ -9,21 +9,17 @@
 import Foundation
 import CoreData
 
-enum JobSheetStatus: String, CaseIterable {
-    case incomplete
-    case inProgress
-    case complete
-    case assigned
-}
+
 
 extension Component {
     
     var componentRepresentation: ComponentRepresentation? {
         guard let componentId = componentId,
-            let manufacturer = manufacturer,
-            let partNumber = partNumber,
             let rlCategory = rlCategory,
             let rlNumber = rlNumber,
+            let componentDescription = componentDescription,
+            let manufacturer = manufacturer,
+            let partNumber = partNumber,
             let stockCode = stockCode,
             let electricalAddress = electricalAddress,
             let componentApplication = componentApplication,
@@ -34,15 +30,16 @@ extension Component {
             let cutSheet = cutSheet,
             let maintenanceVideo = maintenanceVideo,
             let storePartNumber = storePartNumber,
-            let status = status,
             let ownedJobSheet = ownedJobSheet,
+            let custom = custom,
             let ownedJobSheetRep = ownedJobSheet.jobSheetRepresentation else { return nil }
         
         return ComponentRepresentation(componentId: componentId,
-                                       manufacturer: manufacturer,
-                                       partNumber: partNumber,
                                        rlCategory: rlCategory,
                                        rlNumber: rlNumber,
+                                       componentDescription: componentDescription,
+                                       manufacturer: manufacturer,
+                                       partNumber: partNumber,
                                        stockCode: stockCode,
                                        electricalAddress: electricalAddress,
                                        componentApplication: componentApplication,
@@ -53,15 +50,16 @@ extension Component {
                                        cutSheet: cutSheet,
                                        maintenanceVideo: maintenanceVideo,
                                        storePartNumber: storePartNumber,
-                                       status: status,
+                                       custom: custom,
                                        ownedJobSheet: ownedJobSheetRep)
     }
     
     @discardableResult convenience init(componentId: String,
-                                        manufacturer: String?,
-                                        partNumber: String?,
                                         rlCategory: String?,
                                         rlNumber: String?,
+                                        componentDescription: String?,
+                                        manufacturer: String?,
+                                        partNumber: String?,
                                         stockCode: String?,
                                         electricalAddress: String?,
                                         componentApplication: String?,
@@ -72,15 +70,16 @@ extension Component {
                                         cutSheet: String?,
                                         maintenanceVideo: String?,
                                         storePartNumber: String?,
-                                        status: JobSheetStatus,
+                                        custom: String?,
                                         ownedJobSheet: JobSheet,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.componentId = componentId
-        self.manufacturer = manufacturer
-        self.partNumber = partNumber
         self.rlCategory = rlCategory
         self.rlNumber = rlNumber
+        self.componentDescription = componentDescription
+        self.manufacturer = manufacturer
+        self.partNumber = partNumber
         self.stockCode = stockCode
         self.electricalAddress = electricalAddress
         self.componentApplication = componentApplication
@@ -91,17 +90,18 @@ extension Component {
         self.cutSheet = cutSheet
         self.maintenanceVideo = maintenanceVideo
         self.storePartNumber = storePartNumber
-        self.status = status.rawValue
+        self.custom = custom
         self.ownedJobSheet = ownedJobSheet
     }
     
     @discardableResult convenience init(componentRepresentation: ComponentRepresentation, context: NSManagedObjectContext) {
         
         self.init(componentId: componentRepresentation.componentId,
-                  manufacturer: componentRepresentation.manufacturer,
-                  partNumber: componentRepresentation.partNumber,
                   rlCategory: componentRepresentation.rlCategory,
                   rlNumber: componentRepresentation.rlNumber,
+                  componentDescription: componentRepresentation.componentDescription,
+                  manufacturer: componentRepresentation.manufacturer,
+                  partNumber: componentRepresentation.partNumber,
                   stockCode: componentRepresentation.stockCode,
                   electricalAddress: componentRepresentation.electricalAddress,
                   componentApplication: componentRepresentation.componentApplication,
@@ -112,7 +112,7 @@ extension Component {
                   cutSheet: componentRepresentation.cutSheet,
                   maintenanceVideo: componentRepresentation.maintenanceVideo,
                   storePartNumber: componentRepresentation.storePartNumber,
-                  status: JobSheetStatus(rawValue: componentRepresentation.status) ?? JobSheetStatus.incomplete,
+                  custom: componentRepresentation.custom,
                   ownedJobSheet: JobSheet(jobSheetRepresentation: componentRepresentation.ownedJobSheet, context: context),
                   context: context)
     }
