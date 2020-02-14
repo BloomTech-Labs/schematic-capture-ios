@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import FirebaseStorage
 
 class ProjectController {
     
@@ -58,7 +59,7 @@ class ProjectController {
                 
                 self.updateProjects(with: projectsRep)
                 self.projects = projectsRep
-                
+                self.projects.sort { $0.id < $1.id }
                 print("\n\nPROJECTS: \(self.projects)\n\n")
             } catch {
                 print("Error decoding the jobs: \(error)")
@@ -124,6 +125,88 @@ class ProjectController {
     }
     
     // Download schematic from firebase storage
+    func downloadSchematics(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
+        
+        guard let user = user, let _ = bearer else {
+            completion(.noBearer)
+            return
+        }
+        
+        guard let organizations = user.organizations,
+            let organization = organizations.first else {
+                completion(.error("No user organizations found"))
+                return
+        }
+        
+        let maxSize: Int64 = 1073741824 // 1GB
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        for project in projects {
+            
+            guard var jobSheets = project.jobSheets else {
+                completion(.error("No job sheets found"))
+                return
+            }
+            
+            jobSheets.sort { $0.id < $1.id }
+            
+            for jobSheet in jobSheets {
+                var pdfRef: String?
+                let schematicRef = storageRef.child("\(organization.id)")
+                    .child("\(project.clientId)")
+                    .child("\(project.id)")
+                    .child("\(jobSheet.id)")
+                
+                schematicRef.listAll { (listResult, error) in
+                    if let error = error {
+                        completion(.error("\(error)"))
+                        return
+                    }
+                    
+                    let listFullPaths = listResult.items.map { $0.fullPath }
+                    for path in listFullPaths {
+                        if path.contains(".PDF") || path.contains(".pdf") {
+                            pdfRef = path
+                            break
+                        }
+                    }
+                    
+                    guard let pdfRef = pdfRef else {
+                        completion(.error("No PDF file found in \(schematicRef.fullPath)"))
+                        return
+                    }
+                    
+                    let start = pdfRef.lastIndex(of: "/")!
+                    let newStart = pdfRef.index(after: start)
+                    let range = newStart...pdfRef.endIndex
+                    let pdfNameString = String(pdfRef[range])
+                    
+                    
+                    
+                    schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
+                        if let error = error {
+                            print("\(error)")
+                            completion(.serverError(error))
+                            return
+                        }
+                        
+                        guard let data = data else {
+                            print("No schematic pdf returned")
+                            completion(.noData)
+                            return
+                        }
+                        
+                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicData = data
+                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicName = pdfNameString
+                    }
+                    
+                }
+                
+                
+                }
+            }
+    
+    }
     
     // Upload jobs in core data (check the status of the jobs)
     

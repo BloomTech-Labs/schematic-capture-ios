@@ -9,12 +9,20 @@
 import Foundation
 import CoreData
 
+enum JobSheetStatus: String, CaseIterable {
+    case incomplete
+    case inProgress
+    case complete
+    case assigned
+}
+
 extension JobSheet {
     
     var jobSheetRepresentation: JobSheetRepresentation? {
         guard let name = name,
             let updatedAt = updatedAt,
             let ownedProject = ownedProject,
+            let status = status,
             let ownedProjectRep = ownedProject.projectRepresentation else { return nil }
         
         // Sort the job sheet array by component id
@@ -30,27 +38,33 @@ extension JobSheet {
         return JobSheetRepresentation(id: Int(id),
                                       name: name,
                                       components: componentsArr,
-                                      schematic: schematic,
+                                      schematicData: schematicData,
+                                      schematicName: schematicName,
                                       photos: photosArr,
                                       updatedAt: updatedAt,
+                                      status: status,
                                       ownedProject: ownedProjectRep)
     }
     
     @discardableResult convenience init(id: Int,
                                         name: String,
                                         components: [Component]?,
-                                        schematic: Data?,
+                                        schematicData: Data?,
+                                        schematicName: String?,
                                         photos: [Photo]?,
                                         updatedAt: String,
+                                        status: JobSheetStatus,
                                         ownedProject: Project,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
         self.name = name
         self.components = components != nil ? NSSet(array: components!) : nil
-        self.schematic = schematic
+        self.schematicData = schematicData
+        self.schematicName = schematicName
         self.photos = photos != nil ? NSSet(array: photos!) : nil
         self.updatedAt = updatedAt
+        self.status = status.rawValue
         self.ownedProject = ownedProject
     }
     
@@ -63,10 +77,13 @@ extension JobSheet {
         self.init(id: jobSheetRepresentation.id,
                   name: jobSheetRepresentation.name,
                   components: components,
-                  schematic: jobSheetRepresentation.schematic,
+                  schematicData: jobSheetRepresentation.schematicData,
+                  schematicName: jobSheetRepresentation.schematicName,
                   photos: photos,
                   updatedAt: jobSheetRepresentation.updatedAt,
+                  status: JobSheetStatus(rawValue: jobSheetRepresentation.status) ?? JobSheetStatus.incomplete,
                   ownedProject: Project(projectRepresentation: jobSheetRepresentation.ownedProject, context: context),
                   context: context)
+        
     }
 }
