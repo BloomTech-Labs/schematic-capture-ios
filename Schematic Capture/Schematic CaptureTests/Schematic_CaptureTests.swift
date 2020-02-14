@@ -31,30 +31,6 @@ class Schematic_CaptureTests: XCTestCase {
         }
     }
     
-    func testSignUpEncode() {
-        
-        let loginController = LogInController()
-        let user = User(email: "john@lambda", password: "testing123!", confirmPassword: "testing123!", firstName: "John", lastName: "Kim", phone: "1231231234", inviteToken: "eyJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoyfQ.0lOBBJoCb-YGfixRco1R2aOSUeG_wW3_OBedyUBCIRQ")
-        loginController.signUp(with: user) { (error) in
-            if let error = error {
-                XCTFail("\(error)")
-                return
-            }
-        }
-    }
     
-//    func testSignUpDecode() {
-//          let bundle = Bundle(for: type(of: self))
-//          let fileUrl = bundle.url(forResource: "signUpEncode", withExtension: "json")
-//        let data = try! Data(contentsOf: fileUrl!)
-//        do {
-//            let user = try JSONDecoder().decode(User.self, from: data)
-//            XCTAssertNotNil(user)
-//            let token = try JSONDecoder().decode(Bearer.self, from: data)
-//            XCTAssertNotNil(token)
-//        }catch {
-//            XCTFail("\(error)")
-//        }
-//    }
 
 }
