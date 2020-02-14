@@ -14,8 +14,8 @@
             filePath = "Schematic Capture/Controllers/LoginController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "logIn(with:completion:)"
             landmarkType = "7">
          </BreakpointContent>

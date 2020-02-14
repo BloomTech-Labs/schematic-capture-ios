@@ -13,6 +13,7 @@ enum JobSheetStatus: String, CaseIterable {
     case incomplete
     case inProgress
     case complete
+    case assigned
 }
 
 extension Component {
