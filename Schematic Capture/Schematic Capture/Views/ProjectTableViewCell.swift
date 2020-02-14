@@ -1,5 +1,5 @@
 //
-//  ClientTableViewCell.swift
+//  ProjectTableViewCell.swift
 //  Schematic Capture
 //
 //  Created by Gi Pyo Kim on 2/7/20.
@@ -8,10 +8,15 @@
 
 import UIKit
 
-class ClientTableViewCell: UITableViewCell {
-    @IBOutlet weak var clientLogo: UIImageView!
+class ProjectTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var numbOfProjectsLabel: UILabel!
+    @IBOutlet weak var numbOfJobSheetLabel: UILabel!
+    
+    var project: Project? {
+        didSet {
+            
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

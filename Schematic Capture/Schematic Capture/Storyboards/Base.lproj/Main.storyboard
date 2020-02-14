@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FLQ-gN-IEA">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tPW-Nu-gbc" customClass="GIDSignInButton">
                                 <rect key="frame" x="40" y="568" width="334" height="40"/>
@@ -93,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="39" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-Fd-K6F">
-                                <rect key="frame" x="40" y="96" width="334" height="205"/>
+                                <rect key="frame" x="40" y="40" width="334" height="205"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l8P-Cq-zYy">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -161,7 +161,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="41" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFl-ZV-9Xz">
-                                <rect key="frame" x="40" y="96" width="334" height="315"/>
+                                <rect key="frame" x="40" y="40" width="334" height="315"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGv-lI-k5A">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -246,7 +246,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="41" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axX-JB-8bS">
-                                <rect key="frame" x="40" y="96" width="334" height="478"/>
+                                <rect key="frame" x="40" y="40" width="334" height="478"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vwX-Bc-fDf">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
@@ -400,50 +400,36 @@
             <objects>
                 <tableViewController modalPresentationStyle="fullScreen" id="pkd-zm-3Me" customClass="ProjectsTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wnd-Zc-spw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ClientCell" rowHeight="74" id="2sr-em-kPS" customClass="ClientTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="74" id="2sr-em-kPS" customClass="ProjectTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2sr-em-kPS" id="kbx-Bp-cZe">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Itg-AC-ey5">
-                                            <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="Itg-AC-ey5" secondAttribute="height" multiplier="1:1" id="LsH-uG-LXw"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvi-0V-A4I">
-                                            <rect key="frame" x="83" y="6" width="90" height="30"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="22"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boeing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-3t-vmw">
-                                            <rect key="frame" x="83" y="48.5" width="45.5" height="19.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="number of jobs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-3t-vmw">
+                                            <rect key="frame" x="20" y="48" width="101" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Project 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvi-0V-A4I">
+                                            <rect key="frame" x="20" y="10" width="90" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="I1Z-3t-vmw" secondAttribute="bottom" constant="6" id="2Uk-SL-qfw"/>
-                                        <constraint firstItem="Kvi-0V-A4I" firstAttribute="top" secondItem="kbx-Bp-cZe" secondAttribute="top" constant="6" id="7fZ-Gd-vgM"/>
-                                        <constraint firstItem="Kvi-0V-A4I" firstAttribute="leading" secondItem="Itg-AC-ey5" secondAttribute="trailing" constant="9" id="F3w-Fr-JZb"/>
-                                        <constraint firstItem="Itg-AC-ey5" firstAttribute="top" secondItem="kbx-Bp-cZe" secondAttribute="top" id="Yf8-ke-ekC"/>
-                                        <constraint firstItem="Itg-AC-ey5" firstAttribute="leading" secondItem="kbx-Bp-cZe" secondAttribute="leading" id="imV-kC-9bT"/>
-                                        <constraint firstAttribute="bottom" secondItem="Itg-AC-ey5" secondAttribute="bottom" id="rsU-R7-qRX"/>
-                                        <constraint firstItem="I1Z-3t-vmw" firstAttribute="leading" secondItem="Itg-AC-ey5" secondAttribute="trailing" constant="9" id="yqP-BV-fAP"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="clientLogo" destination="Itg-AC-ey5" id="8Vt-aJ-k3o"/>
                                     <outlet property="nameLabel" destination="Kvi-0V-A4I" id="8Rl-yt-0HZ"/>
-                                    <outlet property="numbOfProjectsLabel" destination="I1Z-3t-vmw" id="LXv-yy-V6w"/>
+                                    <outlet property="numbOfJobSheetLabel" destination="I1Z-3t-vmw" id="LXv-yy-V6w"/>
                                     <segue destination="iz8-F7-Mky" kind="show" id="k7R-SM-WpB"/>
                                 </connections>
                             </tableViewCell>
@@ -464,7 +450,7 @@
             <objects>
                 <tableViewController modalPresentationStyle="fullScreen" id="iz8-F7-Mky" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GTr-rh-xAo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>

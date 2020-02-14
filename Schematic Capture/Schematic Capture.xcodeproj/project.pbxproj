@@ -42,7 +42,7 @@
 		A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */; };
 		A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */; };
 		A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */; };
-		A6F1C9FC23EE0EA900E0D583 /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9FB23EE0EA900E0D583 /* ClientTableViewCell.swift */; };
+		A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */; };
 		A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */; };
 		A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */; };
 		A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */; };
@@ -112,7 +112,7 @@
 		A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Convenience.swift"; sourceTree = "<group>"; };
 		A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
-		A6F1C9FB23EE0EA900E0D583 /* ClientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
+		A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectController.swift; sourceTree = "<group>"; };
 		A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepresentation.swift; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 		A6F1C9FA23EE0E8400E0D583 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A6F1C9FB23EE0EA900E0D583 /* ClientTableViewCell.swift */,
+				A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -578,7 +578,7 @@
 			files = (
 				A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */,
 				A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */,
-				A6F1C9FC23EE0EA900E0D583 /* ClientTableViewCell.swift in Sources */,
+				A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */,
 				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
 				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
