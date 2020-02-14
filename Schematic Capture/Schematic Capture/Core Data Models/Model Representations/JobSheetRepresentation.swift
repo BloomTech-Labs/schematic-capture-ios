@@ -12,18 +12,22 @@ struct JobSheetRepresentation: Codable {
     let id: Int
     var name: String
     var components: [ComponentRepresentation]?
-    var schematic: Data?
+    var schematicData: Data?
+    var schematicName: String?
     var photos: [PhotoRepresentation]?
     var updatedAt: String
+    var status: String
     let ownedProject: ProjectRepresentation
     
     private enum CodingKeys: String, CodingKey {
         case id
         case name
         case components
-        case schematic
+        case schematicData
+        case schematicName
         case photos
         case updatedAt
+        case status
         case ownedProject
     }
 }
