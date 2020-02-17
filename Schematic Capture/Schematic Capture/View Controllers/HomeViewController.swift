@@ -27,14 +27,17 @@ class HomeViewController: UIViewController {
         projectController.downloadSchematics()
     }
     
-    /*
-    // MARK: - Navigation
+    
+     
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ProjectSegue" {
+            if let projectsTableVC = segue.destination as? ProjectsTableViewController {
+                projectsTableVC.loginController = loginController
+                projectsTableVC.projectController = projectController
+            }
+        }
     }
-    */
+    
 
 }

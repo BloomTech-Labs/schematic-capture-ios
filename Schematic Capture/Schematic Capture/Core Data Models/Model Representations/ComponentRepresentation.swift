@@ -9,7 +9,8 @@
 import Foundation
 
 struct ComponentRepresentation: Codable {
-    let componentId: String
+    let id: Int
+    let componentId: String?
     var rlCategory: String?
     var rlNumber: String?
     var componentDescription: String?
@@ -25,14 +26,15 @@ struct ComponentRepresentation: Codable {
     var cutSheet: String?
     var maintenanceVideo: String?
     var storePartNumber: String?
-    var custom: String
-    let ownedJobSheet: JobSheetRepresentation
+    var custom: String?
+    let jobSheetId: Int
     
     private enum CodingKeys: String, CodingKey {
+        case id
         case componentId
         case rlCategory
         case rlNumber
-        case componentDescription = "description"
+        case componentDescription = "descriptions"
         case manufacturer
         case partNumber
         case stockCode
@@ -46,6 +48,6 @@ struct ComponentRepresentation: Codable {
         case maintenanceVideo
         case storePartNumber
         case custom
-        case ownedJobSheet
+        case jobSheetId = "jobsheetId"
     }
 }

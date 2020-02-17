@@ -18,8 +18,8 @@ struct ProjectRepresentation: Codable {
     private enum CodingKeys: String, CodingKey {
         case id
         case name
-        case jobSheets
-        case client
+        case jobSheets = "jobsheet"
+        case client = "companyName"
         case clientId
     }
 }

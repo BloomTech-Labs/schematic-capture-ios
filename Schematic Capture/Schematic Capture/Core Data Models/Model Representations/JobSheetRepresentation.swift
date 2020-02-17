@@ -17,7 +17,7 @@ struct JobSheetRepresentation: Codable {
     var photos: [PhotoRepresentation]?
     var updatedAt: String
     var status: String
-    let ownedProject: ProjectRepresentation
+    let projectId: Int
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -28,6 +28,6 @@ struct JobSheetRepresentation: Codable {
         case photos
         case updatedAt
         case status
-        case ownedProject
+        case projectId
     }
 }

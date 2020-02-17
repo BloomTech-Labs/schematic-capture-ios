@@ -14,27 +14,9 @@ import CoreData
 extension Component {
     
     var componentRepresentation: ComponentRepresentation? {
-        guard let componentId = componentId,
-            let rlCategory = rlCategory,
-            let rlNumber = rlNumber,
-            let componentDescription = componentDescription,
-            let manufacturer = manufacturer,
-            let partNumber = partNumber,
-            let stockCode = stockCode,
-            let electricalAddress = electricalAddress,
-            let componentApplication = componentApplication,
-            let referenceTag = referenceTag,
-            let settings = settings,
-            let image = image,
-            let resources = resources,
-            let cutSheet = cutSheet,
-            let maintenanceVideo = maintenanceVideo,
-            let storePartNumber = storePartNumber,
-            let ownedJobSheet = ownedJobSheet,
-            let custom = custom,
-            let ownedJobSheetRep = ownedJobSheet.jobSheetRepresentation else { return nil }
         
-        return ComponentRepresentation(componentId: componentId,
+        return ComponentRepresentation(id: Int(id),
+                                       componentId: componentId,
                                        rlCategory: rlCategory,
                                        rlNumber: rlNumber,
                                        componentDescription: componentDescription,
@@ -51,10 +33,11 @@ extension Component {
                                        maintenanceVideo: maintenanceVideo,
                                        storePartNumber: storePartNumber,
                                        custom: custom,
-                                       ownedJobSheet: ownedJobSheetRep)
+                                       jobSheetId: Int(jobSheetId))
     }
     
-    @discardableResult convenience init(componentId: String,
+    @discardableResult convenience init(id: Int,
+                                        componentId: String?,
                                         rlCategory: String?,
                                         rlNumber: String?,
                                         componentDescription: String?,
@@ -71,9 +54,10 @@ extension Component {
                                         maintenanceVideo: String?,
                                         storePartNumber: String?,
                                         custom: String?,
-                                        ownedJobSheet: JobSheet,
+                                        jobSheetId: Int,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
+        self.id = Int32(id)
         self.componentId = componentId
         self.rlCategory = rlCategory
         self.rlNumber = rlNumber
@@ -91,12 +75,13 @@ extension Component {
         self.maintenanceVideo = maintenanceVideo
         self.storePartNumber = storePartNumber
         self.custom = custom
-        self.ownedJobSheet = ownedJobSheet
+        self.jobSheetId = Int32(jobSheetId)
     }
     
     @discardableResult convenience init(componentRepresentation: ComponentRepresentation, context: NSManagedObjectContext) {
         
-        self.init(componentId: componentRepresentation.componentId,
+        self.init(id: componentRepresentation.id,
+                  componentId: componentRepresentation.componentId,
                   rlCategory: componentRepresentation.rlCategory,
                   rlNumber: componentRepresentation.rlNumber,
                   componentDescription: componentRepresentation.componentDescription,
@@ -113,7 +98,7 @@ extension Component {
                   maintenanceVideo: componentRepresentation.maintenanceVideo,
                   storePartNumber: componentRepresentation.storePartNumber,
                   custom: componentRepresentation.custom,
-                  ownedJobSheet: JobSheet(jobSheetRepresentation: componentRepresentation.ownedJobSheet, context: context),
+                  jobSheetId: componentRepresentation.jobSheetId,
                   context: context)
     }
 }

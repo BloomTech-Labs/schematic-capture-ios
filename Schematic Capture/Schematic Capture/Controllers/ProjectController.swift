@@ -17,7 +17,8 @@ class ProjectController {
     var projects: [ProjectRepresentation] = []
     
     //    private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
-    private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+//    private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+    private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
     
     // Download assigned jobs (get client, project, job, csv as json)
     func downloadAssignedJobs(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
@@ -27,7 +28,7 @@ class ProjectController {
             return
         }
         
-        let requestURL = self.baseURL.appendingPathComponent("assignedJobs")
+        let requestURL = self.baseURL.appendingPathComponent("jobsheets").appendingPathComponent("assigned")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.get.rawValue
@@ -99,11 +100,11 @@ class ProjectController {
                     guard let representation = representationsByID[id] else { continue }
                     
                     // update the ones that are in core data
-                    project.name = representation.name
-                    project.client = representation.client
-                    project.clientId = Int32(representation.clientId)
-                    let jobSheetArr = representation.jobSheets
-                    project.jobSheets = jobSheetArr != nil ? NSSet(array: jobSheetArr!) : nil
+//                    project.name = representation.name
+//                    project.client = representation.client
+//                    project.clientId = Int32(representation.clientId)
+//                    let jobSheetArr = representation.jobSheets
+//                    project.jobSheets = jobSheetArr != nil ? NSSet(array: jobSheetArr!) : nil
                     
                     // We just updated a task, we don't need to create a new Task for this identifier
                     projectsToCreate.removeValue(forKey: id)
@@ -111,7 +112,29 @@ class ProjectController {
                 
                 // Figure out which ones we don't have
                 for representation in projectsToCreate.values {
-                    Project(projectRepresentation: representation, context: context)
+                    // Create Projects from project representations
+                    let project = Project(projectRepresentation: representation, context: context)
+                    if let jobSheetsRep = representation.jobSheets {
+                        // Create JobSheets from jobsheet representations
+                        for jobSheetRep in jobSheetsRep {
+                            let jobSheet = JobSheet(jobSheetRepresentation: jobSheetRep, context: context)
+                            jobSheet.ownedProject = project
+                            if let componentsRep = jobSheetRep.components {
+                                // Create Compoonents from component representations
+                                for componentRep in componentsRep {
+                                    let component = Component(componentRepresentation: componentRep, context: context)
+                                    component.ownedJobSheet = jobSheet
+                                }
+                            }
+                            if let photosRep = jobSheetRep.photos {
+                                // Create Photos from photo representations
+                                for photoRep in photosRep {
+                                    let photo = Photo(photoRepresentation: photoRep, context: context)
+                                    photo.ownedJobSheet = jobSheet
+                                }
+                            }
+                        }
+                    }
                 }
                 
                 // Persist all the changes (updating and creating of tasks) to Core Data

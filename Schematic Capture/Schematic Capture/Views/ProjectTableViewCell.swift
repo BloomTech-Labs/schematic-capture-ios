@@ -14,7 +14,7 @@ class ProjectTableViewCell: UITableViewCell {
     
     var project: Project? {
         didSet {
-            
+            updateViews()
         }
     }
     
@@ -27,5 +27,11 @@ class ProjectTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func updateViews() {
+        guard let project = project else { return }
+        nameLabel.text = project.name
+        numbOfJobSheetLabel.text = project.jobSheets != nil ? "\(project.jobSheets!.count) Jobs" : "0 Jobs"
     }
 }

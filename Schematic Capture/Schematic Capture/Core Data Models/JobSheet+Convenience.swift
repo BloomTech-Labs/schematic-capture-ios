@@ -21,9 +21,7 @@ extension JobSheet {
     var jobSheetRepresentation: JobSheetRepresentation? {
         guard let name = name,
             let updatedAt = updatedAt,
-            let ownedProject = ownedProject,
-            let status = status,
-            let ownedProjectRep = ownedProject.projectRepresentation else { return nil }
+            let status = status else { return nil }
         
         // Sort the job sheet array by component id
         let componentIdDescriptor = NSSortDescriptor(key: "componentId", ascending: true)
@@ -43,7 +41,7 @@ extension JobSheet {
                                       photos: photosArr,
                                       updatedAt: updatedAt,
                                       status: status,
-                                      ownedProject: ownedProjectRep)
+                                      projectId: Int(projectId) )
     }
     
     @discardableResult convenience init(id: Int,
@@ -54,7 +52,7 @@ extension JobSheet {
                                         photos: [Photo]?,
                                         updatedAt: String,
                                         status: JobSheetStatus,
-                                        ownedProject: Project,
+                                        projectId: Int,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
@@ -65,7 +63,7 @@ extension JobSheet {
         self.photos = photos != nil ? NSSet(array: photos!) : nil
         self.updatedAt = updatedAt
         self.status = status.rawValue
-        self.ownedProject = ownedProject
+        self.projectId = Int32(projectId)
     }
     
     @discardableResult convenience init(jobSheetRepresentation: JobSheetRepresentation, context: NSManagedObjectContext) {
@@ -82,7 +80,7 @@ extension JobSheet {
                   photos: photos,
                   updatedAt: jobSheetRepresentation.updatedAt,
                   status: JobSheetStatus(rawValue: jobSheetRepresentation.status) ?? JobSheetStatus.incomplete,
-                  ownedProject: Project(projectRepresentation: jobSheetRepresentation.ownedProject, context: context),
+                  projectId: jobSheetRepresentation.projectId,
                   context: context)
         
     }

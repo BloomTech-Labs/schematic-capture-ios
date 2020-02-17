@@ -11,12 +11,15 @@ import CoreData
 
 class ProjectsTableViewController: UITableViewController {
     
+    var loginController: LogInController?
+    var projectController: ProjectController?
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Project> = {
         let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "client", ascending: true),
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "clientId", ascending: true),
                                          NSSortDescriptor(key: "name", ascending: true)]
         
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "client", cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "clientId", cacheName: nil)
         
         frc.delegate = self
         
