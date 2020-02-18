@@ -32,6 +32,9 @@
 		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
 		A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */; };
 		A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */; };
+		A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */; };
+		A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */; };
+		A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */; };
 		A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */; };
 		A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */; };
 		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
@@ -104,6 +107,9 @@
 		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetsTableViewController.swift; sourceTree = "<group>"; };
 		A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetTableViewCell.swift; sourceTree = "<group>"; };
+		A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpyTableViewController.swift; sourceTree = "<group>"; };
+		A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentMainTableViewCell.swift; sourceTree = "<group>"; };
+		A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
@@ -234,6 +240,7 @@
 				A665839323E0E607006073DF /* HomeViewController.swift */,
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
+				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -313,6 +320,8 @@
 			children = (
 				A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */,
 				A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */,
+				A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */,
+				A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -588,6 +597,7 @@
 				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
 				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
+				A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */,
 				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
 				A665838623DFA50A006073DF /* User.swift in Sources */,
 				A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */,
@@ -602,9 +612,11 @@
 				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
 				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
+				A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */,
 				A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */,
 				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
 				A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */,
+				A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */,
 				A665839423E0E607006073DF /* HomeViewController.swift in Sources */,
 				A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
