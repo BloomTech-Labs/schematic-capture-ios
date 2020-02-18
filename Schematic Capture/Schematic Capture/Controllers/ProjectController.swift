@@ -98,7 +98,6 @@ class ProjectController {
                     // Grab the ProjectRepresentation that corresponds to this Project
                     let id = Int(project.id)
                     guard let representation = representationsByID[id] else { continue }
-                    
                     // update the ones that are in core data
 //                    project.name = representation.name
 //                    project.client = representation.client
@@ -114,22 +113,25 @@ class ProjectController {
                 for representation in projectsToCreate.values {
                     // Create Projects from project representations
                     let project = Project(projectRepresentation: representation, context: context)
-                    if let jobSheetsRep = representation.jobSheets {
-                        // Create JobSheets from jobsheet representations
-                        for jobSheetRep in jobSheetsRep {
-                            let jobSheet = JobSheet(jobSheetRepresentation: jobSheetRep, context: context)
+                    
+                    // Connect JobSheet to Project relationship
+                    if let jobSheetsSet = project.jobSheets,
+                        let jobSheets = jobSheetsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [JobSheet] {
+                        for jobSheet in  jobSheets{
                             jobSheet.ownedProject = project
-                            if let componentsRep = jobSheetRep.components {
-                                // Create Compoonents from component representations
-                                for componentRep in componentsRep {
-                                    let component = Component(componentRepresentation: componentRep, context: context)
+                            
+                            // Connect Component to JobSheet relationship
+                            if let componentsSet = jobSheet.components,
+                                let components = componentsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [Component] {
+                                for component in components {
                                     component.ownedJobSheet = jobSheet
                                 }
                             }
-                            if let photosRep = jobSheetRep.photos {
-                                // Create Photos from photo representations
-                                for photoRep in photosRep {
-                                    let photo = Photo(photoRepresentation: photoRep, context: context)
+                            
+                            // Connect Photo to JobSheet relationship
+                            if let photosSet = jobSheet.photos,
+                                let photos = photosSet.sortedArray(using: [NSSortDescriptor(key: "name", ascending: true)]) as? [Photo] {
+                                for photo in photos {
                                     photo.ownedJobSheet = jobSheet
                                 }
                             }

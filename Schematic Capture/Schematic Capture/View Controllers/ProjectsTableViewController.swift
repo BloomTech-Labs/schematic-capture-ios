@@ -62,14 +62,13 @@ class ProjectsTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 
     /*
     // Override to support editing the table view.
@@ -98,15 +97,23 @@ class ProjectsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "JobSheetSegue" {
+            if let jobSheetsTVC = segue.destination as? JobSheetsTableViewController,
+                let indexPath = tableView.indexPathForSelectedRow {
+                
+                guard let jobSheetsSet = fetchedResultsController.object(at: indexPath).jobSheets,
+                    let jobSheets = jobSheetsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [JobSheet] else {
+                        print("No jobsheets found in \(fetchedResultsController.object(at: indexPath))")
+                        return
+                }
+                jobSheetsTVC.jobSheets = jobSheets
+            }
+        }
     }
-    */
+    
 
 }
 

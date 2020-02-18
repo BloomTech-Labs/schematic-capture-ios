@@ -30,6 +30,8 @@
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
 		A665839423E0E607006073DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839323E0E607006073DF /* HomeViewController.swift */; };
 		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
+		A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */; };
+		A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */; };
 		A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */; };
 		A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */; };
 		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
@@ -100,6 +102,8 @@
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A665839323E0E607006073DF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetsTableViewController.swift; sourceTree = "<group>"; };
+		A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetTableViewCell.swift; sourceTree = "<group>"; };
 		A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 				A6613BF623E4CAFC004A11B2 /* GoogleSignUpViewController.swift */,
 				A665839323E0E607006073DF /* HomeViewController.swift */,
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
+				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */,
+				A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -585,6 +591,7 @@
 				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
 				A665838623DFA50A006073DF /* User.swift in Sources */,
 				A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */,
+				A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */,
 				A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */,
 				A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */,
 				A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */,
@@ -593,6 +600,7 @@
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
 				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
 				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
+				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
 				A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */,
 				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
