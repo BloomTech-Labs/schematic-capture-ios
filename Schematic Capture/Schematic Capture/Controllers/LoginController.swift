@@ -162,6 +162,7 @@ class LogInController {
             } catch {
                 print("Error decoding the user: \(error)")
                 completion(.badDecode)
+                return
             }
             
             completion(nil)
@@ -216,6 +217,7 @@ class LogInController {
             } catch {
                 print("Error decoding the user: \(error)")
                 completion(.badDecode)
+                return
             }
             completion(nil)
             
@@ -341,11 +343,19 @@ class LogInController {
         guard let firstName = user.firstName,
             let lastName = user.lastName,
             let organizations = user.organizations,
+            !organizations.isEmpty,
             let role = user.role else { return }
         
-        defaults.set(firstName, forKey: "firstName")
-        defaults.set(lastName, forKey: "lastName")
-        defaults.set(organizations, forKey: "organizations")
-        defaults.set(role, forKey: "role")
+        do {
+            let organizationData = try JSONEncoder().encode(organizations)
+            let roleData = try JSONEncoder().encode(role)
+            defaults.set(organizationData, forKey: "organizationsJSONData")
+            defaults.set(roleData, forKey: "roleJSONData")
+            defaults.set(firstName, forKey: "firstName")
+            defaults.set(lastName, forKey: "lastName")
+        } catch {
+            print("\(error)")
+            return
+        }
     }
 }

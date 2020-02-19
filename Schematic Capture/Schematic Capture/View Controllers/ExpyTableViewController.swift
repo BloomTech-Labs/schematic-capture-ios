@@ -38,9 +38,12 @@ class ExpyTableViewController: UIViewController {
         
         expandableTableView.reloadData()
     }
+    
+    
+    
 }
 
-extension ExpyTableViewController: ExpyTableViewDataSource {
+extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegate {
     
     func tableView(_ tableView: ExpyTableView, canExpandSection section: Int) -> Bool {
         true
@@ -76,15 +79,5 @@ extension ExpyTableViewController: ExpyTableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
-    }
-    
-    
-
-}
-
-extension ExpyTableViewController: ExpyTableViewDelegate {
-    
-    func tableView(_ tableView: ExpyTableView, expyState state: ExpyState, changeForSection section: Int) {
-        
     }
 }
