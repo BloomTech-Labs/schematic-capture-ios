@@ -13,22 +13,31 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var loginLabel: UILabel!
     
     var loginController: LogInController?
+    var projectController = ProjectController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func downloadSchematics(_ sender: Any) {
+        projectController.downloadAssignedJobs()
+        projectController.downloadSchematics()
     }
-    */
+    
+    
+     
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProjectSegue" {
+            if let projectsTableVC = segue.destination as? ProjectsTableViewController {
+                projectsTableVC.loginController = loginController
+                projectsTableVC.projectController = projectController
+            }
+        }
+    }
+    
 
 }

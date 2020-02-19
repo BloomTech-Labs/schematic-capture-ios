@@ -19,23 +19,31 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string></string>
+			<key>CFBundleURLName</key>
+			<string>com.Schematic-Capture.GIPGIP</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>schematiccapture</string>
 				<string>com.googleusercontent.apps.138524710398-bfkdqmd9fv6mjc467si515jc8tu17f2d</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string>com.Schematic-Capture.GIPGIP</string>
-			<key>CFBundleURLIconFile</key>
-			<string></string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>OpenSans-Bold.ttf</string>
+		<string>OpenSans-ExtraBold.ttf</string>
+		<string>OpenSans-Light.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OpenSans-SemiBold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -75,14 +83,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>OpenSans-Bold.ttf</string>
-		<string>OpenSans-ExtraBold.ttf</string>
-		<string>OpenSans-Light.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
-		<string>OpenSans-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>
