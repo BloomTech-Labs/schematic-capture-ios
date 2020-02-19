@@ -8,98 +8,95 @@
 
 import Foundation
 
+struct Organization: Codable {
+    let id: Int
+    let name: String
+    let phone: String?
+    let street: String?
+    let city: String?
+    let zip: String?
+}
+
+struct Role: Codable {
+    let id: Int
+    let name: String
+}
+
 struct User: Codable {
     var email: String?
     var password: String?
-    var confirmPassword: String?
     var firstName: String?
     var lastName: String?
     var phone: String?
     var inviteToken: String?
-    var organizationId: Int?
-    var organization: String?
+    var organizations: [Organization]?
     var roleId: Int?
-    var role: String?
-    var idToken: String?
+    var role: [Role]?
     var id: String?
     
+    /// Initializer for log in
     init(email: String, password: String) {
         self.email = email
         self.password = password
-        self.confirmPassword = nil
         self.firstName = nil
         self.lastName = nil
         self.phone = nil
         self.inviteToken = nil
-        self.organizationId = nil
-        self.organization = nil
+        self.organizations = nil
         self.roleId = nil
-        self.role = nil
-        self.idToken = nil
+        self.role = []
         self.id = nil
     }
     
-    init(email: String, password: String, confirmPassword: String, firstName: String, lastName: String, phone: String, inviteToken: String) {
+    /// Initializer for sign up
+    init(email: String, password: String, firstName: String, lastName: String, phone: String, inviteToken: String) {
         self.email = email
         self.password = password
-        self.confirmPassword = confirmPassword
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = inviteToken
-        self.organizationId = nil
-        self.organization = nil
+        self.organizations = nil
         self.roleId = nil
-        self.role = nil
-        self.idToken = nil
+        self.role = []
         self.id = nil
     }
     
-    init(firstName: String, lastName: String, phone: String?, inviteToken: String?, idToken: String) {
+    /// Initializer for Google sign up
+    init(firstName: String, lastName: String, phone: String?, inviteToken: String?) {
         self.email = nil
         self.password = nil
-        self.confirmPassword = nil
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = inviteToken
-        self.organizationId = nil
-        self.organization = nil
-        self.roleId = nil
+        self.organizations = nil
         self.role = nil
-        self.idToken = idToken
         self.id = nil
     }
     
-    init(email: String, firstName: String, lastName: String, phone: String, organizationId: Int, organization: String, roleId: Int, role: String) {
+    /// Initializer for Google sign in
+    init(email: String, firstName: String, lastName: String, phone: String, organizations: [Organization], role: [Role]) {
         self.email = email
         self.password = nil
-        self.confirmPassword = nil
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
         self.inviteToken = nil
-        self.organizationId = organizationId
-        self.organization = organization
-        self.roleId = roleId
+        self.organizations = organizations
         self.role = role
-        self.idToken = nil
         self.id = nil
     }
     
     private enum CodingKeys: String, CodingKey {
         case email
         case password
-        case confirmPassword
         case firstName
         case lastName
         case phone
         case inviteToken
-        case organizationId
-        case organization
-        case roleId
+        case organizations
         case role
-        case idToken
         case id
     }
 }

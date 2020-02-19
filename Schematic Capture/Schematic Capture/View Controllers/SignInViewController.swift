@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 import GoogleSignIn
 import SCLAlertView
 
@@ -68,60 +69,34 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
             guard let authentication = user.authentication else { return }
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
             
-            // With user's Google account, sign in to our firebase
-            Auth.auth().signIn(with: credential) { (authResult, error) in
+            loginController.googleLogin(withCredential: credential) { (error) in
                 if let error = error {
-                    print("\(error)")
-                    return
-                }
-                
-                guard authResult != nil else {
-                    print("No auth result.")
-                    return
-                }
-                
-                // Get ID token (different from authentication.idToken) from our firebase backend
-                Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
-                   if let error = error {
+                    // If "need register" is returned, create an user with Google's provided name
+                    // and direct to google sign up view
+                    if error == NetworkingError.needRegister {
+                        let firstName = user.profile.givenName
+                        let lastName = user.profile.familyName
+                        self.loginController.user = User(firstName: firstName ?? "", lastName: lastName ?? "", phone: nil, inviteToken: nil)
+                        
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "GoogleSegue", sender: nil)
+                        }
+                        return
+                    } else {
                         print("\(error)")
                         return
                     }
-                    guard let token = token else { return }
-                    
-                    print("TOKEN: \(token)")
-                    
-                    // Try loging in first
-                    self.loginController.googleLogIn(with: token, completion: { (error) in
-                        if let error = error {
-                            // If "need register" is returned, create an user with Google's provided name
-                            // and direct to google sign up view
-                            if error == NetworkingError.needRegister {
-                                let firstName = user.profile.givenName
-                                let lastName = user.profile.familyName
-                                self.loginController.user = User(firstName: firstName ?? "", lastName: lastName ?? "", phone: nil, inviteToken: nil, idToken: token)
-                                
-                                DispatchQueue.main.async {
-                                    self.performSegue(withIdentifier: "GoogleSegue", sender: nil)
-                                }
-                                return
-                            } else {
-                                print("\(error)")
-                                return
-                            }
-                        }
-                        
-                        // Login successful, direct to the main page
-                        DispatchQueue.main.async {
-                            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-                            let alert = SCLAlertView(appearance: appearance)
-                            alert.addButton("Proceed to main page") {
-                                self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
-                            }
-                            alert.showSuccess("Login Success!", subTitle: "")
-                        }
-                        
-                    })
-                })
+                }
+                
+                // Login successful, direct to the main page
+                DispatchQueue.main.async {
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                    let alert = SCLAlertView(appearance: appearance)
+                    alert.addButton("Proceed to main page") {
+                        self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
+                    }
+                    alert.showSuccess("Login Success!", subTitle: "")
+                }
             }
         }
     }
@@ -138,6 +113,8 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         } else if segue.identifier == "HomeVCSegue" {
             if let homeVC = segue.destination as? HomeViewController {
                 homeVC.loginController = loginController
+                homeVC.projectController.user = loginController.user
+                homeVC.projectController.bearer = loginController.bearer
             }
         } else if segue.identifier == "GoogleSegue" {
             if let googleVC = segue.destination as? GoogleSignUpViewController {

@@ -30,11 +30,29 @@
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
 		A665839423E0E607006073DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839323E0E607006073DF /* HomeViewController.swift */; };
 		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
+		A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */; };
+		A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */; };
+		A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */; };
+		A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */; };
+		A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */; };
 		A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */; };
 		A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */; };
 		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
 		A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */; };
 		A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */; };
+		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
+		A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */; };
+		A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */; };
+		A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */; };
+		A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */; };
+		A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */; };
+		A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */; };
+		A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */; };
+		A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */; };
+		A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */; };
+		A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */; };
+		A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */; };
+		A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,11 +105,29 @@
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A665839323E0E607006073DF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetsTableViewController.swift; sourceTree = "<group>"; };
+		A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetTableViewCell.swift; sourceTree = "<group>"; };
+		A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpyTableViewController.swift; sourceTree = "<group>"; };
+		A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentMainTableViewCell.swift; sourceTree = "<group>"; };
+		A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture.xcdatamodel"; sourceTree = "<group>"; };
+		A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JobSheet+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Convenience.swift"; sourceTree = "<group>"; };
+		A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
+		A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
+		A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectController.swift; sourceTree = "<group>"; };
+		A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentRepresentation.swift; sourceTree = "<group>"; };
+		A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepresentation.swift; sourceTree = "<group>"; };
+		A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetRepresentation.swift; sourceTree = "<group>"; };
+		A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepresentation.swift; sourceTree = "<group>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				A665835323DAB508006073DF /* Schematic Capture */,
+				A6F1C9CB23ECB21A00E0D583 /* Core Data */,
 				A665836A23DAB50A006073DF /* Schematic CaptureTests */,
 				A6613C0323E9340E004A11B2 /* Schematic CaptureUITests */,
 				A665835223DAB508006073DF /* Products */,
@@ -173,9 +210,11 @@
 				A6A9D23723E4A86E0026D5E4 /* Fonts */,
 				A6613BF823E89DDE004A11B2 /* System */,
 				A665837F23DF8CC8006073DF /* Storyboards */,
+				A6F1C9FA23EE0E8400E0D583 /* Views */,
 				A665837A23DB6E32006073DF /* View Controllers */,
 				A665838423DFA070006073DF /* Helpers */,
 				A665838723E0B358006073DF /* Models */,
+				A6F1C9E723ECCD4800E0D583 /* Core Data Models */,
 				A665838A23E0E1C6006073DF /* Controllers */,
 			);
 			path = "Schematic Capture";
@@ -199,6 +238,9 @@
 				A665839123E0E5FF006073DF /* LoginViewController.swift */,
 				A6613BF623E4CAFC004A11B2 /* GoogleSignUpViewController.swift */,
 				A665839323E0E607006073DF /* HomeViewController.swift */,
+				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
+				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
+				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -235,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				A665838823E0E1B2006073DF /* LoginController.swift */,
+				A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -249,6 +292,49 @@
 				A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A6F1C9CB23ECB21A00E0D583 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		A6F1C9E723ECCD4800E0D583 /* Core Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */,
+				A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */,
+				A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */,
+				A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */,
+				A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */,
+				A6F1CA0123F4C00500E0D583 /* Model Representations */,
+			);
+			path = "Core Data Models";
+			sourceTree = "<group>";
+		};
+		A6F1C9FA23EE0E8400E0D583 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */,
+				A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */,
+				A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */,
+				A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A6F1CA0123F4C00500E0D583 /* Model Representations */ = {
+			isa = PBXGroup;
+			children = (
+				A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */,
+				A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */,
+				A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */,
+				A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */,
+			);
+			path = "Model Representations";
 			sourceTree = "<group>";
 		};
 		A70A916E7742D130EC55F213 /* Pods */ = {
@@ -505,16 +591,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */,
+				A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */,
+				A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */,
 				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
+				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
+				A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */,
 				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
 				A665838623DFA50A006073DF /* User.swift in Sources */,
+				A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */,
+				A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */,
+				A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */,
+				A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */,
+				A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */,
 				A665838E23E0E384006073DF /* Networking.swift in Sources */,
 				A665838C23E0E27C006073DF /* Bearer.swift in Sources */,
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
+				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
 				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
+				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
+				A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */,
+				A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */,
+				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
+				A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */,
+				A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */,
 				A665839423E0E607006073DF /* HomeViewController.swift in Sources */,
+				A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
 				A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */,
 				A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */,
@@ -729,7 +833,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP.Schematic-Capture";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -750,7 +854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP.Schematic-Capture";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -844,6 +948,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */,
+			);
+			currentVersion = A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */;
+			path = "Schematic Capture.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A665834923DAB508006073DF /* Project object */;
 }

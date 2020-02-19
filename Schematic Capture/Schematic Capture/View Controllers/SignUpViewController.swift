@@ -34,6 +34,15 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         addTapGesture()
         addKeyboardNotification()
         
+        //TODO: Delete this
+        firstNameTextField.text = "John"
+        lastNameTextField.text = "Kim"
+        emailTextField.text = "johnTEST@gmail.com"
+        phoneTextField.text = "1231231234"
+        passwordTextField.text = "testing123!"
+        confirmPasswordTextField.text = "testing123!"
+        tokenTextField.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoxLCJpbnZpdGVyIjoidGlEVGZlTkYxS2NFa1c5N2dQTElwRzg1aXViMiIsInRpbWUiOjE1ODE1Mjc5OTgyMDMsImlhdCI6MTU4MTUyNzk5OCwiZXhwIjoxNTgxNTMxNTk4fQ.GjrO4dpwKOYYWvfBP6gvT6xbRfG3lx4Vdf88gV6v180"
+        
     }
     
     func setUpUI() {
@@ -108,13 +117,14 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        let confirmPassword = confirmPasswordTextField.text!
         let firstName = firstNameTextField.text!
         let lastName = lastNameTextField.text!
         let phone = phoneTextField.text!
         let inviteToken = tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        let user = User(email: email, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
+        //TODO: confirm password needed in user?
+        let user = User(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
+        
         
         loginController.signUp(with: user) { (error) in
             self.stopLoadingScreen()
@@ -142,13 +152,14 @@ class SignUpViewController: UIViewController, WKUIDelegate {
                 let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
                 let alert = SCLAlertView(appearance: appearance)
                 alert.addButton("Proceed to main page") {
-                    self.performSegue(withIdentifier: "MainPageSegue", sender: nil)
+                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
                 }
                 alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
             }
             
         }
     }
+    
     
     func validateTextFields() -> String? {
         if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -250,9 +261,11 @@ class SignUpViewController: UIViewController, WKUIDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MainPageSegue" {
+        if segue.identifier == "HomeVCSegue" {
             if let homeVC = segue.destination as? HomeViewController {
                 homeVC.loginController = loginController
+                homeVC.projectController.user = loginController?.user
+                homeVC.projectController.bearer = loginController?.bearer
             }
         }
     }
