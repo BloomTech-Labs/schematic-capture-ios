@@ -8,6 +8,8 @@
 
 import UIKit
 import ExpyTableView
+import Photos
+import SCLAlertView
 
 class ExpyTableViewController: UIViewController {
     
@@ -39,7 +41,52 @@ class ExpyTableViewController: UIViewController {
         expandableTableView.reloadData()
     }
     
+    private func checkPhotoAuthorization() {
+        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        
+        switch authorizationStatus {
+        case .authorized:
+            presentImagePickerController()
+        case .notDetermined:
+            
+            PHPhotoLibrary.requestAuthorization { (status) in
+                
+                guard status == .authorized else {
+                    NSLog("User did not authorize access to the photo library")
+                    DispatchQueue.main.async {
+                        SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+                    }
+                    return
+                }
+                
+                self.presentImagePickerController()
+            }
+            
+        case .denied:
+            DispatchQueue.main.async {
+                SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+            }
+        case .restricted:
+            DispatchQueue.main.async {
+                SCLAlertView().showError("Error", subTitle: "Unable to access the photo library. Your device's restrictions do not allow access.")
+            }
+        @unknown default:
+            fatalError("Unhandled case for photo library authorization status")
+        }
+        presentImagePickerController()
+    }
     
+    private func presentImagePickerController() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+            DispatchQueue.main.async {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+    }
     
 }
 
@@ -61,6 +108,7 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentMainCell") as? ComponentMainTableViewCell else { return UITableViewCell() }
         
         cell.component = components?[section]
+        cell.delegate = self
         cell.showSeparator()
         
         return cell
@@ -79,5 +127,21 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+extension ExpyTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ExpyTableViewController: MainCellDelegate {
+    func cameraButtonDidTabbed(component: Component) {
+        checkPhotoAuthorization()
     }
 }

@@ -8,8 +8,10 @@
 
 import UIKit
 import ExpyTableView
-import Photos
-import SCLAlertView
+
+protocol MainCellDelegate {
+    func cameraButtonDidTabbed(component: Component)
+}
 
 class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     
@@ -21,6 +23,7 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     
     @IBOutlet weak var cameraButton: UIButton!
     
+    var delegate: MainCellDelegate?
     var component: Component? {
         didSet {
             updateViews()
@@ -29,17 +32,15 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     @IBAction func cameraButtonTabbed(_ sender: Any) {
-        checkPhotoAuthorization()
+        guard let component = component else { return }
+        delegate?.cameraButtonDidTabbed(component: component)
     }
     
     func changeState(_ state: ExpyState, cellReuseStatus cellReuse: Bool) {
@@ -67,52 +68,6 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
         partNumberLabel.text = "Part #: \(component.partNumber ?? "")"
     }
     
-    private func checkPhotoAuthorization() {
-        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
-        
-        switch authorizationStatus {
-        case .authorized:
-            presentImagePickerController()
-        case .notDetermined:
-            
-            PHPhotoLibrary.requestAuthorization { (status) in
-                
-                guard status == .authorized else {
-                    NSLog("User did not authorize access to the photo library")
-                    DispatchQueue.main.async {
-                        SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
-                    }
-                    return
-                }
-                
-                self.presentImagePickerController()
-            }
-            
-        case .denied:
-            DispatchQueue.main.async {
-                SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
-            }
-        case .restricted:
-            DispatchQueue.main.async {
-                SCLAlertView().showError("Error", subTitle: "Unable to access the photo library. Your device's restrictions do not allow access.")
-            }
-        @unknown default:
-            fatalError("Unhandled case for photo library authorization status")
-        }
-        presentImagePickerController()
-    }
-    
-    private func presentImagePickerController() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
-            DispatchQueue.main.async {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.allowsEditing = true
-                imagePicker.sourceType = .photoLibrary
-            }
-        }
-    }
-    
     private func arrowDown(animated: Bool) {
         UIView.animate(withDuration: (animated ? 0.3 : 0)) {
             self.arrowImageView.transform = CGAffineTransform(rotationAngle: (CGFloat.pi / 2))
@@ -125,10 +80,6 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
         }
     }
 
-}
-
-extension ComponentMainTableViewCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
 }
 
 extension UITableViewCell {
