@@ -33,7 +33,8 @@ extension Component {
                                        maintenanceVideo: maintenanceVideo,
                                        storePartNumber: storePartNumber,
                                        custom: custom,
-                                       jobSheetId: Int(jobSheetId))
+                                       jobSheetId: Int(jobSheetId),
+                                       photo: photo?.photoRepresentation)
     }
     
     @discardableResult convenience init(id: Int,
@@ -55,6 +56,7 @@ extension Component {
                                         storePartNumber: String?,
                                         custom: String?,
                                         jobSheetId: Int,
+                                        photo: Photo?,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
@@ -75,6 +77,7 @@ extension Component {
         self.maintenanceVideo = maintenanceVideo
         self.storePartNumber = storePartNumber
         self.custom = custom
+        self.photo = photo
         self.jobSheetId = Int32(jobSheetId)
     }
     
@@ -99,6 +102,7 @@ extension Component {
                   storePartNumber: componentRepresentation.storePartNumber,
                   custom: componentRepresentation.custom,
                   jobSheetId: componentRepresentation.jobSheetId,
+                  photo: componentRepresentation.photo != nil ? Photo(photoRepresentation: componentRepresentation.photo!, context: context) : nil,
                   context: context)
     }
 }

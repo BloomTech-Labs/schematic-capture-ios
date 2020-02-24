@@ -125,14 +125,11 @@ class ProjectController {
                                 let components = componentsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [Component] {
                                 for component in components {
                                     component.ownedJobSheet = jobSheet
-                                }
-                            }
-                            
-                            // Connect Photo to JobSheet relationship
-                            if let photosSet = jobSheet.photos,
-                                let photos = photosSet.sortedArray(using: [NSSortDescriptor(key: "name", ascending: true)]) as? [Photo] {
-                                for photo in photos {
-                                    photo.ownedJobSheet = jobSheet
+                                    
+                                    // Connect Photo to Component relationship
+                                    if let photo = component.photo {
+                                        photo.ownedComponent = component
+                                    }
                                 }
                             }
                         }

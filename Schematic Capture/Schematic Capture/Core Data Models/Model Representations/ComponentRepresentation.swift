@@ -28,6 +28,7 @@ struct ComponentRepresentation: Codable {
     var storePartNumber: String?
     var custom: String?
     let jobSheetId: Int
+    var photo: PhotoRepresentation?
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -49,5 +50,6 @@ struct ComponentRepresentation: Codable {
         case storePartNumber
         case custom
         case jobSheetId = "jobsheetId"
+        case photo
     }
 }

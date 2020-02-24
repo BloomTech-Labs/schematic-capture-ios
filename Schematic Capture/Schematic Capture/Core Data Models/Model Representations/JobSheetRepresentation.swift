@@ -14,7 +14,6 @@ struct JobSheetRepresentation: Codable {
     var components: [ComponentRepresentation]?
     var schematicData: Data?
     var schematicName: String?
-    var photos: [PhotoRepresentation]?
     var updatedAt: String
     var status: String
     let projectId: Int
@@ -25,7 +24,6 @@ struct JobSheetRepresentation: Codable {
         case components
         case schematicData
         case schematicName
-        case photos
         case updatedAt
         case status
         case projectId
