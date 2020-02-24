@@ -23,8 +23,21 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func downloadSchematics(_ sender: Any) {
-        projectController.downloadAssignedJobs()
-        projectController.downloadSchematics()
+        projectController.downloadAssignedJobs { (error) in
+            if let error = error {
+                // show alert
+                print(error)
+                return
+            }
+            
+            self.projectController.downloadSchematics { (error) in
+                if let error = error {
+                    // show alert
+                    print(error)
+                    return
+                }
+            }
+        }
     }
     
     

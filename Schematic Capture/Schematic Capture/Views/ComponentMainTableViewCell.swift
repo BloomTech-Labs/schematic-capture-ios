@@ -20,8 +20,8 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     @IBOutlet weak var manufacturerLabel: UILabel!
     @IBOutlet weak var partNumberLabel: UILabel!
     @IBOutlet weak var arrowImageView: UIImageView!
-    
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var annotatedImageView: UIImageView!
     
     var delegate: MainCellDelegate?
     var component: Component? {
@@ -66,6 +66,14 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
         descriptionLabel.text = "Description: \(component.componentDescription ?? "")"
         manufacturerLabel.text = "Manufacturer: \(component.manufacturer ?? "")"
         partNumberLabel.text = "Part #: \(component.partNumber ?? "")"
+        
+        guard let photo = component.photo,
+            let imageData = photo.imageData,
+            let image = UIImage(data: imageData) else {
+                annotatedImageView.image = nil
+                return
+        }
+        annotatedImageView.image = image
     }
     
     private func arrowDown(animated: Bool) {

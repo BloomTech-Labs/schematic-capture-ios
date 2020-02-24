@@ -10,6 +10,8 @@ import UIKit
 import ExpyTableView
 import Photos
 import SCLAlertView
+import AVFoundation
+import PencilKit
 
 class ExpyTableViewController: UIViewController {
     
@@ -22,6 +24,15 @@ class ExpyTableViewController: UIViewController {
                 navigationController?.title = jobSheet.name
             }
         }
+    }
+    
+    var selectedComponent: Component?
+    var originalPhoto: UIImage?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        expandableTableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -41,49 +52,91 @@ class ExpyTableViewController: UIViewController {
         expandableTableView.reloadData()
     }
     
-    private func checkPhotoAuthorization() {
+    // Get permission for Camera or Photo Library
+    private func checkAuthAndPresentImagePicker(sourceType: UIImagePickerController.SourceType) {
+        if sourceType == .photoLibrary {
         let authorizationStatus = PHPhotoLibrary.authorizationStatus()
-        
-        switch authorizationStatus {
-        case .authorized:
-            presentImagePickerController()
-        case .notDetermined:
             
-            PHPhotoLibrary.requestAuthorization { (status) in
+            switch authorizationStatus {
+            case .authorized:
+                presentImagePickerController(sourceType: sourceType)
+            case .notDetermined:
                 
-                guard status == .authorized else {
-                    NSLog("User did not authorize access to the photo library")
-                    DispatchQueue.main.async {
-                        SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+                PHPhotoLibrary.requestAuthorization { (status) in
+                    
+                    guard status == .authorized else {
+                        NSLog("User did not authorize access to the photo library")
+                        DispatchQueue.main.async {
+                            SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+                        }
+                        return
                     }
-                    return
+                    
+                    self.presentImagePickerController(sourceType: sourceType)
                 }
                 
-                self.presentImagePickerController()
+            case .denied:
+                DispatchQueue.main.async {
+                    SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+                }
+            case .restricted:
+                DispatchQueue.main.async {
+                    SCLAlertView().showError("Error", subTitle: "Unable to access the photo library. Your device's restrictions do not allow access.")
+                }
+            @unknown default:
+                fatalError("Unhandled case for photo library authorization status")
             }
+        } else if sourceType == .camera {
             
-        case .denied:
-            DispatchQueue.main.async {
-                SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+            let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            switch authorizationStatus {
+            case .authorized:
+                presentImagePickerController(sourceType: sourceType)
+            case .notDetermined:
+                AVCaptureDevice.requestAccess(for: .video) { (granted) in
+                    if granted {
+                        self.presentImagePickerController(sourceType: sourceType)
+                    } else {
+                        NSLog("User did not authorize access to the camera")
+                        DispatchQueue.main.async {
+                            SCLAlertView().showError("Error", subTitle: "In order to access the camera, give permission to this application.")
+                        }
+                    }
+                }
+            case .denied:
+                DispatchQueue.main.async {
+                        SCLAlertView().showError("Error", subTitle: "In order to access the camera, give permission to this application.")
+                    }
+            case .restricted:
+                    DispatchQueue.main.async {
+                        SCLAlertView().showError("Error", subTitle: "Unable to access the camera. Your device's restrictions do not allow access.")
+                    }
+            @unknown default:
+                fatalError("Unhandled case for camera authorization status")
             }
-        case .restricted:
-            DispatchQueue.main.async {
-                SCLAlertView().showError("Error", subTitle: "Unable to access the photo library. Your device's restrictions do not allow access.")
-            }
-        @unknown default:
-            fatalError("Unhandled case for photo library authorization status")
         }
-        presentImagePickerController()
     }
     
-    private func presentImagePickerController() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+    private func presentImagePickerController(sourceType: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
             DispatchQueue.main.async {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.allowsEditing = true
-                imagePicker.sourceType = .photoLibrary
+                imagePicker.sourceType = sourceType
                 self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CanvasSegue" {
+            if let annotationVC = segue.destination as? AnnotationViewController {
+                guard let component = selectedComponent,
+                    let originalPhoto = originalPhoto else { return }
+                annotationVC.originalPhoto = originalPhoto
+                annotationVC.component = component
             }
         }
     }
@@ -128,20 +181,57 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    
 }
 
 extension ExpyTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let saveImageToAlbum = picker.sourceType == .camera
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        originalPhoto = image
+        
+        // Present annotation view
+        performSegue(withIdentifier: "CanvasSegue", sender: self)
+        
+        if saveImageToAlbum {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
         
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    // If error occured while saving the original copy of the photo, present alert
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            SCLAlertView().showError("Could not save the photo!", subTitle: error.localizedDescription)
+        }
+    }
 }
 
 extension ExpyTableViewController: MainCellDelegate {
     func cameraButtonDidTabbed(component: Component) {
-        checkPhotoAuthorization()
+        selectedComponent = component
+        DispatchQueue.main.async {
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+            let alert = SCLAlertView(appearance: appearance)
+            alert.addButton("Camera") {
+                self.checkAuthAndPresentImagePicker(sourceType: .camera)
+            }
+            alert.addButton("Photo Library") {
+                self.checkAuthAndPresentImagePicker(sourceType: .photoLibrary)
+            }
+            alert.addButton("Cancel") {
+                alert.hideView()
+            }
+            alert.showNotice("Image Source", subTitle: "")
+            
+        }
     }
 }

@@ -22,6 +22,6 @@ class ProjectTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let project = project else { return }
         nameLabel.text = project.name
-        numbOfJobSheetLabel.text = project.jobSheets != nil ? "\(project.jobSheets!.count) Jobs" : "0 Jobs"
+        numbOfJobSheetLabel.text = project.jobSheets != nil ? "\(project.jobSheets!.count)" + (project.jobSheets!.count > 1 ? " jobs" : " job") : "0 Jobs"
     }
 }
