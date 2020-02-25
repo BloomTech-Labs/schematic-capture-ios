@@ -864,71 +864,40 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="T93-ww-yfb"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" image="doc" catalog="system" id="UPE-Tw-EAe">
+                            <connections>
+                                <action selector="pdfTabbed:" destination="4FV-G0-KSh" id="gQ9-un-Dzm"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="ThH-aV-MKk"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="expandableTableView" destination="bnp-c5-C0s" id="CBL-SJ-pWS"/>
+                        <outlet property="pdfBarButtonItem" destination="UPE-Tw-EAe" id="ov5-0b-saD"/>
                         <segue destination="YzW-Xd-YDp" kind="show" identifier="CanvasSegue" id="Z5D-X0-jvF"/>
+                        <segue destination="m2W-qo-AKg" kind="presentation" identifier="SchematicViewSegue" id="O6b-5Q-kM2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZ2-Fe-jLv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4757.971014492754" y="-89.0625"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="5Mf-aT-5Gl">
+        <!--Schematic View Controller-->
+        <scene sceneID="SPU-dC-x9n">
             <objects>
-                <tableViewController id="y2f-zW-VOB" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dm6-ti-3LF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <viewController id="m2W-qo-AKg" customClass="SchematicViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WVj-Qx-f81">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="05u-lR-KgZ">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="05u-lR-KgZ" id="DSH-BH-sUu">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="y2f-zW-VOB" id="mRV-u3-EYf"/>
-                            <outlet property="delegate" destination="y2f-zW-VOB" id="oxw-ha-Jbf"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4uO-3i-wYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <viewLayoutGuide key="safeArea" id="eo6-ts-YiR"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z3o-Fb-ary" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2675" y="659"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="viU-lc-k3S">
-            <objects>
-                <tableViewController id="DJU-aT-EYG" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="AkH-SG-BNq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="JYc-sk-gjb">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JYc-sk-gjb" id="LpV-RE-X7h">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="DJU-aT-EYG" id="Xl8-T5-FIe"/>
-                            <outlet property="delegate" destination="DJU-aT-EYG" id="1gA-wG-kPz"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uvg-Db-L8n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2783" y="-771"/>
+            <point key="canvasLocation" x="4758" y="635"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="c6a-3R-W6y">
@@ -951,6 +920,7 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
     </scenes>
     <resources>
         <image name="camera" catalog="system" width="64" height="48"/>
+        <image name="doc" catalog="system" width="56" height="64"/>
         <image name="greaterthan" catalog="system" width="64" height="54"/>
         <image name="pencil" catalog="system" width="64" height="56"/>
     </resources>

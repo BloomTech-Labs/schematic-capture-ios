@@ -14,6 +14,7 @@ import AVFoundation
 import PencilKit
 
 class ExpyTableViewController: UIViewController {
+    @IBOutlet weak var pdfBarButtonItem: UIBarButtonItem!
     
     @IBOutlet weak var expandableTableView: ExpyTableView!
     
@@ -26,6 +27,7 @@ class ExpyTableViewController: UIViewController {
         }
     }
     
+    var schematicData: Data?
     var selectedComponent: Component?
     var originalPhoto: UIImage?
     
@@ -50,6 +52,8 @@ class ExpyTableViewController: UIViewController {
         expandableTableView.tableFooterView = UIView()
         
         expandableTableView.reloadData()
+        
+        navigationItem.rightBarButtonItems = [pdfBarButtonItem]
     }
     
     // Get permission for Camera or Photo Library
@@ -138,8 +142,27 @@ class ExpyTableViewController: UIViewController {
                 annotationVC.originalPhoto = originalPhoto
                 annotationVC.component = component
             }
+        } else if segue.identifier == "SchematicViewSegue" {
+            if let schematicVC = segue.destination as? SchematicViewController {
+                guard let shematicData = schematicData else { return }
+                schematicVC.pdfData = shematicData
+            }
         }
     }
+    
+    @IBAction func pdfTabbed(_ sender: Any) {
+        guard let schematicData = schematicData else {
+            DispatchQueue.main.async {
+                SCLAlertView().showError("Error", subTitle: "No schematic data found.")
+            }
+            return
+        }
+        
+        // Segue to PDF view
+        performSegue(withIdentifier: "SchematicViewSegue", sender: self)
+    }
+    
+    
     
 }
 

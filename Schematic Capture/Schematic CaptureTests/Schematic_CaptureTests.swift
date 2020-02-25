@@ -44,7 +44,7 @@ class Schematic_CaptureTests: XCTestCase {
         let schematicRef = storageRef.child("1")
             .child("1")
             .child("1")
-            .child("1")
+            .child("6")
         schematicRef.listAll { (listResult, error) in
             if let error = error {
                 XCTFail("\(error)")
