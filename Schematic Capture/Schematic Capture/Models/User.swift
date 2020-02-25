@@ -14,6 +14,7 @@ struct Organization: Codable {
     let phone: String?
     let street: String?
     let city: String?
+    let state: String?
     let zip: String?
 }
 
@@ -30,8 +31,7 @@ struct User: Codable {
     var phone: String?
     var inviteToken: String?
     var organizations: [Organization]?
-    var roleId: Int?
-    var role: [Role]?
+    var role: Role?
     var id: String?
     
     /// Initializer for log in
@@ -43,8 +43,7 @@ struct User: Codable {
         self.phone = nil
         self.inviteToken = nil
         self.organizations = nil
-        self.roleId = nil
-        self.role = []
+        self.role = nil
         self.id = nil
     }
     
@@ -57,8 +56,7 @@ struct User: Codable {
         self.phone = phone
         self.inviteToken = inviteToken
         self.organizations = nil
-        self.roleId = nil
-        self.role = []
+        self.role = nil
         self.id = nil
     }
     
@@ -76,7 +74,7 @@ struct User: Codable {
     }
     
     /// Initializer for Google sign in
-    init(email: String, firstName: String, lastName: String, phone: String, organizations: [Organization], role: [Role]) {
+    init(email: String, firstName: String, lastName: String, phone: String, organizations: [Organization], role: Role) {
         self.email = email
         self.password = nil
         self.firstName = firstName

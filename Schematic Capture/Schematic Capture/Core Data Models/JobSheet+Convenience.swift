@@ -28,17 +28,11 @@ extension JobSheet {
         // convert NSSet to an array, if nil, return nil
         let componentsArr = components != nil ? (components!.sortedArray(using: [componentIdDescriptor]) as? [ComponentRepresentation]) : nil
         
-        // Sort the job sheet array by component id
-        let photoNameDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        // convert NSSet to an array, if nil, return nil
-        let photosArr = photos != nil ? (photos!.sortedArray(using: [photoNameDescriptor]) as? [PhotoRepresentation]) : nil
-        
         return JobSheetRepresentation(id: Int(id),
                                       name: name,
                                       components: componentsArr,
                                       schematicData: schematicData,
                                       schematicName: schematicName,
-                                      photos: photosArr,
                                       updatedAt: updatedAt,
                                       status: status,
                                       projectId: Int(projectId) )
@@ -49,7 +43,6 @@ extension JobSheet {
                                         components: [Component]?,
                                         schematicData: Data?,
                                         schematicName: String?,
-                                        photos: [Photo]?,
                                         updatedAt: String,
                                         status: JobSheetStatus,
                                         projectId: Int,
@@ -60,7 +53,6 @@ extension JobSheet {
         self.components = components != nil ? NSSet(array: components!) : nil
         self.schematicData = schematicData
         self.schematicName = schematicName
-        self.photos = photos != nil ? NSSet(array: photos!) : nil
         self.updatedAt = updatedAt
         self.status = status.rawValue
         self.projectId = Int32(projectId)
@@ -70,14 +62,11 @@ extension JobSheet {
         
         let components = jobSheetRepresentation.components != nil ? jobSheetRepresentation.components!.map { Component(componentRepresentation: $0, context: context) } : nil
         
-        let photos = jobSheetRepresentation.photos != nil ? jobSheetRepresentation.photos!.map { Photo(photoRepresentation: $0, context: context) } : nil
-        
         self.init(id: jobSheetRepresentation.id,
                   name: jobSheetRepresentation.name,
                   components: components,
                   schematicData: jobSheetRepresentation.schematicData,
                   schematicName: jobSheetRepresentation.schematicName,
-                  photos: photos,
                   updatedAt: jobSheetRepresentation.updatedAt,
                   status: JobSheetStatus(rawValue: jobSheetRepresentation.status) ?? JobSheetStatus.incomplete,
                   projectId: jobSheetRepresentation.projectId,

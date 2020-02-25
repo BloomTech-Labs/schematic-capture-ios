@@ -125,14 +125,11 @@ class ProjectController {
                                 let components = componentsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [Component] {
                                 for component in components {
                                     component.ownedJobSheet = jobSheet
-                                }
-                            }
-                            
-                            // Connect Photo to JobSheet relationship
-                            if let photosSet = jobSheet.photos,
-                                let photos = photosSet.sortedArray(using: [NSSortDescriptor(key: "name", ascending: true)]) as? [Photo] {
-                                for photo in photos {
-                                    photo.ownedJobSheet = jobSheet
+                                    
+                                    // Connect Photo to Component relationship
+                                    if let photo = component.photo {
+                                        photo.ownedComponent = component
+                                    }
                                 }
                             }
                         }
@@ -143,7 +140,7 @@ class ProjectController {
                 CoreDataStack.shared.save(context: context)
                 
             } catch {
-                NSLog("Erro fetching tasks from persistent store: \(error)")
+                NSLog("Error fetching tasks from persistent store: \(error)")
             }
         }
         
@@ -203,7 +200,7 @@ class ProjectController {
                     
                     let start = pdfRef.lastIndex(of: "/")!
                     let newStart = pdfRef.index(after: start)
-                    let range = newStart...pdfRef.endIndex
+                    let range = newStart..<pdfRef.endIndex
                     let pdfNameString = String(pdfRef[range])
                     
                     
@@ -221,8 +218,9 @@ class ProjectController {
                             return
                         }
                         
-                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicData = data
-                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicName = pdfNameString
+//                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicData = data
+//                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicName = pdfNameString
+                        self.updateSchematic(pdfData: data, name: pdfNameString, jobSheetRep: jobSheet)
                     }
                     
                 }
@@ -231,6 +229,30 @@ class ProjectController {
                 }
             }
     
+    }
+    
+    private func updateSchematic(pdfData: Data, name: String, jobSheetRep: JobSheetRepresentation) {
+        let context = CoreDataStack.shared.container.newBackgroundContext()
+        context.performAndWait {
+            do {
+                // Figure out which ones are new
+                let fetchRequest: NSFetchRequest<JobSheet> = JobSheet.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "projectId == %@ AND id == %@", NSNumber(value: jobSheetRep.projectId), NSNumber(value: jobSheetRep.id))
+                
+                // We need to run the context.fetch on the main queue, because the context is the main context
+                let jobSheets = try context.fetch(fetchRequest)
+                
+                // There should only one job sheet with the given ID
+                if let jobSheet = jobSheets.first {
+                    jobSheet.schematicData = pdfData
+                    jobSheet.schematicName = name
+                    
+                    CoreDataStack.shared.save(context: context)
+                }
+            } catch {
+                NSLog("Error fetching tasks from persistent store: \(error)")
+            }
+        }
     }
     
     // Upload jobs in core data (check the status of the jobs)

@@ -58,6 +58,7 @@ class LoginViewController: UIViewController, WKUIDelegate {
         DispatchQueue.main.async {
             webView.translatesAutoresizingMaskIntoConstraints = false
             webView.backgroundColor = .clear
+            webView.isOpaque = false
             self.view.addSubview(webView)
             
             webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
