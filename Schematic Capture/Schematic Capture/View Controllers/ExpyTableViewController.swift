@@ -162,8 +162,6 @@ class ExpyTableViewController: UIViewController {
         performSegue(withIdentifier: "SchematicViewSegue", sender: self)
     }
     
-    
-    
 }
 
 extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegate {
