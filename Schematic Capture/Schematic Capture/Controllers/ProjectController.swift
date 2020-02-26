@@ -97,7 +97,7 @@ class ProjectController {
                 for project in existingProjects {
                     // Grab the ProjectRepresentation that corresponds to this Project
                     let id = Int(project.id)
-                    guard let representation = representationsByID[id] else { continue }
+//                    guard let representation = representationsByID[id] else { continue }
                     // update the ones that are in core data
 //                    project.name = representation.name
 //                    project.client = representation.client

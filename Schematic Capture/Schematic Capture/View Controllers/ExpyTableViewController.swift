@@ -151,7 +151,7 @@ class ExpyTableViewController: UIViewController {
     }
     
     @IBAction func pdfTabbed(_ sender: Any) {
-        guard let schematicData = schematicData else {
+        guard schematicData != nil else {
             DispatchQueue.main.async {
                 SCLAlertView().showError("Error", subTitle: "No schematic data found.")
             }
