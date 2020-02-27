@@ -203,8 +203,6 @@ class ProjectController {
                     let range = newStart..<pdfRef.endIndex
                     let pdfNameString = String(pdfRef[range])
                     
-                    
-                    
                     schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
                         if let error = error {
                             print("\(error)")
@@ -217,18 +215,12 @@ class ProjectController {
                             completion(.noData)
                             return
                         }
-                        
-//                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicData = data
-//                        self.projects[project.id - 1].jobSheets![jobSheet.id - 1].schematicName = pdfNameString
                         self.updateSchematic(pdfData: data, name: pdfNameString, jobSheetRep: jobSheet)
+                        completion(nil)
                     }
-                    
-                }
-                
-                
                 }
             }
-    
+        }
     }
     
     private func updateSchematic(pdfData: Data, name: String, jobSheetRep: JobSheetRepresentation) {

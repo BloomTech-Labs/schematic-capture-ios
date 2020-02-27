@@ -24,10 +24,11 @@ struct AsyncOperation<Value> {
 }
 
 class Schematic_CaptureTests: XCTestCase {
+    var loginController = LogInController()
+    var projectController = ProjectController()
         
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let loginController = LogInController()
         let user = User(email: "bob_johnson@lambdaschool.com", password: "testing123!")
         let expectation = self.expectation(description: "loginController")
         
@@ -36,31 +37,17 @@ class Schematic_CaptureTests: XCTestCase {
                 XCTFail("\(error)")
                 return
             }
-            if loginController.bearer == nil {
+            if self.loginController.bearer == nil {
                 XCTFail("No bearer")
                 return
             }
+            self.projectController.bearer = self.loginController.bearer
+            self.projectController.user = self.loginController.user
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 15, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         XCTAssertNotNil(loginController.bearer)
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
     
     func testDownloadSchematicsPDF() {
@@ -117,4 +104,37 @@ class Schematic_CaptureTests: XCTestCase {
             }
         }
     }
+    
+    func testDownloadAssignedJobSheets() {
+        XCTAssertNotNil(projectController.bearer)
+        
+        let expectation = self.expectation(description: "projectController")
+        projectController.downloadAssignedJobs { (error) in
+            if let error = error {
+                XCTFail("\(error)")
+                return
+            }
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 20, handler: nil)
+        XCTAssertNotNil(projectController.projects)
+    }
+        
+//    func testDownloadSchematics() {
+//        XCTAssertNotNil(projectController.bearer)
+//        XCTAssertNotNil(projectController.user)
+//
+//        let expectation = self.expectation(description: "downloadSchematics")
+//        projectController.downloadSchematics { (error) in
+//            if let error = error {
+//                XCTFail("\(error)")
+//                return
+//            }
+//            expectation.fulfill()
+//        }
+//
+//        waitForExpectations(timeout: 20, handler: nil)
+//        XCTAssertNotNil(projectController.projects)
+//    }
 }
