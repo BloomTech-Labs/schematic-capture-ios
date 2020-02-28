@@ -31,13 +31,82 @@ class Schematic_CaptureUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
-    func testLaunchPerformance() {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    func testAuthenticationNavigation() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let signUpButton = app.buttons["Sign Up"]
+        signUpButton.tap()
+        signUpButton.tap()
+        sleep(5)
+        app.navigationBars["Sign Up"].buttons["Schematic Capture"].tap()
+        
+        let loginButton = app.buttons["Login"]
+        loginButton.tap()
+        loginButton.tap()
+        sleep(5)
+        app/*@START_MENU_TOKEN@*/.buttons["Proceed to main page"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Proceed to main page\"]",".buttons[\"Proceed to main page\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
     }
+    
+    func testDownload() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let loginButton = app.buttons["Login"]
+        loginButton.tap()
+        loginButton.tap()
+        sleep(5)
+        app/*@START_MENU_TOKEN@*/.buttons["Proceed to main page"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Proceed to main page\"]",".buttons[\"Proceed to main page\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        app.buttons["Download Projects"].tap()
+    }
+    
+    func testCardView() {
+        
+        let app = XCUIApplication()
+        app.launch()
+        
+        let loginButton = app.buttons["Login"]
+        loginButton.tap()
+        loginButton.tap()
+        sleep(5)
+        app/*@START_MENU_TOKEN@*/.buttons["Proceed to main page"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Proceed to main page\"]",".buttons[\"Proceed to main page\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        app.buttons["View Projects"].tap()
+
+        let tablesQuery = app.tables
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Test Project 1"]/*[[".cells[\"CellID\"].staticTexts[\"Test Project 1\"]",".staticTexts[\"Test Project 1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["HPU_Manifolds Jobsheet 1.csv"]/*[[".cells.staticTexts[\"HPU_Manifolds Jobsheet 1.csv\"]",".staticTexts[\"HPU_Manifolds Jobsheet 1.csv\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let descriptionElectricMotorCellsQuery = tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"Description: Electric Motor")/*[[".cells.containing(.staticText, identifier:\"1\")",".cells.containing(.staticText, identifier:\"Part #: 284TC\")",".cells.containing(.staticText, identifier:\"Manufacturer: Baldor\")",".cells.containing(.staticText, identifier:\"Description: Electric Motor\")"],[[[-1,3],[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let componentStaticText = descriptionElectricMotorCellsQuery.staticTexts["Component #:"]
+        componentStaticText.tap()
+        componentStaticText.tap()
+        
+        let componentStaticText2 = tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"Description: Pump, Axial Piston")/*[[".cells.containing(.staticText, identifier:\"2\")",".cells.containing(.staticText, identifier:\"Part #: PVM074ER09GS02AA-28\")",".cells.containing(.staticText, identifier:\"Manufacturer: Vickers\")",".cells.containing(.staticText, identifier:\"Description: Pump, Axial Piston\")"],[[[-1,3],[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Component #:"]
+        componentStaticText2.tap()
+        componentStaticText2.tap()
+        
+        let cameraButton = descriptionElectricMotorCellsQuery.buttons["camera"]
+        cameraButton.tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Cancel"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Cancel\"]",".buttons[\"Cancel\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        cameraButton.tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Photo Library"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Photo Library\"]",".buttons[\"Photo Library\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tables.cells.firstMatch.tap()
+                                        
+        
+
+        
+    }
+
+//    func testLaunchPerformance() {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 }

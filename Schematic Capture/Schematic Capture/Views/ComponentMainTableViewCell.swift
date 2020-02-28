@@ -9,6 +9,10 @@
 import UIKit
 import ExpyTableView
 
+protocol MainCellDelegate {
+    func cameraButtonDidTabbed(component: Component)
+}
+
 class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     
     @IBOutlet weak var componentIdLabel: UILabel!
@@ -16,7 +20,10 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     @IBOutlet weak var manufacturerLabel: UILabel!
     @IBOutlet weak var partNumberLabel: UILabel!
     @IBOutlet weak var arrowImageView: UIImageView!
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var annotatedImageView: UIImageView!
     
+    var delegate: MainCellDelegate?
     var component: Component? {
         didSet {
             updateViews()
@@ -25,13 +32,15 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    @IBAction func cameraButtonTabbed(_ sender: Any) {
+        guard let component = component else { return }
+        delegate?.cameraButtonDidTabbed(component: component)
     }
     
     func changeState(_ state: ExpyState, cellReuseStatus cellReuse: Bool) {
@@ -57,6 +66,14 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
         descriptionLabel.text = "Description: \(component.componentDescription ?? "")"
         manufacturerLabel.text = "Manufacturer: \(component.manufacturer ?? "")"
         partNumberLabel.text = "Part #: \(component.partNumber ?? "")"
+        
+        guard let photo = component.photo,
+            let imageData = photo.imageData,
+            let image = UIImage(data: imageData) else {
+                annotatedImageView.image = nil
+                return
+        }
+        annotatedImageView.image = image
     }
     
     private func arrowDown(animated: Bool) {

@@ -34,6 +34,8 @@
 		A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */; };
 		A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */; };
 		A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */; };
+		A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692203123FF3DC10060AD9E /* AnnotationViewController.swift */; };
+		A692203424048B4E0060AD9E /* SchematicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692203324048B4E0060AD9E /* SchematicViewController.swift */; };
 		A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */; };
 		A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */; };
 		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
@@ -72,6 +74,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A692201C23FDDFBA0060AD9E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		49AD8C612B258C5954802E50 /* Pods-Schematic CaptureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.debug.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		74CE154D4AA08AC493FBA5F6 /* Pods-Schematic Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +124,10 @@
 		A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpyTableViewController.swift; sourceTree = "<group>"; };
 		A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentMainTableViewCell.swift; sourceTree = "<group>"; };
 		A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailTableViewCell.swift; sourceTree = "<group>"; };
+		A692200B23FDDFBA0060AD9E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
+		A692200D23FDDFBA0060AD9E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		A692203123FF3DC10060AD9E /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
+		A692203324048B4E0060AD9E /* SchematicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchematicViewController.swift; sourceTree = "<group>"; };
 		A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
@@ -240,6 +259,8 @@
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
 				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
+				A692203123FF3DC10060AD9E /* AnnotationViewController.swift */,
+				A692203324048B4E0060AD9E /* SchematicViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -352,6 +373,8 @@
 			children = (
 				F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */,
 				9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */,
+				A692200B23FDDFBA0060AD9E /* PhotosUI.framework */,
+				A692200D23FDDFBA0060AD9E /* Photos.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -387,6 +410,7 @@
 				A665834F23DAB508006073DF /* Resources */,
 				33064B68C18A8FA8AE58D160 /* [CP] Embed Pods Frameworks */,
 				3C8B0E4BC6D0BD843935E3DF /* [CP] Copy Pods Resources */,
+				A692201C23FDDFBA0060AD9E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -422,7 +446,7 @@
 		A665834923DAB508006073DF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				DefaultBuildSystemTypeForWorkspace = Original;
+				DefaultBuildSystemTypeForWorkspace = Latest;
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "GIPGIP Studio";
@@ -605,9 +629,11 @@
 				A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */,
 				A665838E23E0E384006073DF /* Networking.swift in Sources */,
 				A665838C23E0E27C006073DF /* Bearer.swift in Sources */,
+				A692203424048B4E0060AD9E /* SchematicViewController.swift in Sources */,
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
 				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
 				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
+				A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */,
 				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
 				A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */,
@@ -824,16 +850,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74CE154D4AA08AC493FBA5F6 /* Pods-Schematic Capture.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP.Schematic-Capture";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GiPyoK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -845,16 +874,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7CF1D52C5578D599C2B001F6 /* Pods-Schematic Capture.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP.Schematic-Capture";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GiPyoK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
