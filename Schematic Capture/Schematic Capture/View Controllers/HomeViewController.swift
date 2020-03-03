@@ -12,7 +12,10 @@ import SCLAlertView
 
 class HomeViewController: UIViewController, WKUIDelegate {
 
-    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var downloadProjectsButton: UIButton!
+    @IBOutlet weak var viewProjectsButton: UIButton!
+    @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
+    
     
     var loginController: LogInController?
     var projectController = ProjectController()
@@ -21,6 +24,11 @@ class HomeViewController: UIViewController, WKUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Style.styleFilledButton(downloadProjectsButton)
+        Style.styleFilledButton(viewProjectsButton)
+        Style.styleFilledButton(uploadJobSheetsButton)
+        
         
         webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
         webView.uiDelegate = self
@@ -34,18 +42,23 @@ class HomeViewController: UIViewController, WKUIDelegate {
         projectController.downloadAssignedJobs { (error) in
             if let error = error {
                 self.stopLoadingScreen()
-                SCLAlertView().showError("Unable to download assigned jobs", subTitle: "\(error)")
+                DispatchQueue.main.async {
+                    SCLAlertView().showError("Unable to download assigned jobs", subTitle: "\(error)")
+                }
                 return
             }
             
             self.projectController.downloadSchematics { (error) in
                 self.stopLoadingScreen()
                 if let error = error {
-                    SCLAlertView().showSuccess("Unable to download schematics", subTitle: "\(error)")
+                    DispatchQueue.main.async {
+                        SCLAlertView().showSuccess("Unable to download schematics", subTitle: "\(error)")
+                    }
                     return
                 }
-                
-                SCLAlertView().showSuccess("Download  Successful", subTitle: "")
+                DispatchQueue.main.async {
+                    SCLAlertView().showSuccess("Download  Successful", subTitle: "")
+                }
             }
         }
     }
