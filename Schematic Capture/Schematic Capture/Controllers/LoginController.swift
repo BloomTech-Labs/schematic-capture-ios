@@ -16,10 +16,10 @@ class LogInController {
     var bearer: Bearer?
     var user: User?
     
+//        private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
     private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
-    //    private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
 //    private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
-    //    private let baseURL = URL(string: "https://localhost:5000/api")!
+//    private let baseURL = URL(string: "https://localhost:5000/api")!
     
     
     // MARK: - Sign Up
@@ -283,6 +283,7 @@ class LogInController {
                     return completion(.error("No ID Token returned"), nil)
                 }
                 
+                print("\(idToken)")
                 return completion(nil, Bearer(idToken: idToken))
             }
         }
@@ -337,6 +338,16 @@ class LogInController {
         }
     }
     
+    func signOut(completion: @escaping (Error?) -> Void) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Error signing out: \(error)")
+            completion(error)
+            return
+        }
+        completion(nil)
+    }
     
     //MARK: - Update User
     private func updateUser(user: User) {
