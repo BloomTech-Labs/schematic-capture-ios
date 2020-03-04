@@ -37,11 +37,11 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         //TODO: Delete this
         firstNameTextField.text = "John"
         lastNameTextField.text = "Kim"
-        emailTextField.text = "johnTEST@gmail.com"
-        phoneTextField.text = "1231231234"
+        emailTextField.text = "johntest5@gmail.com"
+        phoneTextField.text = "1234567890"
         passwordTextField.text = "testing123!"
         confirmPasswordTextField.text = "testing123!"
-        tokenTextField.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoxLCJpbnZpdGVyIjoidGlEVGZlTkYxS2NFa1c5N2dQTElwRzg1aXViMiIsInRpbWUiOjE1ODE1Mjc5OTgyMDMsImlhdCI6MTU4MTUyNzk5OCwiZXhwIjoxNTgxNTMxNTk4fQ.GjrO4dpwKOYYWvfBP6gvT6xbRfG3lx4Vdf88gV6v180"
+//        tokenTextField.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoxLCJpbnZpdGVyIjoidGlEVGZlTkYxS2NFa1c5N2dQTElwRzg1aXViMiIsInRpbWUiOjE1ODE1Mjc5OTgyMDMsImlhdCI6MTU4MTUyNzk5OCwiZXhwIjoxNTgxNTMxNTk4fQ.GjrO4dpwKOYYWvfBP6gvT6xbRfG3lx4Vdf88gV6v180"
         
     }
     
@@ -69,6 +69,7 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         DispatchQueue.main.async {
             webView.translatesAutoresizingMaskIntoConstraints = false
             webView.backgroundColor = .clear
+            webView.isOpaque = false
             self.view.addSubview(webView)
             
             webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
@@ -132,16 +133,17 @@ class SignUpViewController: UIViewController, WKUIDelegate {
                 NSLog("Error: \(error)")
                 
                 let errorMessage = "\(error)"
+                // Need to get constant error message format
                 // Get rid of extra characters
-                guard let firstIndex = errorMessage.lastIndex(of: ":"),
-                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
-                
-                let subString = errorMessage[firstIndex..<lastIndex]
-                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
-                let result = subString[startIndex..<subString.endIndex]
+//                guard let firstIndex = errorMessage.lastIndex(of: ":"),
+//                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
+//
+//                let subString = errorMessage[firstIndex..<lastIndex]
+//                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
+//                let result = subString[startIndex..<subString.endIndex]
                 
                 DispatchQueue.main.async {
-                    self.errorMessageLabel.text = String(result)
+                    self.errorMessageLabel.text = errorMessage
                     self.errorMessageLabel.alpha = 1
                 }
                 return

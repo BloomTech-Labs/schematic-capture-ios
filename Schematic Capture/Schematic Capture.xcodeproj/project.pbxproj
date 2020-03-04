@@ -41,6 +41,7 @@
 		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
 		A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */; };
 		A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */; };
+		A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */; };
 		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
 		A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */; };
 		A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */; };
@@ -133,6 +134,7 @@
 		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = OnBoardImage.jpeg; sourceTree = "<group>"; };
 		A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture.xcdatamodel"; sourceTree = "<group>"; };
 		A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Convenience.swift"; sourceTree = "<group>"; };
 		A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+Convenience.swift"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				A665835D23DAB50A006073DF /* Assets.xcassets */,
 				A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */,
+				A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */,
 				A6A9D23723E4A86E0026D5E4 /* Fonts */,
 				A6613BF823E89DDE004A11B2 /* System */,
 				A665837F23DF8CC8006073DF /* Storyboards */,
@@ -504,6 +507,7 @@
 				A6613C0D23EA1417004A11B2 /* Pulse-1s-200px.svg in Resources */,
 				A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */,
 				A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */,
+				A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */,
 				A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */,
 				A665835E23DAB50A006073DF /* Assets.xcassets in Resources */,
 			);
