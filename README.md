@@ -46,7 +46,6 @@ You can find the deployed project at [schematiccapture.com](https://www.schemati
 
 An iOS/web app for capturing and annotating huge machines in some of the countries larger steel manufacturing facilities 🔥 It needs offline capabilities to be able to capture photos and annotate them in facilities that often have no network or signal available to them.
 
-![](header.png)
 
 ### Features
 
