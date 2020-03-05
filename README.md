@@ -1,24 +1,3 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
-# Schematic Capture
-
-You can find the deployed project at [schematiccapture.com](https://www.schematiccapture.com/).
-
-## Contributors
-
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add or delete these place-holders as needed
-
-|                                       [Student 1](https://github.com/)                                        |                                       [Student 2](https://github.com/)                                        |                                       [Student 3](https://github.com/)                                        |                                       [Student 4](https://github.com/)                                        |                                       [Student 5](https://github.com/)                                        |
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)             |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
-
-
 [![Swift Version][swift-image]][swift-url]
 [![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
@@ -26,32 +5,55 @@ You can find the deployed project at [schematiccapture.com](https://www.schemati
 [![Maintainability](https://api.codeclimate.com/v1/badges/1257e90eac623ca12586/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/schematic-capture-ios)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1257e90eac623ca12586/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/schematic-capture-ios)
 
+# Schematic Capture
+
+You can find the deployed project at [schematiccapture.com](https://www.schematiccapture.com/).
+
+# Contributors
+
+## Labs 20 - First Product Cycle
+
+### Team Lead
+
+- **Jason Belgard** – [Github](https://github.com/jbelgard)
+
+### UX
+
+- **Brian Hamilton** – [LinkedIn](https://github.com/BHamilton781)
+
+### iOS
+
+- **Gi Pyo John Kim** – [Github](https://github.com/GiPyoK)
+
+### Full-Stack Web Developers
+
+- **Raajn Patel** - [Github](https://github.com/raajnpatel)
+
+- **Nattajohn Rojanasupya** - [Github](https://github.com/nattroj)
+
+- **Brad Zickafoose** - [Github](https://github.com/bradzickafoose)
+
 
 ## Project Overview
 
-1️⃣ You can find the deployed project at [schematiccapture.com](https://www.schematiccapture.com/).
+You can find the deployed project at [schematiccapture.com](https://www.schematiccapture.com/).
 
-1️⃣ [Trello Board](https://trello.com/b/Amx4wIKW/labs-20-schematic-capture)
+[Trello Board](https://trello.com/b/Amx4wIKW/labs-20-schematic-capture)
 
-1️⃣ [Product Canvas](https://www.notion.so/Schematic-Capture-d4594ebf93ff4c6aba7942aea0546fea)
+[Product Canvas](https://www.notion.so/Schematic-Capture-d4594ebf93ff4c6aba7942aea0546fea)
 
-1️⃣ [UX Design files](https://www.figma.com/file/cFDM1JqxOSem73IdYGSntU/Schematic-Capture?node-id=0%3A1)
+[UX Design files](https://www.figma.com/file/cFDM1JqxOSem73IdYGSntU/Schematic-Capture?node-id=0%3A1)
 
-🚫 One to two paragraph statement about your product and what it does.
-
-Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. Ut aliquam purus sit amet luctus venenatis lectus magna fringilla. Orci dapibus ultrices in iaculis nunc sed augue. Euismod in pellentesque massa placerat duis ultricies. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Lectus quam id leo in vitae. Purus sit amet luctus venenatis lectus magna fringilla urna porttitor.
-
-Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
+An iOS/web app for capturing and annotating huge machines in some of the countries larger steel manufacturing facilities 🔥 It needs offline capabilities to be able to capture photos and annotate them in facilities that often have no network or signal available to them.
 
 ![](header.png)
 
 ### Features
 
--    Feature 1
--    Feature 2
--    Feature 3
--    Feature 4
--    Feature 5
+-    Authenticate user with Firebase
+-    Download assigned jobs
+-    Offline usability
+-    Capture and annotate photos
 
 ### [Firebase](https://firebase.google.com/docs/auth)
 
@@ -75,9 +77,6 @@ ExpyTableView is a re-write based on SLExpandableTableView. Takes some ideas, co
 
 
 ## Requirements
-
-🚫 These are examples, make sure this matches your project's requirements
-
 -   iOS 11.0+
 -   Xcode 11
 -   Cocoa Pods
@@ -129,7 +128,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/Lambda-School-Labs/schematic-capture-be/) for details on the backend of our project.
 
 
 [swift-image]: https://img.shields.io/badge/swift-5.0-orange.svg
