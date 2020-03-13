@@ -17,7 +17,6 @@
 		A6613C1323EA3204004A11B2 /* signUpEncode.json in Resources */ = {isa = PBXBuildFile; fileRef = A6613C1223EA3203004A11B2 /* signUpEncode.json */; };
 		A665835523DAB508006073DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835423DAB508006073DF /* AppDelegate.swift */; };
 		A665835723DAB508006073DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835623DAB508006073DF /* SceneDelegate.swift */; };
-		A665835E23DAB50A006073DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A665835D23DAB50A006073DF /* Assets.xcassets */; };
 		A665836C23DAB50A006073DF /* Schematic_CaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */; };
 		A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665837823DB6E2D006073DF /* SignInViewController.swift */; };
 		A665838323DFA06C006073DF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838223DFA06C006073DF /* Reachability.swift */; };
@@ -56,6 +55,7 @@
 		A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */; };
 		A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
+		FBFA2E7A24192A7C00F20402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBFA2E7924192A7C00F20402 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,7 +103,6 @@
 		A665835423DAB508006073DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A665835623DAB508006073DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A665835B23DAB508006073DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A665835D23DAB50A006073DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A665836023DAB50A006073DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A665836223DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Schematic Capture/System/Info.plist"; sourceTree = SOURCE_ROOT; };
 		A665836723DAB50A006073DF /* Schematic CaptureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +149,7 @@
 		A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepresentation.swift; sourceTree = "<group>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBFA2E7924192A7C00F20402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Schematic-Capture/schematic-capture-ios/Schematic Capture/Schematic Capture/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +225,7 @@
 		A665835323DAB508006073DF /* Schematic Capture */ = {
 			isa = PBXGroup;
 			children = (
-				A665835D23DAB50A006073DF /* Assets.xcassets */,
+				FBFA2E7924192A7C00F20402 /* Assets.xcassets */,
 				A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */,
 				A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */,
 				A6A9D23723E4A86E0026D5E4 /* Fonts */,
@@ -501,6 +501,7 @@
 			files = (
 				A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */,
 				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
+				FBFA2E7A24192A7C00F20402 /* Assets.xcassets in Resources */,
 				A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */,
 				A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */,
 				A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */,
@@ -509,7 +510,6 @@
 				A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */,
 				A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */,
 				A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */,
-				A665835E23DAB50A006073DF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,7 +700,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 4JYCUK7B5K;
 				INFOPLIST_FILE = "Schematic CaptureUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -719,7 +719,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 4JYCUK7B5K;
 				INFOPLIST_FILE = "Schematic CaptureUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -859,7 +859,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 4JYCUK7B5K;
 				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -883,7 +883,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 4JYCUK7B5K;
 				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -904,8 +904,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 4JYCUK7B5K;
 				INFOPLIST_FILE = "Schematic CaptureTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -927,8 +928,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 4JYCUK7B5K;
 				INFOPLIST_FILE = "Schematic CaptureTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
