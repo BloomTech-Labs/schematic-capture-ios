@@ -175,13 +175,13 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 2 //likely refers to 2 cells. ComponentMainTableViewCell, ComponentDetailTableViewCell - TC
     }
     
     func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentMainCell") as? ComponentMainTableViewCell else { return UITableViewCell() }
         
-        cell.component = components?[section]
+        cell.component = components?[section] // assigns first component to first section in TV - TC
         cell.delegate = self
         cell.showSeparator()
         

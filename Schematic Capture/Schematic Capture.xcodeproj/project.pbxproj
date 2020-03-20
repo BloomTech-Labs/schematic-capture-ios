@@ -55,6 +55,7 @@
 		A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */; };
 		A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
+		FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */; };
 		FBFA2E7A24192A7C00F20402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBFA2E7924192A7C00F20402 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -149,6 +150,7 @@
 		A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepresentation.swift; sourceTree = "<group>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailImageViewController.swift; sourceTree = "<group>"; };
 		FBFA2E7924192A7C00F20402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Schematic-Capture/schematic-capture-ios/Schematic Capture/Schematic Capture/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,6 +266,7 @@
 				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
 				A692203123FF3DC10060AD9E /* AnnotationViewController.swift */,
 				A692203324048B4E0060AD9E /* SchematicViewController.swift */,
+				FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
 				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
 				A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */,
+				FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */,
 				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
 				A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */,
