@@ -11,9 +11,16 @@ import ExpyTableView
 
 protocol MainCellDelegate {
     func cameraButtonDidTabbed(component: Component)
-}
+    
 
-class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
+    
+}
+          
+      
+    
+
+
+class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
     
     @IBOutlet weak var componentIdLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -32,6 +39,7 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+      
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,6 +50,8 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
         guard let component = component else { return }
         delegate?.cameraButtonDidTabbed(component: component)
     }
+    
+   
     
     func changeState(_ state: ExpyState, cellReuseStatus cellReuse: Bool) {
         switch state {
@@ -74,7 +84,13 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
                 return
         }
         annotatedImageView.image = image
+        
+      
+         
+        
     }
+    
+ 
     
     private func arrowDown(animated: Bool) {
         UIView.animate(withDuration: (animated ? 0.3 : 0)) {

@@ -54,9 +54,19 @@ class ExpyTableViewController: UIViewController {
         expandableTableView.reloadData()
         
         navigationItem.rightBarButtonItems = [pdfBarButtonItem]
+        
+        
+
     }
     
-    // Get permission for Camera or Photo Library
+   
+    
+
+    
+    
+    
+ 
+    
     private func checkAuthAndPresentImagePicker(sourceType: UIImagePickerController.SourceType) {
         if sourceType == .photoLibrary {
         let authorizationStatus = PHPhotoLibrary.authorizationStatus()
@@ -181,6 +191,11 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
     func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentMainCell") as? ComponentMainTableViewCell else { return UITableViewCell() }
         
+
+      
+
+
+        
         cell.component = components?[section] // assigns first component to first section in TV - TC
         cell.delegate = self
         cell.showSeparator()
@@ -188,9 +203,15 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
         return cell
     }
     
+  
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentDetailCell") as? ComponentDetailTableViewCell else { return UITableViewCell() }
         cell.component = components?[indexPath.section]
+        
+       
+        
+
        
         return cell
     }
@@ -237,6 +258,8 @@ extension ExpyTableViewController: UIImagePickerControllerDelegate, UINavigation
 }
 
 extension ExpyTableViewController: MainCellDelegate {
+
+    
     func cameraButtonDidTabbed(component: Component) {
         selectedComponent = component
         DispatchQueue.main.async {

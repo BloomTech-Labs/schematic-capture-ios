@@ -639,6 +639,10 @@
                                                             </constraints>
                                                             <state key="normal" image="pencil" catalog="system"/>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="the-Gw-dzf">
+                                                            <rect key="frame" x="248" y="8" width="26" height="22"/>
+                                                            <state key="normal" image="eye" catalog="system"/>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Description field" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-O2-Z6L">
                                                             <rect key="frame" x="20" y="39" width="140.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -665,8 +669,9 @@
                                                                 <constraint firstAttribute="height" constant="24" id="kYw-oK-gAa"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="vaR-pD-jEf">
+                                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="vaR-pD-jEf">
                                                             <rect key="frame" x="330" y="38" width="74" height="74"/>
+                                                            <gestureRecognizers/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="vaR-pD-jEf" secondAttribute="height" multiplier="1:1" id="X26-0g-ThU"/>
                                                             </constraints>
@@ -676,11 +681,13 @@
                                                     <constraints>
                                                         <constraint firstItem="zgJ-SF-7qy" firstAttribute="leading" secondItem="sGn-Ba-tS4" secondAttribute="trailing" constant="4" id="3Ao-SY-sDd"/>
                                                         <constraint firstItem="rlZ-GS-vbc" firstAttribute="top" secondItem="7bb-O2-Z6L" secondAttribute="bottom" constant="8" id="BXe-bg-Lor"/>
+                                                        <constraint firstItem="yGf-55-On7" firstAttribute="leading" secondItem="the-Gw-dzf" secondAttribute="trailing" constant="16" id="E66-o8-ZaN"/>
                                                         <constraint firstItem="UkT-4C-Mb4" firstAttribute="leading" secondItem="E1v-g6-L5z" secondAttribute="trailing" constant="16" id="Fzf-bJ-O78"/>
                                                         <constraint firstAttribute="trailing" secondItem="UkT-4C-Mb4" secondAttribute="trailing" constant="20" id="JbA-bi-VHi"/>
                                                         <constraint firstItem="UkT-4C-Mb4" firstAttribute="top" secondItem="by9-q9-5ra" secondAttribute="top" constant="10" id="OfC-rN-9Ka"/>
                                                         <constraint firstItem="vaR-pD-jEf" firstAttribute="top" secondItem="E1v-g6-L5z" secondAttribute="bottom" constant="4" id="TRH-KE-8FC"/>
                                                         <constraint firstItem="E1v-g6-L5z" firstAttribute="leading" secondItem="yGf-55-On7" secondAttribute="trailing" constant="16" id="TuG-ib-sqk"/>
+                                                        <constraint firstItem="the-Gw-dzf" firstAttribute="leading" relation="lessThanOrEqual" secondItem="sGn-Ba-tS4" secondAttribute="trailing" constant="130" id="W8E-Jt-j3e"/>
                                                         <constraint firstItem="sbf-d3-rmJ" firstAttribute="leading" secondItem="by9-q9-5ra" secondAttribute="leading" constant="20" id="XPI-Av-7Pt"/>
                                                         <constraint firstItem="sGn-Ba-tS4" firstAttribute="leading" secondItem="by9-q9-5ra" secondAttribute="leading" constant="20" id="Y1p-sW-UbK"/>
                                                         <constraint firstItem="7bb-O2-Z6L" firstAttribute="leading" secondItem="by9-q9-5ra" secondAttribute="leading" constant="20" id="Zzs-m6-SdO"/>
@@ -694,6 +701,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="sbf-d3-rmJ" secondAttribute="bottom" id="rsI-cK-WuS"/>
                                                         <constraint firstItem="sGn-Ba-tS4" firstAttribute="top" secondItem="by9-q9-5ra" secondAttribute="top" constant="10" id="sfM-mK-CeX"/>
                                                         <constraint firstItem="7bb-O2-Z6L" firstAttribute="top" secondItem="zgJ-SF-7qy" secondAttribute="bottom" constant="8" id="ucb-aX-Hm2"/>
+                                                        <constraint firstItem="the-Gw-dzf" firstAttribute="top" secondItem="by9-q9-5ra" secondAttribute="top" constant="8" id="vIb-xm-sGK"/>
                                                         <constraint firstItem="E1v-g6-L5z" firstAttribute="top" secondItem="by9-q9-5ra" secondAttribute="top" constant="10" id="wBY-3z-6r7"/>
                                                         <constraint firstItem="zgJ-SF-7qy" firstAttribute="centerY" secondItem="sGn-Ba-tS4" secondAttribute="centerY" id="xAj-TZ-qWN"/>
                                                         <constraint firstItem="yGf-55-On7" firstAttribute="leading" secondItem="zgJ-SF-7qy" secondAttribute="trailing" constant="16" id="yyb-Jn-1tV"/>
@@ -893,9 +901,11 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
                         <outlet property="pdfBarButtonItem" destination="UPE-Tw-EAe" id="ov5-0b-saD"/>
                         <segue destination="YzW-Xd-YDp" kind="show" identifier="CanvasSegue" id="Z5D-X0-jvF"/>
                         <segue destination="m2W-qo-AKg" kind="presentation" identifier="SchematicViewSegue" id="O6b-5Q-kM2"/>
+                        <segue destination="XIj-Eh-IMF" kind="show" identifier="ShowComponentDetailImageSegue" id="0E9-hz-5sC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZ2-Fe-jLv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="MVw-wG-9v5"/>
             </objects>
             <point key="canvasLocation" x="4757.971014492754" y="-89.0625"/>
         </scene>
@@ -908,7 +918,7 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s6U-3Y-4He">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -920,6 +930,7 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XWL-0H-pJx"/>
                     </view>
+                    <navigationItem key="navigationItem" id="cPP-v0-fBS"/>
                     <connections>
                         <outlet property="componentDetailImageView" destination="s6U-3Y-4He" id="IY1-QT-omT"/>
                     </connections>
@@ -965,6 +976,7 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
     <resources>
         <image name="camera" catalog="system" width="64" height="48"/>
         <image name="doc" catalog="system" width="56" height="64"/>
+        <image name="eye" catalog="system" width="64" height="40"/>
         <image name="greaterthan" catalog="system" width="64" height="54"/>
         <image name="pencil" catalog="system" width="64" height="56"/>
     </resources>
