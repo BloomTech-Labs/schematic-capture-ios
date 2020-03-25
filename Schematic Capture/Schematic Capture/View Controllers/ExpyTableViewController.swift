@@ -21,7 +21,7 @@ class ExpyTableViewController: UIViewController {
     @IBAction func imageButtonTapped(_ sender: Any) {
         guard let selectedComponent = selectedComponent,
             let currentComponentPhoto = currentComponentPhoto else {return}
-        sleep(3)
+       
         performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
         
     }
@@ -182,6 +182,8 @@ class ExpyTableViewController: UIViewController {
                              print("***currentComponentsPhotoValue is \(selectedImage)")
                               print("***selected component is \(selectedComponent)")
                               print("DETAIL VC IS: \(detailVC)")
+                selectedComponent = nil
+                currentComponentPhoto = nil
 
                   
               
