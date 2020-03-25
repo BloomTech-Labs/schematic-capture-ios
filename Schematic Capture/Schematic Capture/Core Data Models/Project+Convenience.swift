@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension Project {
+    // COMPUTED PROP projectRepresentation directly on Project, its getting all its attributes from Person, generated automatically.
     var projectRepresentation: ProjectRepresentation? {
         guard let name = name, let client = client else { return nil }
         // Sort the job sheet array by id
@@ -18,6 +19,7 @@ extension Project {
         let jobSheetsArr = jobSheets != nil ? (jobSheets!.sortedArray(using: [idDescriptor]) as? [JobSheetRepresentation]) : nil
         return ProjectRepresentation(id: Int(id), name: name, jobSheets: jobSheetsArr, client: client, clientId: Int(clientId))
     }
+    // PERSONS convenience init itself
     
     @discardableResult convenience init(id: Int,
                                         name: String,
@@ -32,6 +34,8 @@ extension Project {
         self.client = client
         self.clientId = Int32(clientId)
     }
+    
+    //Initializer for Project that takes in a projectRepresentation and creates a person from its values.
     
     @discardableResult convenience init(projectRepresentation: ProjectRepresentation, context: NSManagedObjectContext) {
         
