@@ -418,10 +418,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" id="2sr-em-kPS" customClass="ProjectTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="46"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="46.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2sr-em-kPS" id="kbx-Bp-cZe">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Project 1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvi-0V-A4I">
@@ -431,7 +431,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number of jobs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-3t-vmw">
-                                            <rect key="frame" x="20" y="25" width="374" height="17"/>
+                                            <rect key="frame" x="20" y="25" width="374" height="17.5"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -476,10 +476,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="JobSheetCell" id="w1u-TR-dpn" customClass="JobSheetTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="50.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w1u-TR-dpn" id="DD6-Bl-6Xh">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Job Sheet 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ak-Ao-Noq">
@@ -489,13 +489,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="253" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1I-qv-27J">
-                                            <rect key="frame" x="344.5" y="15" width="49.5" height="21"/>
+                                            <rect key="frame" x="344.5" y="14.5" width="49.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Components" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ0-bN-bgs">
-                                            <rect key="frame" x="20" y="25" width="304.5" height="21.5"/>
+                                            <rect key="frame" x="20" y="25" width="304.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -589,7 +589,7 @@
         <!--Expy Table View Controller-->
         <scene sceneID="gHQ-KY-J6j">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="4FV-G0-KSh" customClass="ExpyTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowComponentDetailImageSegue" modalPresentationStyle="fullScreen" id="4FV-G0-KSh" customClass="ExpyTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UiJ-XJ-Mv1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -642,6 +642,10 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="the-Gw-dzf">
                                                             <rect key="frame" x="248" y="8" width="26" height="22"/>
                                                             <state key="normal" image="eye" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="imageButtonTapped:" destination="4FV-G0-KSh" eventType="touchUpInside" id="n65-7U-B5O"/>
+                                                                <action selector="viewImageButtonTapped:" destination="m0h-kX-8X8" eventType="touchUpInside" id="2qB-Hh-XFZ"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Description field" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-O2-Z6L">
                                                             <rect key="frame" x="20" y="39" width="140.5" height="20.5"/>
@@ -723,6 +727,7 @@
                                             <outlet property="descriptionLabel" destination="7bb-O2-Z6L" id="652-m1-sjL"/>
                                             <outlet property="manufacturerLabel" destination="rlZ-GS-vbc" id="ndx-Sy-QAh"/>
                                             <outlet property="partNumberLabel" destination="sbf-d3-rmJ" id="caA-RM-3ra"/>
+                                            <outlet property="viewImageButton" destination="the-Gw-dzf" id="DvB-oU-MZ8"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComponentDetailCell" id="C7D-vt-xd7" customClass="ComponentDetailTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
@@ -901,7 +906,7 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
                         <outlet property="pdfBarButtonItem" destination="UPE-Tw-EAe" id="ov5-0b-saD"/>
                         <segue destination="YzW-Xd-YDp" kind="show" identifier="CanvasSegue" id="Z5D-X0-jvF"/>
                         <segue destination="m2W-qo-AKg" kind="presentation" identifier="SchematicViewSegue" id="O6b-5Q-kM2"/>
-                        <segue destination="XIj-Eh-IMF" kind="show" identifier="ShowComponentDetailImageSegue" id="0E9-hz-5sC"/>
+                        <segue destination="XIj-Eh-IMF" kind="showDetail" identifier="ShowComponentDetailImageSegue" id="epW-qA-Wri"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZ2-Fe-jLv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -912,13 +917,13 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
         <!--Component Detail Image View Controller-->
         <scene sceneID="Fhf-Dg-qWL">
             <objects>
-                <viewController id="XIj-Eh-IMF" customClass="ComponentDetailImageViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComponentDetailImageViewController" id="XIj-Eh-IMF" customClass="ComponentDetailImageViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gSg-iA-C74">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s6U-3Y-4He">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

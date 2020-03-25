@@ -9,12 +9,19 @@
 import UIKit
 
 class ComponentDetailImageViewController: UIViewController {
+    var component:Component?
+    var delegate: MainCellDelegate?
+    var passedInImage:UIImage?
     
-    
-    @IBOutlet weak var componentDetailImageView: UIImageView!
+    @IBOutlet weak var componentDetailImageView: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        componentDetailImageView?.image = passedInImage
+        
+     
+        print("I'm componentDetailImageView my componentDetailImageView.image property is \(componentDetailImageView?.image)")
+        print("CDV component = \(component)")
 
         // Do any additional setup after loading the view.
     }
@@ -31,3 +38,20 @@ class ComponentDetailImageViewController: UIViewController {
     */
 
 }
+extension ComponentDetailImageViewController: MainCellDelegate {
+    func cameraButtonDidTabbed(component: Component) {
+        
+    }
+    
+    func viewImageButtonDidTabbed(component: Component, selectedImage: UIImage?) {
+        
+        guard let selectedImage = selectedImage else {return}
+            componentDetailImageView?.image = selectedImage
+                
+        }
+        
+    }
+    
+    
+
+
