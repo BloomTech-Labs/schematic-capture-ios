@@ -20,8 +20,7 @@ class ComponentDetailImageViewController: UIViewController {
         componentDetailImageView?.image = passedInImage
         
      
-        print("I'm componentDetailImageView my componentDetailImageView.image property is \(componentDetailImageView?.image)")
-        print("CDV component = \(component)")
+
 
         // Do any additional setup after loading the view.
     }

@@ -19,8 +19,8 @@ class ExpyTableViewController: UIViewController {
     @IBOutlet weak var expandableTableView: ExpyTableView!
     
     @IBAction func imageButtonTapped(_ sender: Any) {
-        guard let selectedComponent = selectedComponent,
-            let currentComponentPhoto = currentComponentPhoto else {return}
+        guard let _ = selectedComponent,
+            let _ = currentComponentPhoto else {return}
        
         performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
         
@@ -173,15 +173,14 @@ class ExpyTableViewController: UIViewController {
        else if segue.identifier == "ShowComponentDetailImageSegue" {
             if let detailVC = segue.destination as? ComponentDetailImageViewController {
              detailVC.delegate = self
-                guard let component = selectedComponent else { print("no component selected returning"); return }
+                guard let _ = selectedComponent else { print("no component selected returning"); return }
                
               
               guard let selectedImage = currentComponentPhoto else { print("No currentComponentPhoto image returning"); return}
                  print("169")
                 detailVC.passedInImage = selectedImage
-                             print("***currentComponentsPhotoValue is \(selectedImage)")
-                              print("***selected component is \(selectedComponent)")
-                              print("DETAIL VC IS: \(detailVC)")
+                            
+                    
                 selectedComponent = nil
                 currentComponentPhoto = nil
 
@@ -303,15 +302,14 @@ extension ExpyTableViewController: MainCellDelegate {
         currentComponentPhoto = selectedImage
         
         
-        guard let selectedComponentShadow = selectedComponent else {return}
-        guard   let selectedImageShadow = selectedImage else {return}
+        guard let _ = selectedComponent else {return}
+        guard   let  _ = selectedImage else {return}
         
-        // ^^ make sure these are not nil with a redundant unwrap
+    
             
        
         
-            print("286 executed, currentComponentPhoto is \(self.currentComponentPhoto)")
-            print("287 executed, selectedComponent is \(selectedComponent)")
+
             performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
          }
         
