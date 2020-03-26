@@ -46,12 +46,11 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
        
         guard let image = annotatedImageView.image,
         let component = component else {return}
-        print("I'm in the MainCell I'm the unwrapped annotated image: \(image)")
-        print("I'm in the MainCell I'm the unwrapped component: \(component)")
+
             
-       //global queue?
+    
             delegate?.viewImageButtonDidTabbed(component:component, selectedImage: image)
-        print("Code on line 45 executed MainCell")
+      
     }
     
     
