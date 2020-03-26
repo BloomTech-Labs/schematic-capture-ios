@@ -38,11 +38,11 @@ class ComponentDetailImageViewController: UIViewController {
 
 }
 extension ComponentDetailImageViewController: MainCellDelegate {
-    func cameraButtonDidTabbed(component: Component) {
+    func cameraButtonDidTapped(component: Component) {
         
     }
     
-    func viewImageButtonDidTabbed(component: Component, selectedImage: UIImage?) {
+    func viewImageButtonDidTapped(component: Component, selectedImage: UIImage?) {
         
         guard let selectedImage = selectedImage else {return}
             componentDetailImageView?.image = selectedImage

@@ -177,7 +177,7 @@ class ExpyTableViewController: UIViewController {
                
               
               guard let selectedImage = currentComponentPhoto else { print("No currentComponentPhoto image returning"); return}
-                 print("169")
+                 
                 detailVC.passedInImage = selectedImage
                             
                     
@@ -297,7 +297,7 @@ extension ExpyTableViewController: MainCellDelegate {
  
     
   
-    func viewImageButtonDidTabbed(component:Component,selectedImage:UIImage? ){
+    func viewImageButtonDidTapped(component:Component,selectedImage:UIImage? ){
         selectedComponent = component
         currentComponentPhoto = selectedImage
         
@@ -313,7 +313,7 @@ extension ExpyTableViewController: MainCellDelegate {
             performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
          }
         
-        func cameraButtonDidTabbed(component: Component) {
+        func cameraButtonDidTapped(component: Component) {
             selectedComponent = component
             DispatchQueue.main.async {
                 let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)

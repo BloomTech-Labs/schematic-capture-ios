@@ -10,9 +10,9 @@ import UIKit
 import ExpyTableView
 
 protocol MainCellDelegate {
-    func cameraButtonDidTabbed(component: Component)
+    func cameraButtonDidTapped(component: Component)
     
-    func viewImageButtonDidTabbed(component:Component, selectedImage:UIImage?)
+    func viewImageButtonDidTapped(component:Component, selectedImage:UIImage?)
     
     
     
@@ -49,7 +49,7 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
 
             
     
-            delegate?.viewImageButtonDidTabbed(component:component, selectedImage: image)
+            delegate?.viewImageButtonDidTapped(component:component, selectedImage: image)
       
     }
     
@@ -67,7 +67,7 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
     
     @IBAction func cameraButtonTabbed(_ sender: Any) {
         guard let component = component else { return }
-        delegate?.cameraButtonDidTabbed(component: component)
+        delegate?.cameraButtonDidTapped(component: component)
     }
     
    
