@@ -10,11 +10,27 @@ import UIKit
 import ExpyTableView
 
 protocol MainCellDelegate {
-    func cameraButtonDidTabbed(component: Component)
-}
-
-class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
+    func cameraButtonDidTapped(component: Component)
     
+    func viewImageButtonDidTapped(component:Component, selectedImage:UIImage?)
+    
+    
+    
+
+    
+}
+          
+      
+    
+
+
+class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
+    var delegate: MainCellDelegate?
+    var component: Component? {
+        didSet {
+            updateViews()
+        }
+    }
     @IBOutlet weak var componentIdLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var manufacturerLabel: UILabel!
@@ -23,15 +39,26 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var annotatedImageView: UIImageView!
     
-    var delegate: MainCellDelegate?
-    var component: Component? {
-        didSet {
-            updateViews()
-        }
+    @IBOutlet weak var viewImageButton: UIButton!
+    
+    
+    @IBAction func viewImageButtonTapped(_ sender: Any) {
+       
+        guard let image = annotatedImageView.image,
+        let component = component else {return}
+
+            
+    
+            delegate?.viewImageButtonDidTapped(component:component, selectedImage: image)
+      
     }
+    
+    
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
+      
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -40,8 +67,10 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
     
     @IBAction func cameraButtonTabbed(_ sender: Any) {
         guard let component = component else { return }
-        delegate?.cameraButtonDidTabbed(component: component)
+        delegate?.cameraButtonDidTapped(component: component)
     }
+    
+   
     
     func changeState(_ state: ExpyState, cellReuseStatus cellReuse: Bool) {
         switch state {
@@ -74,7 +103,13 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
                 return
         }
         annotatedImageView.image = image
+        
+      
+         
+        
     }
+    
+ 
     
     private func arrowDown(animated: Bool) {
         UIView.animate(withDuration: (animated ? 0.3 : 0)) {
@@ -90,6 +125,7 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell {
 
 }
 
+
 extension UITableViewCell {
 
     func showSeparator() {
@@ -104,3 +140,4 @@ extension UITableViewCell {
         }
     }
 }
+

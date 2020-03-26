@@ -18,6 +18,15 @@ class ExpyTableViewController: UIViewController {
     
     @IBOutlet weak var expandableTableView: ExpyTableView!
     
+    @IBAction func imageButtonTapped(_ sender: Any) {
+        guard let _ = selectedComponent,
+            let _ = currentComponentPhoto else {return}
+       
+        performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
+        
+    }
+    
+    
     var components: [Component]? {
         didSet {
             if !components!.isEmpty,
@@ -30,6 +39,8 @@ class ExpyTableViewController: UIViewController {
     var schematicData: Data?
     var selectedComponent: Component?
     var originalPhoto: UIImage?
+    var currentComponentPhoto:UIImage? //+++
+    var delegate: MainCellDelegate?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,9 +65,19 @@ class ExpyTableViewController: UIViewController {
         expandableTableView.reloadData()
         
         navigationItem.rightBarButtonItems = [pdfBarButtonItem]
+        
+        
+
     }
     
-    // Get permission for Camera or Photo Library
+   
+    
+
+    
+    
+    
+ 
+    
     private func checkAuthAndPresentImagePicker(sourceType: UIImagePickerController.SourceType) {
         if sourceType == .photoLibrary {
         let authorizationStatus = PHPhotoLibrary.authorizationStatus()
@@ -148,7 +169,31 @@ class ExpyTableViewController: UIViewController {
                 schematicVC.pdfData = shematicData
             }
         }
-    }
+        
+       else if segue.identifier == "ShowComponentDetailImageSegue" {
+            if let detailVC = segue.destination as? ComponentDetailImageViewController {
+             detailVC.delegate = self
+                guard let _ = selectedComponent else { print("no component selected returning"); return }
+               
+              
+              guard let selectedImage = currentComponentPhoto else { print("No currentComponentPhoto image returning"); return}
+                 
+                detailVC.passedInImage = selectedImage
+                            
+                    
+                selectedComponent = nil
+                currentComponentPhoto = nil
+
+                  
+              
+                 }
+            }
+
+
+        }
+        
+       
+    
     
     @IBAction func pdfTabbed(_ sender: Any) {
         guard schematicData != nil else {
@@ -175,22 +220,34 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 2 //likely refers to 2 cells. ComponentMainTableViewCell, ComponentDetailTableViewCell - TC
     }
     
     func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentMainCell") as? ComponentMainTableViewCell else { return UITableViewCell() }
         
-        cell.component = components?[section]
+
+      
+
+
+        
+        cell.component = components?[section] // assigns first component to first section in TV - TC
         cell.delegate = self
         cell.showSeparator()
         
         return cell
     }
     
+  
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentDetailCell") as? ComponentDetailTableViewCell else { return UITableViewCell() }
         cell.component = components?[indexPath.section]
+        
+        
+       
+        
+
        
         return cell
     }
@@ -237,22 +294,55 @@ extension ExpyTableViewController: UIImagePickerControllerDelegate, UINavigation
 }
 
 extension ExpyTableViewController: MainCellDelegate {
-    func cameraButtonDidTabbed(component: Component) {
+ 
+    
+  
+    func viewImageButtonDidTapped(component:Component,selectedImage:UIImage? ){
         selectedComponent = component
-        DispatchQueue.main.async {
-            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-            let alert = SCLAlertView(appearance: appearance)
-            alert.addButton("Camera") {
-                self.checkAuthAndPresentImagePicker(sourceType: .camera)
-            }
-            alert.addButton("Photo Library") {
-                self.checkAuthAndPresentImagePicker(sourceType: .photoLibrary)
-            }
-            alert.addButton("Cancel") {
-                alert.hideView()
-            }
-            alert.showNotice("Image Source", subTitle: "")
+        currentComponentPhoto = selectedImage
+        
+        
+        guard let _ = selectedComponent else {return}
+        guard   let  _ = selectedImage else {return}
+        
+    
             
+       
+        
+
+            performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
+         }
+        
+        func cameraButtonDidTapped(component: Component) {
+            selectedComponent = component
+            DispatchQueue.main.async {
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+                let alert = SCLAlertView(appearance: appearance)
+                alert.addButton("Camera") {
+                    self.checkAuthAndPresentImagePicker(sourceType: .camera)
+                }
+                alert.addButton("Photo Library") {
+                    self.checkAuthAndPresentImagePicker(sourceType: .photoLibrary)
+                }
+                alert.addButton("Cancel") {
+                    alert.hideView()
+                }
+                alert.showNotice("Image Source", subTitle: "")
+                
+            }
         }
-    }
-}
+     }
+
+        
+        
+        
+        
+    
+    
+    
+
+    
+
+
+
+
