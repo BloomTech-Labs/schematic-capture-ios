@@ -151,6 +151,7 @@
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailImageViewController.swift; sourceTree = "<group>"; };
+		FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 2.xcdatamodel"; sourceTree = "<group>"; };
 		FBFA2E7924192A7C00F20402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Schematic-Capture/schematic-capture-ios/Schematic Capture/Schematic Capture/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -995,9 +996,10 @@
 		A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */,
 				A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */,
 			);
-			currentVersion = A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */;
+			currentVersion = FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */;
 			path = "Schematic Capture.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
