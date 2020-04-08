@@ -37,7 +37,7 @@ extension JobSheet {
                                       status: status,
                                       projectId: Int(projectId),
                                       userEmail: userEmail,
-                                      completed:completed
+                                      completed:Int(completed)
    ) }
     
     @discardableResult convenience init(id: Int,
@@ -49,7 +49,7 @@ extension JobSheet {
                                         status: JobSheetStatus,
                                         projectId: Int,
                                         userEmail:String,
-                                        completed:Bool,
+                                        completed:Int,
         
                                         context: NSManagedObjectContext) {
         self.init(context: context)
@@ -62,7 +62,7 @@ extension JobSheet {
         self.status = status.rawValue
         self.projectId = Int32(projectId)
         self.userEmail = userEmail
-        self.completed = completed 
+        self.completed = Int32(completed)
     }
     
     @discardableResult convenience init(jobSheetRepresentation: JobSheetRepresentation, context: NSManagedObjectContext) {

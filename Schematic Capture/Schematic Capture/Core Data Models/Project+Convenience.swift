@@ -17,7 +17,7 @@ extension Project {
         let idDescriptor = NSSortDescriptor(key: "id", ascending: true)
         // convert NSSet to an array, if nil, return nil
         let jobSheetsArr = jobSheets != nil ? (jobSheets!.sortedArray(using: [idDescriptor]) as? [JobSheetRepresentation]) : nil
-        return ProjectRepresentation(id: Int(id), name: name, jobSheets: jobSheetsArr,  clientId: Int(clientId), assignedStatus:assignedStatus, completed:completed)
+        return ProjectRepresentation(id: Int(id), name: name, jobSheets: jobSheetsArr,  clientId: Int(clientId),  completed:Int(completed))
     }
     // Projects convenience init itself
     
@@ -26,8 +26,8 @@ extension Project {
                                         jobSheets: [JobSheet]?,
                                         
                                         clientId: Int,
-                                        assignedStatus:Bool,
-                                        completed:Bool,
+                                        
+                                        completed:Int,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
@@ -35,8 +35,8 @@ extension Project {
         self.jobSheets = jobSheets != nil ? NSSet(array: jobSheets!) : nil
         
         self.clientId = Int32(clientId)
-        self.assignedStatus = assignedStatus
-        self.completed = completed
+        
+        self.completed = Int32(completed)
     }
     
     //Initializer for Project that takes in a projectRepresentation and creates a person from its values.
@@ -48,7 +48,7 @@ extension Project {
         self.init (id: projectRepresentation.id,
             name: projectRepresentation.name,
             jobSheets: jobSheets,
-            clientId: projectRepresentation.clientId, assignedStatus:projectRepresentation.assignedStatus,
+            clientId: projectRepresentation.clientId, 
             completed:projectRepresentation.completed,
             context: context)
     }

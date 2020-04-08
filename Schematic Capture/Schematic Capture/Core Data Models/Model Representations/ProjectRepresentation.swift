@@ -13,15 +13,15 @@ struct ProjectRepresentation: Codable {
     var name: String
     var jobSheets: [JobSheetRepresentation]?
     let clientId: Int
-    var assignedStatus:Bool
-    var completed:Bool
+   // var assignedStatus:Bool
+    var completed:Int
     
     private enum CodingKeys: String, CodingKey {
         case id
         case name
         case jobSheets = "jobsheet"
         case clientId
-        case assignedStatus
+        //case assignedStatus
         case completed
     }
 }
