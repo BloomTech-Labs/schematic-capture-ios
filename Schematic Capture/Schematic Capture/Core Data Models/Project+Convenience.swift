@@ -12,27 +12,31 @@ import CoreData
 extension Project {
     // COMPUTED PROP projectRepresentation directly on Project, its getting all its attributes from Person, generated automatically.
     var projectRepresentation: ProjectRepresentation? {
-        guard let name = name, let client = client else { return nil }
+        guard let name = name else { return nil }
         // Sort the job sheet array by id
         let idDescriptor = NSSortDescriptor(key: "id", ascending: true)
         // convert NSSet to an array, if nil, return nil
         let jobSheetsArr = jobSheets != nil ? (jobSheets!.sortedArray(using: [idDescriptor]) as? [JobSheetRepresentation]) : nil
-        return ProjectRepresentation(id: Int(id), name: name, jobSheets: jobSheetsArr, client: client, clientId: Int(clientId))
+        return ProjectRepresentation(id: Int(id), name: name, jobSheets: jobSheetsArr,  clientId: Int(clientId), assignedStatus:assignedStatus, completed:completed)
     }
-    // PERSONS convenience init itself
+    // Projects convenience init itself
     
     @discardableResult convenience init(id: Int,
                                         name: String,
                                         jobSheets: [JobSheet]?,
-                                        client: String,
+                                        
                                         clientId: Int,
+                                        assignedStatus:Bool,
+                                        completed:Bool,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
         self.name = name
         self.jobSheets = jobSheets != nil ? NSSet(array: jobSheets!) : nil
-        self.client = client
+        
         self.clientId = Int32(clientId)
+        self.assignedStatus = assignedStatus
+        self.completed = completed
     }
     
     //Initializer for Project that takes in a projectRepresentation and creates a person from its values.
@@ -44,8 +48,8 @@ extension Project {
         self.init (id: projectRepresentation.id,
             name: projectRepresentation.name,
             jobSheets: jobSheets,
-            client: projectRepresentation.client,
-            clientId: projectRepresentation.clientId,
+            clientId: projectRepresentation.clientId, assignedStatus:projectRepresentation.assignedStatus,
+            completed:projectRepresentation.completed,
             context: context)
     }
 }

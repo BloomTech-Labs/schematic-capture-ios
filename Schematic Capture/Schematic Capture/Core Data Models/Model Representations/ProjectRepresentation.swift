@@ -12,14 +12,16 @@ struct ProjectRepresentation: Codable {
     let id: Int
     var name: String
     var jobSheets: [JobSheetRepresentation]?
-    let client: String
     let clientId: Int
+    var assignedStatus:Bool
+    var completed:Bool
     
     private enum CodingKeys: String, CodingKey {
         case id
         case name
         case jobSheets = "jobsheet"
-        case client = "companyName"
         case clientId
+        case assignedStatus
+        case completed
     }
 }
