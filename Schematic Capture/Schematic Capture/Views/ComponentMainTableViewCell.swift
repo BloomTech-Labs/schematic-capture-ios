@@ -16,6 +16,8 @@ protocol MainCellDelegate {
     
     func editComponentButtonTapped(component:Component)
     
+    func saveComponentEditsTapped()
+    
     
     
 

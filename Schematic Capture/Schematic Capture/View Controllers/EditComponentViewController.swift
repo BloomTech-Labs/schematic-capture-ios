@@ -34,6 +34,8 @@ class EditComponentViewController: UIViewController {
         component?.setValue(newDescription, forKey: "componentDescription")
         CoreDataStack.shared.save(context: context)
         
+        delegate?.saveComponentEditsTapped()
+        
         
     }
     
@@ -45,7 +47,7 @@ class EditComponentViewController: UIViewController {
             
             currentComponentDescription.text? = component?.value(forKey: "componentDescription") as? String ?? "Can not display description"
             
-            print("\(component?.managedObjectContext)")
+       
         }
 
         // Do any additional setup after loading the view.

@@ -313,6 +313,10 @@ extension ExpyTableViewController: UIImagePickerControllerDelegate, UINavigation
 }
 
 extension ExpyTableViewController: MainCellDelegate {
+    func saveComponentEditsTapped() {
+        self.expandableTableView.reloadData()
+    }
+    
  
     
   
@@ -357,6 +361,8 @@ extension ExpyTableViewController: MainCellDelegate {
         guard let _ = selectedComponent else {return}
         performSegue(withIdentifier: "EditComponentSegue", sender: self)
               }
+    
+    
     }
      
 
