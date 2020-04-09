@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import CoreData 
 
 class EditComponentViewController: UIViewController {
     var component:Component?
     
      var delegate: MainCellDelegate?
+    var context = CoreDataStack.shared.mainContext
     
    
     @IBOutlet weak var currentComponentDescription: UILabel!
+    
+    
+    @IBOutlet weak var editDescriptionTextField: UITextField!
     
     
     @IBAction func dismissButtonTapped(_ sender: Any) {
@@ -23,11 +28,24 @@ class EditComponentViewController: UIViewController {
         component = nil
     }
     
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard  let newDescription = editDescriptionTextField.text else {return}
+        component?.setValue(newDescription, forKey: "componentDescription")
+        CoreDataStack.shared.save(context: context)
+        
+        
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if component != nil {
-            currentComponentDescription.text? = component?.componentDescription ?? "Can not display description"
+//            currentComponentDescription.text? = component?.componentDescription ?? "Can not display description"
+            
+            currentComponentDescription.text? = component?.value(forKey: "componentDescription") as? String ?? "Can not display description"
+            
+            print("\(component?.managedObjectContext)")
         }
 
         // Do any additional setup after loading the view.
