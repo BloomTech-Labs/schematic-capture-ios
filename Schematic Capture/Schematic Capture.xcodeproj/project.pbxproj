@@ -59,6 +59,7 @@
 		FBAD0B7D243DA07700B653BE /* TechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7C243DA07700B653BE /* TechClient.swift */; };
 		FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7E243DA11B00B653BE /* Client.swift */; };
 		FBAD0B81243DA1AF00B653BE /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B80243DA1AF00B653BE /* Contact.swift */; };
+		FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B85243F860300B653BE /* EditComponentViewController.swift */; };
 		FBFA2E7A24192A7C00F20402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBFA2E7924192A7C00F20402 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,7 @@
 		FBAD0B82243E7A1000B653BE /* Schematic Capture 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 4.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B83243E7C4700B653BE /* Schematic Capture 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 5.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 6.xcdatamodel"; sourceTree = "<group>"; };
+		FBAD0B85243F860300B653BE /* EditComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditComponentViewController.swift; sourceTree = "<group>"; };
 		FBFA2E7924192A7C00F20402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Schematic-Capture/schematic-capture-ios/Schematic Capture/Schematic Capture/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -278,6 +280,7 @@
 				A692203123FF3DC10060AD9E /* AnnotationViewController.swift */,
 				A692203324048B4E0060AD9E /* SchematicViewController.swift */,
 				FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */,
+				FBAD0B85243F860300B653BE /* EditComponentViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */,
 				A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */,
 				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
+				FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
 				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
 				A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */,

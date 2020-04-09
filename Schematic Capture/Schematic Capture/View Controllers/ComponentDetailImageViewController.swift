@@ -38,6 +38,10 @@ class ComponentDetailImageViewController: UIViewController {
 
 }
 extension ComponentDetailImageViewController: MainCellDelegate {
+    func editComponentButtonTapped(component: Component) {
+        
+    }
+    
     func cameraButtonDidTapped(component: Component) {
         
     }

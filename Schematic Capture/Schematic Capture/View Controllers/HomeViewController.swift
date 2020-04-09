@@ -48,18 +48,18 @@ class HomeViewController: UIViewController, WKUIDelegate {
                 return
             }
             
-            self.projectController.downloadSchematics { (error) in
-                self.stopLoadingScreen()
-                if let error = error {
-                    DispatchQueue.main.async {
-                        SCLAlertView().showSuccess("Unable to download schematics", subTitle: "\(error)")
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    SCLAlertView().showSuccess("Download  Successful", subTitle: "")
-                }
-            }
+//            self.projectController.downloadSchematics { (error) in
+//                self.stopLoadingScreen()
+//                if let error = error {
+//                    DispatchQueue.main.async {
+//                        SCLAlertView().showSuccess("Unable to download schematics", subTitle: "\(error)")
+//                    }
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    SCLAlertView().showSuccess("Download  Successful", subTitle: "")
+//                }
+//            }
         }
     }
     

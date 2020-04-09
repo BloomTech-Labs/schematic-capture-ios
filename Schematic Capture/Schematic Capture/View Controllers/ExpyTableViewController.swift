@@ -27,6 +27,13 @@ class ExpyTableViewController: UIViewController {
     }
     
     
+    @IBAction func editComponentButtonTapped(_ sender: Any) {
+        guard let _ = selectedComponent else {return}
+        
+        performSegue(withIdentifier:"EditComponentSegue", sender:self)
+    }
+    
+    
     var components: [Component]? {
         didSet {
             if !components!.isEmpty,
@@ -188,6 +195,18 @@ class ExpyTableViewController: UIViewController {
               
                  }
             }
+        
+        else if segue.identifier == "EditComponentSegue" {
+            if let detailVC = segue.destination as? EditComponentViewController {
+                detailVC.delegate = self
+                  guard let componentToEdit = selectedComponent else { print("no component selected returning"); return }
+                
+                detailVC.component = componentToEdit
+                
+//                selectedComponent = nil
+                
+            }
+        }
 
 
         }
@@ -331,6 +350,10 @@ extension ExpyTableViewController: MainCellDelegate {
                 
             }
         }
+    
+    func editComponentButtonTapped(component: Component) {
+        selectedComponent = component
+    }
      }
 
         

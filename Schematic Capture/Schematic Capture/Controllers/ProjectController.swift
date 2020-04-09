@@ -148,106 +148,109 @@ class ProjectController {
     }
     
     // Download schematic from firebase storage
-    func downloadSchematics(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
-        
-        guard let user = user, let _ = bearer else {
-            completion(.noBearer)
-            return
-        }
-        
-        guard let organizations = user.organizations,
-            let organization = organizations.first else {
-                completion(.error("No user organizations found"))
-                return
-        }
-        
-        let maxSize: Int64 = 1073741824 // 1GB
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        for project in projects {
-            
-            guard var jobSheets = project.jobSheets else {
-                completion(.error("No job sheets found"))
-                return
-            }
-            
-            jobSheets.sort { $0.id < $1.id }
-            
-            for jobSheet in jobSheets {
-                var pdfRef: String?
-                let schematicRef = storageRef.child("\(organization.id)")
-                    .child("\(project.clientId)")
-                    .child("\(project.id)")
-                    .child("\(jobSheet.id)")
-                
-                schematicRef.listAll { (listResult, error) in
-                    if let error = error {
-                        completion(.error("\(error)"))
-                        return
-                    }
-                    
-                    let listFullPaths = listResult.items.map { $0.fullPath }
-                    for path in listFullPaths {
-                        if path.contains(".PDF") || path.contains(".pdf") {
-                            pdfRef = path
-                            break
-                        }
-                    }
-                    
-                    guard let pdfRef = pdfRef else {
-                        completion(.error("No PDF file found in \(schematicRef.fullPath)"))
-                        return
-                    }
-                    
-                    let start = pdfRef.lastIndex(of: "/")!
-                    let newStart = pdfRef.index(after: start)
-                    let range = newStart..<pdfRef.endIndex
-                    let pdfNameString = String(pdfRef[range])
-                    
-                    schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
-                        if let error = error {
-                            print("\(error)")
-                            completion(.serverError(error))
-                            return
-                        }
-                        
-                        guard let data = data else {
-                            print("No schematic pdf returned")
-                            completion(.noData)
-                            return
-                        }
-                        self.updateSchematic(pdfData: data, name: pdfNameString, jobSheetRep: jobSheet)
-                        completion(nil)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func updateSchematic(pdfData: Data, name: String, jobSheetRep: JobSheetRepresentation) {
-        let context = CoreDataStack.shared.container.newBackgroundContext()
-        context.performAndWait {
-            do {
-                // Figure out which ones are new
-                let fetchRequest: NSFetchRequest<JobSheet> = JobSheet.fetchRequest()
-                fetchRequest.predicate = NSPredicate(format: "projectId == %@ AND id == %@", NSNumber(value: jobSheetRep.projectId), NSNumber(value: jobSheetRep.id))
-                
-                // We need to run the context.fetch on the main queue, because the context is the main context
-                let jobSheets = try context.fetch(fetchRequest)
-                
-                // There should only one job sheet with the given ID
-                if let jobSheet = jobSheets.first {
-                    jobSheet.schematicData = pdfData
-                    jobSheet.schematicName = name
-                    
-                    CoreDataStack.shared.save(context: context)
-                }
-            } catch {
-                NSLog("Error fetching tasks from persistent store: \(error)")
-            }
-        }
-    }
-    
+//    func downloadSchematics(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
+//
+//        guard let user = user, let _ = bearer else {
+//            completion(.noBearer)
+//            return
+//        }
+//
+////        guard let organizations = user.organizations,
+////            let organization = organizations.first else {
+////                completion(.error("No user organizations found"))
+////                return
+////
+//
+//
+//        let maxSize: Int64 = 1073741824 // 1GB
+//        let storage = Storage.storage()
+//        let storageRef = storage.reference()
+//        for project in projects {
+//
+//            guard var jobSheets = project.jobSheets else {
+//                completion(.error("No job sheets found"))
+//                return
+//            }
+//
+//            jobSheets.sort { $0.id < $1.id }
+//
+//            for jobSheet in jobSheets {
+//                var pdfRef: String?
+//                let schematicRef = storageRef.child("\(organization.id)")
+//                    .child("\(project.clientId)")
+//                    .child("\(project.id)")
+//                    .child("\(jobSheet.id)")
+//
+//                schematicRef.listAll { (listResult, error) in
+//                    if let error = error {
+//                        completion(.error("\(error)"))
+//                        return
+//                    }
+//
+//                    let listFullPaths = listResult.items.map { $0.fullPath }
+//                    for path in listFullPaths {
+//                        if path.contains(".PDF") || path.contains(".pdf") {
+//                            pdfRef = path
+//                            break
+//                        }
+//                    }
+//
+//                    guard let pdfRef = pdfRef else {
+//                        completion(.error("No PDF file found in \(schematicRef.fullPath)"))
+//                        return
+//                    }
+//
+//                    let start = pdfRef.lastIndex(of: "/")!
+//                    let newStart = pdfRef.index(after: start)
+//                    let range = newStart..<pdfRef.endIndex
+//                    let pdfNameString = String(pdfRef[range])
+//
+//                    schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
+//                        if let error = error {
+//                            print("\(error)")
+//                            completion(.serverError(error))
+//                            return
+//                        }
+//
+//                        guard let data = data else {
+//                            print("No schematic pdf returned")
+//                            completion(.noData)
+//                            return
+//                        }
+//                        self.updateSchematic(pdfData: data, name: pdfNameString, jobSheetRep: jobSheet)
+//                        completion(nil)
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
+////
+//
+//    private func updateSchematic(pdfData: Data, name: String, jobSheetRep: JobSheetRepresentation) {
+//        let context = CoreDataStack.shared.container.newBackgroundContext()
+//        context.performAndWait {
+//            do {
+//                // Figure out which ones are new
+//                let fetchRequest: NSFetchRequest<JobSheet> = JobSheet.fetchRequest()
+//                fetchRequest.predicate = NSPredicate(format: "projectId == %@ AND id == %@", NSNumber(value: jobSheetRep.projectId), NSNumber(value: jobSheetRep.id))
+//
+//                // We need to run the context.fetch on the main queue, because the context is the main context
+//                let jobSheets = try context.fetch(fetchRequest)
+//
+//                // There should only one job sheet with the given ID
+//                if let jobSheet = jobSheets.first {
+//                    jobSheet.schematicData = pdfData
+//                    jobSheet.schematicName = name
+//
+//                    CoreDataStack.shared.save(context: context)
+//                }
+//            } catch {
+//                NSLog("Error fetching tasks from persistent store: \(error)")
+//            }
+//        }
+//    }
+//
     // Upload jobs in core data (check the status of the jobs)
     
 }
