@@ -28,7 +28,7 @@ class ExpyTableViewController: UIViewController {
     
     
     @IBAction func editComponentButtonTapped(_ sender: Any) {
-        guard let _ = selectedComponent else {return}
+        guard let _ = selectedComponent else { print("No component on line 31, editComponentButtonTapped Exypy") ; return}
         
         performSegue(withIdentifier:"EditComponentSegue", sender:self)
     }
@@ -203,7 +203,7 @@ class ExpyTableViewController: UIViewController {
                 
                 detailVC.component = componentToEdit
                 
-//                selectedComponent = nil
+                selectedComponent = nil
                 
             }
         }
@@ -353,8 +353,12 @@ extension ExpyTableViewController: MainCellDelegate {
     
     func editComponentButtonTapped(component: Component) {
         selectedComponent = component
+        
+        guard let _ = selectedComponent else {return}
+        performSegue(withIdentifier: "EditComponentSegue", sender: self)
+              }
     }
-     }
+     
 
         
         

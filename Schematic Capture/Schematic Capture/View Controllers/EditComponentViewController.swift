@@ -9,16 +9,19 @@
 import UIKit
 
 class EditComponentViewController: UIViewController {
-    var component:Component? {
-        didSet {
-            updateViews()
-        }
-    }
+    var component:Component?
     
      var delegate: MainCellDelegate?
     
    
     @IBOutlet weak var currentComponentDescription: UILabel!
+    
+    
+    @IBAction func dismissButtonTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+        component = nil
+    }
     
 
     override func viewDidLoad() {
@@ -30,9 +33,7 @@ class EditComponentViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func updateViews() {
-        guard let component = component else { print("No Component is in EditComponentVC returning"); return}
-        print("My editing component is \(component)")
+
         
    
        
@@ -49,4 +50,4 @@ class EditComponentViewController: UIViewController {
     }
     */
 
-}
+
