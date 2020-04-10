@@ -483,40 +483,40 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Job Sheet 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ak-Ao-Noq">
-                                            <rect key="frame" x="20" y="0.0" width="304.5" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="253" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1I-qv-27J">
-                                            <rect key="frame" x="344.5" y="15" width="49.5" height="21"/>
+                                            <rect key="frame" x="20" y="0.0" width="89.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Components" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ0-bN-bgs">
-                                            <rect key="frame" x="20" y="25" width="304.5" height="21.5"/>
+                                            <rect key="frame" x="20" y="25" width="184" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEo-fl-oPm">
+                                            <rect key="frame" x="279" y="11" width="96" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="incomplete"/>
+                                            <state key="selected" title="complete"/>
+                                            <state key="highlighted" title="complete"/>
+                                            <connections>
+                                                <action selector="statusToggleTapped:" destination="w1u-TR-dpn" eventType="touchUpInside" id="2Yx-gt-uUr"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="O1I-qv-27J" firstAttribute="leading" secondItem="6ak-Ao-Noq" secondAttribute="trailing" constant="20" id="0sM-tV-9O8"/>
                                         <constraint firstItem="UZ0-bN-bgs" firstAttribute="top" secondItem="6ak-Ao-Noq" secondAttribute="bottom" constant="4" id="9Hz-Pm-PB0"/>
                                         <constraint firstItem="6ak-Ao-Noq" firstAttribute="top" secondItem="DD6-Bl-6Xh" secondAttribute="top" id="Ihc-UW-a07"/>
-                                        <constraint firstItem="O1I-qv-27J" firstAttribute="centerY" secondItem="DD6-Bl-6Xh" secondAttribute="centerY" id="Ljk-3W-xBA"/>
-                                        <constraint firstAttribute="trailing" secondItem="O1I-qv-27J" secondAttribute="trailing" constant="20" id="UVU-mb-8gA"/>
                                         <constraint firstItem="UZ0-bN-bgs" firstAttribute="leading" secondItem="DD6-Bl-6Xh" secondAttribute="leading" constant="20" id="ik6-xc-drr"/>
                                         <constraint firstItem="6ak-Ao-Noq" firstAttribute="leading" secondItem="DD6-Bl-6Xh" secondAttribute="leading" constant="20" id="lzp-6W-Qmv"/>
-                                        <constraint firstItem="O1I-qv-27J" firstAttribute="leading" secondItem="UZ0-bN-bgs" secondAttribute="trailing" constant="20" id="sSI-NR-fv7"/>
                                         <constraint firstAttribute="bottom" secondItem="UZ0-bN-bgs" secondAttribute="bottom" constant="4" id="xTH-5T-YdW"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="jobSheetNameLabel" destination="6ak-Ao-Noq" id="pMO-Nj-vSc"/>
                                     <outlet property="numOfComponentsLabel" destination="UZ0-bN-bgs" id="1Q8-a8-yXo"/>
-                                    <outlet property="statusLabel" destination="O1I-qv-27J" id="1WR-ou-pBB"/>
+                                    <outlet property="statusButton" destination="hEo-fl-oPm" id="MvL-kJ-RMX"/>
                                     <segue destination="4FV-G0-KSh" kind="show" identifier="ComponentSegue" id="oFt-Ld-sTz"/>
                                 </connections>
                             </tableViewCell>
@@ -530,7 +530,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MM2-pg-ALA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3967" y="-89"/>
+            <point key="canvasLocation" x="3966.666666666667" y="-89.0625"/>
         </scene>
         <!--Annotation View Controller-->
         <scene sceneID="DQM-0g-o6t">
