@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class JobSheetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var jobSheetNameLabel: UILabel!
@@ -30,7 +31,11 @@ class JobSheetTableViewCell: UITableViewCell {
         
         print("The jobsheet is \(jobSheet?.status)")
         
+        CoreDataStack.shared.save(context: context)
+        
     }
+    
+    var context = CoreDataStack.shared.mainContext
     
     var jobSheet: JobSheet? {
         didSet{
