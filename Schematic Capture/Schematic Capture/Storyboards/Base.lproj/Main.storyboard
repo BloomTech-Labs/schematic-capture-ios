@@ -595,7 +595,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editing:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCb-ps-WHJ">
-                                <rect key="frame" x="66.5" y="20.5" width="57.5" height="20.5"/>
+                                <rect key="frame" x="66.5" y="4" width="57.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -606,16 +606,48 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1q-d4-fBV">
-                                <rect key="frame" x="340" y="778" width="54" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Dismiss"/>
-                                <connections>
-                                    <action selector="dismissButtonTapped:" destination="tUL-aG-uM2" eventType="touchUpInside" id="DlD-T7-skm"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="zIy-9z-Hfi">
+                                <rect key="frame" x="226.5" y="48.5" width="168" height="382"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Maintenance Video" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yzn-r7-t34">
+                                        <rect key="frame" x="0.0" y="0.0" width="168" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Store Part Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wX8-Ep-6zn">
+                                        <rect key="frame" x="0.0" y="58" width="168" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Electrical Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GYb-g9-b0Z">
+                                        <rect key="frame" x="0.0" y="116" width="168" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Component Application" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aXl-6F-Yj9">
+                                        <rect key="frame" x="0.0" y="174" width="168" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Settings" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sIz-ei-sby">
+                                        <rect key="frame" x="0.0" y="232" width="168" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reference Tag" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PfK-S9-ND4">
+                                        <rect key="frame" x="0.0" y="290" width="168" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Resources" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsN-oS-cmQ">
+                                        <rect key="frame" x="0.0" y="348" width="168" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="aGU-vY-yuu">
-                                <rect key="frame" x="8" y="65" width="210" height="672"/>
+                                <rect key="frame" x="8" y="48.5" width="210" height="382"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edit Component Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j2r-M7-YBI">
                                         <rect key="frame" x="0.0" y="0.0" width="210" height="34"/>
@@ -647,69 +679,48 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Electrical Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GYb-g9-b0Z">
-                                        <rect key="frame" x="0.0" y="348" width="210" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Component Application" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aXl-6F-Yj9">
-                                        <rect key="frame" x="0.0" y="406" width="210" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reference Tag" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PfK-S9-ND4">
-                                        <rect key="frame" x="0.0" y="464" width="210" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Settings" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sIz-ei-sby">
-                                        <rect key="frame" x="0.0" y="522" width="210" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Resources" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsN-oS-cmQ">
-                                        <rect key="frame" x="0.0" y="580" width="210" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cutsheet" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U4Z-q5-uIq">
-                                        <rect key="frame" x="0.0" y="638" width="210" height="34"/>
+                                        <rect key="frame" x="0.0" y="348" width="210" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTS-xE-HCc">
-                                <rect key="frame" x="38" y="778" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="tUL-aG-uM2" eventType="touchUpInside" id="KGo-RX-aMX"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Maintenance Video" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yzn-r7-t34">
-                                <rect key="frame" x="242" y="65" width="152" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Store Part Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wX8-Ep-6zn">
-                                <rect key="frame" x="245.5" y="124" width="148.5" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="271" translatesAutoresizingMaskIntoConstraints="NO" id="Wi4-yy-Nnw">
+                                <rect key="frame" x="20" y="438" width="359" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTS-xE-HCc">
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveButtonTapped:" destination="tUL-aG-uM2" eventType="touchUpInside" id="KGo-RX-aMX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1q-d4-fBV">
+                                        <rect key="frame" x="305" y="0.0" width="54" height="30"/>
+                                        <state key="normal" title="Dismiss"/>
+                                        <connections>
+                                            <action selector="dismissButtonTapped:" destination="tUL-aG-uM2" eventType="touchUpInside" id="DlD-T7-skm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="1bc-ww-I3C" firstAttribute="trailing" secondItem="yzn-r7-t34" secondAttribute="trailing" constant="20" id="645-01-vaR"/>
                             <constraint firstItem="S0D-f4-baP" firstAttribute="leading" secondItem="ZCb-ps-WHJ" secondAttribute="trailing" constant="21" id="7Kz-Xb-l6z"/>
-                            <constraint firstItem="1bc-ww-I3C" firstAttribute="trailing" secondItem="wX8-Ep-6zn" secondAttribute="trailing" constant="20" id="AeU-jl-4qt"/>
-                            <constraint firstItem="dTS-xE-HCc" firstAttribute="top" secondItem="aGU-vY-yuu" secondAttribute="bottom" constant="41" id="BbJ-V3-aHP"/>
+                            <constraint firstItem="aGU-vY-yuu" firstAttribute="top" secondItem="ZCb-ps-WHJ" secondAttribute="bottom" constant="8" id="FnZ-bN-9WG"/>
+                            <constraint firstItem="zIy-9z-Hfi" firstAttribute="top" secondItem="aGU-vY-yuu" secondAttribute="top" id="HJj-Eh-1Mi"/>
+                            <constraint firstItem="zIy-9z-Hfi" firstAttribute="top" secondItem="S0D-f4-baP" secondAttribute="bottom" constant="8" symbolic="YES" id="Hi9-eu-FNO"/>
                             <constraint firstItem="aGU-vY-yuu" firstAttribute="leading" secondItem="1bc-ww-I3C" secondAttribute="leading" constant="8" id="IDv-CO-d9m"/>
-                            <constraint firstItem="yzn-r7-t34" firstAttribute="top" secondItem="1bc-ww-I3C" secondAttribute="top" constant="65" id="Vi0-2C-sh5"/>
+                            <constraint firstItem="aGU-vY-yuu" firstAttribute="leading" secondItem="1bc-ww-I3C" secondAttribute="leading" constant="20" id="NBA-af-3Np"/>
                             <constraint firstItem="1bc-ww-I3C" firstAttribute="trailing" secondItem="S0D-f4-baP" secondAttribute="trailing" constant="134" id="WbK-EI-eCQ"/>
                             <constraint firstItem="S0D-f4-baP" firstAttribute="top" secondItem="1bc-ww-I3C" secondAttribute="top" constant="20" id="Xdv-Ez-4Ge"/>
-                            <constraint firstItem="wX8-Ep-6zn" firstAttribute="top" secondItem="yzn-r7-t34" secondAttribute="bottom" constant="25" id="YDM-yU-icR"/>
-                            <constraint firstItem="aGU-vY-yuu" firstAttribute="top" secondItem="yzn-r7-t34" secondAttribute="top" id="a18-Fy-auh"/>
+                            <constraint firstItem="Wi4-yy-Nnw" firstAttribute="top" secondItem="zIy-9z-Hfi" secondAttribute="bottom" constant="7.5" id="dVy-4I-7c3"/>
+                            <constraint firstItem="1bc-ww-I3C" firstAttribute="trailing" secondItem="zIy-9z-Hfi" secondAttribute="trailing" constant="19.5" id="ddJ-dL-a6G"/>
+                            <constraint firstItem="Wi4-yy-Nnw" firstAttribute="leading" secondItem="m3D-pY-VWt" secondAttribute="leadingMargin" id="gP5-9Q-8VQ"/>
                             <constraint firstItem="aGU-vY-yuu" firstAttribute="top" secondItem="ZCb-ps-WHJ" secondAttribute="bottom" constant="24" id="j8g-J7-t3H"/>
+                            <constraint firstItem="zIy-9z-Hfi" firstAttribute="leading" secondItem="m3D-pY-VWt" secondAttribute="leading" constant="226.5" id="m6M-v2-XKy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1bc-ww-I3C"/>
                     </view>
