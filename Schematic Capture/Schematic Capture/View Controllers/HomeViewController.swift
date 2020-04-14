@@ -12,7 +12,7 @@ import SCLAlertView
 
 class HomeViewController: UIViewController, WKUIDelegate {
 
-    @IBOutlet weak var downloadProjectsButton: UIButton!
+   @IBOutlet weak var downloadProjectsButton: UIButton!
     @IBOutlet weak var viewProjectsButton: UIButton!
     @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
     
@@ -25,7 +25,7 @@ class HomeViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Style.styleFilledButton(downloadProjectsButton)
+       Style.styleFilledButton(downloadProjectsButton)
         Style.styleFilledButton(viewProjectsButton)
         Style.styleFilledButton(uploadJobSheetsButton)
         
@@ -48,18 +48,18 @@ class HomeViewController: UIViewController, WKUIDelegate {
                 return
             }
             
-//            self.projectController.downloadSchematics { (error) in
-//                self.stopLoadingScreen()
-//                if let error = error {
-//                    DispatchQueue.main.async {
-//                        SCLAlertView().showSuccess("Unable to download schematics", subTitle: "\(error)")
-//                    }
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    SCLAlertView().showSuccess("Download  Successful", subTitle: "")
-//                }
-//            }
+            self.projectController.downloadSchematics { (error) in
+                self.stopLoadingScreen()
+                if let error = error {
+                    DispatchQueue.main.async {
+                        SCLAlertView().showSuccess("Unable to download schematics", subTitle: "\(error)")
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    SCLAlertView().showSuccess("Download  Successful", subTitle: "")
+                }
+            }
         }
     }
     

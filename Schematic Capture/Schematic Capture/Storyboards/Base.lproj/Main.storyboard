@@ -399,7 +399,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="downloadProjectsButton" destination="RZU-AK-prF" id="raK-Mt-o7y"/>
+                        <outlet property="downloadProjectsButton" destination="RZU-AK-prF" id="sz2-12-VyB"/>
                         <outlet property="uploadJobSheetsButton" destination="z0n-og-4VX" id="mdp-4Z-h9F"/>
                         <outlet property="viewProjectsButton" destination="bzf-fP-atX" id="SZT-54-9iX"/>
                     </connections>
