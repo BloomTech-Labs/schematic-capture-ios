@@ -15,7 +15,11 @@ class EditComponentViewController: UIViewController {
      var delegate: MainCellDelegate?
     var context = CoreDataStack.shared.mainContext
     
-   
+    
+    @IBOutlet weak var saveButton: UIButton!
+    
+    @IBOutlet weak var dismissButton: UIButton!
+    
     @IBOutlet weak var currentComponentDescription: UILabel!
     
     
@@ -145,9 +149,12 @@ class EditComponentViewController: UIViewController {
         
     }
     
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpUI()
         if component != nil {
 //            currentComponentDescription.text? = component?.componentDescription ?? "Can not display description"
             
@@ -159,6 +166,10 @@ class EditComponentViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func setUpUI() {
+        Style.styleFilledButton(saveButton)
+        Style.styleFilledButton(dismissButton)
+    }
 
         
    

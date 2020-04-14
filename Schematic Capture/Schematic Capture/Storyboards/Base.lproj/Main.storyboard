@@ -737,7 +737,9 @@
                         <outlet property="StockCodeTextField" destination="nhI-ih-chd" id="y0F-uq-zgh"/>
                         <outlet property="StorePartNumberTextField" destination="wX8-Ep-6zn" id="Z2a-kr-Vum"/>
                         <outlet property="currentComponentDescription" destination="S0D-f4-baP" id="ktJ-Fa-EXD"/>
+                        <outlet property="dismissButton" destination="n1q-d4-fBV" id="6fL-d8-KJG"/>
                         <outlet property="editDescriptionTextField" destination="j2r-M7-YBI" id="Z4S-xJ-9BF"/>
+                        <outlet property="saveButton" destination="dTS-xE-HCc" id="8Jv-uL-GEC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Vg-tA-q0h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
