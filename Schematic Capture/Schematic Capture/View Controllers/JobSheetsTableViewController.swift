@@ -50,13 +50,14 @@ class JobSheetsTableViewController: UITableViewController {
                 
                 // Pass components array and schematic pdf data
                 guard let componentsSet = jobSheets?[indexPath.row].components,
-                    let components = componentsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [Component],
-                    let schematicData = jobSheets?[indexPath.row].schematicData else {
-                        print("No components found in \(String(describing: jobSheets?[indexPath.row]))")
+                    let components = componentsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [Component]
+//                    let schematicData = jobSheets?[indexPath.row].schematicData
+                    else {
+//                        print("No components found in \(String(describing: jobSheets?[indexPath.row]))")
                         return
                 }
                 expyTVC.components = components
-                expyTVC.schematicData = schematicData
+                //expyTVC.schematicData = schematicData // blocking out schematic data logic
             }
         }
     }
