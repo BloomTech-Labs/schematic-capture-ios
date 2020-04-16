@@ -56,6 +56,10 @@
 		A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */; };
 		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
 		FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */; };
+		FBAD0B7D243DA07700B653BE /* TechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7C243DA07700B653BE /* TechClient.swift */; };
+		FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7E243DA11B00B653BE /* Client.swift */; };
+		FBAD0B81243DA1AF00B653BE /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B80243DA1AF00B653BE /* Contact.swift */; };
+		FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B85243F860300B653BE /* EditComponentViewController.swift */; };
 		FBFA2E7A24192A7C00F20402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBFA2E7924192A7C00F20402 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +155,15 @@
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailImageViewController.swift; sourceTree = "<group>"; };
+		FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 2.xcdatamodel"; sourceTree = "<group>"; };
+		FBAD0B7B243D9B7800B653BE /* Schematic Capture 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 3.xcdatamodel"; sourceTree = "<group>"; };
+		FBAD0B7C243DA07700B653BE /* TechClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechClient.swift; sourceTree = "<group>"; };
+		FBAD0B7E243DA11B00B653BE /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		FBAD0B80243DA1AF00B653BE /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		FBAD0B82243E7A1000B653BE /* Schematic Capture 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 4.xcdatamodel"; sourceTree = "<group>"; };
+		FBAD0B83243E7C4700B653BE /* Schematic Capture 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 5.xcdatamodel"; sourceTree = "<group>"; };
+		FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 6.xcdatamodel"; sourceTree = "<group>"; };
+		FBAD0B85243F860300B653BE /* EditComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditComponentViewController.swift; sourceTree = "<group>"; };
 		FBFA2E7924192A7C00F20402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Schematic-Capture/schematic-capture-ios/Schematic Capture/Schematic Capture/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,6 +280,7 @@
 				A692203123FF3DC10060AD9E /* AnnotationViewController.swift */,
 				A692203324048B4E0060AD9E /* SchematicViewController.swift */,
 				FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */,
+				FBAD0B85243F860300B653BE /* EditComponentViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -295,6 +309,9 @@
 			children = (
 				A665838523DFA50A006073DF /* User.swift */,
 				A665838B23E0E27C006073DF /* Bearer.swift */,
+				FBAD0B7C243DA07700B653BE /* TechClient.swift */,
+				FBAD0B7E243DA11B00B653BE /* Client.swift */,
+				FBAD0B80243DA1AF00B653BE /* Contact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -624,6 +641,7 @@
 				A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */,
 				A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */,
 				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
+				FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
 				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
 				A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */,
@@ -643,13 +661,16 @@
 				A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */,
 				FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */,
 				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
+				FBAD0B81243DA1AF00B653BE /* Contact.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
 				A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */,
 				A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */,
+				FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */,
 				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
 				A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */,
 				A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */,
 				A665839423E0E607006073DF /* HomeViewController.swift in Sources */,
+				FBAD0B7D243DA07700B653BE /* TechClient.swift in Sources */,
 				A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
 				A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */,
@@ -870,7 +891,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GiPyoK";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP.Schematic-Capture";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -894,7 +915,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GiPyoK";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Schematic-Capture.GIPGIP.Schematic-Capture";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -995,9 +1016,14 @@
 		A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */,
+				FBAD0B83243E7C4700B653BE /* Schematic Capture 5.xcdatamodel */,
+				FBAD0B82243E7A1000B653BE /* Schematic Capture 4.xcdatamodel */,
+				FBAD0B7B243D9B7800B653BE /* Schematic Capture 3.xcdatamodel */,
+				FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */,
 				A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */,
 			);
-			currentVersion = A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */;
+			currentVersion = FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */;
 			path = "Schematic Capture.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

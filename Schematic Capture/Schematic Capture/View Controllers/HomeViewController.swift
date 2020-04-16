@@ -12,7 +12,7 @@ import SCLAlertView
 
 class HomeViewController: UIViewController, WKUIDelegate {
 
-    @IBOutlet weak var downloadProjectsButton: UIButton!
+   @IBOutlet weak var downloadProjectsButton: UIButton!
     @IBOutlet weak var viewProjectsButton: UIButton!
     @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
     
@@ -25,7 +25,7 @@ class HomeViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Style.styleFilledButton(downloadProjectsButton)
+       Style.styleFilledButton(downloadProjectsButton)
         Style.styleFilledButton(viewProjectsButton)
         Style.styleFilledButton(uploadJobSheetsButton)
         
@@ -39,6 +39,7 @@ class HomeViewController: UIViewController, WKUIDelegate {
     
     @IBAction func downloadSchematics(_ sender: Any) {
         startLoadingScreen()
+        print("in HOMEVC startLoadingScreen started")
         projectController.downloadAssignedJobs { (error) in
             if let error = error {
                 self.stopLoadingScreen()
@@ -47,8 +48,10 @@ class HomeViewController: UIViewController, WKUIDelegate {
                 }
                 return
             }
+            print("We are passed downloadAssignedJobs in HOMEVC")
             
             self.projectController.downloadSchematics { (error) in
+                print("We are inside self.projectController.downloadSchematics in HOMEVC")
                 self.stopLoadingScreen()
                 if let error = error {
                     DispatchQueue.main.async {
@@ -60,6 +63,12 @@ class HomeViewController: UIViewController, WKUIDelegate {
                     SCLAlertView().showSuccess("Download  Successful", subTitle: "")
                 }
             }
+            // adding these to stop download animation
+            self.stopLoadingScreen()
+            DispatchQueue.main.async {
+                               SCLAlertView().showSuccess("Download  Successful", subTitle: "")
+                           }
+            
         }
     }
     

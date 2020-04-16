@@ -35,8 +35,10 @@ extension JobSheet {
                                       schematicName: schematicName,
                                       updatedAt: updatedAt,
                                       status: status,
-                                      projectId: Int(projectId) )
-    }
+                                      projectId: Int(projectId),
+                                      userEmail: userEmail,
+                                      completed:Int(completed)
+   ) }
     
     @discardableResult convenience init(id: Int,
                                         name: String,
@@ -46,6 +48,9 @@ extension JobSheet {
                                         updatedAt: String,
                                         status: JobSheetStatus,
                                         projectId: Int,
+                                        userEmail:String,
+                                        completed:Int,
+        
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
@@ -56,6 +61,8 @@ extension JobSheet {
         self.updatedAt = updatedAt
         self.status = status.rawValue
         self.projectId = Int32(projectId)
+        self.userEmail = userEmail
+        self.completed = Int32(completed)
     }
     
     @discardableResult convenience init(jobSheetRepresentation: JobSheetRepresentation, context: NSManagedObjectContext) {
@@ -70,6 +77,8 @@ extension JobSheet {
                   updatedAt: jobSheetRepresentation.updatedAt,
                   status: JobSheetStatus(rawValue: jobSheetRepresentation.status) ?? JobSheetStatus.incomplete,
                   projectId: jobSheetRepresentation.projectId,
+                  userEmail:jobSheetRepresentation.userEmail ?? "",
+                  completed:jobSheetRepresentation.completed,
                   context: context)
         
     }

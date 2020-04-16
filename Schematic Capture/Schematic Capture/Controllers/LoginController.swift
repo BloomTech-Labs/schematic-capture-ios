@@ -16,10 +16,12 @@ class LogInController {
     var bearer: Bearer?
     var user: User?
     
-      // private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
+      private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
   //  private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
 //    private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+
     private let baseURL = URL(string: "http://localhost:5000/api")!
+
     
     
     // MARK: - Sign Up

@@ -14,6 +14,10 @@ protocol MainCellDelegate {
     
     func viewImageButtonDidTapped(component:Component, selectedImage:UIImage?)
     
+    func editComponentButtonTapped(component:Component)
+    
+    func saveComponentEditsTapped()
+    
     
     
 
@@ -52,6 +56,13 @@ class ComponentMainTableViewCell: UITableViewCell, ExpyTableViewHeaderCell{
             delegate?.viewImageButtonDidTapped(component:component, selectedImage: image)
       
     }
+    
+    
+    @IBAction func editComponentButtonTapped(_ sender: Any) {
+     guard  let component = component else {return}
+        delegate?.editComponentButtonTapped(component: component)
+    }
+    
     
     
 
