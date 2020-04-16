@@ -51,7 +51,7 @@ class ProjectController {
             }
             
             //TODO: debug statement
-            print("\n\n \(String(data: data, encoding: .utf8)!) \n\n")
+            print("\ninside download assigned jobs\n \(String(data: data, encoding: .utf8)!) \n\n")
             
             // decode projects
             let decoder = JSONDecoder()
@@ -70,6 +70,7 @@ class ProjectController {
             
             completion(nil)
         }.resume()
+        print("0. Last line of downloadAssigned Jobs Executed")
     }
     
     
@@ -144,7 +145,7 @@ class ProjectController {
                 NSLog("Error fetching tasks from persistent store: \(error)")
             }
         }
-
+        print("1.Last line of updateProjects executed")
     }
     
     // Download schematic from firebase storage
@@ -196,39 +197,41 @@ class ProjectController {
                         }
                     }
 
-                    guard let pdfRef = pdfRef else {
-                        completion(.error("No PDF file found in \(schematicRef.fullPath)"))
-                        return
-                    }
+//                    guard let pdfRef = pdfRef else {
+//                        completion(.error("No PDF file found in \(schematicRef.fullPath)"))
+//                        return
+//                    }
+                    
+                    // commenting out so that no pdf wont break function
 
-                    let start = pdfRef.lastIndex(of: "/")!
-                    let newStart = pdfRef.index(after: start)
-                    let range = newStart..<pdfRef.endIndex
-                    let pdfNameString = String(pdfRef[range])
+//                    let start = pdfRef.lastIndex(of: "/")!
+//                    let newStart = pdfRef.index(after: start)
+//                    let range = newStart..<pdfRef.endIndex
+//                    let pdfNameString = String(pdfRef[range])
+//
+//                    schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
+//                        if let error = error {
+//                            print("\(error)")
+//                            completion(.serverError(error))
+//                            return
+//                        }
 
-                    schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
-                        if let error = error {
-                            print("\(error)")
-                            completion(.serverError(error))
-                            return
-                        }
-
-                        guard let data = data else {
-                            print("No schematic pdf returned")
-                            completion(.noData)
-                            return
-                        }
-                        self.updateSchematic(pdfData: data, name: pdfNameString, jobSheetRep: jobSheet)
-                        completion(nil)
-                    }
-                }
+//                        guard let data = data else {
+//                            print("No schematic pdf returned")
+//                            completion(.noData)
+//                            return
+//                        }
+//                        self.updateSchematic(pdfData: data, name: pdfNameString, jobSheetRep: jobSheet)
+//                        completion(nil)
+//                    }
+//                }
             }
         }
-
+            print("2. Last line of DownloadSchematics executed")
     }
 //
 
-    private func updateSchematic(pdfData: Data, name: String, jobSheetRep: JobSheetRepresentation) {
+     func updateSchematic(pdfData: Data, name: String, jobSheetRep: JobSheetRepresentation) {
         let context = CoreDataStack.shared.container.newBackgroundContext()
         context.performAndWait {
             do {
@@ -241,7 +244,7 @@ class ProjectController {
 
                 // There should only one job sheet with the given ID
                 if let jobSheet = jobSheets.first {
-                    jobSheet.schematicData = pdfData
+                    //jobSheet.schematicData = pdfData
                     jobSheet.schematicName = name
 
                     CoreDataStack.shared.save(context: context)
@@ -251,7 +254,9 @@ class ProjectController {
             }
         }
     }
+        print("3.last line of update schematics executed")
 
    //  Upload jobs in core data (check the status of the jobs)
     
+}
 }
