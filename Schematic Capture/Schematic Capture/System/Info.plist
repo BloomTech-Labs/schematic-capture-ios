@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>dbapi-2</string>
+		<string>dbapi-8-emm</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -34,6 +39,7 @@
 			<string>com.Schematic-Capture.GIPGIP</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>db-t5i27y2t3fzkiqj</string>
 				<string>schematiccapture</string>
 				<string>com.googleusercontent.apps.138524710398-bfkdqmd9fv6mjc467si515jc8tu17f2d</string>
 			</array>
@@ -43,11 +49,6 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses camera to take picture of the machine components</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
