@@ -14,6 +14,7 @@ pod 'GoogleSignIn'
 pod 'SCLAlertView'
 pod 'ExpyTableView'
 pod 'SwiftyDropbox'
+pod 'OktaAuth'
 
 
   target 'Schematic CaptureTests' do
