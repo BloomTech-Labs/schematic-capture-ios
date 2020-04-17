@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import SCLAlertView
+import SwiftyDropbox
 
 class HomeViewController: UIViewController, WKUIDelegate {
 
@@ -35,6 +36,13 @@ class HomeViewController: UIViewController, WKUIDelegate {
         if let url = Bundle.main.url(forResource: "Pulse-1s-200px", withExtension: "svg") {
             webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
         }
+    }
+    
+    
+    @IBAction func uploadJobSheets(_ sender: Any) {
+        DropboxClientsManager.authorizeFromController(UIApplication.shared,
+                                                     controller: self,
+                                                     openURL: { (url:URL) -> Void in UIApplication.shared.openURL(url)})
     }
     
     @IBAction func downloadSchematics(_ sender: Any) {
