@@ -8,6 +8,7 @@
 
 // Add question:String attribute to User
 //:comment for excluding Third party API from Code Climate
+//Attempt to exclude pods.
 import Foundation
 
 struct Organization: Codable {
