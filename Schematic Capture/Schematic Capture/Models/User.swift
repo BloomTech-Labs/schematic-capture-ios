@@ -7,7 +7,7 @@
 //
 
 // Add question:String attribute to User
-
+//almost
 import Foundation
 
 struct Organization: Codable {
