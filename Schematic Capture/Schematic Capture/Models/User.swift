@@ -6,6 +6,7 @@
 //  Copyright © 2020 GIPGIP Studio. All rights reserved.
 //
 
+// Add question:String attribute to User
 import Foundation
 
 struct Organization: Codable {
