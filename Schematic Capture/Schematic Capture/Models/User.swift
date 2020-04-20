@@ -7,6 +7,7 @@
 //
 
 // Add question:String attribute to User
+//:comment for excluding Third party API from Code Climate
 import Foundation
 
 struct Organization: Codable {
