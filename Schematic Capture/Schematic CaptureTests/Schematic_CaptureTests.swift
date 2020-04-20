@@ -50,60 +50,60 @@ class Schematic_CaptureTests: XCTestCase {
         XCTAssertNotNil(loginController.bearer)
     }
     
-    func testDownloadSchematicsPDF() {
-        let listAll = expectation(description: "List All")
-        let getData = expectation(description: "Get Data")
-
-        let maxSize: Int64 = 1073741824 // 1GB
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        var pdfRef: String?
-        let schematicRef = storageRef.child("1")
-            .child("1")
-            .child("1")
-            .child("1")
-        schematicRef.listAll { (listResult, error) in
-            if let error = error {
-                XCTFail("\(error)")
-                return
-            }
-            let listFullPaths = listResult.items.map { $0.fullPath }
-            for path in listFullPaths {
-                if path.contains(".PDF") || path.contains(".pdf") {
-                    pdfRef = path
-                    break
-                }
-            }
-            guard let pdfRef = pdfRef else {
-                XCTFail("No PDF file found in \(schematicRef.fullPath)")
-                return
-            }
-            let start = pdfRef.lastIndex(of: "/")!
-            let newStart = pdfRef.index(after: start)
-            let range = newStart..<pdfRef.endIndex
-            let pdfNameString = String(pdfRef[range])
-            print(pdfNameString)
-            schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
-                if let error = error {
-                    XCTFail("\(error)")
-                    return
-                }
-
-                guard let data = data else {
-                    XCTFail("No schematic pdf returned")
-                    return
-                }
-                print("\(data)")
-                getData.fulfill()
-            }
-            listAll.fulfill()
-        }
-        waitForExpectations(timeout: 10) { (error) in
-            if let error = error {
-                XCTFail("\(error)")
-            }
-        }
-    }
+//    func testDownloadSchematicsPDF() {
+//        let listAll = expectation(description: "List All")
+//        let getData = expectation(description: "Get Data")
+//
+//        let maxSize: Int64 = 1073741824 // 1GB
+//        let storage = Storage.storage()
+//        let storageRef = storage.reference()
+//        var pdfRef: String?
+//        let schematicRef = storageRef.child("1")
+//            .child("1")
+//            .child("1")
+//            .child("1")
+//        schematicRef.listAll { (listResult, error) in
+//            if let error = error {
+//                XCTFail("\(error)")
+//                return
+//            }
+//            let listFullPaths = listResult.items.map { $0.fullPath }
+//            for path in listFullPaths {
+//                if path.contains(".PDF") || path.contains(".pdf") {
+//                    pdfRef = path
+//                    break
+//                }
+//            }
+//            guard let pdfRef = pdfRef else {
+//                XCTFail("No PDF file found in \(schematicRef.fullPath)")
+//                return
+//            }
+//            let start = pdfRef.lastIndex(of: "/")!
+//            let newStart = pdfRef.index(after: start)
+//            let range = newStart..<pdfRef.endIndex
+//            let pdfNameString = String(pdfRef[range])
+//            print(pdfNameString)
+//            schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
+//                if let error = error {
+//                    XCTFail("\(error)")
+//                    return
+//                }
+//
+//                guard let data = data else {
+//                    XCTFail("No schematic pdf returned")
+//                    return
+//                }
+//                print("\(data)")
+//                getData.fulfill()
+//            }
+//            listAll.fulfill()
+//        }
+//        waitForExpectations(timeout: 10) { (error) in
+//            if let error = error {
+//                XCTFail("\(error)")
+//            }
+//        }
+//    }
     
     func testDownloadAssignedJobSheets() {
         XCTAssertNotNil(projectController.bearer)
