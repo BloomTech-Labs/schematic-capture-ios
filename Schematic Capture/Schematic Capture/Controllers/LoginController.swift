@@ -9,6 +9,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
+
+
 class LogInController {
     
     let defaults = UserDefaults.standard
@@ -18,8 +20,7 @@ class LogInController {
     
      // private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
   //  private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
-//    private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
-
+    //private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
     private let baseURL = URL(string: "http://localhost:5000/api")!
 
     
@@ -193,15 +194,7 @@ class LogInController {
                 return
             }
             
-//            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-//                if response.statusCode == 400 {
-//                    completion(.needRegister)
-//                    return
-//                }
-//                completion(.unexpectedStatusCode(response.statusCode))
-//                return
-//            }
-            
+
             guard let data = data else {
                 NSLog("No data returned from data task")
                 completion(.noData)
@@ -355,14 +348,14 @@ class LogInController {
     private func updateUser(user: User) {
         guard let firstName = user.firstName,
             let lastName = user.lastName,
-            let organizations = user.organizations,
-            !organizations.isEmpty,
+            
+            
             let role = user.role else { return }
         
         do {
-            let organizationData = try JSONEncoder().encode(organizations)
+           
             let roleData = try JSONEncoder().encode(role)
-            defaults.set(organizationData, forKey: "organizationsJSONData")
+            
             defaults.set(roleData, forKey: "roleJSONData")
             defaults.set(firstName, forKey: "firstName")
             defaults.set(lastName, forKey: "lastName")

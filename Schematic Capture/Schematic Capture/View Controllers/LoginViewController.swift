@@ -30,7 +30,7 @@ class LoginViewController: UIViewController, WKUIDelegate {
         addKeyboardNotification()
         
         emailTextField.text = "bob_johnson@lambdaschool.com"
-        passwordTextField.text = "testing123!"
+        passwordTextField.text = "Testing123!"
         
     }
     
