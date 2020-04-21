@@ -29,11 +29,7 @@ class LogInController {
     func signUp(with user: User, completion: @escaping (NetworkingError?) -> Void) {
         
         if let email = user.email,
-            let password = user.password,
-            user.firstName != nil,
-            user.lastName != nil,
-            user.phone != nil,
-            user.inviteToken != nil {
+            let password = user.password {
             
             self.user = user
             googleSignUp(withEmail: email, Password: password) { (error, bearer) in
@@ -348,8 +344,6 @@ class LogInController {
     private func updateUser(user: User) {
         guard let firstName = user.firstName,
             let lastName = user.lastName,
-            
-            
             let role = user.role else { return }
         
         do {
