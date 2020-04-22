@@ -156,11 +156,6 @@ class ProjectController {
             return
         }
 
-//        guard let organizations = user.organizations,
-//            let organization = organizations.first else {
-//                completion(.error("No user organizations found"))
-//                return
-//
 
 
         let maxSize: Int64 = 1073741824 // 1GB
@@ -178,7 +173,7 @@ class ProjectController {
             for jobSheet in jobSheets {
                 var pdfRef: String?
                 let schematicRef = storageRef.child("\(project.clientId)")
-                    //storageRef.child("\(organization.id)")
+                   
                     
                     .child("\(project.id)")
                     .child("\(jobSheet.id)")
