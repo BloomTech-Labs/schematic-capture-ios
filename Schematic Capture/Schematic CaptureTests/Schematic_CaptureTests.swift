@@ -57,4 +57,22 @@ class Schematic_CaptureTests: XCTestCase {
     XCTAssert(user.username == "bob_johnson@lambdaschool.com")
    XCTAssertNotNil(bearer)
     }
+    
+    func testSignOut(){
+        let expectation = self.expectation(description: "Logged out succesfully")
+        loginController.signOut(completion: { (error)
+            in
+            if let error = error {
+                XCTFail("\(error)")
+                return
+            }
+            else {
+                expectation.fulfill()
+            }
+            
+            
+            } )
+        wait(for:[expectation], timeout:10)
+        
+    }
 }
