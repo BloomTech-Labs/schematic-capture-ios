@@ -60,72 +60,25 @@ class SignInViewController: UIViewController, WKUIDelegate {
             webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
         }
     }
-//
-//    // Called when the user is signed in with their Google account
-//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-//        startLoadingScreen()
-//
-//        if let error = error {
-//            print(error.localizedDescription)
-//            stopLoadingScreen()
-//            return
-//        } else {
-//            guard let authentication = user.authentication else {
-//                stopLoadingScreen()
-//                return
-//            }
-//            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-//
-//            loginController.googleLogin(withCredential: credential) { (error) in
-//                if let error = error {
-//                    // If "need register" is returned, create an user with Google's provided name
-//                    // and direct to google sign up view
-//                    if error == NetworkingError.needRegister {
-//                        let firstName = user.profile.givenName
-//                        let lastName = user.profile.familyName
-//                        self.loginController.user = User(firstName: firstName ?? "", lastName: lastName ?? "", phone: nil, inviteToken: nil)
-//                        self.stopLoadingScreen()
-//                        DispatchQueue.main.async {
-//                            self.performSegue(withIdentifier: "GoogleSegue", sender: nil)
-//                        }
-//                        return
-//                    } else {
-//                        print("\(error)")
-//                         self.stopLoadingScreen()
-//                        return
-//                    }
-//                }
-//
-//                // Login successful, direct to the main page
-//                self.stopLoadingScreen()
-//                DispatchQueue.main.async {
-//                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-//                    let alert = SCLAlertView(appearance: appearance)
-//                    alert.addButton("Proceed to main page") {
-//                        self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
-//                    }
-//                    alert.showSuccess("Login Success!", subTitle: "")
-//                }
-//            }
-//        }
-//    }
-//
-//    func startLoadingScreen() {
-//        guard let webView = webView else { return }
-//
-//        DispatchQueue.main.async {
-//            webView.translatesAutoresizingMaskIntoConstraints = false
-//            webView.backgroundColor = .clear
-//            webView.isOpaque = false
-//            self.view.addSubview(webView)
-//
-//            webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-//            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.2).isActive = true
-//            webView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-//            webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -15).isActive = true
-//        }
-//    }
-//
+
+
+
+    func startLoadingScreen() {
+        guard let webView = webView else { return }
+
+        DispatchQueue.main.async {
+            webView.translatesAutoresizingMaskIntoConstraints = false
+            webView.backgroundColor = .clear
+            webView.isOpaque = false
+            self.view.addSubview(webView)
+
+            webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.2).isActive = true
+            webView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -15).isActive = true
+        }
+    }
+
     func stopLoadingScreen() {
         guard let webView = webView else { return }
 
