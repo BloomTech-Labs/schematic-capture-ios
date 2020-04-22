@@ -29,7 +29,7 @@ class JobSheetTableViewCell: UITableViewCell {
             jobSheet?.status = "incomplete"
         }
         
-        print("The jobsheet is \(jobSheet?.status)")
+        
         
         CoreDataStack.shared.save(context: context)
         
@@ -45,7 +45,7 @@ class JobSheetTableViewCell: UITableViewCell {
     
     private func updateViews() {
         guard let jobSheet = jobSheet else { return }
-         print("The jobsheet status on updateViews is \(jobSheet.status)")
+         
         jobSheetNameLabel.text = jobSheet.name
         numOfComponentsLabel.text = jobSheet.components != nil ? "\(jobSheet.components!.count) Components" : "0 Components"
         if jobSheet.status == "complete" {

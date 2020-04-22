@@ -58,37 +58,37 @@ class GoogleSignUpViewController: UIViewController, WKUIDelegate {
         googleUser.phone = phone
         googleUser.inviteToken = inviteToken
         
-        loginController.signUp(with: googleUser) { (error) in
-            self.stopLoadingScreen()
-            
-            if let error = error {
-                NSLog("Error: \(error)")
-                
-                let errorMessage = "\(error)"
-                guard let firstIndex = errorMessage.lastIndex(of: ":"),
-                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
-                
-                let subString = errorMessage[firstIndex..<lastIndex]
-                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
-                let result = subString[startIndex..<subString.endIndex]
-                
-                DispatchQueue.main.async {
-                    self.errorMessageLabel.text = String(result)
-                    self.errorMessageLabel.alpha = 1
-                }
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.errorMessageLabel.alpha = 0
-                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-                let alert = SCLAlertView(appearance: appearance)
-                alert.addButton("Proceed to main page") {
-                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
-                }
-                alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
-            }
-        }
+//        loginController.signUp(with: googleUser) { (error) in
+//            self.stopLoadingScreen()
+//            
+//            if let error = error {
+//                NSLog("Error: \(error)")
+//                
+//                let errorMessage = "\(error)"
+//                guard let firstIndex = errorMessage.lastIndex(of: ":"),
+//                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
+//                
+//                let subString = errorMessage[firstIndex..<lastIndex]
+//                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
+//                let result = subString[startIndex..<subString.endIndex]
+//                
+//                DispatchQueue.main.async {
+//                    self.errorMessageLabel.text = String(result)
+//                    self.errorMessageLabel.alpha = 1
+//                }
+//                return
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.errorMessageLabel.alpha = 0
+//                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+//                let alert = SCLAlertView(appearance: appearance)
+//                alert.addButton("Proceed to main page") {
+//                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
+//                }
+//                alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
+//            }
+//        }
         
     }
     

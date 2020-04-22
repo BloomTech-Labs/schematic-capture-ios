@@ -35,13 +35,13 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         addKeyboardNotification()
         
         //TODO: Delete this
-        firstNameTextField.text = "John"
-        lastNameTextField.text = "Kim"
-        emailTextField.text = "johntest5@gmail.com"
+        firstNameTextField.text = "Bobs"
+        lastNameTextField.text = "Dog"
+        emailTextField.text = "bobJohnsons.dog@gmail.com"
         phoneTextField.text = "1234567890"
-        passwordTextField.text = "testing123!"
-        confirmPasswordTextField.text = "testing123!"
-//        tokenTextField.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoxLCJpbnZpdGVyIjoidGlEVGZlTkYxS2NFa1c5N2dQTElwRzg1aXViMiIsInRpbWUiOjE1ODE1Mjc5OTgyMDMsImlhdCI6MTU4MTUyNzk5OCwiZXhwIjoxNTgxNTMxNTk4fQ.GjrO4dpwKOYYWvfBP6gvT6xbRfG3lx4Vdf88gV6v180"
+        passwordTextField.text = "Testing123!"
+        confirmPasswordTextField.text = "Testing123!"
+        tokenTextField.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoxLCJpbnZpdGVyIjoidGlEVGZlTkYxS2NFa1c5N2dQTElwRzg1aXViMiIsInRpbWUiOjE1ODE1Mjc5OTgyMDMsImlhdCI6MTU4MTUyNzk5OCwiZXhwIjoxNTgxNTMxNTk4fQ.GjrO4dpwKOYYWvfBP6gvT6xbRfG3lx4Vdf88gV6v180"
         
     }
     
@@ -124,42 +124,42 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         let inviteToken = tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         //TODO: confirm password needed in user?
-        let user = User(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
+//        let user = User(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         
         
-        loginController.signUp(with: user) { (error) in
-            self.stopLoadingScreen()
-            if let error = error {
-                NSLog("Error: \(error)")
-                
-                let errorMessage = "\(error)"
-                // Need to get constant error message format
-                // Get rid of extra characters
-//                guard let firstIndex = errorMessage.lastIndex(of: ":"),
-//                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
-//
-//                let subString = errorMessage[firstIndex..<lastIndex]
-//                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
-//                let result = subString[startIndex..<subString.endIndex]
-                
-                DispatchQueue.main.async {
-                    self.errorMessageLabel.text = errorMessage
-                    self.errorMessageLabel.alpha = 1
-                }
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.errorMessageLabel.alpha = 0
-                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-                let alert = SCLAlertView(appearance: appearance)
-                alert.addButton("Proceed to main page") {
-                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
-                }
-                alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
-            }
-            
-        }
+//        loginController.signUp(with: user) { (error) in
+//            self.stopLoadingScreen()
+//            if let error = error {
+//                NSLog("Error: \(error)")
+//                
+//                let errorMessage = "\(error)"
+//                // Need to get constant error message format
+//                // Get rid of extra characters
+////                guard let firstIndex = errorMessage.lastIndex(of: ":"),
+////                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
+////
+////                let subString = errorMessage[firstIndex..<lastIndex]
+////                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
+////                let result = subString[startIndex..<subString.endIndex]
+//                
+//                DispatchQueue.main.async {
+//                    self.errorMessageLabel.text = errorMessage
+//                    self.errorMessageLabel.alpha = 1
+//                }
+//                return
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.errorMessageLabel.alpha = 0
+//                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+//                let alert = SCLAlertView(appearance: appearance)
+//                alert.addButton("Proceed to main page") {
+//                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
+//                }
+//                alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
+//            }
+//            
+//        }
     }
     
     
