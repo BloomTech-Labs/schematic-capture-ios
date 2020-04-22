@@ -20,6 +20,8 @@ class LoginViewController: UIViewController, WKUIDelegate {
     
     var loginController: LogInController?
     var webView: WKWebView!
+   var userPassword:String?
+   var userEmail:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,7 @@ class LoginViewController: UIViewController, WKUIDelegate {
         addKeyboardNotification()
         
         emailTextField.text = "bob_johnson@lambdaschool.com"
-        passwordTextField.text = "testing123!"
+        passwordTextField.text = "Testing123!"
         
     }
     
@@ -93,9 +95,10 @@ class LoginViewController: UIViewController, WKUIDelegate {
             return
         }
         
-        let user = User(email: emailTextField.text!, password: passwordTextField.text!)
+        let user = User(password: passwordTextField.text!, username: emailTextField.text!)
         
-        loginController.logIn(with: user) { (error) in
+        
+        loginController.logIn(username: user.username!, password: user.password!, completion:  { (error) in
             self.stopLoadingScreen()
             
             if let error = error {
@@ -112,7 +115,7 @@ class LoginViewController: UIViewController, WKUIDelegate {
                 alert.showSuccess("Login Success!", subTitle: "")
             }
             
-        }
+        } )
     }
     
     func validateTextFields() -> String? {

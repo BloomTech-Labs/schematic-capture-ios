@@ -29,7 +29,7 @@ class Schematic_CaptureTests: XCTestCase {
         
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let user = User(email: "bob_johnson@lambdaschool.com", password: "testing123!")
+        let user = User(email: "bob_johnson@lambdaschool.com", password: "Testing123!")
         let expectation = self.expectation(description: "loginController")
         
         loginController.logIn(with: user) { (error) in

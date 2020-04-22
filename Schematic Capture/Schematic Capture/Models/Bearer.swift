@@ -9,5 +9,9 @@
 import Foundation
 
 struct Bearer: Codable {
-    let idToken: String
+    let token: String
+}
+
+private enum CodingKeys:String, CodingKey {
+    case token
 }
