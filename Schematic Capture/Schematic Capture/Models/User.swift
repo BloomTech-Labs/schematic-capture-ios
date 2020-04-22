@@ -24,7 +24,6 @@ struct User: Codable {
     var lastName: String?
     var phone: String?
     var inviteToken: String?
-  
     var role: Role?
     var id: String?
     var username:String?
@@ -38,7 +37,6 @@ struct User: Codable {
         case lastName
         case phone
         case inviteToken
-      
         case role
         case id
         case username

@@ -26,6 +26,35 @@ struct AsyncOperation<Value> {
 class Schematic_CaptureTests: XCTestCase {
     var loginController = LogInController()
     var projectController = ProjectController()
+    
+    override func setUp() {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let user = User(password: "Testing123!", username: "bob_johnson@lambdaschool.com")
+        let bearer = Bearer?.self
+        let expectation = self.expectation(description: "loginController")
         
-
+        loginController.logIn(username: (user.username)!, password: user.password!, completion:  { (error) in
+            if let error = error {
+                XCTFail("\(error)")
+                return
+            }
+            else {
+                expectation.fulfill()
+            }
+            
+            
+           
+        
+ 
+        
+} )
+         wait(for:[expectation], timeout:10)
+}
+    
+   func testLogIn(){
+    let bearer = Bearer?.self
+    let user = User(password: "Testing123!", username: "bob_johnson@lambdaschool.com")
+    XCTAssert(user.username == "bob_johnson@lambdaschool.com")
+   XCTAssertNotNil(bearer)
+    }
 }
