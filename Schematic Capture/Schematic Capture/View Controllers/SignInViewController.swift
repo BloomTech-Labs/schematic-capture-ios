@@ -16,38 +16,23 @@ import WebKit
 class SignInViewController: UIViewController, WKUIDelegate {
     
     @IBOutlet weak var loginImage: UIImageView!
-    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
    let loginController = LogInController()
     var webView: WKWebView!
-//
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
 
         setUpUI()
 
-        // check network connection
-//        if Reachability.isConnectedToNetwork() {
-//            // if wifi/data is available, setup Google sign in
-//            GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-//            GIDSignIn.sharedInstance().delegate = self
-//            GIDSignIn.sharedInstance()?.presentingViewController = self
-//            GIDSignIn.sharedInstance().signIn()
-//        } else {
-//            // if wifi/data is NOT available, skip the login page and direct to the main page
-//            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-//            let alert = SCLAlertView(appearance: appearance)
-//            alert.addButton("OK") {
-//                self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
-//            }
-//            alert.showWarning("No Internet Connection!", subTitle: "Unable to download or upload")
+
         }
     
-//
+
     func setUpUI() {
-        Style.styleFilledButton(signUpButton)
+        
         Style.styleFilledButton(loginButton)
 
         self.navigationController?.view.backgroundColor = .clear

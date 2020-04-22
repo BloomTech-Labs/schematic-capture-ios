@@ -75,7 +75,7 @@ class LogInController {
             let decoder = JSONDecoder()
             do {
                 internalBearer = try decoder.decode(Bearer.self, from: data)
-                print("Sucess logging in your token is: \(String(describing: self.bearer?.token))")
+                
             } catch {
                 print("Error decoding a bearer token: \(error)")
                 completion(NetworkingError.error("Error Decoding self.bearer.token in LoginController URLSession.shared.dataTask"))
@@ -87,6 +87,7 @@ class LogInController {
             
             self.user = loggingInUser
             self.bearer = internalBearer
+            print(self.bearer)
             
         }.resume()
     }
