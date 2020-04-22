@@ -33,7 +33,7 @@ class ProjectController {
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.get.rawValue
-        request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
+        request.setValue("Bearer \(bearer.token)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
         
         URLSession.shared.dataTask(with: request) { (data, _, error) in

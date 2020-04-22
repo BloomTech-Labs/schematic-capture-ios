@@ -16,319 +16,90 @@ class LogInController {
     let defaults = UserDefaults.standard
     
     var bearer: Bearer?
+    
     var user: User?
     
      // private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
   //  private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
-    //private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
-    private let baseURL = URL(string: "http://localhost:5000/api")!
+   // private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+   private let baseURL = URL(string: "http://localhost:5000/api")!
 
     
     
-    // MARK: - Sign Up
-    func signUp(with user: User, completion: @escaping (NetworkingError?) -> Void) {
-        
-        if let email = user.email,
-            let password = user.password {
-            
-            self.user = user
-            googleSignUp(withEmail: email, Password: password) { (error, bearer) in
-                if let error = error {
-                    completion(error)
-                    return
-                }
-                
-                guard let bearer = bearer else {
-                    print("No bearer returned")
-                    completion(.noBearer)
-                    return
-                }
-                
-                self.bearer = bearer
-                self.registerHttpRequest(bearer: bearer) { (error) in
-                    if let error = error {
-                        completion(error)
-                        return
-                    }
-                    completion(nil)
-                }
-            }
-        } else if let bearer = self.bearer,
-            user.firstName != nil,
-            user.lastName != nil,
-            user.phone != nil,
-            user.inviteToken != nil {
-            self.user = user
-            registerHttpRequest(bearer: bearer) { (error) in
-                if let error = error {
-                    completion(error)
-                    return
-                }
-                completion(nil)
-            }
-        }
-    }
+//MARK: Sign-Up
     
-    //MARK: - Log In Email / Password
-    func logIn(with user: User, completion: @escaping (NetworkingError?) -> Void) {
-        // email and password have been already validated
-        googleLogin(withEmail: user.email!, password: user.password!) { (error, bearer) in
-            if let error = error {
-                completion(error)
-                return
-            }
-            
-            guard let bearer = bearer else {
-                print("No bearer returned")
-                completion(.noBearer)
-                return
-            }
-            
-            self.loginHttpRequest(bearer: bearer) { (error) in
-                if let error = error {
-                    completion(error)
-                    return
-                }
-                
-                completion(nil)
-            }
-        }
-    }
+ 
     
-    // MARK: - Register HTTP Request
-    private func registerHttpRequest(bearer: Bearer, completion: @escaping (NetworkingError?) -> Void) {
-        // Building the URL
-        let requestURL = self.baseURL.appendingPathComponent("auth").appendingPathComponent("register")
+//MARK:Log-In
+    func logIn(username:String, password:String, completion: @escaping (NetworkingError?) -> Void) {
+        //configure request url
+        let loggingInUser = User(password:password, username:username)
+        var internalBearer:Bearer?
+        // internal bearer for within the function
         
-        // Building the request
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
-        request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
+      
         
-        //TODO: debug statement
-        print("\n\n \(bearer.idToken) \n\n")
+        let loginURL = baseURL.appendingPathComponent("auth/login")
         
-        let encoder = JSONEncoder()
+        var request = URLRequest(url:loginURL)
+        print(request.description)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+     
         
+
+        
+        
+        let jsonEncoder = JSONEncoder()
         do {
-            request.httpBody = try encoder.encode(user)
-            //TODO: debug statement
-            print("\n\n \(String(data: request.httpBody!, encoding: .utf8)!) \n\n")
+            let jsonData = try jsonEncoder.encode(loggingInUser)
+            let jsonDataString = String(decoding:jsonData, as: UTF8.self)
+            print("jsonData is \(jsonDataString)")
+            request.httpBody = jsonData
         } catch {
-            print("Error encoding user object: \(error)")
-            completion(.badEncode)
+            print("Error encoding user in LogIn LoginController: \(error)")
+            completion(NetworkingError.badEncode)
             return
         }
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
+        URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
-                print("Error signing up user: \(error)")
-                completion(.serverError(error))
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
-                print("Error unexpected status Code: \(response.statusCode)")
-                // Display the error message from the backend
-                if let data = data {
-                    if let responseData = String(data: data, encoding: String.Encoding.utf8) {
-                        completion(.statusCodeMessage(responseData))
-                        return
-                    }
-                }
-                completion(.unexpectedStatusCode(response.statusCode))
-                return
-            }
-            
-            guard let data = data else {
-                print("No data returned from data task")
-                completion(.noData)
-                return
-            }
-            //TODO: debug statement
-            print("\n\n \(String(data: data, encoding: .utf8)!) \n\n")
-            
-            // Decode User
-            do {
-                let user = try JSONDecoder().decode(User.self, from: data)
-                self.user = user
+                completion(NetworkingError.error("Error response from URLSession.shared.dataTask in LoginController"))
                 
-                // update user info
-                self.updateUser(user: user)
-                print("\n\nUSER: \(user)\n\n")
-            } catch {
-                print("Error decoding the user: \(error)")
-                completion(.badDecode)
-                return
             }
-            
-            completion(nil)
-        }.resume()
-    }
-    
-    //MARK: - Login HTTP Request
-    private func loginHttpRequest(bearer: Bearer, completion: @escaping (NetworkingError?) -> Void) {
-        
-        self.bearer = bearer
-        
-        //TODO: Delete
-        print(bearer.idToken)
-        
-        let requestURL = baseURL.appendingPathComponent("auth").appendingPathComponent("login")
-        
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("Bearer \(bearer.idToken)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            if let error = error {
-                NSLog("Error signing in user: \(error)")
-                completion(.serverError(error))
-                return
-            }
-            
-
             guard let data = data else {
-                NSLog("No data returned from data task")
-                completion(.noData)
+                completion(NetworkingError.error("Bad data back from URLSession.shared.dataTask in LoginController"))
                 return
             }
             
-            // Decode User
+            let decoder = JSONDecoder()
             do {
-                let user = try JSONDecoder().decode(User.self, from: data)
-                self.user = user
-                
-                // Update user info
-                self.updateUser(user: user)
-                print("\n\nUSER: \(user)\n\n")
+                internalBearer = try decoder.decode(Bearer.self, from: data)
+                print("Sucess logging in your token is: \(String(describing: self.bearer?.token))")
             } catch {
-                print("Error decoding the user: \(error)")
-                completion(.badDecode)
+                print("Error decoding a bearer token: \(error)")
+                completion(NetworkingError.error("Error Decoding self.bearer.token in LoginController URLSession.shared.dataTask"))
+                let dataString = String(decoding:data, as: UTF8.self)
+                print(dataString)
                 return
             }
             completion(nil)
             
         }.resume()
     }
-    
-    
-    
-    //MARK: - Google Sign Up with email and password
-    private func googleSignUp(withEmail email: String, Password: String, completion: @escaping (NetworkingError?, Bearer?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: Password) { (authResult, error) in
-            if let error = error {
-                print(error)
-                return completion(.serverError(error), nil)
-            }
             
-            guard let authResult = authResult else {
-                print("googleSignUp(): No auth result returned")
-                return completion(.error("No auth result returned"), nil)
-            }
-            
-            
-            
-            authResult.user.getIDToken { (idToken, error) in
-                if let error = error {
-                    print(error)
-                    return completion(.serverError(error), nil)
-                }
-                
-                guard let idToken = idToken else {
-                    print("googleSignUp()::getIdToken(): No ID Token returned")
-                    return completion(.error("No ID Token returned"), nil)
-                }
-                
-                
-                
-                return completion(nil, Bearer(idToken: idToken))
-            }
-        }
-    }
-    
-    //MARK: - Google Sign In with email and password
-    private func googleLogin(withEmail email: String, password: String, completion: @escaping (NetworkingError?, Bearer?) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
-            if let error = error {
-                print(error)
-                return completion(.serverError(error), nil)
-            }
-            
-            guard let authResult = authResult else {
-                print("googleLogin(): No auth result returned")
-                return completion(.error("No auth result returned"), nil)
-            }
-            
-            authResult.user.getIDToken { (idToken, error) in
-                if let error = error {
-                    print(error)
-                    return completion(.serverError(error), nil)
-                }
-                
-                guard let idToken = idToken else {
-                    print("googleLogin()::getIdToken(): No ID Token returned")
-                    return completion(.error("No ID Token returned"), nil)
-                }
-                
-                print("\(idToken)")
-                return completion(nil, Bearer(idToken: idToken))
-            }
-        }
-    }
-    
-    
-    //MARK: - Google Login with credential
-    func googleLogin(withCredential credential: AuthCredential, completion: @escaping (NetworkingError?) -> Void) {
         
-        // Sign in to firebase using user's Google account
-        Auth.auth().signIn(with: credential) { (authResult, error) in
-            if let error = error {
-                print(error)
-                completion(.serverError(error))
-                return
-            }
-            
-            guard authResult != nil else {
-                print("No auth result.")
-                completion(.error("No auth result returned."))
-                return
-            }
-            
-            guard let currentUser = Auth.auth().currentUser else {
-                print("Current user not available.")
-                completion(.error("Current user not available."))
-                return
-            }
-            
-            currentUser.getIDToken(completion: { (idToken, error) in
-                if let error = error {
-                    print(error)
-                    completion(.serverError(error))
-                    return
-                }
-                
-                guard let idToken = idToken else {
-                    print("No ID Token returned.")
-                    completion(.noBearer)
-                    return
-                }
-                
-                self.loginHttpRequest(bearer: Bearer(idToken: idToken)) { (error) in
-                    if let error = error {
-                        completion(error)
-                        return
-                    }
-                    
-                    completion(nil)
-                }
-            })
-        }
-    }
+        
+  
+        
+        // send user to back end for response && Grab Bearer
+        
+        // Proceed to HomeViewController
     
+   
+    
+    
+    
+    //MARK:Sign-Out to refactor
     func signOut(completion: @escaping (Error?) -> Void) {
         do {
             try Auth.auth().signOut()
@@ -358,4 +129,5 @@ class LogInController {
             return
         }
     }
+
 }

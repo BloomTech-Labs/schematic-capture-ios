@@ -124,42 +124,42 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         let inviteToken = tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         //TODO: confirm password needed in user?
-        let user = User(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
+//        let user = User(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone, inviteToken: inviteToken)
         
         
-        loginController.signUp(with: user) { (error) in
-            self.stopLoadingScreen()
-            if let error = error {
-                NSLog("Error: \(error)")
-                
-                let errorMessage = "\(error)"
-                // Need to get constant error message format
-                // Get rid of extra characters
-//                guard let firstIndex = errorMessage.lastIndex(of: ":"),
-//                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
-//
-//                let subString = errorMessage[firstIndex..<lastIndex]
-//                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
-//                let result = subString[startIndex..<subString.endIndex]
-                
-                DispatchQueue.main.async {
-                    self.errorMessageLabel.text = errorMessage
-                    self.errorMessageLabel.alpha = 1
-                }
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.errorMessageLabel.alpha = 0
-                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-                let alert = SCLAlertView(appearance: appearance)
-                alert.addButton("Proceed to main page") {
-                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
-                }
-                alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
-            }
-            
-        }
+//        loginController.signUp(with: user) { (error) in
+//            self.stopLoadingScreen()
+//            if let error = error {
+//                NSLog("Error: \(error)")
+//                
+//                let errorMessage = "\(error)"
+//                // Need to get constant error message format
+//                // Get rid of extra characters
+////                guard let firstIndex = errorMessage.lastIndex(of: ":"),
+////                    let lastIndex = errorMessage.lastIndex(of: "\\") else { return }
+////
+////                let subString = errorMessage[firstIndex..<lastIndex]
+////                let startIndex = subString.index(subString.startIndex, offsetBy: 3)
+////                let result = subString[startIndex..<subString.endIndex]
+//                
+//                DispatchQueue.main.async {
+//                    self.errorMessageLabel.text = errorMessage
+//                    self.errorMessageLabel.alpha = 1
+//                }
+//                return
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.errorMessageLabel.alpha = 0
+//                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+//                let alert = SCLAlertView(appearance: appearance)
+//                alert.addButton("Proceed to main page") {
+//                    self.performSegue(withIdentifier: "HomeVCSegue", sender: nil)
+//                }
+//                alert.showSuccess("Congratulations", subTitle: "You have successfully signed up")
+//            }
+//            
+//        }
     }
     
     
