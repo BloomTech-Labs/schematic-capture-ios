@@ -35,13 +35,13 @@ class SignUpViewController: UIViewController, WKUIDelegate {
         addKeyboardNotification()
         
         //TODO: Delete this
-        firstNameTextField.text = "John"
-        lastNameTextField.text = "Kim"
-        emailTextField.text = "johntest5@gmail.com"
+        firstNameTextField.text = "Bobs"
+        lastNameTextField.text = "Dog"
+        emailTextField.text = "bobJohnsons.dog@gmail.com"
         phoneTextField.text = "1234567890"
         passwordTextField.text = "Testing123!"
         confirmPasswordTextField.text = "Testing123!"
-//        tokenTextField.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoxLCJpbnZpdGVyIjoidGlEVGZlTkYxS2NFa1c5N2dQTElwRzg1aXViMiIsInRpbWUiOjE1ODE1Mjc5OTgyMDMsImlhdCI6MTU4MTUyNzk5OCwiZXhwIjoxNTgxNTMxNTk4fQ.GjrO4dpwKOYYWvfBP6gvT6xbRfG3lx4Vdf88gV6v180"
+        tokenTextField.text = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwicm9sZUlkIjoxLCJpbnZpdGVyIjoidGlEVGZlTkYxS2NFa1c5N2dQTElwRzg1aXViMiIsInRpbWUiOjE1ODE1Mjc5OTgyMDMsImlhdCI6MTU4MTUyNzk5OCwiZXhwIjoxNTgxNTMxNTk4fQ.GjrO4dpwKOYYWvfBP6gvT6xbRfG3lx4Vdf88gV6v180"
         
     }
     

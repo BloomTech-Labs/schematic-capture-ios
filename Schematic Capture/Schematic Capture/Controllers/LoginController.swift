@@ -28,6 +28,7 @@ class LogInController {
     
 //MARK: Sign-Up
     
+    
  
     
 //MARK:Log-In
@@ -62,7 +63,7 @@ class LogInController {
             return
         }
         URLSession.shared.dataTask(with:request) { (data, _, error) in
-            if let error = error {
+            if let _ = error {
                 completion(NetworkingError.error("Error response from URLSession.shared.dataTask in LoginController"))
                 
             }
@@ -83,6 +84,9 @@ class LogInController {
                 return
             }
             completion(nil)
+            
+            self.user = loggingInUser
+            self.bearer = internalBearer
             
         }.resume()
     }

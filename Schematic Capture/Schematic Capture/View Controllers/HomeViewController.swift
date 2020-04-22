@@ -40,10 +40,12 @@ class HomeViewController: UIViewController, WKUIDelegate {
     
     
     @IBAction func uploadJobSheets(_ sender: Any) {
-        DropboxClientsManager.authorizeFromController(UIApplication.shared,
-                                                     controller: self,
-                                                     openURL: { (url:URL) -> Void in UIApplication.shared.openURL(url)})
-    }
+     DropboxClientsManager.authorizeFromController(UIApplication.shared,
+                                                             controller: self,
+                                                             openURL: { (url:URL) -> Void in UIApplication.shared.openURL(url)})
+            }
+                                                         
+        
     
     @IBAction func downloadSchematics(_ sender: Any) {
         startLoadingScreen()
