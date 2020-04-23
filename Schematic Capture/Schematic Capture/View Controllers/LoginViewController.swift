@@ -20,8 +20,7 @@ class LoginViewController: UIViewController, WKUIDelegate {
     
     var loginController: LogInController?
     var webView: WKWebView!
-   var userPassword:String?
-   var userEmail:String?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
