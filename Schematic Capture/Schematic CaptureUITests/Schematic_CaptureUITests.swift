@@ -36,11 +36,7 @@ class Schematic_CaptureUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        let signUpButton = app.buttons["Sign Up"]
-        signUpButton.tap()
-        signUpButton.tap()
-        sleep(5)
-        app.navigationBars["Sign Up"].buttons["Schematic Capture"].tap()
+     
         
         let loginButton = app.buttons["Login"]
         loginButton.tap()
