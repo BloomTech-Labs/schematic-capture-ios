@@ -91,7 +91,9 @@ class Schematic_CaptureTests: XCTestCase {
      
             
         if  projectController.bearer != nil {
+               
                expectation.fulfill()
+               wait(for:[expectation], timeout:10)
                 return
             }
             else {
