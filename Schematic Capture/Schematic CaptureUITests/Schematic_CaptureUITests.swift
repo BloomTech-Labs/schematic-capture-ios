@@ -36,13 +36,20 @@ class Schematic_CaptureUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-     
         
+                
         let loginButton = app.buttons["Login"]
         loginButton.tap()
         loginButton.tap()
-        sleep(5)
         app/*@START_MENU_TOKEN@*/.buttons["Proceed to main page"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Proceed to main page\"]",".buttons[\"Proceed to main page\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["Download Projects"].tap()
+        app.buttons["Done"].tap()
+      
+     
+        app.buttons["View Projects"].tap()
+     
+        
+      
     }
     
     func testDownload() {
@@ -72,17 +79,33 @@ class Schematic_CaptureUITests: XCTestCase {
         app.buttons["View Projects"].tap()
 
         let tablesQuery = app.tables
+        
         tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Test Project 1"]/*[[".cells[\"CellID\"].staticTexts[\"Test Project 1\"]",".staticTexts[\"Test Project 1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        tablesQuery.buttons["JobSheetsTableViewController.button.toggleComplete"].tap()
+        
         tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["HPU_Manifolds Jobsheet 1.csv"]/*[[".cells.staticTexts[\"HPU_Manifolds Jobsheet 1.csv\"]",".staticTexts[\"HPU_Manifolds Jobsheet 1.csv\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        
         
         let descriptionElectricMotorCellsQuery = tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"Description: Electric Motor")/*[[".cells.containing(.staticText, identifier:\"1\")",".cells.containing(.staticText, identifier:\"Part #: 284TC\")",".cells.containing(.staticText, identifier:\"Manufacturer: Baldor\")",".cells.containing(.staticText, identifier:\"Description: Electric Motor\")"],[[[-1,3],[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         let componentStaticText = descriptionElectricMotorCellsQuery.staticTexts["Component #:"]
         componentStaticText.tap()
         componentStaticText.tap()
         
+        descriptionElectricMotorCellsQuery.buttons["ExpyTableViewController.EditComponentButton"].tap()
+        
+        app.buttons["EditComponentController.DismissButton"].tap()
+        
+      
+      
+        
+        
+        
         let componentStaticText2 = tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"Description: Pump, Axial Piston")/*[[".cells.containing(.staticText, identifier:\"2\")",".cells.containing(.staticText, identifier:\"Part #: PVM074ER09GS02AA-28\")",".cells.containing(.staticText, identifier:\"Manufacturer: Vickers\")",".cells.containing(.staticText, identifier:\"Description: Pump, Axial Piston\")"],[[[-1,3],[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.staticTexts["Component #:"]
         componentStaticText2.tap()
         componentStaticText2.tap()
+        
+        
         
         let cameraButton = descriptionElectricMotorCellsQuery.buttons["camera"]
         cameraButton.tap()

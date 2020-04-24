@@ -74,11 +74,8 @@ class SignInViewController: UIViewController, WKUIDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SignUpSegue" {
-            if let signUpVC = segue.destination as? SignUpViewController {
-                signUpVC.loginController = loginController
-            }
-        } else if segue.identifier == "LoginSegue" {
+     
+         if segue.identifier == "LoginSegue" {
             if let loginVC = segue.destination as? LoginViewController {
                 loginVC.loginController = loginController
             }

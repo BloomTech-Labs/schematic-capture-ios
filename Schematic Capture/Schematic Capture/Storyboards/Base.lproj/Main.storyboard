@@ -262,10 +262,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="JobSheetCell" id="w1u-TR-dpn" customClass="JobSheetTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="50.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w1u-TR-dpn" id="DD6-Bl-6Xh">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Job Sheet 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ak-Ao-Noq">
@@ -275,7 +275,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Components" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ0-bN-bgs">
-                                            <rect key="frame" x="20" y="25" width="184" height="21"/>
+                                            <rect key="frame" x="20" y="25" width="184" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -283,6 +283,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEo-fl-oPm">
                                             <rect key="frame" x="279" y="11" width="96" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="JobSheetsTableViewController.button.toggleComplete"/>
                                             <state key="normal" title="incomplete"/>
                                             <state key="selected" title="complete"/>
                                             <state key="highlighted" title="complete"/>
@@ -484,6 +485,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1q-d4-fBV">
                                         <rect key="frame" x="305" y="0.0" width="54" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="EditComponentController.DismissButton"/>
                                         <state key="normal" title="Dismiss"/>
                                         <connections>
                                             <action selector="dismissButtonTapped:" destination="tUL-aG-uM2" eventType="touchUpInside" id="DlD-T7-skm"/>
@@ -584,6 +586,7 @@
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" horizontalCompressionResistancePriority="754" verticalCompressionResistancePriority="754" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGf-55-On7">
                                                             <rect key="frame" x="290" y="10" width="24" height="24"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="ExpyTableViewController.EditComponentButton"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="OhO-YE-LH2"/>
                                                                 <constraint firstAttribute="width" constant="24" id="YNx-iO-kIq"/>
@@ -942,6 +945,6 @@ EE1haW50ZW5hbmNlIFZpZGVvOg
         <image name="pencil" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DeJ-ZT-Nm7"/>
+        <segue reference="uqv-ZP-B83"/>
     </inferredMetricsTieBreakers>
 </document>
