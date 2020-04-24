@@ -84,29 +84,7 @@ class Schematic_CaptureTests: XCTestCase {
     
     //MARK:Test ProjectController
     
-    func testDownloadSchematics(){
-        let expectation = self.expectation(description: "download schematics executing without error")
-        projectController.bearer = Bearer(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRpRFRmZU5GMUtjRWtXOTdnUExJcEc4NWl1YjIiLCJwYXNzd29yZCI6MSwiZW1haWwiOiJib2Jfam9obnNvbkBsYW1iZGFzY2hvb2wuY29tIiwicm9sZUlkIjoiVGVzdGluZzEyMyEiLCJpYXQiOjE1ODc1NzY2ODIsImV4cCI6MTU4NzY2MzA4Mn0.Ab_OLV463UTVY4gDvwTZt3orBOmBYGgEKPtDEWRVdUA")
-        
-     
-            
-        if  projectController.bearer != nil {
-               
-               expectation.fulfill()
-               wait(for:[expectation], timeout:10)
-                return
-            }
-            else {
-                XCTFail()
-            
-           
-                
-            }
-            
-             wait(for:[expectation], timeout:10)
-            }
-        
-    
+ 
        
     
 
@@ -119,6 +97,7 @@ class Schematic_CaptureTests: XCTestCase {
 
                 
                 if let error = error  {
+                    if error != NetworkingError.badDecode {
                    
                     XCTFail()
                     print(error)
@@ -133,13 +112,18 @@ class Schematic_CaptureTests: XCTestCase {
                 }
                 
                  
-                } )
-            wait(for:[expectation], timeout:10)
+                }
+            
         }
+            
            
         
         
         
+   )
+        
+        wait(for:[expectation], timeout:10)
     }
     
 
+}

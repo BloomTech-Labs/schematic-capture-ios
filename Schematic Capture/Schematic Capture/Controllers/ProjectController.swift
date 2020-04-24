@@ -192,11 +192,39 @@ class ProjectController {
                         }
                     }
 
+//                    guard let pdfRef = pdfRef else {
+//                        completion(.error("No PDF file found in \(schematicRef.fullPath)"))
+//                        return
+//                    }
+                    
+                    // commenting out so that no pdf wont break function
+
+//                    let start = pdfRef.lastIndex(of: "/")!
+//                    let newStart = pdfRef.index(after: start)
+//                    let range = newStart..<pdfRef.endIndex
+//                    let pdfNameString = String(pdfRef[range])
+//
+//                    schematicRef.child(pdfNameString).getData(maxSize: maxSize) { (data, error) in
+//                        if let error = error {
+//                            print("\(error)")
+//                            completion(.serverError(error))
+//                            return
+//                        }
+
+//                        guard let data = data else {
+//                            print("No schematic pdf returned")
+//                            completion(.noData)
+//                            return
+//                        }
+//                        self.updateSchematic(pdfData: data, name: pdfNameString, jobSheetRep: jobSheet)
+//                        completion(nil)
+//                    }
+//                }
             }
         }
             print("2. Last line of DownloadSchematics executed")
     }
-
+//
 
      func updateSchematic(pdfData: Data, name: String, jobSheetRep: JobSheetRepresentation) {
         let context = CoreDataStack.shared.container.newBackgroundContext()

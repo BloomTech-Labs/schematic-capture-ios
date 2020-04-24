@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		203A5C168218CC2EF860A488 /* Pods_Schematic_CaptureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */; };
-		A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6613BF623E4CAFC004A11B2 /* GoogleSignUpViewController.swift */; };
 		A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835A23DAB508006073DF /* Main.storyboard */; };
 		A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835F23DAB50A006073DF /* LaunchScreen.storyboard */; };
 		A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665837623DB6695006073DF /* GoogleService-Info.plist */; };
@@ -23,7 +22,6 @@
 		A665838923E0E1B2006073DF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838823E0E1B2006073DF /* LoginController.swift */; };
 		A665838C23E0E27C006073DF /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838B23E0E27C006073DF /* Bearer.swift */; };
 		A665838E23E0E384006073DF /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838D23E0E384006073DF /* Networking.swift */; };
-		A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838F23E0E5F1006073DF /* SignUpViewController.swift */; };
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
 		A665839423E0E607006073DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839323E0E607006073DF /* HomeViewController.swift */; };
 		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
@@ -97,7 +95,6 @@
 		74CE154D4AA08AC493FBA5F6 /* Pods-Schematic Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.debug.xcconfig"; sourceTree = "<group>"; };
 		7CF1D52C5578D599C2B001F6 /* Pods-Schematic Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.release.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.release.xcconfig"; sourceTree = "<group>"; };
 		9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_CaptureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6613BF623E4CAFC004A11B2 /* GoogleSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignUpViewController.swift; sourceTree = "<group>"; };
 		A6613C0223E9340E004A11B2 /* Schematic CaptureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureUITests.swift; sourceTree = "<group>"; };
 		A6613C0623E9340E004A11B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,7 +115,6 @@
 		A665838823E0E1B2006073DF /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A665838B23E0E27C006073DF /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		A665838D23E0E384006073DF /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		A665838F23E0E5F1006073DF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A665839323E0E607006073DF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -267,9 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				A665837823DB6E2D006073DF /* SignInViewController.swift */,
-				A665838F23E0E5F1006073DF /* SignUpViewController.swift */,
 				A665839123E0E5FF006073DF /* LoginViewController.swift */,
-				A6613BF623E4CAFC004A11B2 /* GoogleSignUpViewController.swift */,
 				A665839323E0E607006073DF /* HomeViewController.swift */,
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
@@ -636,7 +630,6 @@
 				A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */,
 				A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */,
 				A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */,
-				A6613BF723E4CAFC004A11B2 /* GoogleSignUpViewController.swift in Sources */,
 				FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
 				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
@@ -653,7 +646,6 @@
 				A692203424048B4E0060AD9E /* SchematicViewController.swift in Sources */,
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
 				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
-				A665839023E0E5F1006073DF /* SignUpViewController.swift in Sources */,
 				A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */,
 				FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */,
 				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
