@@ -38,8 +38,9 @@ class Schematic_CaptureUITests: XCTestCase {
         
         
                 
+        let firstButton = app.buttons["Authorized Technician Portal"]
+        firstButton.tap()
         let loginButton = app.buttons["Login"]
-        loginButton.tap()
         loginButton.tap()
         app/*@START_MENU_TOKEN@*/.buttons["Proceed to main page"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Proceed to main page\"]",".buttons[\"Proceed to main page\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.buttons["Download Projects"].tap()
@@ -56,9 +57,11 @@ class Schematic_CaptureUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        let loginButton = app.buttons["Login"]
-        loginButton.tap()
-        loginButton.tap()
+      let firstButton = app.buttons["Authorized Technician Portal"]
+      firstButton.tap()
+      let loginButton = app.buttons["Login"]
+      loginButton.tap()
+      
         sleep(5)
         app/*@START_MENU_TOKEN@*/.buttons["Proceed to main page"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Proceed to main page\"]",".buttons[\"Proceed to main page\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
@@ -70,9 +73,10 @@ class Schematic_CaptureUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        let loginButton = app.buttons["Login"]
-        loginButton.tap()
-        loginButton.tap()
+      let firstButton = app.buttons["Authorized Technician Portal"]
+      firstButton.tap()
+      let loginButton = app.buttons["Login"]
+      loginButton.tap()
         sleep(5)
         app/*@START_MENU_TOKEN@*/.buttons["Proceed to main page"]/*[[".otherElements[\"SCLAlertView\"].buttons[\"Proceed to main page\"]",".buttons[\"Proceed to main page\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
