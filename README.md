@@ -15,15 +15,20 @@ You can find the deployed project at [schematiccapture.com](https://www.schemati
 
 ### Team Lead
 
-- **Jason Belgard** – [Github](https://github.com/jbelgard)
+- Labs20: **Jason Belgard** – [Github](https://github.com/jbelgard)
+- Labs22: ** Mark French** -  [Github](https://github.com/mrmarkfrench)
 
 ### UX
 
-- **Brian Hamilton** – [LinkedIn](https://github.com/BHamilton781)
+- Labs20: **Brian Hamilton** – [LinkedIn](https://github.com/BHamilton781)
+-  Labs 22: **Sarinaa VanderWag** - sarina-van-der-waag@lambdastudents.com 
+
 
 ### iOS
 
-- **Gi Pyo John Kim** – [Github](https://github.com/GiPyoK)
+- Labs20: **Gi Pyo John Kim** – [Github](https://github.com/GiPyoK)
+- Labs22: **Troy Christian** - [Github) (https://github.com/TroyChristian)
+
 
 ### Full-Stack Web Developers
 
@@ -33,16 +38,29 @@ You can find the deployed project at [schematiccapture.com](https://www.schemati
 
 - **Brad Zickafoose** - [Github](https://github.com/bradzickafoose)
 
+- **Tyler Thompson** - [Github] (https://github.com/adastraz)
+                                tyler-w.--thompson@lambdastudents.com
+   ** Vincent Sanders** [Github] (https://github.com/vincesanders)
+   
+   **Ashton Ragan**  
+   
+   **Dani Blackwell**
 
 ## Project Overview
 
 You can find the deployed project at [schematiccapture.com](https://www.schematiccapture.com/).
 
-[Trello Board](https://trello.com/b/Amx4wIKW/labs-20-schematic-capture)
+[Trello Board 20](https://trello.com/b/Amx4wIKW/labs-20-schematic-capture)
+
+[Trello Board Labs 22] (https://trello.com/b/Z6tCs69r/labs-22-schematic-capture)
 
 [Product Canvas](https://www.notion.so/Schematic-Capture-d4594ebf93ff4c6aba7942aea0546fea)
 
-[UX Design files](https://www.figma.com/file/cFDM1JqxOSem73IdYGSntU/Schematic-Capture?node-id=0%3A1)
+[UX Design files Labs 22](https://www.figma.com/file/cFDM1JqxOSem73IdYGSntU/Schematic-Capture?node-id=0%3A1)
+
+[UX Design Files Labs 24] (https://lambdaschool.enterprise.slack.com/files/W012X6U2J3B/FVDQUDA1F/schematic_capture_2x.png)
+
+**Labs 24 Documentation for next team: https://docs.google.com/document/d/1aQXBuyjQHdP8SaUAfBKriizokW6yxdHn89Ef_G0teqY/edit?usp=sharing 
 
 An iOS/web app for capturing and annotating huge machines in some of the countries larger steel manufacturing facilities 🔥 It needs offline capabilities to be able to capture photos and annotate them in facilities that often have no network or signal available to them.
 
