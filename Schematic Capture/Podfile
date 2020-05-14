@@ -6,15 +6,8 @@ target 'Schematic Capture' do
   use_frameworks!
 
   # Pods for Schematic Capture
-pod 'Firebase/Core'
-pod 'Firebase/Analytics'
-pod 'Firebase/Auth'
-pod 'Firebase/Storage'
-pod 'GoogleSignIn'
-pod 'SCLAlertView'
 pod 'ExpyTableView'
 pod 'SwiftyDropbox'
-
 
   target 'Schematic CaptureTests' do
     inherit! :search_paths

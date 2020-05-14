@@ -57,7 +57,6 @@
 		FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7E243DA11B00B653BE /* Client.swift */; };
 		FBAD0B81243DA1AF00B653BE /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B80243DA1AF00B653BE /* Contact.swift */; };
 		FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B85243F860300B653BE /* EditComponentViewController.swift */; };
-		FBFA2E7A24192A7C00F20402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBFA2E7924192A7C00F20402 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +145,7 @@
 		A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepresentation.swift; sourceTree = "<group>"; };
+		E142131D246DD1F2001B86EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/ufuk/Development/Labs/schematic-capture-ios/Schematic Capture/Schematic Capture/Ressources/Assets.xcassets"; sourceTree = "<absolute>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailImageViewController.swift; sourceTree = "<group>"; };
@@ -158,7 +158,6 @@
 		FBAD0B83243E7C4700B653BE /* Schematic Capture 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 5.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 6.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B85243F860300B653BE /* EditComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditComponentViewController.swift; sourceTree = "<group>"; };
-		FBFA2E7924192A7C00F20402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/Schematic-Capture/schematic-capture-ios/Schematic Capture/Schematic Capture/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,15 +187,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6613BF823E89DDE004A11B2 /* System */ = {
+		A6613BF823E89DDE004A11B2 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				E142131D246DD1F2001B86EC /* Assets.xcassets */,
 				A665835423DAB508006073DF /* AppDelegate.swift */,
 				A665835623DAB508006073DF /* SceneDelegate.swift */,
 				A665837623DB6695006073DF /* GoogleService-Info.plist */,
 				A665836223DAB50A006073DF /* Info.plist */,
 			);
-			path = System;
+			path = Ressources;
 			sourceTree = "<group>";
 		};
 		A6613C0323E9340E004A11B2 /* Schematic CaptureUITests */ = {
@@ -234,11 +234,10 @@
 		A665835323DAB508006073DF /* Schematic Capture */ = {
 			isa = PBXGroup;
 			children = (
-				FBFA2E7924192A7C00F20402 /* Assets.xcassets */,
 				A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */,
 				A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */,
 				A6A9D23723E4A86E0026D5E4 /* Fonts */,
-				A6613BF823E89DDE004A11B2 /* System */,
+				A6613BF823E89DDE004A11B2 /* Ressources */,
 				A665837F23DF8CC8006073DF /* Storyboards */,
 				A6F1C9FA23EE0E8400E0D583 /* Views */,
 				A665837A23DB6E32006073DF /* View Controllers */,
@@ -423,7 +422,6 @@
 				A665834E23DAB508006073DF /* Frameworks */,
 				A665834F23DAB508006073DF /* Resources */,
 				33064B68C18A8FA8AE58D160 /* [CP] Embed Pods Frameworks */,
-				3C8B0E4BC6D0BD843935E3DF /* [CP] Copy Pods Resources */,
 				A692201C23FDDFBA0060AD9E /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -512,7 +510,6 @@
 			files = (
 				A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */,
 				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
-				FBFA2E7A24192A7C00F20402 /* Assets.xcassets in Resources */,
 				A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */,
 				A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */,
 				A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */,
@@ -549,23 +546,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3C8B0E4BC6D0BD843935E3DF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5B9D69F3039E28FDD08A0915 /* [CP] Check Pods Manifest.lock */ = {
