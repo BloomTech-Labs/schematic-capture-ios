@@ -72,7 +72,6 @@ class ProjectController {
         NSLog("0. Last line of downloadAssigned Jobs Executed")
     }
     
-    
     private func updateProjects(with representations: [ProjectRepresentation]) {
         let identifiersToFetch = representations.map({ $0.id })
         
@@ -250,6 +249,5 @@ class ProjectController {
         }
     }
     //  Upload jobs in core data (check the status of the jobs)
-    
 }
 

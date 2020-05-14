@@ -9,6 +9,7 @@
 import UIKit
 
 class ComponentDetailImageViewController: UIViewController {
+    
     var component:Component?
     var delegate: MainCellDelegate?
     var passedInImage:UIImage?
@@ -18,24 +19,19 @@ class ComponentDetailImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         componentDetailImageView?.image = passedInImage
-        
-     
-
-
         // Do any additional setup after loading the view.
     }
     
-
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 extension ComponentDetailImageViewController: MainCellDelegate {
     func saveComponentEditsTapped() {
@@ -53,12 +49,12 @@ extension ComponentDetailImageViewController: MainCellDelegate {
     func viewImageButtonDidTapped(component: Component, selectedImage: UIImage?) {
         
         guard let selectedImage = selectedImage else {return}
-            componentDetailImageView?.image = selectedImage
-                
-        }
+        componentDetailImageView?.image = selectedImage
         
     }
     
-    
+}
+
+
 
 

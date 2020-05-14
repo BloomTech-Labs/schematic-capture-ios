@@ -10,56 +10,38 @@ import UIKit
 import CoreData 
 
 class EditComponentViewController: UIViewController {
-    var component:Component?
-    
-     var delegate: MainCellDelegate?
-    var context = CoreDataStack.shared.mainContext
-    
     
     @IBOutlet weak var saveButton: UIButton!
-    
     @IBOutlet weak var dismissButton: UIButton!
-    
     @IBOutlet weak var currentComponentDescription: UILabel!
-    
-    
     @IBOutlet weak var editDescriptionTextField: UITextField!
-    
     @IBOutlet weak var ManufacturerTextField: UITextField!
-    
     @IBOutlet weak var PartNumberTextField: UITextField!
-    
-    
     @IBOutlet weak var RLCategoryTextField: UITextField!
-    
     @IBOutlet weak var RLNumberTextField: UITextField!
-    
-    
     @IBOutlet weak var StockCodeTextField: UITextField!
-    
-    
     @IBOutlet weak var ElectricalAddressTextField: UITextField!
-    
-    
     @IBOutlet weak var ComponentApplicationTextField: UITextField!
-    
-    
     @IBOutlet weak var ReferenceTagTextField: UITextField!
-    
     @IBOutlet weak var SettingsTextField: UITextField!
-    
-  
     @IBOutlet weak var ResourcesTextField: UITextField!
-    
-    
     @IBOutlet weak var CutSheetTextField: UITextField!
-    
-    
-    
     @IBOutlet weak var MaintenanceVideoTextField: UITextField!
-    
-    
     @IBOutlet weak var StorePartNumberTextField: UITextField!
+    
+    var component:Component?
+    var delegate: MainCellDelegate?
+    var context = CoreDataStack.shared.mainContext
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpUI()
+        if component != nil {
+            //            currentComponentDescription.text? = component?.componentDescription ?? "Can not display description"
+            currentComponentDescription.text? = component?.value(forKey: "componentDescription") as? String ?? "Can not display description"
+        }
+        // Do any additional setup after loading the view.
+    }
     
     @IBAction func dismissButtonTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -71,7 +53,7 @@ class EditComponentViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         let newDescription = editDescriptionTextField.text
         if !newDescription!.isEmpty {
-        component?.setValue(newDescription, forKey: "componentDescription")
+            component?.setValue(newDescription, forKey: "componentDescription")
         }
         
         let newManufacturer = ManufacturerTextField.text
@@ -145,46 +127,26 @@ class EditComponentViewController: UIViewController {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
         component = nil
-        
-        
-    }
-    
-    
-    
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpUI()
-        if component != nil {
-//            currentComponentDescription.text? = component?.componentDescription ?? "Can not display description"
-            
-            currentComponentDescription.text? = component?.value(forKey: "componentDescription") as? String ?? "Can not display description"
-            
-       
-        }
-
-        // Do any additional setup after loading the view.
     }
     
     func setUpUI() {
         Style.styleFilledButton(saveButton)
         Style.styleFilledButton(dismissButton)
     }
-
-        
-   
-       
-    }
     
-
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+
+
 
 

@@ -20,7 +20,6 @@ class LoginViewController: UIViewController, WKUIDelegate {
     var loginController: LogInController?
     var webView: WKWebView!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

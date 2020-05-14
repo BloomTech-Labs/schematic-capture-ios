@@ -33,9 +33,7 @@ extension Project {
         self.id = Int32(id)
         self.name = name
         self.jobSheets = jobSheets != nil ? NSSet(array: jobSheets!) : nil
-        
         self.clientId = Int32(clientId)
-        
         self.completed = Int32(completed)
     }
     
@@ -46,10 +44,10 @@ extension Project {
         let jobSheets = projectRepresentation.jobSheets != nil ? projectRepresentation.jobSheets!.map { JobSheet(jobSheetRepresentation: $0, context: context) } : nil
         
         self.init (id: projectRepresentation.id,
-            name: projectRepresentation.name,
-            jobSheets: jobSheets,
-            clientId: projectRepresentation.clientId, 
-            completed:projectRepresentation.completed,
-            context: context)
+                   name: projectRepresentation.name,
+                   jobSheets: jobSheets,
+                   clientId: projectRepresentation.clientId, 
+                   completed:projectRepresentation.completed,
+                   context: context)
     }
 }

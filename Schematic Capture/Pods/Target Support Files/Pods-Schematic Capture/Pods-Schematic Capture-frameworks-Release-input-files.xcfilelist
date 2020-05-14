@@ -1,4 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/ExpyTableView/ExpyTableView.framework
+${BUILT_PRODUCTS_DIR}/HydraAsync/Hydra.framework
+${BUILT_PRODUCTS_DIR}/OktaAuth/OktaAuth.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework

@@ -38,7 +38,7 @@ extension JobSheet {
                                       projectId: Int(projectId),
                                       userEmail: userEmail,
                                       completed:Int(completed)
-   ) }
+        ) }
     
     @discardableResult convenience init(id: Int,
                                         name: String,
@@ -50,7 +50,7 @@ extension JobSheet {
                                         projectId: Int,
                                         userEmail:String,
                                         completed:Int,
-        
+                                        
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)

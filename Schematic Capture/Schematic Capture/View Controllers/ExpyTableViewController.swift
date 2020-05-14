@@ -20,7 +20,7 @@ class ExpyTableViewController: UIViewController {
     @IBAction func imageButtonTapped(_ sender: Any) {
         guard let _ = selectedComponent,
             let _ = currentComponentPhoto else {return}
-       
+        
         performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
         
     }
@@ -53,7 +53,7 @@ class ExpyTableViewController: UIViewController {
         
         expandableTableView.reloadData()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,78 +73,78 @@ class ExpyTableViewController: UIViewController {
         navigationItem.rightBarButtonItems = [pdfBarButtonItem]
         
         
-
+        
     }
     
-   
-    
-
     
     
     
- 
+    
+    
+    
+    
     
     private func checkAuthAndPresentImagePicker(sourceType: UIImagePickerController.SourceType) {
         if sourceType == .photoLibrary {
-        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+            let authorizationStatus = PHPhotoLibrary.authorizationStatus()
             
             switch authorizationStatus {
-            case .authorized:
-                presentImagePickerController(sourceType: sourceType)
-            case .notDetermined:
-                
-                PHPhotoLibrary.requestAuthorization { (status) in
+                case .authorized:
+                    presentImagePickerController(sourceType: sourceType)
+                case .notDetermined:
                     
-                    guard status == .authorized else {
-                        NSLog("User did not authorize access to the photo library")
-                        DispatchQueue.main.async {
-                            // TODO: - Show Alert: "In order to access the photo library, give permission to this application.")
+                    PHPhotoLibrary.requestAuthorization { (status) in
+                        
+                        guard status == .authorized else {
+                            NSLog("User did not authorize access to the photo library")
+                            DispatchQueue.main.async {
+                                // TODO: - Show Alert: "In order to access the photo library, give permission to this application.")
+                            }
+                            return
                         }
-                        return
-                    }
-                    
-                    self.presentImagePickerController(sourceType: sourceType)
+                        
+                        self.presentImagePickerController(sourceType: sourceType)
                 }
                 
-            case .denied:
-                DispatchQueue.main.async {
-                    // TODO: - Show Alert: "In order to access the photo library, give permission to this application.")
+                case .denied:
+                    DispatchQueue.main.async {
+                        // TODO: - Show Alert: "In order to access the photo library, give permission to this application.")
                 }
-            case .restricted:
-                DispatchQueue.main.async {
-                    // TODO: - Show Alert: "Unable to access the photo library. Your device's restrictions do not allow access.")
+                case .restricted:
+                    DispatchQueue.main.async {
+                        // TODO: - Show Alert: "Unable to access the photo library. Your device's restrictions do not allow access.")
                 }
-            @unknown default:
-                fatalError("Unhandled case for photo library authorization status")
+                @unknown default:
+                    fatalError("Unhandled case for photo library authorization status")
             }
         } else if sourceType == .camera {
             
             let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
             
             switch authorizationStatus {
-            case .authorized:
-                presentImagePickerController(sourceType: sourceType)
-            case .notDetermined:
-                AVCaptureDevice.requestAccess(for: .video) { (granted) in
-                    if granted {
-                        self.presentImagePickerController(sourceType: sourceType)
-                    } else {
-                        NSLog("User did not authorize access to the camera")
-                        DispatchQueue.main.async {
-                            // TODO: - Show Alert: "In order to access the camera, give permission to this application.")
+                case .authorized:
+                    presentImagePickerController(sourceType: sourceType)
+                case .notDetermined:
+                    AVCaptureDevice.requestAccess(for: .video) { (granted) in
+                        if granted {
+                            self.presentImagePickerController(sourceType: sourceType)
+                        } else {
+                            NSLog("User did not authorize access to the camera")
+                            DispatchQueue.main.async {
+                                // TODO: - Show Alert: "In order to access the camera, give permission to this application.")
+                            }
                         }
-                    }
                 }
-            case .denied:
-                DispatchQueue.main.async {
+                case .denied:
+                    DispatchQueue.main.async {
                         // TODO: - Show Alert: "In order to access the camera, give permission to this application.")
-                    }
-            case .restricted:
+                }
+                case .restricted:
                     DispatchQueue.main.async {
                         // TODO: - Show Alert: "Unable to access the camera. Your device's restrictions do not allow access.")
-                    }
-            @unknown default:
-                fatalError("Unhandled case for camera authorization status")
+                }
+                @unknown default:
+                    fatalError("Unhandled case for camera authorization status")
             }
         }
     }
@@ -174,44 +174,38 @@ class ExpyTableViewController: UIViewController {
                 guard let shematicData = schematicData else { return }
                 schematicVC.pdfData = shematicData
             }
-        }
-        
-       else if segue.identifier == "ShowComponentDetailImageSegue" {
+        } else if segue.identifier == "ShowComponentDetailImageSegue" {
+            
             if let detailVC = segue.destination as? ComponentDetailImageViewController {
-             detailVC.delegate = self
-                guard let _ = selectedComponent else { print("no component selected returning"); return }
-               
-              
-              guard let selectedImage = currentComponentPhoto else { print("No currentComponentPhoto image returning"); return}
-                 
+                detailVC.delegate = self
+                
+                guard let _ = selectedComponent else {
+                    print("no component selected returning")
+                    return
+                }
+                
+                guard let selectedImage = currentComponentPhoto else {
+                    print("No currentComponentPhoto image returning")
+                    return
+                }
+                
                 detailVC.passedInImage = selectedImage
-                            
-                    
                 selectedComponent = nil
                 currentComponentPhoto = nil
-
-                  
-              
-                 }
             }
-        
+        }
+            
         else if segue.identifier == "EditComponentSegue" {
             if let detailVC = segue.destination as? EditComponentViewController {
                 detailVC.delegate = self
-                  guard let componentToEdit = selectedComponent else { print("no component selected returning"); return }
+                guard let componentToEdit = selectedComponent else { print("no component selected returning"); return }
                 
                 detailVC.component = componentToEdit
                 
                 selectedComponent = nil
-                
             }
         }
-
-
-        }
-        
-       
-    
+    }
     
     @IBAction func pdfTabbed(_ sender: Any) {
         guard schematicData != nil else {
@@ -220,7 +214,6 @@ class ExpyTableViewController: UIViewController {
             }
             return
         }
-        
         // Segue to PDF view
         performSegue(withIdentifier: "SchematicViewSegue", sender: self)
     }
@@ -244,11 +237,6 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
     func tableView(_ tableView: ExpyTableView, expandableCellForSection section: Int) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentMainCell") as? ComponentMainTableViewCell else { return UITableViewCell() }
         
-
-      
-
-
-        
         cell.component = components?[section] // assigns first component to first section in TV - TC
         cell.delegate = self
         cell.showSeparator()
@@ -256,17 +244,12 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
         return cell
     }
     
-  
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ComponentDetailCell") as? ComponentDetailTableViewCell else { return UITableViewCell() }
         cell.component = components?[indexPath.section]
         
-        
-       
-        
-
-       
         return cell
     }
     
@@ -277,7 +260,6 @@ extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
     
 }
 
@@ -296,7 +278,6 @@ extension ExpyTableViewController: UIImagePickerControllerDelegate, UINavigation
         }
         
         picker.dismiss(animated: true, completion: nil)
-        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -316,64 +297,54 @@ extension ExpyTableViewController: MainCellDelegate {
         self.expandableTableView.reloadData()
     }
     
- 
-    
-  
-    func viewImageButtonDidTapped(component:Component,selectedImage:UIImage? ){
+    func viewImageButtonDidTapped(component:Component,selectedImage:UIImage? ) {
         selectedComponent = component
         currentComponentPhoto = selectedImage
-        
         
         guard let _ = selectedComponent else {return}
         guard   let  _ = selectedImage else {return}
         
+        performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
+    }
     
+    func cameraButtonDidTapped(component: Component) {
+        selectedComponent = component
+        DispatchQueue.main.async {
             
-       
-        
-
-            performSegue(withIdentifier: "ShowComponentDetailImageSegue", sender: self)
-         }
-        
-        func cameraButtonDidTapped(component: Component) {
-            selectedComponent = component
-            DispatchQueue.main.async {
-                
-                //let alert = // TODO: - Show Alert
-//                alert.addButton("Camera") {
-//                    self.checkAuthAndPresentImagePicker(sourceType: .camera)
-//                }
-//                alert.addButton("Photo Library") {
-//                    self.checkAuthAndPresentImagePicker(sourceType: .photoLibrary)
-//                }
-//                alert.addButton("Cancel") {
-//                    alert.hideView()
-//                }
-//                alert.showNotice("Image Source", subTitle: "")
-                
-            }
+            //let alert = // TODO: - Show Alert
+            //                alert.addButton("Camera") {
+            //                    self.checkAuthAndPresentImagePicker(sourceType: .camera)
+            //                }
+            //                alert.addButton("Photo Library") {
+            //                    self.checkAuthAndPresentImagePicker(sourceType: .photoLibrary)
+            //                }
+            //                alert.addButton("Cancel") {
+            //                    alert.hideView()
+            //                }
+            //                alert.showNotice("Image Source", subTitle: "")
+            
         }
+    }
     
     func editComponentButtonTapped(component: Component) {
         selectedComponent = component
         
         guard let _ = selectedComponent else {return}
         performSegue(withIdentifier: "EditComponentSegue", sender: self)
-              }
-    
-    
     }
-     
+    
+}
 
-        
-        
-        
-        
-    
-    
-    
 
-    
+
+
+
+
+
+
+
+
+
 
 
 

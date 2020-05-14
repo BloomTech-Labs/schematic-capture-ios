@@ -10,27 +10,22 @@ import UIKit
 class LogInController {
     
     let defaults = UserDefaults.standard
-    
     var bearer: Bearer?
-    
     var user: User?
     
-     // private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
-  //  private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
-   // private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
-   private let baseURL = URL(string: "http://localhost:5000/api")!
-
-//MARK: Sign-Up
-
-//MARK:Log-In
+    // private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
+    //  private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
+    // private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
+    private let baseURL = URL(string: "http://localhost:5000/api")!
+    
+    //MARK: Sign-Up
+    
+    //MARK:Log-In
     func logIn(username:String, password:String, completion: @escaping (NetworkingError?) -> Void) {
         //configure request url
         let loggingInUser = User(password:password, username:username)
         var internalBearer:Bearer?
         // internal bearer for within the function
-        
-      
-        
         let loginURL = baseURL.appendingPathComponent("auth/login")
         
         var request = URLRequest(url:loginURL)
@@ -49,6 +44,7 @@ class LogInController {
             completion(NetworkingError.badEncode)
             return
         }
+        
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let _ = error {
                 completion(NetworkingError.error("Error response from URLSession.shared.dataTask in LoginController"))
@@ -75,21 +71,12 @@ class LogInController {
             self.user = loggingInUser
             self.bearer = internalBearer
             print(self.bearer)
-            
         }.resume()
     }
-            
-        
-        
-  
-        
-        // send user to back end for response && Grab Bearer
-        
-        // Proceed to HomeViewController
     
-   
+    // send user to back end for response && Grab Bearer
     
-    
+    // Proceed to HomeViewController
     
     //MARK:Sign-Out to refactor
     func signOut(completion: @escaping (Error?) -> Void) {
@@ -110,7 +97,7 @@ class LogInController {
             let role = user.role else { return }
         
         do {
-           
+            
             let roleData = try JSONEncoder().encode(role)
             
             defaults.set(roleData, forKey: "roleJSONData")
@@ -121,5 +108,5 @@ class LogInController {
             return
         }
     }
-
+    
 }

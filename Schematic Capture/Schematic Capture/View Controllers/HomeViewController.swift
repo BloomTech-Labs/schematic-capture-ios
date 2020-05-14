@@ -16,10 +16,8 @@ class HomeViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var viewProjectsButton: UIButton!
     @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
     
-    
     var loginController: LogInController?
     var projectController = ProjectController()
-    
     var webView: WKWebView!
     
     override func viewDidLoad() {
@@ -37,14 +35,11 @@ class HomeViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    
     @IBAction func uploadJobSheets(_ sender: Any) {
         DropboxClientsManager.authorizeFromController(UIApplication.shared,
                                                       controller: self,
-                                                      openURL: { (url:URL) -> Void in UIApplication.shared.openURL(url)})
+                                                      openURL: {(url:URL) -> Void in UIApplication.shared.openURL(url)})
     }
-    
-    
     
     @IBAction func downloadSchematics(_ sender: Any) {
         startLoadingScreen()
@@ -58,22 +53,17 @@ class HomeViewController: UIViewController, WKUIDelegate {
                 return
             }
             
-            
-            
             // adding these to stop download animation
             self.stopLoadingScreen()
             DispatchQueue.main.async {
                 // TODO: - Show Alert
             }
-            
         }
     }
     
-    
     @IBAction func signOut(_ sender: Any) {
-        guard let loginController = loginController else {
-            return
-        }
+        guard let loginController = loginController else { return }
+        
         loginController.signOut { (error) in
             if let error = error {
                 print("\(error)")
@@ -85,14 +75,12 @@ class HomeViewController: UIViewController, WKUIDelegate {
                     self.dismiss(animated: false, completion: {
                         self.navigationController!.popToRootViewController(animated: true)
                     })
-                }
-                else {
+                } else {
                     self.navigationController!.popToRootViewController(animated: true)
                 }
             }
         }
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ProjectSegue" {
@@ -127,6 +115,5 @@ class HomeViewController: UIViewController, WKUIDelegate {
             self.webView = nil
         }
     }
-    
     
 }

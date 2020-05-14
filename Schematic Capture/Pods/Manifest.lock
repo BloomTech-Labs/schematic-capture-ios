@@ -1,24 +1,32 @@
 PODS:
   - Alamofire (4.8.2)
   - ExpyTableView (1.2)
+  - HydraAsync (1.2.1)
+  - OktaAuth (2.1.0):
+    - HydraAsync (~> 1.2.1)
   - SwiftyDropbox (5.1.0):
     - Alamofire (~> 4.8.2)
 
 DEPENDENCIES:
   - ExpyTableView
+  - OktaAuth
   - SwiftyDropbox
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - ExpyTableView
+    - HydraAsync
+    - OktaAuth
     - SwiftyDropbox
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   ExpyTableView: e317dc2bccfab6672d52b62507c834a4ecb57bba
+  HydraAsync: 8f2ab62d57e140b4ca587ae0f66e1eb04e8e6965
+  OktaAuth: 503bfc134e649cb4630327bc39f7980658350675
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
 
-PODFILE CHECKSUM: 31f66d2381e6d476de4d1f2d17e6e7d0a6cca28f
+PODFILE CHECKSUM: d67d417213997a78318e53c2bb7758d38f7c48af
 
 COCOAPODS: 1.9.1

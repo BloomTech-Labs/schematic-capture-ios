@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct Client{
     var id:Int
     var companyName:String

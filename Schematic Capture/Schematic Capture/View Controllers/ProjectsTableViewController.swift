@@ -30,30 +30,30 @@ class ProjectsTableViewController: UITableViewController {
         }
         return frc
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return fetchedResultsController.sections?.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell", for: indexPath) as? ProjectTableViewCell else { return UITableViewCell() }
-
+        
         cell.project = fetchedResultsController.object(at: indexPath)
-
+        
         return cell
     }
     
@@ -64,9 +64,6 @@ class ProjectsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
-   
-
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,7 +81,6 @@ class ProjectsTableViewController: UITableViewController {
         }
     }
     
-
 }
 
 extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
@@ -100,24 +96,24 @@ extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
         
         switch type {
             
-        case .insert:
-            guard let newIndexPath = newIndexPath else { return }
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            case .insert:
+                guard let newIndexPath = newIndexPath else { return }
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
             
-        case .delete:
-            guard let indexPath = indexPath else { return }
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            case .delete:
+                guard let indexPath = indexPath else { return }
+                tableView.deleteRows(at: [indexPath], with: .automatic)
             
-        case .move:
-            guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
-            tableView.moveRow(at: indexPath, to: newIndexPath)
+            case .move:
+                guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
+                tableView.moveRow(at: indexPath, to: newIndexPath)
             
-        case .update:
-            guard let indexPath = indexPath else { return }
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            case .update:
+                guard let indexPath = indexPath else { return }
+                tableView.reloadRows(at: [indexPath], with: .automatic)
             
-        @unknown default:
-            fatalError()
+            @unknown default:
+                fatalError()
         }
     }
     
@@ -126,13 +122,12 @@ extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
         let indexSet = IndexSet(integer: sectionIndex)
         
         switch type {
-        case .insert:
-            tableView.insertSections(indexSet, with: .automatic)
-        case .delete:
-            tableView.deleteSections(indexSet, with: .automatic)
-        default:
-            return
+            case .insert:
+                tableView.insertSections(indexSet, with: .automatic)
+            case .delete:
+                tableView.deleteSections(indexSet, with: .automatic)
+            default:
+                return
         }
-        
     }
 }

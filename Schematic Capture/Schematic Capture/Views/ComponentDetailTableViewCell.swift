@@ -55,8 +55,6 @@ class ComponentDetailTableViewCell: UITableViewCell {
         cutsheetLabel.text = "Cutsheet: \(component.cutSheet ?? "")"
         maintenanceVideoLabel.text = "Maintenance Video: \(component.maintenanceVideo ?? "")"
         storePartNumberLabel.text = "Sotre's Part #: \(component.storePartNumber ?? "")"
-        
-       
     }
-
+    
 }

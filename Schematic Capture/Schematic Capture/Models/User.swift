@@ -10,8 +10,6 @@
 
 import Foundation
 
-
-
 struct Role: Codable {
     let id: Int
     let name: String
@@ -28,8 +26,6 @@ struct User: Codable {
     var id: String?
     var username:String?
     
-
-    
     private enum CodingKeys: String, CodingKey {
         case email
         case password
@@ -41,8 +37,6 @@ struct User: Codable {
         case id
         case username
     }
-    
-
 }
 
 

@@ -10,7 +10,7 @@ import UIKit
 import PencilKit
 
 class AnnotationViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerObserver {
-
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var canvasView: PKCanvasView!
     @IBOutlet weak var pencilFingerBarButtonItem: UIBarButtonItem!
@@ -44,7 +44,7 @@ class AnnotationViewController: UIViewController, PKCanvasViewDelegate, PKToolPi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -62,7 +62,7 @@ class AnnotationViewController: UIViewController, PKCanvasViewDelegate, PKToolPi
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
-
+    
     @IBAction func gogglePencilFingerDrawing(_ sender: Any) {
         canvasView.allowsFingerDrawing.toggle()
         pencilFingerBarButtonItem.title = canvasView.allowsFingerDrawing ? "Finger" : "Pencil"
@@ -89,18 +89,18 @@ class AnnotationViewController: UIViewController, PKCanvasViewDelegate, PKToolPi
 }
 
 extension UIImage {
-  func mergeWith(topImage: UIImage) -> UIImage {
-    let bottomImage = self
-
-    UIGraphicsBeginImageContext(size)
-
-    let areaSize = CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height)
-    bottomImage.draw(in: areaSize)
-
-    topImage.draw(in: areaSize, blendMode: .normal, alpha: 1.0)
-
-    let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
-    UIGraphicsEndImageContext()
-    return mergedImage
-  }
+    func mergeWith(topImage: UIImage) -> UIImage {
+        let bottomImage = self
+        
+        UIGraphicsBeginImageContext(size)
+        
+        let areaSize = CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height)
+        bottomImage.draw(in: areaSize)
+        
+        topImage.draw(in: areaSize, blendMode: .normal, alpha: 1.0)
+        
+        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return mergedImage
+    }
 }

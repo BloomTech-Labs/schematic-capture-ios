@@ -9,8 +9,6 @@
 import Foundation
 import CoreData
 
-
-
 extension Component {
     
     var componentRepresentation: ComponentRepresentation? {

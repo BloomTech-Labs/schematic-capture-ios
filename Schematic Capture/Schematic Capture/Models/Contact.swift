@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct Contact {
    var id:Int
     var clientID:Int

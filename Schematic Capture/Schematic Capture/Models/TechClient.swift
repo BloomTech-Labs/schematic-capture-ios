@@ -7,11 +7,11 @@
 //
 
 import Foundation
+
 struct TechClient: Codable {
     var id: Int
     var clientID:Int
     var techID:Int
-    
 }
 
 private enum CodingKeys:String, CodingKey {

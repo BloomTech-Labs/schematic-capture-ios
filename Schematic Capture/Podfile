@@ -8,6 +8,7 @@ target 'Schematic Capture' do
   # Pods for Schematic Capture
 pod 'ExpyTableView'
 pod 'SwiftyDropbox'
+pod 'OktaAuth'
 
   target 'Schematic CaptureTests' do
     inherit! :search_paths
