@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		203A5C168218CC2EF860A488 /* Pods_Schematic_CaptureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */; };
+		6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D443000246DD876008C8EE1 /* Assets.xcassets */; };
 		A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835A23DAB508006073DF /* Main.storyboard */; };
 		A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835F23DAB50A006073DF /* LaunchScreen.storyboard */; };
 		A6613C0523E9340E004A11B2 /* Schematic_CaptureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */; };
@@ -90,6 +91,8 @@
 
 /* Begin PBXFileReference section */
 		49AD8C612B258C5954802E50 /* Pods-Schematic CaptureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.debug.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6D443000246DD876008C8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6D443008246DDC18008C8EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74CE154D4AA08AC493FBA5F6 /* Pods-Schematic Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.debug.xcconfig"; sourceTree = "<group>"; };
 		7CF1D52C5578D599C2B001F6 /* Pods-Schematic Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.release.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.release.xcconfig"; sourceTree = "<group>"; };
 		9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_CaptureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,7 +105,6 @@
 		A665835623DAB508006073DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A665835B23DAB508006073DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A665836023DAB50A006073DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A665836223DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Schematic Capture/System/Info.plist"; sourceTree = SOURCE_ROOT; };
 		A665836723DAB50A006073DF /* Schematic CaptureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureTests.swift; sourceTree = "<group>"; };
 		A665836D23DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,7 +145,6 @@
 		A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepresentation.swift; sourceTree = "<group>"; };
-		E142131D246DD1F2001B86EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/ufuk/Development/Labs/schematic-capture-ios/Schematic Capture/Schematic Capture/Ressources/Assets.xcassets"; sourceTree = "<absolute>"; };
 		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailImageViewController.swift; sourceTree = "<group>"; };
@@ -188,10 +189,10 @@
 		A6613BF823E89DDE004A11B2 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				E142131D246DD1F2001B86EC /* Assets.xcassets */,
 				A665835423DAB508006073DF /* AppDelegate.swift */,
 				A665835623DAB508006073DF /* SceneDelegate.swift */,
-				A665836223DAB50A006073DF /* Info.plist */,
+				6D443000246DD876008C8EE1 /* Assets.xcassets */,
+				6D443008246DDC18008C8EE1 /* Info.plist */,
 			);
 			path = Ressources;
 			sourceTree = "<group>";
@@ -457,7 +458,7 @@
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Latest;
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "GIPGIP Studio";
 				TargetAttributes = {
 					A6613C0123E9340E004A11B2 = {
@@ -509,6 +510,7 @@
 				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
 				A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */,
 				A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */,
+				6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */,
 				A6613C0D23EA1417004A11B2 /* Pulse-1s-200px.svg in Resources */,
 				A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */,
 				A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */,
@@ -848,8 +850,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 4JYCUK7B5K;
-				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
+				DEVELOPMENT_TEAM = GF728A45JE;
+				INFOPLIST_FILE = "$(SRCROOT)/Schematic Capture/Ressources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -872,8 +874,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 4JYCUK7B5K;
-				INFOPLIST_FILE = "Schematic Capture/System/Info.plist";
+				DEVELOPMENT_TEAM = GF728A45JE;
+				INFOPLIST_FILE = "$(SRCROOT)/Schematic Capture/Ressources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

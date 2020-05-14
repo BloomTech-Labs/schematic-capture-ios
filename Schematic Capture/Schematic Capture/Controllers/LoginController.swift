@@ -20,13 +20,8 @@ class LogInController {
    // private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
    private let baseURL = URL(string: "http://localhost:5000/api")!
 
-    
-    
 //MARK: Sign-Up
-    
-    
- 
-    
+
 //MARK:Log-In
     func logIn(username:String, password:String, completion: @escaping (NetworkingError?) -> Void) {
         //configure request url
@@ -42,10 +37,6 @@ class LogInController {
         print(request.description)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-     
-        
-
-        
         
         let jsonEncoder = JSONEncoder()
         do {

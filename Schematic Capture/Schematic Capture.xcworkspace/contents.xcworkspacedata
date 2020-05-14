@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/ufuk/Development/Labs/schematic-capture-ios/Schematic Capture/Schematic Capture/Ressources/Assets.xcassets">
-   </FileRef>
-   <FileRef
       location = "group:Schematic Capture.xcodeproj">
    </FileRef>
    <FileRef

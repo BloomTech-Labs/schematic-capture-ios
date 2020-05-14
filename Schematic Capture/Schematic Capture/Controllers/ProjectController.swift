@@ -38,19 +38,19 @@ class ProjectController {
         URLSession.shared.dataTask(with: request) { (data, _, error) in
             
             if let error = error {
-                print("Error getting assigned jobs: \(error)")
+                NSLog("Error getting assigned jobs: \(error)")
                 completion(.serverError(error))
                 return
             }
             
             guard let data = data else {
-                print("No data returned from data task")
+                NSLog("No data returned from data task")
                 completion(.noData)
                 return
             }
             
             //TODO: debug statement
-            print("\ninside download assigned jobs\n \(String(data: data, encoding: .utf8)!) \n\n")
+            NSLog("\ninside download assigned jobs\n \(String(data: data, encoding: .utf8)!) \n\n")
             
             // decode projects
             let decoder = JSONDecoder()
@@ -61,15 +61,15 @@ class ProjectController {
                 self.updateProjects(with: projectsRep)
                 self.projects = projectsRep
                 self.projects.sort { $0.id < $1.id }
-                print("\n\nPROJECTS: \(self.projects)\n\n")
+                NSLog("\n\nPROJECTS: \(self.projects)\n\n")
             } catch {
-                print("Error decoding the jobs: \(error)")
+                NSLog("Error decoding the jobs: \(error)")
                 completion(.badDecode)
             }
             
             completion(nil)
         }.resume()
-        print("0. Last line of downloadAssigned Jobs Executed")
+        NSLog("0. Last line of downloadAssigned Jobs Executed")
     }
     
     
@@ -249,8 +249,6 @@ class ProjectController {
             }
         }
     }
-    print("3.last line of update schematics executed")
-    
     //  Upload jobs in core data (check the status of the jobs)
     
 }
