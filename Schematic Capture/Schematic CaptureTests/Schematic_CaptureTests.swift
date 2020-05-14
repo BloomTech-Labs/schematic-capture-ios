@@ -7,8 +7,7 @@
 //
 
 import XCTest
-import Firebase
-import FirebaseStorage
+
 @testable import Schematic_Capture
 
 struct AsyncOperation<Value> {

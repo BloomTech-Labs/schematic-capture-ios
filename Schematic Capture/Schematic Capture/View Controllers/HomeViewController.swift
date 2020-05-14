@@ -8,12 +8,11 @@
 
 import UIKit
 import WebKit
-import SCLAlertView
 import SwiftyDropbox
 
 class HomeViewController: UIViewController, WKUIDelegate {
-
-   @IBOutlet weak var downloadProjectsButton: UIButton!
+    
+    @IBOutlet weak var downloadProjectsButton: UIButton!
     @IBOutlet weak var viewProjectsButton: UIButton!
     @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
     
@@ -26,7 +25,7 @@ class HomeViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       Style.styleFilledButton(downloadProjectsButton)
+        Style.styleFilledButton(downloadProjectsButton)
         Style.styleFilledButton(viewProjectsButton)
         Style.styleFilledButton(uploadJobSheetsButton)
         
@@ -40,12 +39,12 @@ class HomeViewController: UIViewController, WKUIDelegate {
     
     
     @IBAction func uploadJobSheets(_ sender: Any) {
-     DropboxClientsManager.authorizeFromController(UIApplication.shared,
-                                                             controller: self,
-                                                             openURL: { (url:URL) -> Void in UIApplication.shared.openURL(url)})
-            }
-                                                         
-        
+        DropboxClientsManager.authorizeFromController(UIApplication.shared,
+                                                      controller: self,
+                                                      openURL: { (url:URL) -> Void in UIApplication.shared.openURL(url)})
+    }
+    
+    
     
     @IBAction func downloadSchematics(_ sender: Any) {
         startLoadingScreen()
@@ -54,18 +53,18 @@ class HomeViewController: UIViewController, WKUIDelegate {
             if let error = error {
                 self.stopLoadingScreen()
                 DispatchQueue.main.async {
-                    SCLAlertView().showError("Unable to download assigned jobs", subTitle: "\(error)")
+                    // TODO: - Show Alert: "Unable to download assigned jobs", subTitle: "\(error)")
                 }
                 return
             }
-           
             
-
+            
+            
             // adding these to stop download animation
             self.stopLoadingScreen()
             DispatchQueue.main.async {
-                               SCLAlertView().showSuccess("Download  Successful", subTitle: "")
-                           }
+                // TODO: - Show Alert
+            }
             
         }
     }
@@ -84,7 +83,7 @@ class HomeViewController: UIViewController, WKUIDelegate {
             DispatchQueue.main.async {
                 if self.presentingViewController != nil {
                     self.dismiss(animated: false, completion: {
-                       self.navigationController!.popToRootViewController(animated: true)
+                        self.navigationController!.popToRootViewController(animated: true)
                     })
                 }
                 else {
@@ -94,7 +93,7 @@ class HomeViewController: UIViewController, WKUIDelegate {
         }
     }
     
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ProjectSegue" {
             if let projectsTableVC = segue.destination as? ProjectsTableViewController {
@@ -129,5 +128,5 @@ class HomeViewController: UIViewController, WKUIDelegate {
         }
     }
     
-
+    
 }

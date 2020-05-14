@@ -10,7 +10,6 @@
 		203A5C168218CC2EF860A488 /* Pods_Schematic_CaptureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */; };
 		A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835A23DAB508006073DF /* Main.storyboard */; };
 		A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835F23DAB50A006073DF /* LaunchScreen.storyboard */; };
-		A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A665837623DB6695006073DF /* GoogleService-Info.plist */; };
 		A6613C0523E9340E004A11B2 /* Schematic_CaptureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */; };
 		A6613C0D23EA1417004A11B2 /* Pulse-1s-200px.svg in Resources */ = {isa = PBXBuildFile; fileRef = A6613C0C23EA1417004A11B2 /* Pulse-1s-200px.svg */; };
 		A665835523DAB508006073DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835423DAB508006073DF /* AppDelegate.swift */; };
@@ -107,7 +106,6 @@
 		A665836723DAB50A006073DF /* Schematic CaptureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureTests.swift; sourceTree = "<group>"; };
 		A665836D23DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A665837623DB6695006073DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A665837823DB6E2D006073DF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A665838223DFA06C006073DF /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A665838523DFA50A006073DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				E142131D246DD1F2001B86EC /* Assets.xcassets */,
 				A665835423DAB508006073DF /* AppDelegate.swift */,
 				A665835623DAB508006073DF /* SceneDelegate.swift */,
-				A665837623DB6695006073DF /* GoogleService-Info.plist */,
 				A665836223DAB50A006073DF /* Info.plist */,
 			);
 			path = Ressources;
@@ -510,7 +507,6 @@
 			files = (
 				A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */,
 				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
-				A6613BFC23E8BFC8004A11B2 /* GoogleService-Info.plist in Resources */,
 				A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */,
 				A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */,
 				A6613C0D23EA1417004A11B2 /* Pulse-1s-200px.svg in Resources */,

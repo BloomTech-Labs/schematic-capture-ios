@@ -9,7 +9,6 @@
 import UIKit
 import ExpyTableView
 import Photos
-import SCLAlertView
 import AVFoundation
 import PencilKit
 
@@ -99,7 +98,7 @@ class ExpyTableViewController: UIViewController {
                     guard status == .authorized else {
                         NSLog("User did not authorize access to the photo library")
                         DispatchQueue.main.async {
-                            SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+                            // TODO: - Show Alert: "In order to access the photo library, give permission to this application.")
                         }
                         return
                     }
@@ -109,11 +108,11 @@ class ExpyTableViewController: UIViewController {
                 
             case .denied:
                 DispatchQueue.main.async {
-                    SCLAlertView().showError("Error", subTitle: "In order to access the photo library, give permission to this application.")
+                    // TODO: - Show Alert: "In order to access the photo library, give permission to this application.")
                 }
             case .restricted:
                 DispatchQueue.main.async {
-                    SCLAlertView().showError("Error", subTitle: "Unable to access the photo library. Your device's restrictions do not allow access.")
+                    // TODO: - Show Alert: "Unable to access the photo library. Your device's restrictions do not allow access.")
                 }
             @unknown default:
                 fatalError("Unhandled case for photo library authorization status")
@@ -132,17 +131,17 @@ class ExpyTableViewController: UIViewController {
                     } else {
                         NSLog("User did not authorize access to the camera")
                         DispatchQueue.main.async {
-                            SCLAlertView().showError("Error", subTitle: "In order to access the camera, give permission to this application.")
+                            // TODO: - Show Alert: "In order to access the camera, give permission to this application.")
                         }
                     }
                 }
             case .denied:
                 DispatchQueue.main.async {
-                        SCLAlertView().showError("Error", subTitle: "In order to access the camera, give permission to this application.")
+                        // TODO: - Show Alert: "In order to access the camera, give permission to this application.")
                     }
             case .restricted:
                     DispatchQueue.main.async {
-                        SCLAlertView().showError("Error", subTitle: "Unable to access the camera. Your device's restrictions do not allow access.")
+                        // TODO: - Show Alert: "Unable to access the camera. Your device's restrictions do not allow access.")
                     }
             @unknown default:
                 fatalError("Unhandled case for camera authorization status")
@@ -217,7 +216,7 @@ class ExpyTableViewController: UIViewController {
     @IBAction func pdfTabbed(_ sender: Any) {
         guard schematicData != nil else {
             DispatchQueue.main.async {
-                SCLAlertView().showError("Error", subTitle: "No schematic data found.")
+                // TODO: - Show Alert: "No schematic data found.")
             }
             return
         }
@@ -307,7 +306,7 @@ extension ExpyTableViewController: UIImagePickerControllerDelegate, UINavigation
     // If error occured while saving the original copy of the photo, present alert
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            SCLAlertView().showError("Could not save the photo!", subTitle: error.localizedDescription)
+            // TODO: - Show Alert: Could not save the photo!"
         }
     }
 }
@@ -339,18 +338,18 @@ extension ExpyTableViewController: MainCellDelegate {
         func cameraButtonDidTapped(component: Component) {
             selectedComponent = component
             DispatchQueue.main.async {
-                let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
-                let alert = SCLAlertView(appearance: appearance)
-                alert.addButton("Camera") {
-                    self.checkAuthAndPresentImagePicker(sourceType: .camera)
-                }
-                alert.addButton("Photo Library") {
-                    self.checkAuthAndPresentImagePicker(sourceType: .photoLibrary)
-                }
-                alert.addButton("Cancel") {
-                    alert.hideView()
-                }
-                alert.showNotice("Image Source", subTitle: "")
+                
+                //let alert = // TODO: - Show Alert
+//                alert.addButton("Camera") {
+//                    self.checkAuthAndPresentImagePicker(sourceType: .camera)
+//                }
+//                alert.addButton("Photo Library") {
+//                    self.checkAuthAndPresentImagePicker(sourceType: .photoLibrary)
+//                }
+//                alert.addButton("Cancel") {
+//                    alert.hideView()
+//                }
+//                alert.showNotice("Image Source", subTitle: "")
                 
             }
         }

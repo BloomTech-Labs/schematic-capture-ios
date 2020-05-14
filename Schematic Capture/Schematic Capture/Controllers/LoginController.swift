@@ -6,10 +6,6 @@
 //
 
 import UIKit
-import Firebase
-import GoogleSignIn
-
-
 
 class LogInController {
     
@@ -107,7 +103,7 @@ class LogInController {
     //MARK:Sign-Out to refactor
     func signOut(completion: @escaping (Error?) -> Void) {
         do {
-            try Auth.auth().signOut()
+            //try //Auth.auth().signOut()
         } catch {
             print("Error signing out: \(error)")
             completion(error)

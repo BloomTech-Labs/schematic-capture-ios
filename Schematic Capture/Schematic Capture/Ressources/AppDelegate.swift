@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import GoogleSignIn
 import SwiftyDropbox
 
 @UIApplicationMain
@@ -19,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         DropboxClientsManager.setupWithAppKey("t5i27y2t3fzkiqj")
-        FirebaseApp.configure()
         
         return true
     }

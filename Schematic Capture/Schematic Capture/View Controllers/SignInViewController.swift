@@ -7,10 +7,6 @@
 //
 //
 import UIKit
-import Firebase
-import FirebaseStorage
-import GoogleSignIn
-import SCLAlertView
 import WebKit
 
 class SignInViewController: UIViewController, WKUIDelegate {
