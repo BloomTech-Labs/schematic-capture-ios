@@ -11,7 +11,7 @@ import CoreData
 
 class ProjectsTableViewController: UITableViewController {
     
-    var loginController: LogInController?
+    var authController: AuthorizationController?
     var projectController: ProjectController?
     
     lazy var fetchedResultsController: NSFetchedResultsController<Project> = {

@@ -17,7 +17,6 @@
 		A665835523DAB508006073DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835423DAB508006073DF /* AppDelegate.swift */; };
 		A665835723DAB508006073DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835623DAB508006073DF /* SceneDelegate.swift */; };
 		A665836C23DAB50A006073DF /* Schematic_CaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */; };
-		A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665837823DB6E2D006073DF /* SignInViewController.swift */; };
 		A665838323DFA06C006073DF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838223DFA06C006073DF /* Reachability.swift */; };
 		A665838623DFA50A006073DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838523DFA50A006073DF /* User.swift */; };
 		A665838923E0E1B2006073DF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838823E0E1B2006073DF /* LoginController.swift */; };
@@ -115,7 +114,6 @@
 		A665836723DAB50A006073DF /* Schematic CaptureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureTests.swift; sourceTree = "<group>"; };
 		A665836D23DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A665837823DB6E2D006073DF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A665838223DFA06C006073DF /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A665838523DFA50A006073DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A665838823E0E1B2006073DF /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 		6DC49BAE246EE5FD009769E0 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				A665837823DB6E2D006073DF /* SignInViewController.swift */,
 				A665839323E0E607006073DF /* HomeViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
 				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
@@ -713,7 +710,6 @@
 				A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
 				A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */,
-				A665837923DB6E2D006073DF /* SignInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

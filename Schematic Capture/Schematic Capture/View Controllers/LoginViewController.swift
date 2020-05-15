@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties
 
-    var loginController = AuthorizationController()
+    var authController = AuthorizationController()
     
     // MARK: - View Lifecycle
     
@@ -58,17 +58,15 @@ class LoginViewController: UIViewController {
     
     @objc private func login(_ sender: UIButton) {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
-        loginController.authenticateUser(username: username , password: password) { result in
+        authController.authenticateUser(username: username , password: password) { result in
             if let user = try? result.get() as? EmbeddedResponse.User {
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
                     let projectsTableViewController = ProjectsTableViewController()
-                    projects
-                    let homeViewController = HomeViewController()
-                    homeViewController.loginController = self.loginController
-                    homeViewController.projectController.user = self.loginController.user
-                    homeViewController.projectController.bearer = self.loginController.bearer
+                    projectsTableViewController.loginController = self.authController
+                    navigationController.pushViewController(pa)
+                    
                 }
             }
         }
