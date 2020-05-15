@@ -10,11 +10,14 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: - UI Elements
     
     let emailTextField = UITextField()
     let passwordTextField = UITextField()
     let loginButton = UIButton()
+    
+    // MARK: - Properties
+
     var loginController: LogInController?
     
     // MARK: - View Lifecycle
@@ -57,14 +60,16 @@ class LoginViewController: UIViewController {
     }
     
     @objc func login(_ sender: UIButton) {
-        guard let loginController = loginController, let emailAddress = emailTextField.text, let password = passwordTextField.text else { return }
-        loginController.AuthenticateUser(username: emailAddress, password: password) {
-            DispatchQueue.main.async {
-                // Authentication succeeded go to HomeViewController
-                let homeViewController = HomeViewController()
-                homeViewController.loginController = loginController
-                homeViewController.projectController.user = loginController.user
-                homeViewController.projectController.bearer = loginController.bearer
+        guard let loginController = loginController, let username = emailTextField.text, let password = passwordTextField.text else { return }
+        loginController.authenticateUser(username: username , password: password) { result in
+            if let error = try? result.get() {
+                DispatchQueue.main.async {
+                    // Authentication succeeded go to HomeViewController
+                    let homeViewController = HomeViewController()
+                    homeViewController.loginController = loginController
+                    homeViewController.projectController.user = loginController.user
+                    homeViewController.projectController.bearer = loginController.bearer
+                }
             }
         }
     }

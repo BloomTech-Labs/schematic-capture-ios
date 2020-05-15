@@ -8,25 +8,36 @@
 import UIKit
 import OktaAuthSdk
 
-
 class LogInController {
     
     let defaults = UserDefaults.standard
     var bearer: Bearer?
     var user: User?
-
-    typealias Completion = () -> Void
-
-    private var url = URL(string: "https://dev-833124-admin.okta.com/")!
     
-    //MARK: AuthenticateUser
-    
-    func AuthenticateUser(username: String, password: String, completion: Completion) {
-        OktaAuthSdk.authenticate(with: url, username: username, password: password, onStatusChange: { authStatus in
-            let status = self.handleStatus(status: authStatus)
-            print("STATUS: \(status!)")
+    typealias Completion = (Result<OktaAuthStatus, Error>) -> ()
+        
+    // AuthenticateUser
+    /*Authenticate user with username and password*/
+    func authenticateUser(username: String, password: String, completion: @escaping Completion) {
+        OktaAuthSdk.authenticate(with:URL(string: OktaUrls.baseUrl.rawValue)!, username: username, password: password, onStatusChange: { authStatus in
+            if let status = self.handleStatus(status: authStatus) {
+                completion(.success(status))
+            }
         }) { error in
             NSLog("Error authenticating user: \(error)")
+            completion(.failure(error))
+        }
+    }
+    
+    
+    // Password recovery
+    /*Starts a new password recovery transaction for a given user and issues a
+     recovery token that can be used to reset a user's password*/
+    func recoverPassword(username: String, completion: @escaping Completion) {
+        OktaAuthSdk.recoverPassword(with: URL(string: OktaUrls.passwordRecoveryUrl.rawValue)!, username: username, factorType: .email, onStatusChange: { authStatus in
+            completion(.success(authStatus))
+        }) { error in
+            completion(.failure(error))
         }
     }
     
@@ -34,7 +45,7 @@ class LogInController {
     // Handle status
     /*Handle current status in order to proceed with the initiated flow*/
     func handleStatus(status: OktaAuthStatus) -> OktaAuthStatus? {
-
+        
         switch status.statusType {
         case .success:
             let successState: OktaAuthStatusSuccess = status as! OktaAuthStatusSuccess
@@ -77,39 +88,4 @@ class LogInController {
         }
         return nil
     }
-    
-    //
-//    // Proceed to HomeViewController
-//    
-//    //MARK:Sign-Out to refactor
-//    func signOut(completion: @escaping (Error?) -> Void) {
-//        do {
-//            //try //Auth.auth().signOut()
-//        } catch {
-//            print("Error signing out: \(error)")
-//            completion(error)
-//            return
-//        }
-//        completion(nil)
-//    }
-//    
-//    //MARK: - Update User
-//    private func updateUser(user: User) {
-//        guard let firstName = user.firstName,
-//            let lastName = user.lastName,
-//            let role = user.role else { return }
-//        
-//        do {
-//            
-//            let roleData = try JSONEncoder().encode(role)
-//            
-//            defaults.set(roleData, forKey: "roleJSONData")
-//            defaults.set(firstName, forKey: "firstName")
-//            defaults.set(lastName, forKey: "lastName")
-//        } catch {
-//            print("\(error)")
-//            return
-//        }
-//    }
-    
 }
