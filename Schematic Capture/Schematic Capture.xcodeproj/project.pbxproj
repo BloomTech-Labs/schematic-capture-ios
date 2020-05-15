@@ -32,11 +32,6 @@
 		A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */; };
 		A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692203123FF3DC10060AD9E /* AnnotationViewController.swift */; };
 		A692203424048B4E0060AD9E /* SchematicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692203324048B4E0060AD9E /* SchematicViewController.swift */; };
-		A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */; };
-		A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */; };
-		A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */; };
-		A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */; };
-		A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */; };
 		A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */; };
 		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
 		A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */; };
@@ -131,11 +126,6 @@
 		A692200D23FDDFBA0060AD9E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		A692203123FF3DC10060AD9E /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		A692203324048B4E0060AD9E /* SchematicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchematicViewController.swift; sourceTree = "<group>"; };
-		A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = OnBoardImage.jpeg; sourceTree = "<group>"; };
 		A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture.xcdatamodel"; sourceTree = "<group>"; };
 		A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Convenience.swift"; sourceTree = "<group>"; };
@@ -263,7 +253,6 @@
 			children = (
 				6DC49BA8246ECF9D009769E0 /* Constant */,
 				A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */,
-				A6A9D23723E4A86E0026D5E4 /* Fonts */,
 				A6613BF823E89DDE004A11B2 /* Ressources */,
 				A665837F23DF8CC8006073DF /* Storyboards */,
 				A6F1C9FA23EE0E8400E0D583 /* Views */,
@@ -335,18 +324,6 @@
 				A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		A6A9D23723E4A86E0026D5E4 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				A6A9D23E23E4A8820026D5E4 /* OpenSans-Bold.ttf */,
-				A6A9D24123E4A8830026D5E4 /* OpenSans-ExtraBold.ttf */,
-				A6A9D23D23E4A8820026D5E4 /* OpenSans-Light.ttf */,
-				A6A9D23B23E4A8820026D5E4 /* OpenSans-Regular.ttf */,
-				A6A9D23C23E4A8820026D5E4 /* OpenSans-SemiBold.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		A6F1C9CB23ECB21A00E0D583 /* Core Data */ = {
@@ -537,14 +514,9 @@
 			files = (
 				A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */,
 				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
-				A6A9D24923E4AE460026D5E4 /* OpenSans-Regular.ttf in Resources */,
 				E1C88705246DFA9C00A6E464 /* Okta.plist in Resources */,
-				A6A9D24723E4AE460026D5E4 /* OpenSans-Light.ttf in Resources */,
 				6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */,
-				A6A9D24A23E4AE460026D5E4 /* OpenSans-SemiBold.ttf in Resources */,
-				A6A9D24223E4AE460026D5E4 /* OpenSans-Bold.ttf in Resources */,
 				A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */,
-				A6A9D24423E4AE460026D5E4 /* OpenSans-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

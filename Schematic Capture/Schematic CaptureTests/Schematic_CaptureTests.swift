@@ -34,7 +34,7 @@ class Schematic_CaptureTests: XCTestCase {
         
         
         //MARK: Test LoginController
-        loginController.logIn(username: (user.username)!, password: user.password!, completion: { (error) in
+        loginController.authenticateUser(username: user.username!, password: user.password!, completion: { (error) in
             if let error = error {
                 XCTFail("\(error)")
                 return
