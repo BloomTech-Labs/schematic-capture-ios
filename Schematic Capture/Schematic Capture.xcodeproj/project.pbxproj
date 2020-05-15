@@ -23,7 +23,6 @@
 		A665838C23E0E27C006073DF /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838B23E0E27C006073DF /* Bearer.swift */; };
 		A665838E23E0E384006073DF /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838D23E0E384006073DF /* Networking.swift */; };
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
-		A665839423E0E607006073DF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839323E0E607006073DF /* HomeViewController.swift */; };
 		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
 		A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */; };
 		A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */; };
@@ -115,7 +114,6 @@
 		A665838B23E0E27C006073DF /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		A665838D23E0E384006073DF /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		A665839323E0E607006073DF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetsTableViewController.swift; sourceTree = "<group>"; };
 		A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetTableViewCell.swift; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 		6DC49BAE246EE5FD009769E0 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
-				A665839323E0E607006073DF /* HomeViewController.swift */,
 				A692203123FF3DC10060AD9E /* AnnotationViewController.swift */,
 				A692203324048B4E0060AD9E /* SchematicViewController.swift */,
 				FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */,
@@ -251,8 +248,8 @@
 		A665835323DAB508006073DF /* Schematic Capture */ = {
 			isa = PBXGroup;
 			children = (
-				6DC49BA8246ECF9D009769E0 /* Constant */,
 				A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */,
+				6DC49BA8246ECF9D009769E0 /* Constant */,
 				A6613BF823E89DDE004A11B2 /* Ressources */,
 				A665837F23DF8CC8006073DF /* Storyboards */,
 				A6F1C9FA23EE0E8400E0D583 /* Views */,
@@ -675,7 +672,6 @@
 				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
 				A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */,
 				A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */,
-				A665839423E0E607006073DF /* HomeViewController.swift in Sources */,
 				6DC49BAC246EE3C8009769E0 /* UserDefault+String.swift in Sources */,
 				6DC49BAA246ECFAA009769E0 /* Enum.swift in Sources */,
 				FBAD0B7D243DA07700B653BE /* TechClient.swift in Sources */,
