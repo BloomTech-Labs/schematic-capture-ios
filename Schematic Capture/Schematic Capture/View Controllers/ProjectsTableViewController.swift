@@ -12,7 +12,7 @@ import CoreData
 class ProjectsTableViewController: UITableViewController {
     
     var authController: AuthorizationController?
-    var projectController: ProjectController?
+    var projectController = ProjectController()
     
     lazy var fetchedResultsController: NSFetchedResultsController<Project> = {
         let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
@@ -85,7 +85,9 @@ class ProjectsTableViewController: UITableViewController {
     func setupViews() {
         view.backgroundColor = .systemBackground
         self.title = "Projects"
-        
+        projectController.getClients(completion: { (clients) in
+            print(clients)
+        })
     }
     
 }

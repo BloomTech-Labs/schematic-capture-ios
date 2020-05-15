@@ -67,6 +67,7 @@ class LoginViewController: UIViewController {
                     projectsTableViewController.authController = self.authController
                     self.navigationController?.pushViewController(projectsTableViewController, animated: true)
                     
+                    
                 }
             }
         }

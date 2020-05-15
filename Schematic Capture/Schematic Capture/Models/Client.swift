@@ -8,19 +8,19 @@
 
 import Foundation
 
-struct Client{
+struct Client: Codable {
     var id:Int
-    var companyName:String
-    var phone:String
-    var street:String
-    var city:String
-    var state:String
-    var zip:String
+    //var companyName:String?
+    var phone:String?
+    var street:String?
+    var city:String?
+    var state:String?
+    var zip:String?
 }
 
-private enum CodingKeys:String, CodingKey {
+private enum CodingKeys: String, CodingKey {
     case id
-    case companyName
+    case companyName = "company_name"
     case phone
     case street
     case city
