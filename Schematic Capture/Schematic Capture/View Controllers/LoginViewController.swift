@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import OktaAuthSdk
 
 class LoginViewController: UIViewController {
     
@@ -58,18 +57,18 @@ class LoginViewController: UIViewController {
     
     @objc private func login(_ sender: UIButton) {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
-        authController.authenticateUser(username: username , password: password) { result in
-            if let user = try? result.get() as? EmbeddedResponse.User {
-                /* Do something with the user? If user is super-admin show problems ViewController first
-                 if it's not show camera ViewController? */
-                DispatchQueue.main.async {
-                    let projectsTableViewController = ProjectsTableViewController()
-                    projectsTableViewController.authController = self.authController
-                    self.navigationController?.pushViewController(projectsTableViewController, animated: true)
-                    
-                }
-            }
-        }
+//        authController.authenticateUser(username: username , password: password) { result in
+//            if let user = try? result.get() as? EmbeddedResponse.User {
+//                /* Do something with the user? If user is super-admin show problems ViewController first
+//                 if it's not show camera ViewController? */
+//                DispatchQueue.main.async {
+//                    let projectsTableViewController = ProjectsTableViewController()
+//                    projectsTableViewController.authController = self.authController
+//                    self.navigationController?.pushViewController(projectsTableViewController, animated: true)
+//                    
+//                }
+//            }
+//        }
     }
     
     // TODO: Add password recoveryViewController
