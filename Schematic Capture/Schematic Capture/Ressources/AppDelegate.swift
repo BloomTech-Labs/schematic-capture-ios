@@ -20,19 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func configureOkta() {
-        
-        let configuration = try? OktaOidcConfig(with: [
-            "issuer": "https://$com.okta.dev-833124/oauth2/default",
-            "clientId": "0oac57x5hNOP4Qb0C4x6",
-            "redirectUri": "com.okta.dev-833124:/",
-            "scopes": "openid profile offline_access"
-        ])
-        
-        let oktaOidc = try? OktaOidc(configuration: configuration)
-
-    }
-    
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

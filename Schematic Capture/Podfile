@@ -6,7 +6,6 @@ target 'Schematic Capture' do
   use_frameworks!
 
   # Pods for Schematic Capture
-pod 'OktaOidc'
 pod 'ExpyTableView'
 pod 'SwiftyDropbox'
 

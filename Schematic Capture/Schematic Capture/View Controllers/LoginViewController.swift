@@ -78,13 +78,13 @@ class LoginViewController: UIViewController, WKUIDelegate {
     
     @IBAction func login(_ sender: Any) {
         startLoadingScreen()
-        
-        if let error = validateTextFields() {
-            errorMessageLabel.alpha = 1
-            errorMessageLabel.text = error
-            stopLoadingScreen()
-            return
-        }
+//        
+//        if let error = validateTextFields() {
+//            errorMessageLabel.alpha = 1
+//            errorMessageLabel.text = error
+//            stopLoadingScreen()
+//            return
+//        }
         
         guard let loginController = loginController else {
             NSLog("LoginController not found")
@@ -95,19 +95,24 @@ class LoginViewController: UIViewController, WKUIDelegate {
         let user = User(password: passwordTextField.text!, username: emailTextField.text!)
         
         
-        loginController.logIn(username: user.username!, password: user.password!, completion:  { (error) in
-            self.stopLoadingScreen()
-            
-            if let error = error {
-                NSLog("\(error)")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                // TODO: - Show Alert
-            }
-            
-        } )
+        loginController.logIn(from: self)
+        
+        
+        
+        
+//        loginController.logIn(username: user.username!, password: user.password!, completion:  { (error) in
+//            self.stopLoadingScreen()
+//            
+//            if let error = error {
+//                NSLog("\(error)")
+//                return
+//            }
+//            
+//            DispatchQueue.main.async {
+//                // TODO: - Show Alert
+//            }
+//            
+//        } )
     }
     
     func validateTextFields() -> String? {

@@ -1,36 +1,24 @@
 PODS:
   - Alamofire (4.8.2)
   - ExpyTableView (1.2.1)
-  - OktaOidc (3.7.0):
-    - OktaOidc/AppAuth (= 3.7.0)
-    - OktaOidc/Okta (= 3.7.0)
-  - OktaOidc/AppAuth (3.7.0)
-  - OktaOidc/Okta (3.7.0):
-    - OktaOidc/AppAuth
-    - OktaOidc/Okta/Classes (= 3.7.0)
-  - OktaOidc/Okta/Classes (3.7.0):
-    - OktaOidc/AppAuth
   - SwiftyDropbox (5.1.0):
     - Alamofire (~> 4.8.2)
 
 DEPENDENCIES:
   - ExpyTableView
-  - OktaOidc
   - SwiftyDropbox
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - ExpyTableView
-    - OktaOidc
     - SwiftyDropbox
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   ExpyTableView: 19cf224c2ff04b1ec215ec52bc4ba6f81fa809ed
-  OktaOidc: 646773483d04de414575fd7845345fb151c0c388
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
 
-PODFILE CHECKSUM: 9fe1c2244306aa0ae7003e97b2e67b68f0ea75f7
+PODFILE CHECKSUM: e02c2db5864bd617b99e1c4f25bfb5cd3053ee3a
 
 COCOAPODS: 1.8.4

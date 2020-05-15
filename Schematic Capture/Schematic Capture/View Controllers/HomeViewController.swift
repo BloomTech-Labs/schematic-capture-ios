@@ -64,22 +64,22 @@ class HomeViewController: UIViewController, WKUIDelegate {
     @IBAction func signOut(_ sender: Any) {
         guard let loginController = loginController else { return }
         
-        loginController.signOut { (error) in
-            if let error = error {
-                print("\(error)")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if self.presentingViewController != nil {
-                    self.dismiss(animated: false, completion: {
-                        self.navigationController!.popToRootViewController(animated: true)
-                    })
-                } else {
-                    self.navigationController!.popToRootViewController(animated: true)
-                }
-            }
-        }
+//        loginController.signOut { (error) in
+//            if let error = error {
+//                print("\(error)")
+//                return
+//            }
+//            
+//            DispatchQueue.main.async {
+//                if self.presentingViewController != nil {
+//                    self.dismiss(animated: false, completion: {
+//                        self.navigationController!.popToRootViewController(animated: true)
+//                    })
+//                } else {
+//                    self.navigationController!.popToRootViewController(animated: true)
+//                }
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>issuer</key>
-	<string>https://$com.okta.dev-833124/oauth2/{authServerId}</string>
+	<string>https://$com.okta.dev-833124/oauth2/</string>
 	<key>clientId</key>
 	<string>0oac57x5hNOP4Qb0C4x6</string>
 	<key>redirectUri</key>

@@ -77,7 +77,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.okta.dev-833124</string>
+				<string>com.okta.dev-833124:/callback</string>
 			</array>
 		</dict>
 	</array>
