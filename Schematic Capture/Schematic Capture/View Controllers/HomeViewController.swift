@@ -109,7 +109,6 @@ class HomeViewController: UIViewController, WKUIDelegate {
     
     func stopLoadingScreen() {
         guard let webView = webView else { return }
-        
         DispatchQueue.main.async {
             webView.removeFromSuperview()
             self.webView = nil

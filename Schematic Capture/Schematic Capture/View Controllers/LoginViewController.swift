@@ -7,180 +7,95 @@
 //
 
 import UIKit
-import WebKit
 
-class LoginViewController: UIViewController, WKUIDelegate {
+class LoginViewController: UIViewController {
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var errorMessageLabel: UILabel!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var baseConstraint: NSLayoutConstraint!
+    // MARK: - Properties
     
+    let emailTextField = UITextField()
+    let passwordTextField = UITextField()
+    let loginButton = UIButton()
     var loginController: LogInController?
-    var webView: WKWebView!
-
+    
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setUpTextFieldDelegate()
-        setUpUI()
-        addTapGesture()
-        addKeyboardNotification()
-        
+        setupViews()
+        /// Email and passwrod are for testing purposes
         emailTextField.text = "bob_johnson@lambdaschool.com"
         passwordTextField.text = "Testing123!"
-        
     }
     
-    func setUpUI() {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupConstraints()
+    }
+    
+    // MARK: - Functions
+    
+    private func setupViews() {
+        self.title = "Log In"
+        
+        view.backgroundColor = .systemBackground
         Style.styleTextField(emailTextField)
         Style.styleTextField(passwordTextField)
         Style.styleFilledButton(loginButton)
-        errorMessageLabel.alpha = 0
         
-        webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
-        webView.uiDelegate = self
-        if let url = Bundle.main.url(forResource: "Pulse-1s-200px", withExtension: "svg") {
-            webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
-        }
-    }
-    
-    func setUpTextFieldDelegate() {
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        loginButton.setTitle("Log In", for: .normal)
+        loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
+        
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(loginButton)
     }
     
-    func startLoadingScreen() {
-        guard let webView = webView else { return }
-        
-        DispatchQueue.main.async {
-            webView.translatesAutoresizingMaskIntoConstraints = false
-            webView.backgroundColor = .clear
-            webView.isOpaque = false
-            self.view.addSubview(webView)
-            
-            webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.2).isActive = true
-            webView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-            webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -15).isActive = true
-        }
-    }
-    
-    func stopLoadingScreen() {
-        guard let webView = webView else { return }
-        
-        DispatchQueue.main.async {
-            webView.removeFromSuperview()
-            self.webView = nil
-        }
-    }
-    
-    @IBAction func login(_ sender: Any) {
-        startLoadingScreen()
-//        
-//        if let error = validateTextFields() {
-//            errorMessageLabel.alpha = 1
-//            errorMessageLabel.text = error
-//            stopLoadingScreen()
-//            return
-//        }
-        
-        guard let loginController = loginController else {
-            NSLog("LoginController not found")
-            stopLoadingScreen()
-            return
-        }
-        
-        let user = User(password: passwordTextField.text!, username: emailTextField.text!)
-        
-        
-        loginController.logIn(from: self)
-        
-        
-        
-        
-//        loginController.logIn(username: user.username!, password: user.password!, completion:  { (error) in
-//            self.stopLoadingScreen()
-//            
-//            if let error = error {
-//                NSLog("\(error)")
-//                return
-//            }
-//            
-//            DispatchQueue.main.async {
-//                // TODO: - Show Alert
-//            }
-//            
-//        } )
-    }
-    
-    func validateTextFields() -> String? {
-        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "Please fill in all fields."
-        }
-        return nil
-    }
-    
-    // Dismiss Keyboard
-    func addTapGesture() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
-    func addKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func animateWithKeyboard(notification: NSNotification) {
-        
-        let userInfo = notification.userInfo!
-        let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
-        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
-        let curve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
-        let moveUp = (notification.name == UIResponder.keyboardWillShowNotification)
-        
-        let viewHeight = self.view.safeAreaLayoutGuide.layoutFrame.height
-        var displacement: CGFloat = 0
-        
-        if let textField = getActiveTextField() {
-            displacement = viewHeight - (textField.frame.origin.y + keyboardHeight + 15)
-        }
-        
-        baseConstraint.constant = moveUp ? displacement : 40
-        
-        let options = UIView.AnimationOptions(rawValue: curve << 16)
-        UIView.animate(withDuration: duration, delay: 0, options: options, animations: { self.view.layoutIfNeeded() },
-                       completion: nil)
-    }
-    
-    func getActiveTextField() -> UITextField? {
-        if emailTextField.isFirstResponder {
-            return emailTextField
-        } else if passwordTextField.isFirstResponder {
-            return passwordTextField
-        }
-        return nil
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "HomeVCSegue" {
-            if let homeVC = segue.destination as? HomeViewController {
-                homeVC.loginController = loginController
-                homeVC.projectController.user = loginController?.user
-                homeVC.projectController.bearer = loginController?.bearer
+    @objc func login(_ sender: UIButton) {
+        guard let loginController = loginController, let emailAddress = emailTextField.text, let password = passwordTextField.text else { return }
+        loginController.AuthenticateUser(username: emailAddress, password: password) {
+            DispatchQueue.main.async {
+                // Authentication succeeded go to HomeViewController
+                let homeViewController = HomeViewController()
+                homeViewController.loginController = loginController
+                homeViewController.projectController.user = loginController.user
+                homeViewController.projectController.bearer = loginController.bearer
             }
         }
     }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            
+            emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48.0),
+            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emailTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -64),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 8.0),
+            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordTextField.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
+            passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
+            
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16.0),
+            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginButton.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
+            loginButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
+        ])
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
+
+// MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

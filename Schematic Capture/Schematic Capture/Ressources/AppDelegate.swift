@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyDropbox
-import OktaOidc
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
