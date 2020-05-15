@@ -13,13 +13,55 @@ class AuthorizationController {
     var bearer: Bearer?
     var user: User?
     
-    typealias Completion = (Result<Any, Error>) -> ()
+    typealias Completion = (Result<Any, NetworkingError>) -> ()
     
     // AuthenticateUser
     /*Authenticate user with username and password. Save user Id to UserDefaults */
     
-    
-    
+    func logIn(username:String, password:String, completion: @escaping Completion) {
+        //configure request url
+        let loggingInUser = User(password:password, username:username)
+        var internalBearer:Bearer?
+
+        var request = URLRequest(url: URL(string: Urls.logInUrl.rawValue)!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("token", forHTTPHeaderField: "validateIdToken")
+
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(loggingInUser)
+            let jsonDataString = String(decoding: jsonData, as: UTF8.self)
+            request.httpBody = jsonData
+        } catch {
+            print("Error encoding user in LogIn: \(error)")
+            completion(.failure(.badDecode))
+            return
+        }
+        URLSession.shared.dataTask(with:request) { (data, _, error) in
+            if let error = error {
+                completion(.failure(.serverError(error)))
+            }
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+                        
+            let decoder = JSONDecoder()
+            do {
+                internalBearer = try decoder.decode(Bearer.self, from: data)
+            } catch {
+                print("Error decoding a bearer token: \(error)")
+                completion(.failure(.badDecode))
+                let dataString = String(decoding:data, as: UTF8.self)
+                print("DATA: ", dataString)
+                return
+            }
+            self.user = loggingInUser
+            self.bearer = internalBearer
+            self.defaults.set(internalBearer?.token, forKey: .userId)
+        }.resume()
+    }
     
     
     
@@ -33,7 +75,7 @@ class AuthorizationController {
     
     // Handle status
     /*Handle current status in order to proceed with the initiated flow*/
-
+    
     
     
     

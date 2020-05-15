@@ -22,10 +22,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func setupRootViewController() {
-        let loginViewController = LoginViewController()
-        let navigationController = UINavigationController(rootViewController: loginViewController)
-        self.window?.rootViewController = navigationController
-        self.window?.makeKeyAndVisible()
+        if let userId = UserDefaults.standard.string(forKey: .userId) {
+            let navigationController = UINavigationController(rootViewController: ProjectsTableViewController())
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+        } else {
+            let navigationController = UINavigationController(rootViewController: LoginViewController())
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     let loginButton = UIButton()
     
     // MARK: - Properties
-
+    
     var authController = AuthorizationController()
     
     // MARK: - View Lifecycle
@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-
+        
         loginButton.setTitle("Log In", for: .normal)
         loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
         
@@ -57,18 +57,19 @@ class LoginViewController: UIViewController {
     
     @objc private func login(_ sender: UIButton) {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
-//        authController.authenticateUser(username: username , password: password) { result in
-//            if let user = try? result.get() as? EmbeddedResponse.User {
-//                /* Do something with the user? If user is super-admin show problems ViewController first
-//                 if it's not show camera ViewController? */
-//                DispatchQueue.main.async {
-//                    let projectsTableViewController = ProjectsTableViewController()
-//                    projectsTableViewController.authController = self.authController
-//                    self.navigationController?.pushViewController(projectsTableViewController, animated: true)
-//                    
-//                }
-//            }
-//        }
+        
+        authController.logIn(username: username, password: password) { result in
+            if let user = try? result.get() as? User {
+                /* Do something with the user? If user is super-admin show problems ViewController first
+                 if it's not show camera ViewController? */
+                DispatchQueue.main.async {
+                    let projectsTableViewController = ProjectsTableViewController()
+                    projectsTableViewController.authController = self.authController
+                    self.navigationController?.pushViewController(projectsTableViewController, animated: true)
+                    
+                }
+            }
+        }
     }
     
     // TODO: Add password recoveryViewController
@@ -76,7 +77,7 @@ class LoginViewController: UIViewController {
     @objc private func gotToRecoveryViewController() {
         
     }
-
+    
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([

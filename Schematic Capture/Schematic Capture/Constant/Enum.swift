@@ -9,10 +9,9 @@
 import Foundation
 
 
-// Urls for all Okta's operations
-enum OktaUrls: String {
-    case baseUrl = "https://dev-833124-admin.okta.com/"
-    case passwordRecoveryUrl = "https://dev-833124-admin.okta.com/api/v1/authn/recovery/password"
+// Urls for all Heroku operations
+enum Urls: String {
+    case logInUrl = "https://schematiccapture-master.herokuapp.com/api/auth/login"
 }
 
 enum Keys: String {
