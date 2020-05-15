@@ -17,93 +17,61 @@ class ProjectController {
     
     
     
-    func fetchClients() {
-        
-        //configure request url
-
-        var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        URLSession.shared.dataTask(with: request) { (data, _, error) in
-            if let error = error {
-//                completion(.failure(.serverError(error)))
-            }
-            guard let data = data else {
-//                completion(.failure(.noData))
-                return
-            }
-                        
-            let decoder = JSONDecoder()
-            do {
-                let clients = try decoder.decode(Client.self, from: data)
-                
-                print("CLIENTS: ", clients)
-            } catch {
-                print("Error decoding clients: \(error)")
-                return
-            }
-            
-        }.resume()
-        
-    }
-    
-    
     
     
     
     
     // Download assigned jobs (get client, project, job, csv as json)
-    func downloadAssignedJobs(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
-        
-        guard let bearer = self.bearer else {
-            completion(.noBearer)
-            return
-        }
-        
-        let requestURL = self.baseURL.appendingPathComponent("jobsheets").appendingPathComponent("assigned")
-        
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = HTTPMethod.get.rawValue
-        request.setValue("Bearer \(bearer.token)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
-        request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
-        
-        URLSession.shared.dataTask(with: request) { (data, _, error) in
-            
-            if let error = error {
-                NSLog("Error getting assigned jobs: \(error)")
-                completion(.serverError(error))
-                return
-            }
-            
-            guard let data = data else {
-                NSLog("No data returned from data task")
-                completion(.noData)
-                return
-            }
-            
-            //TODO: debug statement
-            NSLog("\ninside download assigned jobs\n \(String(data: data, encoding: .utf8)!) \n\n")
-            
-            // decode projects
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            do {
-                let projectsRep = try decoder.decode([ProjectRepresentation].self, from: data)
-                
-                self.updateProjects(with: projectsRep)
-                self.projects = projectsRep
-                self.projects.sort { $0.id < $1.id }
-                NSLog("\n\nPROJECTS: \(self.projects)\n\n")
-            } catch {
-                NSLog("Error decoding the jobs: \(error)")
-                completion(.badDecode)
-            }
-            
-            completion(nil)
-        }.resume()
-        NSLog("0. Last line of downloadAssigned Jobs Executed")
-    }
+//    func downloadAssignedJobs(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
+//        
+//        guard let bearer = self.bearer else {
+//            completion(.noBearer)
+//            return
+//        }
+//        
+////        let requestURL = self.baseURL.appendingPathComponent("jobsheets").appendingPathComponent("assigned")
+//        
+//        var request = URLRequest(url: requestURL)
+//        request.httpMethod = HTTPMethod.get.rawValue
+//        request.setValue("Bearer \(bearer.token)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
+//        request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
+//        
+//        URLSession.shared.dataTask(with: request) { (data, _, error) in
+//            
+//            if let error = error {
+//                NSLog("Error getting assigned jobs: \(error)")
+//                completion(.serverError(error))
+//                return
+//            }
+//            
+//            guard let data = data else {
+//                NSLog("No data returned from data task")
+//                completion(.noData)
+//                return
+//            }
+//            
+//            //TODO: debug statement
+//            NSLog("\ninside download assigned jobs\n \(String(data: data, encoding: .utf8)!) \n\n")
+//            
+//            // decode projects
+//            let decoder = JSONDecoder()
+//            decoder.dateDecodingStrategy = .iso8601
+//            do {
+//                let projectsRep = try decoder.decode([ProjectRepresentation].self, from: data)
+//                
+//                self.updateProjects(with: projectsRep)
+//                self.projects = projectsRep
+//                self.projects.sort { $0.id < $1.id }
+//                NSLog("\n\nPROJECTS: \(self.projects)\n\n")
+//            } catch {
+//                NSLog("Error decoding the jobs: \(error)")
+//                completion(.badDecode)
+//            }
+//            
+//            completion(nil)
+//        }.resume()
+//        NSLog("0. Last line of downloadAssigned Jobs Executed")
+//    }
     
     private func updateProjects(with representations: [ProjectRepresentation]) {
         let identifiersToFetch = representations.map({ $0.id })

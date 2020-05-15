@@ -6,4 +6,10 @@
 //  Copyright © 2020 GIPGIP Studio. All rights reserved.
 //
 
-import Foundation
+import UIKit 
+
+extension UIView {
+    static var id: String {
+        return String(describing: self)
+    }
+}

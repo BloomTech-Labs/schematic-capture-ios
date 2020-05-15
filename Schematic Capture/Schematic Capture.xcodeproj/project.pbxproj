@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D32F6F1246F2D5400F59FBB /* ClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */; };
+		6D32F6F3246F30F100F59FBB /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D32F6F2246F30F100F59FBB /* ClientTableViewCell.swift */; };
 		6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D443000246DD876008C8EE1 /* Assets.xcassets */; };
 		6DC49BAA246ECFAA009769E0 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC49BA9246ECFAA009769E0 /* Enum.swift */; };
 		6DC49BAC246EE3C8009769E0 /* UserDefault+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC49BAB246EE3C8009769E0 /* UserDefault+String.swift */; };
@@ -92,6 +93,7 @@
 		5C9F0C4E76F3C58107BC14BD /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		69D35217379C6756E5F92DF3 /* Pods_Schematic_CaptureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_CaptureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewController.swift; sourceTree = "<group>"; };
+		6D32F6F2246F30F100F59FBB /* ClientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
 		6D443000246DD876008C8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D443008246DDC18008C8EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DC49BA9246ECFAA009769E0 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
@@ -277,10 +279,10 @@
 			isa = PBXGroup;
 			children = (
 				A665839123E0E5FF006073DF /* LoginViewController.swift */,
+				6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */,
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
 				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
-				6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */,
 				6DC49BAE246EE5FD009769E0 /* Legacy */,
 			);
 			path = "View Controllers";
@@ -354,6 +356,7 @@
 				A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */,
 				A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */,
 				A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */,
+				6D32F6F2246F30F100F59FBB /* ClientTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
 				A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */,
 				FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */,
+				6D32F6F3246F30F100F59FBB /* ClientTableViewCell.swift in Sources */,
 				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
 				FBAD0B81243DA1AF00B653BE /* Contact.swift in Sources */,
 				A665839623E0E863006073DF /* Style.swift in Sources */,
