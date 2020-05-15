@@ -81,15 +81,6 @@ class HomeViewController: UIViewController, WKUIDelegate {
 //        }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ProjectSegue" {
-            if let projectsTableVC = segue.destination as? ProjectsTableViewController {
-                projectsTableVC.loginController = loginController
-                projectsTableVC.projectController = projectController
-            }
-        }
-    }
-    
     func startLoadingScreen() {
         guard let webView = webView else { return }
         

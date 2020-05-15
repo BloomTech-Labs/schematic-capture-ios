@@ -206,8 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				A665839323E0E607006073DF /* HomeViewController.swift */,
-				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
-				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
 				A692203123FF3DC10060AD9E /* AnnotationViewController.swift */,
 				A692203324048B4E0060AD9E /* SchematicViewController.swift */,
 				FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */,
@@ -292,6 +290,8 @@
 			children = (
 				A665839123E0E5FF006073DF /* LoginViewController.swift */,
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
+				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
+				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
 				6DC49BAE246EE5FD009769E0 /* Legacy */,
 			);
 			path = "View Controllers";

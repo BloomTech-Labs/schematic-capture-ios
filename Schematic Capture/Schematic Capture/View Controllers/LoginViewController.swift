@@ -64,8 +64,8 @@ class LoginViewController: UIViewController {
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
                     let projectsTableViewController = ProjectsTableViewController()
-                    projectsTableViewController.loginController = self.authController
-                    navigationController.pushViewController(pa)
+                    projectsTableViewController.authController = self.authController
+                    self.navigationController?.pushViewController(projectsTableViewController, animated: true)
                     
                 }
             }
