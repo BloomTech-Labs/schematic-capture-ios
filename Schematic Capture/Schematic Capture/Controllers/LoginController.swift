@@ -26,12 +26,10 @@ class AuthorizationController {
         var request = URLRequest(url: URL(string: Urls.logInUrl.rawValue)!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("token", forHTTPHeaderField: "validateIdToken")
 
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(loggingInUser)
-            let jsonDataString = String(decoding: jsonData, as: UTF8.self)
             request.httpBody = jsonData
         } catch {
             print("Error encoding user in LogIn: \(error)")

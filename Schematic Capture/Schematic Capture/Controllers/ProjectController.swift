@@ -15,10 +15,43 @@ class ProjectController {
     var user: User?
     var projects: [ProjectRepresentation] = []
     
-    // private let baseURL = URL(string: "https://sc-be-production.herokuapp.com/api")!
-    //    private let baseURL = URL(string: "https://sc-be-staging.herokuapp.com/api")!
-    // private let baseURL = URL(string: "https://sc-test-be.herokuapp.com/api")!
-    private let baseURL = URL(string: "http://localhost:5000/api")!
+    
+    
+    func fetchClients() {
+        
+        //configure request url
+
+        var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+//                completion(.failure(.serverError(error)))
+            }
+            guard let data = data else {
+//                completion(.failure(.noData))
+                return
+            }
+                        
+            let decoder = JSONDecoder()
+            do {
+                let clients = try decoder.decode(Client.self, from: data)
+                
+                print("CLIENTS: ", clients)
+            } catch {
+                print("Error decoding clients: \(error)")
+                return
+            }
+            
+        }.resume()
+        
+    }
+    
+    
+    
+    
+    
     
     // Download assigned jobs (get client, project, job, csv as json)
     func downloadAssignedJobs(completion: @escaping (NetworkingError?) -> Void = { _ in }) {
