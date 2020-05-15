@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        DropboxClientsManager.setupWithAppKey("t5i27y2t3fzkiqj")
+        DropboxClientsManager.setupWithAppKey(Keys.dropbox.rawValue)
         return true
     }
     

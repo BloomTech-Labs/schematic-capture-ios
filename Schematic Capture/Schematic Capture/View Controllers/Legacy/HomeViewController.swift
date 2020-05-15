@@ -12,26 +12,20 @@ import SwiftyDropbox
 
 class HomeViewController: UIViewController, WKUIDelegate {
     
-    
     // MARK: - UI Elements
     
     @IBOutlet weak var downloadProjectsButton: UIButton!
     @IBOutlet weak var viewProjectsButton: UIButton!
     @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
     
+    // MARK: - Properties
     
-    // MARK: - Properties 
     var loginController: LogInController?
     var projectController = ProjectController()
     var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Style.styleFilledButton(downloadProjectsButton)
-        Style.styleFilledButton(viewProjectsButton)
-        Style.styleFilledButton(uploadJobSheetsButton)
-        
         
         webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
         webView.uiDelegate = self

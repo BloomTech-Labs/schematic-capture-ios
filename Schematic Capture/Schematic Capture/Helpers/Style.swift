@@ -49,32 +49,7 @@ class Style {
             alpha: CGFloat(1.0)
         )
     }
-    
-    static func styleTextField(_ textfield:UITextField) {
-        DispatchQueue.main.async {
-            // Create the bottom line
-            let bottomLine = CALayer()
-            
-            bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 1, width: textfield.frame.width, height: 2)
-            
-            bottomLine.backgroundColor = hexStringToUIColor(hex: "#1165A8").cgColor
-            
-            // Remove border on text field
-            textfield.borderStyle = .none
-            
-            // Add the line to the text field
-            textfield.layer.addSublayer(bottomLine)
-        }
-    }
-    
-    static func styleFilledButton(_ button:UIButton) {
-        DispatchQueue.main.async {
-            button.backgroundColor = hexStringToUIColor(hex: "#1165A8")
-            button.layer.cornerRadius = 2
-            button.tintColor = UIColor.white
-            button.titleLabel?.font = UIFont(name: "OpenSans-Regular", size: 20)
-        }
-    }
+
     
     static func styleHollowButton(_ button:UIButton) {
         DispatchQueue.main.async {

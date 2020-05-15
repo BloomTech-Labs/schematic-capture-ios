@@ -17,7 +17,7 @@ class LogInController {
     typealias Completion = (Result<Any, Error>) -> ()
     
     // AuthenticateUser
-    /*Authenticate user with username and password*/
+    /*Authenticate user with username and password. Save user Id to UserDefaults */
     func authenticateUser(username: String, password: String, completion: @escaping Completion) {
         OktaAuthSdk.authenticate(with:URL(string: OktaUrls.baseUrl.rawValue)!, username: username, password: password, onStatusChange: { authStatus in
             if let status = self.handleStatus(status: authStatus), let user = status.user {

@@ -19,13 +19,10 @@ class SignInViewController: UIViewController, WKUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpUI()
-        
     }
     
     func setUpUI() {
-        Style.styleFilledButton(loginButton)
         
         self.navigationController?.view.backgroundColor = .clear
         

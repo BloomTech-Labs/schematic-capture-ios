@@ -42,16 +42,11 @@ class LoginViewController: UIViewController {
         self.title = "Log In"
         
         view.backgroundColor = .systemBackground
-        Style.styleTextField(emailTextField)
-        Style.styleTextField(passwordTextField)
-        Style.styleFilledButton(loginButton)
         
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
+
         loginButton.setTitle("Log In", for: .normal)
         loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
         
@@ -64,6 +59,7 @@ class LoginViewController: UIViewController {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
         loginController.authenticateUser(username: username , password: password) { result in
             if let user = try? result.get() as? EmbeddedResponse.User {
+                // Do something with the user?
                 DispatchQueue.main.async {
                     let homeViewController = HomeViewController()
                     homeViewController.loginController = self.loginController
@@ -99,20 +95,6 @@ class LoginViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-    }
-}
-
-
-// MARK: - UITextFieldDelegate
-extension LoginViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
-            nextField.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-        }
-        return false
     }
 }
 

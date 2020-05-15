@@ -130,8 +130,7 @@ class EditComponentViewController: UIViewController {
     }
     
     func setUpUI() {
-        Style.styleFilledButton(saveButton)
-        Style.styleFilledButton(dismissButton)
+
     }
     
     /*
