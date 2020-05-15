@@ -26,9 +26,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        /// Email and passwrod are for testing purposes
-        emailTextField.text = "bob_johnson@lambdaschool.com"
-        passwordTextField.text = "Testing123!"
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,16 +47,21 @@ class LoginViewController: UIViewController {
         loginButton.setTitle("Log In", for: .normal)
         loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
         
+        /// Email and password are for testing purposes
+        emailTextField.text = "bob_johnson@lambdaschool.com"
+        passwordTextField.text = "Testing123!"
+        
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
     }
     
-    @objc func login(_ sender: UIButton) {
+    @objc private func login(_ sender: UIButton) {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
         loginController.authenticateUser(username: username , password: password) { result in
             if let user = try? result.get() as? EmbeddedResponse.User {
-                // Do something with the user?
+                /* Do something with the user? If user is super-admin show problems ViewController first
+                 if it's not show camera ViewController? */
                 DispatchQueue.main.async {
                     let homeViewController = HomeViewController()
                     homeViewController.loginController = self.loginController
@@ -70,8 +72,12 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // TODO: Add password recovery
+    // TODO: Add password recoveryViewController
     
+    @objc private func gotToRecoveryViewController() {
+        
+    }
+
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
