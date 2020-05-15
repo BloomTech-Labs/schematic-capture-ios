@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OktaAuthSdk
 
 class LoginViewController: UIViewController {
     
@@ -18,7 +19,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties
 
-    var loginController: LogInController?
+    var loginController = LogInController()
     
     // MARK: - View Lifecycle
     
@@ -60,19 +61,21 @@ class LoginViewController: UIViewController {
     }
     
     @objc func login(_ sender: UIButton) {
-        guard let loginController = loginController, let username = emailTextField.text, let password = passwordTextField.text else { return }
+        guard let username = emailTextField.text, let password = passwordTextField.text else { return }
         loginController.authenticateUser(username: username , password: password) { result in
-            if let error = try? result.get() {
+            if let user = try? result.get() as? EmbeddedResponse.User {
                 DispatchQueue.main.async {
-                    // Authentication succeeded go to HomeViewController
                     let homeViewController = HomeViewController()
-                    homeViewController.loginController = loginController
-                    homeViewController.projectController.user = loginController.user
-                    homeViewController.projectController.bearer = loginController.bearer
+                    homeViewController.loginController = self.loginController
+                    homeViewController.projectController.user = self.loginController.user
+                    homeViewController.projectController.bearer = self.loginController.bearer
                 }
             }
         }
     }
+    
+    // TODO: Add password recovery
+    
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([

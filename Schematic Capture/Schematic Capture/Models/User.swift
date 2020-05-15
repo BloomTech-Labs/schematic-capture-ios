@@ -25,18 +25,6 @@ struct User: Codable {
     var role: Role?
     var id: String?
     var username:String?
-    
-    private enum CodingKeys: String, CodingKey {
-        case email
-        case password
-        case firstName
-        case lastName
-        case phone
-        case inviteToken
-        case role
-        case id
-        case username
-    }
 }
 
 

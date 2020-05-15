@@ -14,14 +14,15 @@ class LogInController {
     var bearer: Bearer?
     var user: User?
     
-    typealias Completion = (Result<OktaAuthStatus, Error>) -> ()
-        
+    typealias Completion = (Result<Any, Error>) -> ()
+    
     // AuthenticateUser
     /*Authenticate user with username and password*/
     func authenticateUser(username: String, password: String, completion: @escaping Completion) {
         OktaAuthSdk.authenticate(with:URL(string: OktaUrls.baseUrl.rawValue)!, username: username, password: password, onStatusChange: { authStatus in
-            if let status = self.handleStatus(status: authStatus) {
-                completion(.success(status))
+            if let status = self.handleStatus(status: authStatus), let user = status.user {
+                self.defaults.set(user.id, forKey: .userId)
+                completion(.success(user))
             }
         }) { error in
             NSLog("Error authenticating user: \(error)")
@@ -31,8 +32,8 @@ class LogInController {
     
     
     // Password recovery
-    /*Starts a new password recovery transaction for a given user and issues a
-     recovery token that can be used to reset a user's password*/
+    /*Starts a new password recovery transaction for a given user and issues a that
+     can be used to reset a user's password*/
     func recoverPassword(username: String, completion: @escaping Completion) {
         OktaAuthSdk.recoverPassword(with: URL(string: OktaUrls.passwordRecoveryUrl.rawValue)!, username: username, factorType: .email, onStatusChange: { authStatus in
             completion(.success(authStatus))

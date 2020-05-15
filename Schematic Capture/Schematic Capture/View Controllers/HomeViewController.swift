@@ -12,10 +12,15 @@ import SwiftyDropbox
 
 class HomeViewController: UIViewController, WKUIDelegate {
     
+    
+    // MARK: - UI Elements
+    
     @IBOutlet weak var downloadProjectsButton: UIButton!
     @IBOutlet weak var viewProjectsButton: UIButton!
     @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
     
+    
+    // MARK: - Properties 
     var loginController: LogInController?
     var projectController = ProjectController()
     var webView: WKWebView!
@@ -34,6 +39,15 @@ class HomeViewController: UIViewController, WKUIDelegate {
             webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     @IBAction func uploadJobSheets(_ sender: Any) {
         DropboxClientsManager.authorizeFromController(UIApplication.shared,
