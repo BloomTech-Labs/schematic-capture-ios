@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyDropbox
-import OktaAuth
+import OktaOidc
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         DropboxClientsManager.setupWithAppKey("t5i27y2t3fzkiqj")
         return true
+    }
+    
+    func configureOkta() {
+        
+        let configuration = try? OktaOidcConfig(with: [
+            "issuer": "https://$com.okta.dev-833124/oauth2/default",
+            "clientId": "0oac57x5hNOP4Qb0C4x6",
+            "redirectUri": "com.okta.dev-833124:/",
+            "scopes": "openid profile offline_access"
+        ])
+        
+        let oktaOidc = try? OktaOidc(configuration: configuration)
+
     }
     
     // MARK: UISceneSession Lifecycle
@@ -33,10 +46,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-        return OktaAuth.resume(url: url, options: options)
-    }
-    
 }
 

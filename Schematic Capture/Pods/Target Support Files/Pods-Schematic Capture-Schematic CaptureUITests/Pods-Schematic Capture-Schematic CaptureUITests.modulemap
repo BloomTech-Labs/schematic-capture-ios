@@ -1,0 +1,6 @@
+framework module Pods_Schematic_Capture_Schematic_CaptureUITests {
+  umbrella header "Pods-Schematic Capture-Schematic CaptureUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

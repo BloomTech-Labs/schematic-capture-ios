@@ -1,32 +1,36 @@
 PODS:
   - Alamofire (4.8.2)
-  - ExpyTableView (1.2)
-  - HydraAsync (1.2.1)
-  - OktaAuth (2.1.0):
-    - HydraAsync (~> 1.2.1)
+  - ExpyTableView (1.2.1)
+  - OktaOidc (3.7.0):
+    - OktaOidc/AppAuth (= 3.7.0)
+    - OktaOidc/Okta (= 3.7.0)
+  - OktaOidc/AppAuth (3.7.0)
+  - OktaOidc/Okta (3.7.0):
+    - OktaOidc/AppAuth
+    - OktaOidc/Okta/Classes (= 3.7.0)
+  - OktaOidc/Okta/Classes (3.7.0):
+    - OktaOidc/AppAuth
   - SwiftyDropbox (5.1.0):
     - Alamofire (~> 4.8.2)
 
 DEPENDENCIES:
   - ExpyTableView
-  - OktaAuth
+  - OktaOidc
   - SwiftyDropbox
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - ExpyTableView
-    - HydraAsync
-    - OktaAuth
+    - OktaOidc
     - SwiftyDropbox
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  ExpyTableView: e317dc2bccfab6672d52b62507c834a4ecb57bba
-  HydraAsync: 8f2ab62d57e140b4ca587ae0f66e1eb04e8e6965
-  OktaAuth: 503bfc134e649cb4630327bc39f7980658350675
+  ExpyTableView: 19cf224c2ff04b1ec215ec52bc4ba6f81fa809ed
+  OktaOidc: 646773483d04de414575fd7845345fb151c0c388
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
 
-PODFILE CHECKSUM: d67d417213997a78318e53c2bb7758d38f7c48af
+PODFILE CHECKSUM: 9fe1c2244306aa0ae7003e97b2e67b68f0ea75f7
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.8.4

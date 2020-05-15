@@ -1,9 +1,10 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/ExpyTableView" "${PODS_CONFIGURATION_BUILD_DIR}/HydraAsync" "${PODS_CONFIGURATION_BUILD_DIR}/OktaAuth" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyDropbox"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/ExpyTableView" "${PODS_CONFIGURATION_BUILD_DIR}/OktaOidc" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyDropbox"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ExpyTableView/ExpyTableView.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/HydraAsync/Hydra.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/OktaAuth/OktaAuth.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyDropbox/SwiftyDropbox.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "ExpyTableView" -framework "Foundation" -framework "Hydra" -framework "OktaAuth" -framework "SwiftyDropbox" -framework "SystemConfiguration" -framework "UIKit" -framework "WebKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ExpyTableView/ExpyTableView.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/OktaOidc/OktaOidc.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyDropbox/SwiftyDropbox.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "ExpyTableView" -framework "Foundation" -framework "OktaOidc" -framework "SwiftyDropbox" -framework "SystemConfiguration" -framework "UIKit" -framework "WebKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
+USER_HEADER_SEARCH_PATHS = ${SRCROOT}/OktaOidc/**
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

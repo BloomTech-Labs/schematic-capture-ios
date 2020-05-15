@@ -6,12 +6,18 @@ target 'Schematic Capture' do
   use_frameworks!
 
   # Pods for Schematic Capture
+pod 'OktaOidc'
 pod 'ExpyTableView'
 pod 'SwiftyDropbox'
-pod 'OktaAuth'
+
+  
 
   target 'Schematic CaptureTests' do
     inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Schematic CaptureUITests' do
     # Pods for testing
   end
 

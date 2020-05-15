@@ -222,6 +222,10 @@ class ExpyTableViewController: UIViewController {
 
 extension ExpyTableViewController: ExpyTableViewDataSource, ExpyTableViewDelegate {
     
+    func tableView(_ tableView: ExpyTableView, expyState state: ExpyState, changeForSection section: Int) {
+        
+    }
+    
     func tableView(_ tableView: ExpyTableView, canExpandSection section: Int) -> Bool {
         true
     }

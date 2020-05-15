@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		203A5C168218CC2EF860A488 /* Pods_Schematic_CaptureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */; };
 		6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D443000246DD876008C8EE1 /* Assets.xcassets */; };
+		A2BA3BBFE3DD72FD32FE7F2E /* Pods_Schematic_Capture_Schematic_CaptureUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1641FB5382B565D32B5190 /* Pods_Schematic_Capture_Schematic_CaptureUITests.framework */; };
 		A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835A23DAB508006073DF /* Main.storyboard */; };
 		A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A665835F23DAB50A006073DF /* LaunchScreen.storyboard */; };
 		A6613C0523E9340E004A11B2 /* Schematic_CaptureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */; };
@@ -51,8 +51,9 @@
 		A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */; };
 		A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */; };
 		A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */; };
-		A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */; };
+		D71890C64BCE841D90AB35B1 /* Pods_Schematic_CaptureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D35217379C6756E5F92DF3 /* Pods_Schematic_CaptureTests.framework */; };
 		E1C88705246DFA9C00A6E464 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1C88704246DFA9C00A6E464 /* Okta.plist */; };
+		FA04C5040518ED4D6B6758FE /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBCB2AD64144D00159EEDF4 /* Pods_Schematic_Capture.framework */; };
 		FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */; };
 		FBAD0B7D243DA07700B653BE /* TechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7C243DA07700B653BE /* TechClient.swift */; };
 		FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7E243DA11B00B653BE /* Client.swift */; };
@@ -91,12 +92,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		49AD8C612B258C5954802E50 /* Pods-Schematic CaptureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.debug.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3E1641FB5382B565D32B5190 /* Pods_Schematic_Capture_Schematic_CaptureUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture_Schematic_CaptureUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DBCB2AD64144D00159EEDF4 /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C9F0C4E76F3C58107BC14BD /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
+		69D35217379C6756E5F92DF3 /* Pods_Schematic_CaptureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_CaptureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D443000246DD876008C8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D443008246DDC18008C8EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74CE154D4AA08AC493FBA5F6 /* Pods-Schematic Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.debug.xcconfig"; sourceTree = "<group>"; };
-		7CF1D52C5578D599C2B001F6 /* Pods-Schematic Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.release.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.release.xcconfig"; sourceTree = "<group>"; };
-		9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_CaptureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		837699C844A30824EE54A4A9 /* Pods-Schematic Capture-Schematic CaptureUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture-Schematic CaptureUITests.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture-Schematic CaptureUITests/Pods-Schematic Capture-Schematic CaptureUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		84555F124037B693CC002AE6 /* Pods-Schematic Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.release.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.release.xcconfig"; sourceTree = "<group>"; };
+		9A15DDFF9E34B6E8615EDEE2 /* Pods-Schematic Capture-Schematic CaptureUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture-Schematic CaptureUITests.release.xcconfig"; path = "Target Support Files/Pods-Schematic Capture-Schematic CaptureUITests/Pods-Schematic Capture-Schematic CaptureUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A6613C0223E9340E004A11B2 /* Schematic CaptureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6613C0423E9340E004A11B2 /* Schematic_CaptureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureUITests.swift; sourceTree = "<group>"; };
 		A6613C0623E9340E004A11B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,9 +150,9 @@
 		A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepresentation.swift; sourceTree = "<group>"; };
+		C9F9E1DD0A42106CD119635F /* Pods-Schematic CaptureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.debug.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E1C88704246DFA9C00A6E464 /* Okta.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
-		E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
-		F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F89DB6AB1AE322DC29913FCD /* Pods-Schematic Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.debug.xcconfig"; sourceTree = "<group>"; };
 		FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailImageViewController.swift; sourceTree = "<group>"; };
 		FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 2.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B7B243D9B7800B653BE /* Schematic Capture 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2BA3BBFE3DD72FD32FE7F2E /* Pods_Schematic_Capture_Schematic_CaptureUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9CA9B3B318F08D451894CF0 /* Pods_Schematic_Capture.framework in Frameworks */,
+				FA04C5040518ED4D6B6758FE /* Pods_Schematic_Capture.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				203A5C168218CC2EF860A488 /* Pods_Schematic_CaptureTests.framework in Frameworks */,
+				D71890C64BCE841D90AB35B1 /* Pods_Schematic_CaptureTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,10 +379,12 @@
 		A70A916E7742D130EC55F213 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				74CE154D4AA08AC493FBA5F6 /* Pods-Schematic Capture.debug.xcconfig */,
-				7CF1D52C5578D599C2B001F6 /* Pods-Schematic Capture.release.xcconfig */,
-				49AD8C612B258C5954802E50 /* Pods-Schematic CaptureTests.debug.xcconfig */,
-				E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */,
+				F89DB6AB1AE322DC29913FCD /* Pods-Schematic Capture.debug.xcconfig */,
+				84555F124037B693CC002AE6 /* Pods-Schematic Capture.release.xcconfig */,
+				837699C844A30824EE54A4A9 /* Pods-Schematic Capture-Schematic CaptureUITests.debug.xcconfig */,
+				9A15DDFF9E34B6E8615EDEE2 /* Pods-Schematic Capture-Schematic CaptureUITests.release.xcconfig */,
+				C9F9E1DD0A42106CD119635F /* Pods-Schematic CaptureTests.debug.xcconfig */,
+				5C9F0C4E76F3C58107BC14BD /* Pods-Schematic CaptureTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -385,10 +392,11 @@
 		DBE10D79ADA5F39E460F6C41 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F1DFF666FB92F4602DE865FA /* Pods_Schematic_Capture.framework */,
-				9E2B3C9F604D54CD032728F1 /* Pods_Schematic_CaptureTests.framework */,
 				A692200B23FDDFBA0060AD9E /* PhotosUI.framework */,
 				A692200D23FDDFBA0060AD9E /* Photos.framework */,
+				4DBCB2AD64144D00159EEDF4 /* Pods_Schematic_Capture.framework */,
+				3E1641FB5382B565D32B5190 /* Pods_Schematic_Capture_Schematic_CaptureUITests.framework */,
+				69D35217379C6756E5F92DF3 /* Pods_Schematic_CaptureTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -400,9 +408,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6613C0923E9340E004A11B2 /* Build configuration list for PBXNativeTarget "Schematic CaptureUITests" */;
 			buildPhases = (
+				2102D945A3711C7B20E0FFF6 /* [CP] Check Pods Manifest.lock */,
 				A6613BFE23E9340E004A11B2 /* Sources */,
 				A6613BFF23E9340E004A11B2 /* Frameworks */,
 				A6613C0023E9340E004A11B2 /* Resources */,
+				405824713D277E4B415F65BF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -418,12 +428,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A665837023DAB50A006073DF /* Build configuration list for PBXNativeTarget "Schematic Capture" */;
 			buildPhases = (
-				5B9D69F3039E28FDD08A0915 /* [CP] Check Pods Manifest.lock */,
+				5F4EE1B2E420E4857C904F7E /* [CP] Check Pods Manifest.lock */,
 				A665834D23DAB508006073DF /* Sources */,
 				A665834E23DAB508006073DF /* Frameworks */,
 				A665834F23DAB508006073DF /* Resources */,
-				33064B68C18A8FA8AE58D160 /* [CP] Embed Pods Frameworks */,
 				A692201C23FDDFBA0060AD9E /* Embed App Extensions */,
+				5950FA0FC916C6AC50AD366E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -438,7 +448,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A665837323DAB50A006073DF /* Build configuration list for PBXNativeTarget "Schematic CaptureTests" */;
 			buildPhases = (
-				7AD19C71F100EFAA1D05E537 /* [CP] Check Pods Manifest.lock */,
+				647E0200AD088864863B4093 /* [CP] Check Pods Manifest.lock */,
 				A665836323DAB50A006073DF /* Sources */,
 				A665836423DAB50A006073DF /* Frameworks */,
 				A665836523DAB50A006073DF /* Resources */,
@@ -533,7 +543,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		33064B68C18A8FA8AE58D160 /* [CP] Embed Pods Frameworks */ = {
+		2102D945A3711C7B20E0FFF6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Schematic Capture-Schematic CaptureUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		405824713D277E4B415F65BF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture-Schematic CaptureUITests/Pods-Schematic Capture-Schematic CaptureUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture-Schematic CaptureUITests/Pods-Schematic Capture-Schematic CaptureUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture-Schematic CaptureUITests/Pods-Schematic Capture-Schematic CaptureUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5950FA0FC916C6AC50AD366E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -550,7 +599,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5B9D69F3039E28FDD08A0915 /* [CP] Check Pods Manifest.lock */ = {
+		5F4EE1B2E420E4857C904F7E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -572,7 +621,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7AD19C71F100EFAA1D05E537 /* [CP] Check Pods Manifest.lock */ = {
+		647E0200AD088864863B4093 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -693,6 +742,7 @@
 /* Begin XCBuildConfiguration section */
 		A6613C0A23E9340E004A11B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 837699C844A30824EE54A4A9 /* Pods-Schematic Capture-Schematic CaptureUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4JYCUK7B5K;
@@ -712,6 +762,7 @@
 		};
 		A6613C0B23E9340E004A11B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A15DDFF9E34B6E8615EDEE2 /* Pods-Schematic Capture-Schematic CaptureUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4JYCUK7B5K;
@@ -847,7 +898,7 @@
 		};
 		A665837123DAB50A006073DF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74CE154D4AA08AC493FBA5F6 /* Pods-Schematic Capture.debug.xcconfig */;
+			baseConfigurationReference = F89DB6AB1AE322DC29913FCD /* Pods-Schematic Capture.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -871,7 +922,7 @@
 		};
 		A665837223DAB50A006073DF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CF1D52C5578D599C2B001F6 /* Pods-Schematic Capture.release.xcconfig */;
+			baseConfigurationReference = 84555F124037B693CC002AE6 /* Pods-Schematic Capture.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -895,7 +946,7 @@
 		};
 		A665837423DAB50A006073DF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49AD8C612B258C5954802E50 /* Pods-Schematic CaptureTests.debug.xcconfig */;
+			baseConfigurationReference = C9F9E1DD0A42106CD119635F /* Pods-Schematic CaptureTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -919,7 +970,7 @@
 		};
 		A665837523DAB50A006073DF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1FD08C4FDDF46EE97E77091 /* Pods-Schematic CaptureTests.release.xcconfig */;
+			baseConfigurationReference = 5C9F0C4E76F3C58107BC14BD /* Pods-Schematic CaptureTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
