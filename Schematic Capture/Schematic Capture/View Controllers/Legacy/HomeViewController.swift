@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, WKUIDelegate {
     
     // MARK: - Properties
     
-    var loginController: LogInController?
+    var loginController: AuthorizationController?
     var projectController = ProjectController()
     var webView: WKWebView!
     

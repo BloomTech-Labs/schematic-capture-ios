@@ -34,6 +34,7 @@ class ProjectsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
     }
     
     // MARK: - Table view data source
@@ -79,6 +80,10 @@ class ProjectsTableViewController: UITableViewController {
                 jobSheetsTVC.jobSheets = jobSheets
             }
         }
+    }
+    
+    func setupViews() {
+        view.backgroundColor = .systemBackground
     }
     
 }

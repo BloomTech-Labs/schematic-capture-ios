@@ -22,7 +22,7 @@ struct AsyncOperation<Value> {
 }
 
 class Schematic_CaptureTests: XCTestCase {
-    var loginController = LogInController()
+    var loginController = AuthorizationController()
     var projectController = ProjectController()
     
     override func setUp() {

@@ -8,7 +8,7 @@
 import UIKit
 import OktaAuthSdk
 
-class LogInController {
+class AuthorizationController {
     
     let defaults = UserDefaults.standard
     var bearer: Bearer?

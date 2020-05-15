@@ -14,7 +14,7 @@ class SignInViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var loginImage: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     
-    let loginController = LogInController()
+    let loginController = AuthorizationController()
     var webView: WKWebView!
     
     override func viewDidLoad() {
