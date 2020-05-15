@@ -30,7 +30,6 @@ class LogInController {
         }
     }
     
-    
     // Password recovery
     /*Starts a new password recovery transaction for a given user and issues a that
      can be used to reset a user's password*/
@@ -41,7 +40,6 @@ class LogInController {
             completion(.failure(error))
         }
     }
-    
     
     // Handle status
     /*Handle current status in order to proceed with the initiated flow*/

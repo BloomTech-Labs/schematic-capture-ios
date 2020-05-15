@@ -34,15 +34,6 @@ class HomeViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @IBAction func uploadJobSheets(_ sender: Any) {
         DropboxClientsManager.authorizeFromController(UIApplication.shared,
                                                       controller: self,
