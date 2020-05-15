@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pkd-zm-3Me">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iz8-F7-Mky">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -10,69 +10,8 @@
         <array key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
         </array>
-        <array key="OpenSans-Regular.ttf">
-            <string>OpenSans-Regular</string>
-        </array>
     </customFonts>
     <scenes>
-        <!--Projects-->
-        <scene sceneID="deu-49-Ufi">
-            <objects>
-                <tableViewController modalPresentationStyle="fullScreen" id="pkd-zm-3Me" customClass="ProjectsTableViewController" customModule="Schematic_Capture" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wnd-Zc-spw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" id="2sr-em-kPS" customClass="ProjectTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="53.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2sr-em-kPS" id="kbx-Bp-cZe">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Project 1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvi-0V-A4I">
-                                            <rect key="frame" x="20" y="0.0" width="374" height="25"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="18"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="number of jobs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1Z-3t-vmw">
-                                            <rect key="frame" x="20" y="29" width="374" height="20.5"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="I1Z-3t-vmw" secondAttribute="bottom" constant="4" id="Haf-uI-TPL"/>
-                                        <constraint firstItem="Kvi-0V-A4I" firstAttribute="leading" secondItem="kbx-Bp-cZe" secondAttribute="leading" constant="20" id="JYE-hz-r2r"/>
-                                        <constraint firstItem="I1Z-3t-vmw" firstAttribute="leading" secondItem="kbx-Bp-cZe" secondAttribute="leading" constant="20" id="LuS-Wv-7mw"/>
-                                        <constraint firstItem="I1Z-3t-vmw" firstAttribute="top" secondItem="Kvi-0V-A4I" secondAttribute="bottom" constant="4" id="ROZ-2a-NWW"/>
-                                        <constraint firstItem="Kvi-0V-A4I" firstAttribute="top" secondItem="kbx-Bp-cZe" secondAttribute="top" id="WvU-Hs-4I4"/>
-                                        <constraint firstAttribute="trailing" secondItem="I1Z-3t-vmw" secondAttribute="trailing" constant="20" id="if3-gf-5Sp"/>
-                                        <constraint firstAttribute="trailing" secondItem="Kvi-0V-A4I" secondAttribute="trailing" constant="20" id="tYT-Dl-CTj"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <accessibility key="accessibilityConfiguration" identifier="CellID"/>
-                                <connections>
-                                    <outlet property="nameLabel" destination="Kvi-0V-A4I" id="8Rl-yt-0HZ"/>
-                                    <outlet property="numbOfJobSheetLabel" destination="I1Z-3t-vmw" id="LXv-yy-V6w"/>
-                                    <segue destination="iz8-F7-Mky" kind="show" identifier="JobSheetSegue" id="k7R-SM-WpB"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="pkd-zm-3Me" id="AmN-BI-YDW"/>
-                            <outlet property="delegate" destination="pkd-zm-3Me" id="dCr-aU-GoU"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Projects" id="fiH-zz-p1L"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Tu-gw-nZt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3200" y="-89"/>
-        </scene>
         <!--Jobs-->
         <scene sceneID="QXA-Se-3H4">
             <objects>
@@ -373,23 +312,23 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComponentMainCell" id="m0h-kX-8X8" customClass="ComponentMainTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="118"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="116.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m0h-kX-8X8" id="gEF-zd-H6G">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="116.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="by9-q9-5ra">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="116.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="756" verticalCompressionResistancePriority="756" text="Component #:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGn-Ba-tS4">
-                                                            <rect key="frame" x="20" y="10" width="119.5" height="23.5"/>
+                                                            <rect key="frame" x="20" y="10" width="109" height="20"/>
                                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgJ-SF-7qy">
-                                                            <rect key="frame" x="143.5" y="11" width="130.5" height="21.5"/>
+                                                            <rect key="frame" x="133" y="9" width="141" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -427,19 +366,19 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Description field" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-O2-Z6L">
-                                                            <rect key="frame" x="20" y="40.5" width="140.5" height="20.5"/>
+                                                            <rect key="frame" x="20" y="39" width="140.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Manufacturer field" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rlZ-GS-vbc">
-                                                            <rect key="frame" x="20" y="69" width="140.5" height="20.5"/>
+                                                            <rect key="frame" x="20" y="67.5" width="140.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Part # field" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbf-d3-rmJ">
-                                                            <rect key="frame" x="20" y="97.5" width="140.5" height="20.5"/>
+                                                            <rect key="frame" x="20" y="96" width="140.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -510,7 +449,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComponentDetailCell" id="C7D-vt-xd7" customClass="ComponentDetailTableViewCell" customModule="Schematic_Capture" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="146" width="414" height="352.5"/>
+                                        <rect key="frame" x="0.0" y="144.5" width="414" height="352.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C7D-vt-xd7" id="ibU-LS-4Zb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="352.5"/>
