@@ -9,5 +9,5 @@
 import Foundation
 
 extension String {
-    static let userId = "UserId"
+    static let token = "UserId"
 }

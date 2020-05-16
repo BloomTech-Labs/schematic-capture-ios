@@ -17,13 +17,13 @@ class ProjectController {
     
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     
-    func getClients(completion: @escaping Completion) {
+    func getClients(token: String?, completion: @escaping Completion) {
         //configure request url
+        guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
         var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let token = UserDefaults.standard.string(forKey: .userId) else { return }
-        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRpRFRmZU5GMUtjRWtXOTdnUExJcEc4NWl1YjIiLCJwYXNzd29yZCI6MSwiZW1haWwiOiJib2Jfam9obnNvbkBsYW1iZGFzY2hvb2wuY29tIiwicm9sZUlkIjoiVGVzdGluZzEyMyEiLCJpYXQiOjE1ODk1ODE3MzAsImV4cCI6MTU4OTY2ODEzMH0.n79uYdtXnbyYrV-DCpvTYXq-yCtFZau61VNEPCaTowo", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
@@ -39,7 +39,10 @@ class ProjectController {
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([Client].self, from: data)
-                print("Client:", clients)
+                
+                completion(.success(clients))
+                
+                
                 self.getProjects(with: clients.last?.id ?? 1) { (project) in
                     print(project)
                 }
@@ -55,8 +58,6 @@ class ProjectController {
     
     func getProjects(with id: Int, completion: @escaping Completion) {
         //configure request url
-        // https://schematiccapture-master.herokuapp.com/api/clients/
-        // https://schematiccapture-master.herokuapp.com/api/clients/:id/projects
         var requestUrl = URL(string: Urls.projectsUrl.rawValue)!
         requestUrl.appendPathExtension("\(id)")
         requestUrl.appendPathExtension("projects")

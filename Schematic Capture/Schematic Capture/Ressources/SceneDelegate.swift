@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func setupRootViewController() {
-        if let userId = UserDefaults.standard.string(forKey: .userId) {
-            let navigationController = UINavigationController(rootViewController: ProjectsTableViewController())
+        if let _ = UserDefaults.standard.string(forKey: .token) {
+            let navigationController = UINavigationController(rootViewController: ClientsViewController())
             self.window?.rootViewController = navigationController
             self.window?.makeKeyAndVisible()
         } else {

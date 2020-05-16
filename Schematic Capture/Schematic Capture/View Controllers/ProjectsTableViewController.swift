@@ -85,11 +85,7 @@ class ProjectsTableViewController: UITableViewController {
     func setupViews() {
         view.backgroundColor = .systemBackground
         self.title = "Projects"
-        projectController.getClients(completion: { (clients) in
-            print(clients)
-        })
     }
-    
 }
 
 extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {

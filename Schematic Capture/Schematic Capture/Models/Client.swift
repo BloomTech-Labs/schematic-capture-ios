@@ -10,7 +10,7 @@ import Foundation
 
 struct Client: Codable {
     var id:Int
-    //var companyName:String?
+    var companyName:String?
     var phone:String?
     var street:String?
     var city:String?

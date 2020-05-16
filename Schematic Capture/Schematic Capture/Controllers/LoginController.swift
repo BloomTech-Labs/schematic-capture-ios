@@ -48,6 +48,8 @@ class AuthorizationController {
             let decoder = JSONDecoder()
             do {
                 internalBearer = try decoder.decode(Bearer.self, from: data)
+                guard let bearer = internalBearer else { return }
+                completion(.success(bearer.token))
             } catch {
                 print("Error decoding a bearer token: \(error)")
                 completion(.failure(.badDecode))
@@ -57,7 +59,7 @@ class AuthorizationController {
             }
             self.user = loggingInUser
             self.bearer = internalBearer
-            self.defaults.set(internalBearer?.token, forKey: .userId)
+            self.defaults.set(internalBearer?.token, forKey: .token)
         }.resume()
     }
     
