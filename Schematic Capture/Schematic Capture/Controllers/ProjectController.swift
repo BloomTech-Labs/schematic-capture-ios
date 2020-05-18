@@ -36,7 +36,7 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             do {
-                let clients = try decoder.decode(Client.self, from: data)
+                let clients = try decoder.decode([Client].self, from: data)
                 print(clients)
                 completion(.success(clients))
             } catch {
