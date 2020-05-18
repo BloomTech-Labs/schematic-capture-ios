@@ -32,7 +32,7 @@ class AuthorizationController {
             let jsonData = try jsonEncoder.encode(loggingInUser)
             request.httpBody = jsonData
         } catch {
-            print("Error encoding user in LogIn: \(error)")
+            NSLog("Error encoding user in LogIn: \(error)")
             completion(.failure(.badDecode))
             return
         }
@@ -51,10 +51,9 @@ class AuthorizationController {
                 guard let bearer = internalBearer else { return }
                 completion(.success(bearer.token))
             } catch {
-                print("Error decoding a bearer token: \(error)")
+                NSLog("Error decoding a bearer token: \(error)")
                 completion(.failure(.badDecode))
                 let dataString = String(decoding:data, as: UTF8.self)
-                print("DATA: ", dataString)
                 return
             }
             self.user = loggingInUser

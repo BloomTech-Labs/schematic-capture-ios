@@ -21,7 +21,6 @@ class ClientsViewController: UIViewController {
         view.hidesWhenStopped = true
         return view
     }()
-
     
     // MARK: - Properties
     
@@ -33,6 +32,8 @@ class ClientsViewController: UIViewController {
             fetchClients()
         }
     }
+    
+    var currentUser: User!
     
     private let heightForHeader: CGFloat = 30.0
     
@@ -59,28 +60,29 @@ class ClientsViewController: UIViewController {
         indicator.layer.position.x = view.layer.position.x
         
         indicator.startAnimating()
-        view.addSubview(indicator)
         
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.register(ClientTableViewCell.self, forCellReuseIdentifier: ClientTableViewCell.id)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .systemBackground
+        tableView.addSubview(indicator)
         
-        headerView = ClientHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
+        headerView = ClientHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 250))
         tableView.tableHeaderView = headerView
         view.addSubview(tableView)
     }
     
     
     func fetchClients() {
+        // Get the token when the user LogIn or get it from UserDefault.
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController.getClients(token: token) { result in
             if let clients = try? result.get() as? [Client] {
                 DispatchQueue.main.async {
-                    print("CLIENTS: \(clients.count)")
                     self.clients = clients
                     self.tableView.reloadData()
+                    self.indicator.stopAnimating()
                 }
             }
         }
@@ -112,9 +114,13 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let client = self.clients[indexPath.row]
+        let projectsTableViewViewController = ProjectsTableViewController()
+        projectsTableViewViewController.projectController = projectController
+        projectsTableViewViewController.client = client
+        projectsTableViewViewController.token = token
+        navigationController?.pushViewController(projectsTableViewViewController, animated: true)
     }
-    
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         60.0

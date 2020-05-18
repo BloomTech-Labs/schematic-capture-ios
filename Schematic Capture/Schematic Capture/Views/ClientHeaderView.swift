@@ -41,12 +41,22 @@ class ClientHeaderView: UIView {
         
         addSubview(dateLabel)
         
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = "Clients"
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        titleLabel.textColor = .systemGray
+        addSubview(titleLabel)
+        
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
             label.widthAnchor.constraint(equalTo: widthAnchor),
             dateLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
             dateLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            
+            titleLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -32.0),
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
         ])
-        
     }
 }

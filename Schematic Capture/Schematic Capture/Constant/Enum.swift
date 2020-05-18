@@ -13,10 +13,14 @@ import Foundation
 enum Urls: String {
     case logInUrl = "https://schematiccapture-master.herokuapp.com/api/auth/login"
     case clientsUrl = "https://schematiccapture-master.herokuapp.com/api/clients"
-    case projectsUrl = "https://schematiccapture-master.herokuapp.com/api/clients/"
     //https://schematiccapture-master.herokuapp.com/api/clients/:id/projects
     case jobSheetsUrl = "https://schematiccapture-master.herokuapp.com//api/jobsheets/assigned"
     case componentsUrl = "https://schematiccapture-master.herokuapp.com/api/jobsheets/:id/components"
+}
+
+enum HttpMethods: String {
+    case post = "POST"
+    case get = "GET"
 }
 
 enum Keys: String {

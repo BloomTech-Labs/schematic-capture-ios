@@ -12,49 +12,79 @@ import CoreData
 class ProjectsTableViewController: UITableViewController {
     
     var authController: AuthorizationController?
-    var projectController = ProjectController()
+    var projectController: ProjectController?
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Project> = {
-        let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "clientId", ascending: true),
-                                         NSSortDescriptor(key: "name", ascending: true)]
-        
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "clientId", cacheName: nil)
-        
-        frc.delegate = self
-        
-        do {
-            try frc.performFetch() // Fetch the tasks
-        } catch {
-            fatalError("Error performing fetch for frc: \(error)")
+    
+    // The client from the previous ClientsViewController
+    var client: Client? {
+        didSet {
+            print("CLIENT ID: \(client?.id)")
+            title = "Projects for \(client!.companyName ?? "")"
+            fetchProjects()
         }
-        return frc
-    }()
+    }
+    
+    var token: String?
+    
+    var projects = [Project]()
+    
+//    lazy var fetchedResultsController: NSFetchedResultsController<Project> = {
+//        let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "clientId", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
+//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "clientId", cacheName: nil)
+//        frc.delegate = self
+//        do {
+//            try frc.performFetch() // Fetch the tasks
+//        } catch {
+//            fatalError("Error performing fetch for frc: \(error)")
+//        }
+//        return frc
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
     }
     
-    // MARK: - Table view data source
+    
+    private func setupViews() {
+        view.backgroundColor = .systemBackground
+    }
+    
+    private func fetchProjects() {
+        guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
+        print("Fetch ")
+        projectController?.getProjects(with: id, token: token, completion: { result in
+            if let projects = try? result.get() {
+                print("PROJECTS: \(projects)")
+            }
+        })
+    }
+}
+
+
+// MARK: - Table view data source
+
+extension ProjectsTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return fetchedResultsController.sections?.count ?? 0
+        return 1
+        //return fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return projects.count
+       // return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell", for: indexPath) as? ProjectTableViewCell else { return UITableViewCell() }
-        
-        cell.project = fetchedResultsController.object(at: indexPath)
-        
+        let project = self.projects[indexPath.row]
+        cell.project = project
+//        cell.project = fetchedResultsController.object(at: indexPath)
         return cell
     }
     
@@ -67,25 +97,20 @@ class ProjectsTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "JobSheetSegue" {
-            if let jobSheetsTVC = segue.destination as? JobSheetsTableViewController,
-                let indexPath = tableView.indexPathForSelectedRow {
-                
-                guard let jobSheetsSet = fetchedResultsController.object(at: indexPath).jobSheets,
-                    let jobSheets = jobSheetsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [JobSheet] else {
-                        print("No jobsheets found in \(fetchedResultsController.object(at: indexPath))")
-                        return
-                }
-                jobSheetsTVC.jobSheets = jobSheets
-            }
-        }
-    }
-    
-    func setupViews() {
-        view.backgroundColor = .systemBackground
-        self.title = "Projects"
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "JobSheetSegue" {
+//            if let jobSheetsTVC = segue.destination as? JobSheetsTableViewController,
+//                let indexPath = tableView.indexPathForSelectedRow {
+//
+//                guard let jobSheetsSet = fetchedResultsController.object(at: indexPath).jobSheets,
+//                    let jobSheets = jobSheetsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [JobSheet] else {
+//                        print("No jobsheets found in \(fetchedResultsController.object(at: indexPath))")
+//                        return
+//                }
+//                jobSheetsTVC.jobSheets = jobSheets
+//            }
+//        }
+//    }
 }
 
 extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
@@ -101,24 +126,24 @@ extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
         
         switch type {
             
-            case .insert:
-                guard let newIndexPath = newIndexPath else { return }
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
             
-            case .delete:
-                guard let indexPath = indexPath else { return }
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             
-            case .move:
-                guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
-                tableView.moveRow(at: indexPath, to: newIndexPath)
+        case .move:
+            guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
+            tableView.moveRow(at: indexPath, to: newIndexPath)
             
-            case .update:
-                guard let indexPath = indexPath else { return }
-                tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
             
-            @unknown default:
-                fatalError()
+        @unknown default:
+            fatalError()
         }
     }
     
@@ -127,12 +152,12 @@ extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
         let indexSet = IndexSet(integer: sectionIndex)
         
         switch type {
-            case .insert:
-                tableView.insertSections(indexSet, with: .automatic)
-            case .delete:
-                tableView.deleteSections(indexSet, with: .automatic)
-            default:
-                return
+        case .insert:
+            tableView.insertSections(indexSet, with: .automatic)
+        case .delete:
+            tableView.deleteSections(indexSet, with: .automatic)
+        default:
+            return
         }
     }
 }

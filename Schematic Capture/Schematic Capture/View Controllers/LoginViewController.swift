@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
         
         loginButton.setTitle("Log In", for: .normal)
         loginButton.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
+        loginButton.setTitleColor(.systemBlue, for: .normal)
         
         /// Email and password are for testing purposes
         emailTextField.text = "bob_johnson@lambdaschool.com"
@@ -64,10 +65,10 @@ class LoginViewController: UIViewController {
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
                     let clientsViewController = ClientsViewController()
+                    let navigationController = UINavigationController(rootViewController: clientsViewController)
                     clientsViewController.token = token
-                    self.navigationController?.pushViewController(clientsViewController, animated: true)
-                    
-                    
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self.present(navigationController, animated: true, completion: nil)
                 }
             }
         }
