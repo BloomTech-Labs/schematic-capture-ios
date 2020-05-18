@@ -37,7 +37,7 @@ class ClientsViewController: UIViewController {
         didSet {
             // Update the headerView when a user id set
             headerView.setup(viewTypes: .clients, value: [
-                "\(user?.firstName ?? "")", "Clients"
+                (user?.firstName ?? ""), "Clients"
             ])
         }
     }
@@ -47,6 +47,10 @@ class ClientsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        // Update the headerView when a user id set
+        headerView.setup(viewTypes: .clients, value: [
+            (user?.firstName ?? ""), "Clients"
+        ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,8 +60,7 @@ class ClientsViewController: UIViewController {
     
     // MARK: - Functions
     
-    func setupUI() {
-        
+    private func setupUI() {
         self.title = "Schematic Capture"
         view.backgroundColor = .systemBackground
         

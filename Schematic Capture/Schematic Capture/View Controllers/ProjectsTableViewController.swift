@@ -15,9 +15,17 @@ class ProjectsTableViewController: UITableViewController {
     
     var headerView = HeaderView()
     
-    var authController: AuthorizationController?
-    var projectController: ProjectController?
+    lazy var indicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.style = UIActivityIndicatorView.Style.medium
+        view.hidesWhenStopped = true
+        return view
+    }()
     
+    // MARK: - Properties
+    
+    var projectController: ProjectController?
+    var token: String?
     // The client from the previous ClientsViewController
     var client: Client? {
         didSet {
@@ -25,22 +33,41 @@ class ProjectsTableViewController: UITableViewController {
             headerView.setup(viewTypes: .projects, value: [client!.companyName ?? "", "Projects"])
         }
     }
-    
-    var token: String?
+   
     var projects = [ProjectRepresentation]()
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProjects()
+    }
+    
     private func setupViews() {
         view.backgroundColor = .systemBackground
         
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
+        indicator.layer.position.y = view.layer.position.y
+        indicator.layer.position.x = view.layer.position.x
+        indicator.startAnimating()
+        
+        tableView = UITableView(frame: view.frame, style: .grouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .systemBackground
+        tableView.addSubview(indicator)
+        
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView
         tableView?.register(ProjectTableViewCell.self, forCellReuseIdentifier: ProjectTableViewCell.id)
     }
+    
+    // MARK: - Functions
     
     private func fetchProjects() {
         
@@ -89,11 +116,19 @@ extension ProjectsTableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let project = self.projects[indexPath.row]
+        let jobSheetsTableViewViewController = JobSheetsTableViewController()
+        jobSheetsTableViewViewController.projectController = projectController
+        jobSheetsTableViewViewController.project = project
+        jobSheetsTableViewViewController.token = token
+        navigationController?.pushViewController(jobSheetsTableViewViewController, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
-    
-    
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100

@@ -91,13 +91,16 @@ class HeaderView: UIView {
             searchBar.isHidden = true
             updateViews("Welcome back \(value.first ?? "")", value.last ?? "")
         case .projects:
+            searchBar.isHidden = true
             updateViews(value.first ?? "", value.last ?? "")
         case .jobsheets:
-            print("Jobsheets")
+            searchBar.isHidden = true
+            updateViews(value.first ?? "", value.last ?? "")
         case .jobsheetDetails:
-            print("Jobsheets details")
+            searchBar.isHidden = true
+            updateViews(value.first ?? "", value.last ?? "")
         case .components:
-            print("Components")
+            updateViews(value.first ?? "", value.last ?? "")
         }
     }
     

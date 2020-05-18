@@ -10,8 +10,8 @@ import UIKit
 
 class ProjectTableViewCell: UITableViewCell {
     
-     var nameLabel = UILabel()
-     var numberOfJobSheetLabel = UILabel()
+    var nameLabel = UILabel()
+    var numberOfJobSheetLabel = UILabel()
     
     var project: ProjectRepresentation? {
         didSet {
@@ -40,6 +40,6 @@ class ProjectTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let project = project else { return }
         nameLabel.text = project.name
-        numberOfJobSheetLabel.text = project.jobSheets != nil ? "\(project.jobSheets!.count)" + (project.jobSheets!.count > 1 ? " jobs" : " job") : "0 Jobs"
+        //numberOfJobSheetLabel.text = project.jobSheets != nil ? "\(project.jobSheets!.count)" + (project.jobSheets!.count > 1 ? " jobs" : " job") : "0 Jobs"
     }
 }
