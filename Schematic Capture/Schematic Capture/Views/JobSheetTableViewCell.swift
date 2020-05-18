@@ -11,44 +11,35 @@ import UIKit
 
 class JobSheetTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var jobSheetNameLabel: UILabel!
-    @IBOutlet weak var numOfComponentsLabel: UILabel!
-    //    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var statusButton: UIButton!
+    var nameLabel = UILabel()
+    var numberOfJobSheetLabel = UILabel()
     
-    var context = CoreDataStack.shared.mainContext
-    var jobSheet: JobSheet? {
+    var jobSheet: JobSheetRepresentation? {
         didSet{
             updateViews()
         }
     }
     
-    @IBAction func statusToggleTapped(_ sender: Any) {
-        statusButton.isSelected.toggle()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        if statusButton.isSelected {
-            jobSheet?.status = "complete"
-        }
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberOfJobSheetLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(nameLabel)
+        addSubview(numberOfJobSheetLabel)
         
-        if !statusButton.isSelected {
-            jobSheet?.status = "incomplete"
-        }
-        
-        CoreDataStack.shared.save(context: context)
-        
+        NSLayoutConstraint.activate([
+            nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
+            nameLabel.heightAnchor.constraint(equalTo: heightAnchor)
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func updateViews() {
         guard let jobSheet = jobSheet else { return }
-        
-        jobSheetNameLabel.text = jobSheet.name
-        numOfComponentsLabel.text = jobSheet.components != nil ? "\(jobSheet.components!.count) Components" : "0 Components"
-        if jobSheet.status == "complete" {
-            statusButton.isSelected = true
-        }
-        if jobSheet.status == "incomplete" {
-            statusButton.isSelected = false
-        }
-        
+        nameLabel.text = jobSheet.name
     }
 }
