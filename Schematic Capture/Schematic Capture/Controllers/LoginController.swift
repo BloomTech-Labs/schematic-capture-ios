@@ -13,7 +13,7 @@ class AuthorizationController {
     var bearer: Bearer?
     var user: User?
     
-    typealias Completion = (Result<Any, NetworkingError>) -> ()
+    typealias Completion = (Result<[Any], NetworkingError>) -> ()
     
     // AuthenticateUser
     /*Authenticate user with username and password. Save user Id to UserDefaults */
@@ -46,14 +46,16 @@ class AuthorizationController {
             }
                         
             let decoder = JSONDecoder()
+
             do {
+                // Get the bearer and the user
                 internalBearer = try decoder.decode(Bearer.self, from: data)
+                let user = try decoder.decode(User.self, from: data)
                 guard let bearer = internalBearer else { return }
-                completion(.success(bearer.token))
+                completion(.success([bearer.token, user]))
             } catch {
                 NSLog("Error decoding a bearer token: \(error)")
                 completion(.failure(.badDecode))
-                let dataString = String(decoding:data, as: UTF8.self)
                 return
             }
             self.user = loggingInUser

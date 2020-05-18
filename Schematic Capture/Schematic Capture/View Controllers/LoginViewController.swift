@@ -60,13 +60,16 @@ class LoginViewController: UIViewController {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
         
         authController.logIn(username: username, password: password) { result in
-            if let token = try? result.get() as? String {
+            if let result = try? result.get(),
+                let token = result.first as? String,
+                let user = result.last as? User {
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
                     let clientsViewController = ClientsViewController()
                     let navigationController = UINavigationController(rootViewController: clientsViewController)
                     clientsViewController.token = token
+                    clientsViewController.user = user
                     navigationController.modalPresentationStyle = .fullScreen
                     self.present(navigationController, animated: true, completion: nil)
                 }

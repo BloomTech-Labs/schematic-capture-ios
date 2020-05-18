@@ -13,7 +13,7 @@ class ClientsViewController: UIViewController {
     // MARK: - UI Elements
     
     var tableView: UITableView!
-    var headerView: ClientHeaderView!
+    var headerView = ClientHeaderView()
     
     lazy var indicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -30,6 +30,12 @@ class ClientsViewController: UIViewController {
     var token: String? {
         didSet {
             fetchClients()
+        }
+    }
+    
+    var user: User? {
+        didSet {
+            headerView.updateViews(firstname: user?.firstName)
         }
     }
     
@@ -68,7 +74,7 @@ class ClientsViewController: UIViewController {
         tableView.backgroundColor = .systemBackground
         tableView.addSubview(indicator)
         
-        headerView = ClientHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 250))
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView
         view.addSubview(tableView)
     }

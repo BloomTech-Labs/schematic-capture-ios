@@ -10,6 +10,8 @@ import UIKit
 
 class ClientHeaderView: UIView {
     
+    var label = UILabel()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -20,9 +22,7 @@ class ClientHeaderView: UIView {
     }
     
     func setupViews() {
-        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Welcome back, \n Bob!"
         label.numberOfLines = 3
         label.font = UIFont.systemFont(ofSize: 30, weight: .medium)
         label.textAlignment = .center
@@ -58,5 +58,13 @@ class ClientHeaderView: UIView {
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
         ])
+    }
+    
+    func updateViews(firstname: String?) {
+        if let firstname = firstname {
+            label.text = "Welcome back, \n \(firstname)!"
+        } else {
+            label.text = "Welcome back"
+        }
     }
 }
