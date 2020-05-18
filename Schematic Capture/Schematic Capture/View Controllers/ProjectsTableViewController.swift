@@ -24,7 +24,7 @@ class ProjectsTableViewController: UITableViewController {
     }
     
     var token: String?
-    var projects = [Project]()
+    var projects = [ProjectRepresentation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +38,15 @@ class ProjectsTableViewController: UITableViewController {
     private func fetchProjects() {
         guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getProjects(with: id, token: token, completion: { result in
-            if let projects = try? result.get() as? [Project] {
+            if let projects = try? result.get() as? [ProjectRepresentation] {
                 print("PROJECTS: \(projects)")
                 self.projects = projects
+                
+                self.projectController?.getJobSheets(with: 1, token: self.token!, completion: { (result) in
+                    if let jobsheet = try?  result.get() as? [JobSheet] {
+                        print(jobsheet)
+                    }
+                })
                 self.tableView.reloadData()
             }
         })

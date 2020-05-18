@@ -13,7 +13,7 @@ class ProjectTableViewCell: UITableViewCell {
      var nameLabel = UILabel()
      var numberOfJobSheetLabel = UILabel()
     
-    var project: Project? {
+    var project: ProjectRepresentation? {
         didSet {
             updateViews()
         }

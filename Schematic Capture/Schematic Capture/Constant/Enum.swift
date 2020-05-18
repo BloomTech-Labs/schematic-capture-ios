@@ -14,8 +14,8 @@ enum Urls: String {
     case logInUrl = "https://schematiccapture-master.herokuapp.com/api/auth/login"
     case clientsUrl = "https://schematiccapture-master.herokuapp.com/api/clients"
     //https://schematiccapture-master.herokuapp.com/api/clients/:id/projects
-    case jobSheetsUrl = "https://schematiccapture-master.herokuapp.com//api/jobsheets/assigned"
-    case componentsUrl = "https://schematiccapture-master.herokuapp.com/api/jobsheets/:id/components"
+    case jobSheetsUrl = "https://schematiccapture-master.herokuapp.com/api/projects"
+    case componentsUrl = "https://schematiccapture-master.herokuapp.com/api/jobsheets/id/components"
 }
 
 enum Keys: String {
