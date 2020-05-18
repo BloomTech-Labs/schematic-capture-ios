@@ -10,15 +10,42 @@ import UIKit
 
 class JobSheetsTableViewController: UITableViewController {
     
+    // MARK: - UI Elements
+    
+    var headerView = HeaderView()
+    
+    var authController: AuthorizationController?
+    var projectController: ProjectController?
+    
+    var project: Project?
+    var token: String?
+    
     var jobSheets: [JobSheet]? {
         didSet {
             tableView.reloadData()
         }
     }
     
+    private func fetchJobSheets() {
+        guard let id = project?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
+        
+        projectController?.getJobSheets(with: Int(id), token: token, completion: { results in
+    
+            if let jobSheets = try? results.get() as? [JobSheet] {
+                print("JOBSHEETS: \(jobSheets)")
+                self.jobSheets = jobSheets
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = ""
+        fetchJobSheets()
     }
     
     // MARK: - Table view data source
