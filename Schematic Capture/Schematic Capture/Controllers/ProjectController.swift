@@ -13,7 +13,6 @@ class ProjectController {
     
     var bearer: Bearer?
     var user: User?
-    //var projects: [ProjectRepresentation] = []
     
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     

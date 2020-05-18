@@ -21,9 +21,8 @@ class ProjectsTableViewController: UITableViewController {
     // The client from the previous ClientsViewController
     var client: Client? {
         didSet {
-            title = "Projects for \(client!.companyName ?? "")"
             fetchProjects()
-            
+            headerView.setup(viewTypes: .projects, value: [client!.companyName ?? "", "Projects"])
         }
     }
     
@@ -38,7 +37,7 @@ class ProjectsTableViewController: UITableViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
         
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
         tableView.tableHeaderView = headerView
         tableView?.register(ProjectTableViewCell.self, forCellReuseIdentifier: ProjectTableViewCell.id)
     }
