@@ -8,6 +8,8 @@
 
 import UIKit 
 
+
+// This extension return the identifier of any UIView.
 extension UIView {
     static var id: String {
         return String(describing: self)

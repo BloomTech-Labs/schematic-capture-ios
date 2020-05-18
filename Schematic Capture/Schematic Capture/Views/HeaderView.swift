@@ -1,5 +1,5 @@
 //
-//  ClientHeaderView.swift
+//  HeaderView.swift
 //  Schematic Capture
 //
 //  Created by Kerby Jean on 5/15/20.
@@ -8,9 +8,23 @@
 
 import UIKit
 
-class ClientHeaderView: UIView {
+
+enum ViewTypes: String {
+    case clients
+    case projects
+    case jobsheets
+    case jobsheetDetails
+    case components
+}
+
+
+
+class HeaderView: UIView {
     
     var label = UILabel()
+    var secondaryLabel = UILabel()
+    var titleLabel = UILabel()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,19 +43,15 @@ class ClientHeaderView: UIView {
         label.textColor = .label
         addSubview(label)
         
-        let dateLabel = UILabel()
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.sizeToFit()
-        let date = CachedDateFormattingHelper.shared.formatTodayDate()
-        dateLabel.text = date
-        dateLabel.numberOfLines = 3
-        dateLabel.font = UIFont.systemFont(ofSize: 17)
-        dateLabel.textAlignment = .center
-        dateLabel.textColor = .systemGray2
+        secondaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        secondaryLabel.sizeToFit()
+        secondaryLabel.numberOfLines = 3
+        secondaryLabel.font = UIFont.systemFont(ofSize: 17)
+        secondaryLabel.textAlignment = .center
+        secondaryLabel.textColor = .systemGray2
         
-        addSubview(dateLabel)
+        addSubview(secondaryLabel)
         
-        let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Clients"
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -51,8 +61,8 @@ class ClientHeaderView: UIView {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
             label.widthAnchor.constraint(equalTo: widthAnchor),
-            dateLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
-            dateLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            secondaryLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
+            secondaryLabel.widthAnchor.constraint(equalTo: widthAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -32.0),
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
@@ -60,11 +70,19 @@ class ClientHeaderView: UIView {
         ])
     }
     
-    func updateViews(firstname: String?) {
-        if let firstname = firstname {
-            label.text = "Welcome back, \n \(firstname)!"
-        } else {
-            label.text = "Welcome back"
+    func setup(viewTypes: ViewTypes, value: [String]) {
+        switch viewTypes {
+        case .clients:
+            updateViews(value.first ?? "", value.last ?? "")
+        case .projects:
+            updateViews(value.first ?? "", value.last ?? "")
         }
+    }
+    
+    func updateViews(_ value: String, _ title: String) {
+        label.text = value
+        let date = CachedDateFormattingHelper.shared.formatTodayDate()
+        secondaryLabel.text = date
+        titleLabel.text = title
     }
 }

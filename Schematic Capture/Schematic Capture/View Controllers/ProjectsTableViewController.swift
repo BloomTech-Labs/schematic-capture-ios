@@ -11,15 +11,19 @@ import CoreData
 
 class ProjectsTableViewController: UITableViewController {
     
+    // MARK: - UI Elements
+    
+    var headerView = HeaderView()
+    
     var authController: AuthorizationController?
     var projectController: ProjectController?
     
     // The client from the previous ClientsViewController
     var client: Client? {
         didSet {
-            print("CLIENT ID: \(client?.id)")
             title = "Projects for \(client!.companyName ?? "")"
             fetchProjects()
+            
         }
     }
     
@@ -33,21 +37,29 @@ class ProjectsTableViewController: UITableViewController {
     
     private func setupViews() {
         view.backgroundColor = .systemBackground
+        
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
+        tableView.tableHeaderView = headerView
+        tableView?.register(ProjectTableViewCell.self, forCellReuseIdentifier: ProjectTableViewCell.id)
     }
     
     private func fetchProjects() {
+        
         guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getProjects(with: id, token: token, completion: { result in
             if let projects = try? result.get() as? [ProjectRepresentation] {
                 print("PROJECTS: \(projects)")
                 self.projects = projects
                 
-                self.projectController?.getJobSheets(with: 1, token: self.token!, completion: { (result) in
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+                self.projectController?.getJobSheets(with: 1, token: (self.token ?? UserDefaults.standard.string(forKey: .token)) ?? "", completion: { (result) in
                     if let jobsheet = try?  result.get() as? [JobSheet] {
                         print(jobsheet)
                     }
                 })
-                self.tableView.reloadData()
             }
         })
     }
@@ -72,186 +84,19 @@ extension ProjectsTableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell", for: indexPath) as? ProjectTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProjectTableViewCell.id, for: indexPath) as? ProjectTableViewCell else { return UITableViewCell() }
         let project = self.projects[indexPath.row]
         cell.project = project
-//        cell.project = fetchedResultsController.object(at: indexPath)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 60.0
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
-    // MARK: - Navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "JobSheetSegue" {
-//            if let jobSheetsTVC = segue.destination as? JobSheetsTableViewController,
-//                let indexPath = tableView.indexPathForSelectedRow {
-//
-//                guard let jobSheetsSet = fetchedResultsController.object(at: indexPath).jobSheets,
-//                    let jobSheets = jobSheetsSet.sortedArray(using: [NSSortDescriptor(key: "id", ascending: true)]) as? [JobSheet] else {
-//                        print("No jobsheets found in \(fetchedResultsController.object(at: indexPath))")
-//                        return
-//                }
-//                jobSheetsTVC.jobSheets = jobSheets
-//            }
-//        }
-//    }
 }
-
-extension ProjectsTableViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        switch type {
-            
-        case .insert:
-            guard let newIndexPath = newIndexPath else { return }
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-            
-        case .delete:
-            guard let indexPath = indexPath else { return }
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            
-        case .move:
-            guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
-            tableView.moveRow(at: indexPath, to: newIndexPath)
-            
-        case .update:
-            guard let indexPath = indexPath else { return }
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-            
-        @unknown default:
-            fatalError()
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        
-        let indexSet = IndexSet(integer: sectionIndex)
-        
-        switch type {
-        case .insert:
-            tableView.insertSections(indexSet, with: .automatic)
-        case .delete:
-            tableView.deleteSections(indexSet, with: .automatic)
-        default:
-            return
-        }
-    }
-}
-
-/*
- import UIKit
- import WebKit
- import SwiftyDropbox
- 
- class HomeViewController: UIViewController, WKUIDelegate {
- 
- // MARK: - UI Elements
- 
- @IBOutlet weak var downloadProjectsButton: UIButton!
- @IBOutlet weak var viewProjectsButton: UIButton!
- @IBOutlet weak var uploadJobSheetsButton: UIButton! // not implemented
- 
- // MARK: - Properties
- 
- var loginController: AuthorizationController?
- var projectController = ProjectController()
- var webView: WKWebView!
- 
- override func viewDidLoad() {
- super.viewDidLoad()
- 
- webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
- webView.uiDelegate = self
- if let url = Bundle.main.url(forResource: "Pulse-1s-200px", withExtension: "svg") {
- webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
- }
- }
- 
- @IBAction func uploadJobSheets(_ sender: Any) {
- DropboxClientsManager.authorizeFromController(UIApplication.shared,
- controller: self,
- openURL: {(url:URL) -> Void in UIApplication.shared.openURL(url)})
- }
- 
- @IBAction func downloadSchematics(_ sender: Any) {
- startLoadingScreen()
- 
- projectController.downloadAssignedJobs { (error) in
- if let error = error {
- self.stopLoadingScreen()
- DispatchQueue.main.async {
- // TODO: - Show Alert: "Unable to download assigned jobs", subTitle: "\(error)")
- }
- return
- }
- 
- // adding these to stop download animation
- self.stopLoadingScreen()
- DispatchQueue.main.async {
- // TODO: - Show Alert
- }
- }
- }
- 
- @IBAction func signOut(_ sender: Any) {
- guard let loginController = loginController else { return }
- 
- //        loginController.signOut { (error) in
- //            if let error = error {
- //                print("\(error)")
- //                return
- //            }
- //
- //            DispatchQueue.main.async {
- //                if self.presentingViewController != nil {
- //                    self.dismiss(animated: false, completion: {
- //                        self.navigationController!.popToRootViewController(animated: true)
- //                    })
- //                } else {
- //                    self.navigationController!.popToRootViewController(animated: true)
- //                }
- //            }
- //        }
- }
- 
- func startLoadingScreen() {
- guard let webView = webView else { return }
- 
- DispatchQueue.main.async {
- webView.translatesAutoresizingMaskIntoConstraints = false
- webView.backgroundColor = .clear
- webView.isOpaque = false
- self.view.addSubview(webView)
- 
- webView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
- webView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.2).isActive = true
- webView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
- webView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -15).isActive = true
- }
- }
- 
- func stopLoadingScreen() {
- guard let webView = webView else { return }
- DispatchQueue.main.async {
- webView.removeFromSuperview()
- self.webView = nil
- }
- }
- 
- }
- */

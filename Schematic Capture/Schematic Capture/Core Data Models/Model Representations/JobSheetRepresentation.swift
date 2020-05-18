@@ -18,7 +18,7 @@ struct JobSheetRepresentation: Codable {
     var status: String
     let projectId: Int
     var userEmail:String?
-    var completed:Int
+    var completed:Bool
     
     private enum CodingKeys: String, CodingKey {
         case id

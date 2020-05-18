@@ -13,7 +13,7 @@ class ClientsViewController: UIViewController {
     // MARK: - UI Elements
     
     var tableView: UITableView!
-    var headerView = ClientHeaderView()
+    var headerView = HeaderView()
     
     lazy var indicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -35,13 +35,12 @@ class ClientsViewController: UIViewController {
     
     var user: User? {
         didSet {
-            headerView.updateViews(firstname: user?.firstName)
+            // Update the headerView when a user id set
+            headerView.setup(viewTypes: .clients, value: [
+                "Welcome back /n \(user?.firstName)", "Clients"
+            ])
         }
     }
-    
-    var currentUser: User!
-    
-    private let heightForHeader: CGFloat = 30.0
     
     // MARK: - View Lifecycle
     
@@ -111,7 +110,6 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: ClientTableViewCell.id, for: indexPath) as? ClientTableViewCell {
-            
             let client = self.clients[indexPath.row]
             cell.client = client
             return cell
