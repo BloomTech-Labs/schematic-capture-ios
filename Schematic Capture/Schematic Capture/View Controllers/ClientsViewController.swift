@@ -37,7 +37,7 @@ class ClientsViewController: UIViewController {
         didSet {
             // Update the headerView when a user id set
             headerView.setup(viewTypes: .clients, value: [
-                "Welcome back /n \(user?.firstName)", "Clients"
+                "\(user?.firstName ?? "")", "Clients"
             ])
         }
     }
@@ -130,14 +130,5 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         60.0
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        heightForHeader
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        heightForHeader
     }
 }

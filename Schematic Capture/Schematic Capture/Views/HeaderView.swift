@@ -53,7 +53,6 @@ class HeaderView: UIView {
         addSubview(secondaryLabel)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Clients"
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         titleLabel.textColor = .systemGray
         addSubview(titleLabel)
@@ -73,9 +72,15 @@ class HeaderView: UIView {
     func setup(viewTypes: ViewTypes, value: [String]) {
         switch viewTypes {
         case .clients:
-            updateViews(value.first ?? "", value.last ?? "")
+            updateViews("Welcome back \(value.first ?? "")", value.last ?? "")
         case .projects:
             updateViews(value.first ?? "", value.last ?? "")
+        case .jobsheets:
+            print("Jobsheets")
+        case .jobsheetDetails:
+            print("Jobsheets details")
+        case .components:
+            print("Components")
         }
     }
     
