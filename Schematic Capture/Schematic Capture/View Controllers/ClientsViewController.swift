@@ -71,6 +71,7 @@ class ClientsViewController: UIViewController {
         tableView.register(ClientTableViewCell.self, forCellReuseIdentifier: ClientTableViewCell.id)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.backgroundColor = .systemBackground
         tableView.addSubview(indicator)
         
@@ -110,6 +111,7 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: ClientTableViewCell.id, for: indexPath) as? ClientTableViewCell {
+            
             let client = self.clients[indexPath.row]
             cell.client = client
             return cell

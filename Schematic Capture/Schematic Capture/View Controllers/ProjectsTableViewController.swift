@@ -14,7 +14,6 @@ class ProjectsTableViewController: UITableViewController {
     var authController: AuthorizationController?
     var projectController: ProjectController?
     
-    
     // The client from the previous ClientsViewController
     var client: Client? {
         didSet {
@@ -25,27 +24,12 @@ class ProjectsTableViewController: UITableViewController {
     }
     
     var token: String?
-    
     var projects = [Project]()
-    
-//    lazy var fetchedResultsController: NSFetchedResultsController<Project> = {
-//        let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "clientId", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
-//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "clientId", cacheName: nil)
-//        frc.delegate = self
-//        do {
-//            try frc.performFetch() // Fetch the tasks
-//        } catch {
-//            fatalError("Error performing fetch for frc: \(error)")
-//        }
-//        return frc
-//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
-    
     
     private func setupViews() {
         view.backgroundColor = .systemBackground
@@ -53,10 +37,11 @@ class ProjectsTableViewController: UITableViewController {
     
     private func fetchProjects() {
         guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        print("Fetch ")
         projectController?.getProjects(with: id, token: token, completion: { result in
-            if let projects = try? result.get() {
+            if let projects = try? result.get() as? [Project] {
                 print("PROJECTS: \(projects)")
+                self.projects = projects
+                self.tableView.reloadData()
             }
         })
     }

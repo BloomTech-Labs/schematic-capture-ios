@@ -18,11 +18,6 @@ enum Urls: String {
     case componentsUrl = "https://schematiccapture-master.herokuapp.com/api/jobsheets/:id/components"
 }
 
-enum HttpMethods: String {
-    case post = "POST"
-    case get = "GET"
-}
-
 enum Keys: String {
     case dropbox = "t5i27y2t3fzkiqj"
 }

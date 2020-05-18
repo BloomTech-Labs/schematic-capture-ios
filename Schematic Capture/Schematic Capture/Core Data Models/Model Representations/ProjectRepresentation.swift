@@ -10,11 +10,11 @@ import Foundation
 
 struct ProjectRepresentation: Codable {
     let id: Int
-    var name: String
+    var name: String?
     var jobSheets: [JobSheetRepresentation]?
-    let clientId: Int
+    let clientId: Int?
    // var assignedStatus:Bool
-    var completed:Int
+    var completed: Bool?
     
     private enum CodingKeys: String, CodingKey {
         case id
