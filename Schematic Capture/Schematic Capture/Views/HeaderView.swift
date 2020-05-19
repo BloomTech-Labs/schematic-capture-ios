@@ -59,18 +59,33 @@ class HeaderView: UIView {
         titleLabel.textColor = .systemGray
         addSubview(titleLabel)
         
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(secondaryLabel)
+        //stackView.addArrangedSubview(titleLabel)
+        
+        //stackView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -24.0).isActive = true
+        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
-            label.widthAnchor.constraint(equalTo: widthAnchor),
-            
-            secondaryLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
-            secondaryLabel.widthAnchor.constraint(equalTo: widthAnchor),
-
+//            label.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
+//            label.widthAnchor.constraint(equalTo: widthAnchor),
+//
+//            secondaryLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
+//            secondaryLabel.widthAnchor.constraint(equalTo: widthAnchor),
+//
             titleLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -32.0),
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
             
-            searchBar.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -24.0),
+            searchBar.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -16.0),
             searchBar.widthAnchor.constraint(equalTo: widthAnchor),
             searchBar.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
