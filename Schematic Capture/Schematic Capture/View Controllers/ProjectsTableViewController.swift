@@ -44,19 +44,17 @@ class ProjectsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Projects", style: .plain, target: nil, action: nil)
         fetchProjects()
     }
     
     private func setupViews() {
         view.backgroundColor = .systemBackground
-        
+                
         indicator.layer.position.y = view.layer.position.y
         indicator.layer.position.x = view.layer.position.x
         indicator.startAnimating()
-        
-        tableView = UITableView(frame: view.frame, style: .grouped)
-        tableView.delegate = self
-        tableView.dataSource = self
+
         tableView.separatorStyle = .none
         tableView.backgroundColor = .systemBackground
         tableView.addSubview(indicator)
@@ -119,9 +117,5 @@ extension ProjectsTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
-    }
-    
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
     }
 }
