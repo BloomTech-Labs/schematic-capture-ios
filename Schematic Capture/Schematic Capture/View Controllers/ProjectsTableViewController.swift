@@ -63,7 +63,7 @@ class ProjectsTableViewController: UITableViewController {
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView
-        tableView?.register(ProjectTableViewCell.self, forCellReuseIdentifier: ProjectTableViewCell.id)
+        tableView?.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
     }
     
     // MARK: - Functions
@@ -101,9 +101,9 @@ extension ProjectsTableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProjectTableViewCell.id, for: indexPath) as? ProjectTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
         let project = self.projects[indexPath.row]
-        cell.project = project
+        cell.updateViews(viewTypes: .projects, value: project)
         return cell
     }
     

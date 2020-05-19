@@ -42,7 +42,13 @@ class JobSheetsTableViewController: UITableViewController {
         }
     }
     
+    var filteredJobSheets: [JobSheetRepresentation]?
+    
     // MARK: - View Lifecycle
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        headerView.searchBar.resignFirstResponder()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,8 +75,9 @@ class JobSheetsTableViewController: UITableViewController {
         tableView.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
+        headerView.searchDelegate = self
         tableView.tableHeaderView = headerView
-        tableView?.register(JobSheetTableViewCell.self, forCellReuseIdentifier: JobSheetTableViewCell.id)
+        tableView?.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
     }
     
     // MARK: - Functions
@@ -86,6 +93,7 @@ class JobSheetsTableViewController: UITableViewController {
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.indicator.stopAnimating()
                 }
             }
         })
@@ -98,29 +106,46 @@ class JobSheetsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jobSheets?.count ?? 0
+        if headerView.searchBar.text != "" {
+            return filteredJobSheets?.count ?? 0
+        } else {
+            return jobSheets?.count ?? 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: JobSheetTableViewCell.id, for: indexPath) as? JobSheetTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
         
-        cell.jobSheet = jobSheets?[indexPath.row]
-        
+        if headerView.searchBar.text != "" {
+            let jobSheet = filteredJobSheets?[indexPath.row]
+            cell.updateViews(viewTypes: .jobsheets, value: jobSheet)
+        } else {
+            let jobSheet = jobSheets?[indexPath.row]
+            cell.updateViews(viewTypes: .jobsheets, value: jobSheet)
+        }
+    
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let jobSheet = self.jobSheets?[indexPath.row]
-        let expyTableViewViewController = ExpyTableViewController()
+        //let expyTableViewViewController = ExpyTableViewController()
 //        expyTableViewViewController.projectController = projectController
 //        expyTableViewViewController.jobSheet = jobSheet
 //        expyTableViewViewController.token = token
-        navigationController?.pushViewController(expyTableViewViewController, animated: true)
+        //navigationController?.pushViewController(expyTableViewViewController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         60.0
     }
     
+}
+
+extension JobSheetsTableViewController: SearchDelegate {
+    func searchDidEnd(didChangeText: String) {
+        self.filteredJobSheets = jobSheets?.filter({$0.name.capitalized.contains(didChangeText.capitalized)})
+        tableView.reloadData()
+    }
 }

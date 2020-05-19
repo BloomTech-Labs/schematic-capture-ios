@@ -24,21 +24,13 @@ class ClientsViewController: UIViewController {
     
     // MARK: - Properties
     
+    var user: User?
     var clients = [Client]()
     var projectController = ProjectController()
     
     var token: String? {
         didSet {
             fetchClients()
-        }
-    }
-    
-    var user: User? {
-        didSet {
-            // Update the headerView when a user id set
-            headerView.setup(viewTypes: .clients, value: [
-                (user?.firstName ?? ""), "Clients"
-            ])
         }
     }
     
@@ -70,7 +62,7 @@ class ClientsViewController: UIViewController {
         indicator.startAnimating()
         
         tableView = UITableView(frame: view.frame, style: .grouped)
-        tableView.register(ClientTableViewCell.self, forCellReuseIdentifier: ClientTableViewCell.id)
+        tableView.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -111,15 +103,13 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ClientTableViewCell.id, for: indexPath) as? ClientTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell {
             let client = self.clients[indexPath.row]
-            cell.client = client
+            cell.updateViews(viewTypes: .clients, value: client)
             return cell
         }
         return UITableViewCell()
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

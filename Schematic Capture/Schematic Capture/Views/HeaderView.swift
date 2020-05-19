@@ -17,7 +17,9 @@ enum ViewTypes: String {
     case componentDetails
 }
 
-
+protocol SearchDelegate: AnyObject {
+    func searchDidEnd(didChangeText: String)
+}
 
 class HeaderView: UIView {
     
@@ -26,6 +28,7 @@ class HeaderView: UIView {
     var titleLabel = UILabel()
     var searchBar = UISearchBar()
     
+    weak var searchDelegate: SearchDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,13 +53,13 @@ class HeaderView: UIView {
         secondaryLabel.font = UIFont.systemFont(ofSize: 17)
         secondaryLabel.textAlignment = .center
         secondaryLabel.textColor = .systemGray2
-        
         addSubview(secondaryLabel)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchBarStyle = .minimal
+        searchBar.returnKeyType = .done
+        searchBar.delegate = self
         addSubview(searchBar)
-        
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Clients"
@@ -64,10 +67,10 @@ class HeaderView: UIView {
         titleLabel.textColor = .systemGray
         addSubview(titleLabel)
         
-        
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
             label.widthAnchor.constraint(equalTo: widthAnchor),
+            
             secondaryLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
             secondaryLabel.widthAnchor.constraint(equalTo: widthAnchor),
 
@@ -106,4 +109,16 @@ class HeaderView: UIView {
         secondaryLabel.text = secondValue
         searchBar.placeholder = "Search for \(title)"
     }
+}
+
+extension HeaderView: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchDelegate?.searchDidEnd(didChangeText: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
 }

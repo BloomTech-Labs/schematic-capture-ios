@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D32F6F1246F2D5400F59FBB /* ClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */; };
-		6D32F6F3246F30F100F59FBB /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D32F6F2246F30F100F59FBB /* ClientTableViewCell.swift */; };
+		6D32F6F3246F30F100F59FBB /* GeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D32F6F2246F30F100F59FBB /* GeneralTableViewCell.swift */; };
 		6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D443000246DD876008C8EE1 /* Assets.xcassets */; };
 		6DBDA833246F777700CF5136 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBDA832246F777700CF5136 /* DateFormatter.swift */; };
 		6DC49BAA246ECFAA009769E0 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC49BA9246ECFAA009769E0 /* Enum.swift */; };
@@ -27,14 +27,8 @@
 		A665838C23E0E27C006073DF /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838B23E0E27C006073DF /* Bearer.swift */; };
 		A665838E23E0E384006073DF /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838D23E0E384006073DF /* Networking.swift */; };
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
-		A665839623E0E863006073DF /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839523E0E863006073DF /* Style.swift */; };
 		A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */; };
-		A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */; };
 		A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */; };
-		A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */; };
-		A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */; };
-		A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692203123FF3DC10060AD9E /* AnnotationViewController.swift */; };
-		A692203424048B4E0060AD9E /* SchematicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692203324048B4E0060AD9E /* SchematicViewController.swift */; };
 		A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */; };
 		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
 		A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */; };
@@ -43,7 +37,6 @@
 		A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */; };
 		A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */; };
 		A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */; };
-		A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */; };
 		A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */; };
 		A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */; };
 		A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */; };
@@ -52,11 +45,9 @@
 		D71890C64BCE841D90AB35B1 /* Pods_Schematic_CaptureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D35217379C6756E5F92DF3 /* Pods_Schematic_CaptureTests.framework */; };
 		E1347570246F02E300B5C791 /* UIView+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134756F246F02E300B5C791 /* UIView+String.swift */; };
 		FA04C5040518ED4D6B6758FE /* Pods_Schematic_Capture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DBCB2AD64144D00159EEDF4 /* Pods_Schematic_Capture.framework */; };
-		FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */; };
 		FBAD0B7D243DA07700B653BE /* TechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7C243DA07700B653BE /* TechClient.swift */; };
 		FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B7E243DA11B00B653BE /* Client.swift */; };
 		FBAD0B81243DA1AF00B653BE /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B80243DA1AF00B653BE /* Contact.swift */; };
-		FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD0B85243F860300B653BE /* EditComponentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +86,7 @@
 		5C9F0C4E76F3C58107BC14BD /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		69D35217379C6756E5F92DF3 /* Pods_Schematic_CaptureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_CaptureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewController.swift; sourceTree = "<group>"; };
-		6D32F6F2246F30F100F59FBB /* ClientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
+		6D32F6F2246F30F100F59FBB /* GeneralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableViewCell.swift; sourceTree = "<group>"; };
 		6D443000246DD876008C8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D443008246DDC18008C8EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DBDA832246F777700CF5136 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -122,16 +113,10 @@
 		A665838B23E0E27C006073DF /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		A665838D23E0E384006073DF /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		A665839523E0E863006073DF /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetsTableViewController.swift; sourceTree = "<group>"; };
-		A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetTableViewCell.swift; sourceTree = "<group>"; };
 		A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpyTableViewController.swift; sourceTree = "<group>"; };
-		A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentMainTableViewCell.swift; sourceTree = "<group>"; };
-		A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailTableViewCell.swift; sourceTree = "<group>"; };
 		A692200B23FDDFBA0060AD9E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		A692200D23FDDFBA0060AD9E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		A692203123FF3DC10060AD9E /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
-		A692203324048B4E0060AD9E /* SchematicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchematicViewController.swift; sourceTree = "<group>"; };
 		A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = OnBoardImage.jpeg; sourceTree = "<group>"; };
 		A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture.xcdatamodel"; sourceTree = "<group>"; };
 		A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Convenience.swift"; sourceTree = "<group>"; };
@@ -140,7 +125,6 @@
 		A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Convenience.swift"; sourceTree = "<group>"; };
 		A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
-		A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectController.swift; sourceTree = "<group>"; };
 		A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepresentation.swift; sourceTree = "<group>"; };
@@ -149,7 +133,6 @@
 		C9F9E1DD0A42106CD119635F /* Pods-Schematic CaptureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.debug.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E134756F246F02E300B5C791 /* UIView+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+String.swift"; sourceTree = "<group>"; };
 		F89DB6AB1AE322DC29913FCD /* Pods-Schematic Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.debug.xcconfig"; sourceTree = "<group>"; };
-		FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailImageViewController.swift; sourceTree = "<group>"; };
 		FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 2.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B7B243D9B7800B653BE /* Schematic Capture 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 3.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B7C243DA07700B653BE /* TechClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechClient.swift; sourceTree = "<group>"; };
@@ -158,7 +141,6 @@
 		FBAD0B82243E7A1000B653BE /* Schematic Capture 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 4.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B83243E7C4700B653BE /* Schematic Capture 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 5.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 6.xcdatamodel"; sourceTree = "<group>"; };
-		FBAD0B85243F860300B653BE /* EditComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditComponentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,17 +178,6 @@
 				6DC49BAB246EE3C8009769E0 /* UserDefault+String.swift */,
 			);
 			path = Constant;
-			sourceTree = "<group>";
-		};
-		6DC49BAE246EE5FD009769E0 /* Legacy */ = {
-			isa = PBXGroup;
-			children = (
-				A692203123FF3DC10060AD9E /* AnnotationViewController.swift */,
-				A692203324048B4E0060AD9E /* SchematicViewController.swift */,
-				FB8E9C9324255705003818D5 /* ComponentDetailImageViewController.swift */,
-				FBAD0B85243F860300B653BE /* EditComponentViewController.swift */,
-			);
-			path = Legacy;
 			sourceTree = "<group>";
 		};
 		A6613BF823E89DDE004A11B2 /* Ressources */ = {
@@ -287,7 +258,6 @@
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
 				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
-				6DC49BAE246EE5FD009769E0 /* Legacy */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -306,7 +276,6 @@
 			children = (
 				A665838223DFA06C006073DF /* Reachability.swift */,
 				A665838D23E0E384006073DF /* Networking.swift */,
-				A665839523E0E863006073DF /* Style.swift */,
 				6DBDA832246F777700CF5136 /* DateFormatter.swift */,
 			);
 			path = Helpers;
@@ -357,11 +326,7 @@
 		A6F1C9FA23EE0E8400E0D583 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A6F1C9FB23EE0EA900E0D583 /* ProjectTableViewCell.swift */,
-				A6921FFE23FB61790060AD9E /* JobSheetTableViewCell.swift */,
-				A692200223FC553B0060AD9E /* ComponentMainTableViewCell.swift */,
-				A692200423FC55460060AD9E /* ComponentDetailTableViewCell.swift */,
-				6D32F6F2246F30F100F59FBB /* ClientTableViewCell.swift */,
+				6D32F6F2246F30F100F59FBB /* GeneralTableViewCell.swift */,
 				6DF9395B246F7C0600D8927E /* HeaderView.swift */,
 			);
 			path = Views;
@@ -663,34 +628,25 @@
 			files = (
 				A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */,
 				A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */,
-				A6F1C9FC23EE0EA900E0D583 /* ProjectTableViewCell.swift in Sources */,
-				FBAD0B86243F860300B653BE /* EditComponentViewController.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
 				6DF9395C246F7C0600D8927E /* HeaderView.swift in Sources */,
 				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
-				A692200323FC553B0060AD9E /* ComponentMainTableViewCell.swift in Sources */,
 				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
 				A665838623DFA50A006073DF /* User.swift in Sources */,
 				6D32F6F1246F2D5400F59FBB /* ClientsViewController.swift in Sources */,
 				A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */,
 				E1347570246F02E300B5C791 /* UIView+String.swift in Sources */,
-				A6921FFF23FB61790060AD9E /* JobSheetTableViewCell.swift in Sources */,
 				A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */,
 				A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */,
 				A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */,
 				A665838E23E0E384006073DF /* Networking.swift in Sources */,
 				A665838C23E0E27C006073DF /* Bearer.swift in Sources */,
-				A692203424048B4E0060AD9E /* SchematicViewController.swift in Sources */,
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
 				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
-				A692203223FF3DC10060AD9E /* AnnotationViewController.swift in Sources */,
-				FB8E9C9424255705003818D5 /* ComponentDetailImageViewController.swift in Sources */,
-				6D32F6F3246F30F100F59FBB /* ClientTableViewCell.swift in Sources */,
+				6D32F6F3246F30F100F59FBB /* GeneralTableViewCell.swift in Sources */,
 				6DBDA833246F777700CF5136 /* DateFormatter.swift in Sources */,
 				A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */,
 				FBAD0B81243DA1AF00B653BE /* Contact.swift in Sources */,
-				A665839623E0E863006073DF /* Style.swift in Sources */,
-				A692200523FC55460060AD9E /* ComponentDetailTableViewCell.swift in Sources */,
 				A6F1CA0323F4C03600E0D583 /* ComponentRepresentation.swift in Sources */,
 				FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */,
 				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
