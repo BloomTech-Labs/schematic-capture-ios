@@ -9,24 +9,24 @@
 import UIKit
 
 class CameraViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    var imagePicker: ImagePicker!
 
     // MARK: - View Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPickerController()
-    }
-    
-    func setupPickerController() {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.allowsEditing = true
-        pickerController.mediaTypes = ["public.image", "public.movie"]
-        pickerController.sourceType = .camera
+        view.backgroundColor = .systemBackground
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        self.imagePicker.present(from: view)
     }
 }
 
-extension CameraViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension CameraViewController: ImagePickerDelegate {
     
-    
+    func didSelect(image: UIImage?) {
+        print("IMAGE SIZES: \(image?.size)")
+    }
 }
