@@ -94,7 +94,13 @@ extension ProjectsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return projects.count
+        if projects.count == 0 {
+            tableView.setEmptyView(title: "You don't have any projects.", message: "You'll find your assigned projects here.")
+            return 0
+        } else {
+            tableView.restore()
+            return projects.count
+        }
     }
     
     

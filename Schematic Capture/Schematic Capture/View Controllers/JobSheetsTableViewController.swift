@@ -108,10 +108,15 @@ class JobSheetsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if headerView.searchBar.text != "" {
             return filteredJobSheets?.count ?? 0
+        } else if jobSheets?.count == 0 {
+            tableView.setEmptyView(title: "You don't have any job sheets.", message: "You'll find your assigned job sheets here.")
+            return 0
         } else {
+            tableView.restore()
             return jobSheets?.count ?? 0
         }
     }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
@@ -123,7 +128,7 @@ class JobSheetsTableViewController: UITableViewController {
             let jobSheet = jobSheets?[indexPath.row]
             cell.updateViews(viewTypes: .jobsheets, value: jobSheet)
         }
-    
+        
         return cell
     }
     
@@ -131,9 +136,9 @@ class JobSheetsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let jobSheet = self.jobSheets?[indexPath.row]
         //let expyTableViewViewController = ExpyTableViewController()
-//        expyTableViewViewController.projectController = projectController
-//        expyTableViewViewController.jobSheet = jobSheet
-//        expyTableViewViewController.token = token
+        //        expyTableViewViewController.projectController = projectController
+        //        expyTableViewViewController.jobSheet = jobSheet
+        //        expyTableViewViewController.token = token
         //navigationController?.pushViewController(expyTableViewViewController, animated: true)
     }
     

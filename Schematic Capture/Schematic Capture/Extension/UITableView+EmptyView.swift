@@ -16,13 +16,11 @@ extension UITableView {
         let messageLabel = UILabel()
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        titleLabel.textColor = UIColor.label
         titleLabel.text = title
         
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.textColor = UIColor.lightGray
-        messageLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 17)
+        messageLabel.textColor = UIColor.systemGray3
         messageLabel.text = message
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
@@ -31,10 +29,10 @@ extension UITableView {
         emptyView.addSubview(messageLabel)
         
         NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor)
-            titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor)
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
-            messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20)
+            titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20),
             messageLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -20)
         ])
         
