@@ -8,15 +8,6 @@
 
 import UIKit
 
-
-enum ViewTypes: String {
-    case clients
-    case projects
-    case jobsheets
-    case components
-    case componentDetails
-}
-
 protocol SearchDelegate: AnyObject {
     func searchDidEnd(didChangeText: String)
 }
@@ -59,6 +50,7 @@ class HeaderView: UIView {
         searchBar.searchBarStyle = .minimal
         searchBar.returnKeyType = .done
         searchBar.delegate = self
+        searchBar.isHidden = true
         addSubview(searchBar)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +101,7 @@ class HeaderView: UIView {
             searchBar.isHidden = true            
             updateViews(value.first ?? "", value[1], value.last ?? "")
         case .jobsheets:
-//            searchBar.isHidden = true
+            searchBar.isHidden = false
             updateViews(value.first ?? "", "", value.last ?? "")
         case .components:
             updateViews(value.first ?? "", "", value.last ?? "")
@@ -126,6 +118,9 @@ class HeaderView: UIView {
     }
 }
 
+
+
+// MARK: - UISearchBarDelegate
 extension HeaderView: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
