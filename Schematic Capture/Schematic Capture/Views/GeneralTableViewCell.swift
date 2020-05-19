@@ -28,11 +28,12 @@ class GeneralTableViewCell: UITableViewCell {
         nameLabel.textColor = .label
         nameLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.adjustsFontSizeToFitWidth = true
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         
         statusLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         statusLabel.textAlignment = .center
-        statusLabel.layer.cornerRadius = 5
+        statusLabel.clipsToBounds = true
         
         addSubview(nameLabel)
         addSubview(numberOfJobSheetLabel)
@@ -48,7 +49,11 @@ class GeneralTableViewCell: UITableViewCell {
             statusLabel.heightAnchor.constraint(equalTo: heightAnchor, constant: -24.0),
             statusLabel.widthAnchor.constraint(equalToConstant: 100),
             statusLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            nameLabel.rightAnchor.constraint(equalTo: statusLabel.leftAnchor, constant: -16.0)
         ])
+        
+        statusLabel.layer.cornerRadius = 18.0
     }
     
     func updateViews(viewTypes: ViewTypes, value: Any) {
@@ -62,7 +67,7 @@ class GeneralTableViewCell: UITableViewCell {
                 
                 if !project.completed! {
                     statusLabel.backgroundColor = UIColor(red: 250.0/255.0, green: 86.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-                    statusLabel.textColor = .label
+                    statusLabel.textColor = .white
                     statusLabel.text = "Incomplete"
                 } else {
                     statusLabel.textColor = .systemGray
@@ -73,7 +78,7 @@ class GeneralTableViewCell: UITableViewCell {
                 
                 if !jobsheet.completed {
                     statusLabel.backgroundColor = UIColor(red: 250.0/255.0, green: 86.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-                    statusLabel.textColor = .label
+                    statusLabel.textColor = .white
                     statusLabel.text = "Incomplete"
                 } else {
                     statusLabel.textColor = .systemGray
