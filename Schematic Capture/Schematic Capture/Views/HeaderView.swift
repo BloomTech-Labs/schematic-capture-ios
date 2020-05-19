@@ -68,19 +68,11 @@ class HeaderView: UIView {
         stackView.spacing = 8
         stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(secondaryLabel)
-        //stackView.addArrangedSubview(titleLabel)
-        
-        //stackView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -24.0).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         NSLayoutConstraint.activate([
-//            label.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
-//            label.widthAnchor.constraint(equalTo: widthAnchor),
-//
-//            secondaryLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
-//            secondaryLabel.widthAnchor.constraint(equalTo: widthAnchor),
-//
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+
             titleLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -32.0),
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
