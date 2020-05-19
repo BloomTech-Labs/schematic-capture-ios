@@ -1,24 +1,20 @@
 PODS:
   - Alamofire (4.8.2)
-  - ExpyTableView (1.2.1)
   - SwiftyDropbox (5.1.0):
     - Alamofire (~> 4.8.2)
 
 DEPENDENCIES:
-  - ExpyTableView
   - SwiftyDropbox
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - ExpyTableView
     - SwiftyDropbox
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  ExpyTableView: 19cf224c2ff04b1ec215ec52bc4ba6f81fa809ed
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
 
-PODFILE CHECKSUM: e02c2db5864bd617b99e1c4f25bfb5cd3053ee3a
+PODFILE CHECKSUM: 6fb386cc701b44446f73a8a0324a905672b0367d
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

@@ -135,11 +135,11 @@ class JobSheetsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let jobSheet = self.jobSheets?[indexPath.row]
-        //let expyTableViewViewController = ExpyTableViewController()
-        //        expyTableViewViewController.projectController = projectController
-        //        expyTableViewViewController.jobSheet = jobSheet
-        //        expyTableViewViewController.token = token
-        //navigationController?.pushViewController(expyTableViewViewController, animated: true)
+        let componentsTableViewViewController = ComponentsTableViewController()
+        componentsTableViewViewController.projectController = projectController
+        componentsTableViewViewController.jobSheet = jobSheet
+        componentsTableViewViewController.token = token
+        navigationController?.pushViewController(componentsTableViewViewController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
