@@ -10,6 +10,8 @@
 		6D32F6F1246F2D5400F59FBB /* ClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */; };
 		6D32F6F3246F30F100F59FBB /* GeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D32F6F2246F30F100F59FBB /* GeneralTableViewCell.swift */; };
 		6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D443000246DD876008C8EE1 /* Assets.xcassets */; };
+		6DB6500224748946007C10C6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6500124748946007C10C6 /* CameraViewController.swift */; };
+		6DB6500424748AEF007C10C6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6500324748AEF007C10C6 /* ImagePicker.swift */; };
 		6DBDA833246F777700CF5136 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBDA832246F777700CF5136 /* DateFormatter.swift */; };
 		6DC49BAA246ECFAA009769E0 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC49BA9246ECFAA009769E0 /* Enum.swift */; };
 		6DC49BAC246EE3C8009769E0 /* UserDefault+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC49BAB246EE3C8009769E0 /* UserDefault+String.swift */; };
@@ -89,6 +91,8 @@
 		6D32F6F2246F30F100F59FBB /* GeneralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableViewCell.swift; sourceTree = "<group>"; };
 		6D443000246DD876008C8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D443008246DDC18008C8EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DB6500124748946007C10C6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		6DB6500324748AEF007C10C6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6DBDA832246F777700CF5136 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		6DC49BA9246ECFAA009769E0 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		6DC49BAB246EE3C8009769E0 /* UserDefault+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+String.swift"; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
 				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
+				6DB6500124748946007C10C6 /* CameraViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				A665838223DFA06C006073DF /* Reachability.swift */,
 				A665838D23E0E384006073DF /* Networking.swift */,
 				6DBDA832246F777700CF5136 /* DateFormatter.swift */,
+				6DB6500324748AEF007C10C6 /* ImagePicker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -629,6 +635,7 @@
 				A6F1C9F523EDD9B800E0D583 /* CoreDataStack.swift in Sources */,
 				A6F1CA0523F5C71C00E0D583 /* PhotoRepresentation.swift in Sources */,
 				A665835523DAB508006073DF /* AppDelegate.swift in Sources */,
+				6DB6500424748AEF007C10C6 /* ImagePicker.swift in Sources */,
 				6DF9395C246F7C0600D8927E /* HeaderView.swift in Sources */,
 				A6F1C9ED23ECD37D00E0D583 /* JobSheet+Convenience.swift in Sources */,
 				A665838923E0E1B2006073DF /* LoginController.swift in Sources */,
@@ -637,6 +644,7 @@
 				A6F1C9F923EE07A500E0D583 /* ProjectsTableViewController.swift in Sources */,
 				E1347570246F02E300B5C791 /* UIView+String.swift in Sources */,
 				A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */,
+				6DB6500224748946007C10C6 /* CameraViewController.swift in Sources */,
 				A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */,
 				A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */,
 				A665838E23E0E384006073DF /* Networking.swift in Sources */,
