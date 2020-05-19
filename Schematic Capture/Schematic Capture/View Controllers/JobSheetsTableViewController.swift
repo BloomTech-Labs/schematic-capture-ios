@@ -113,9 +113,9 @@ class JobSheetsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let jobSheet = self.jobSheets?[indexPath.row]
         let expyTableViewViewController = ExpyTableViewController()
-        expyTableViewViewController.projectController = projectController
-        expyTableViewViewController.jobSheet = jobSheet
-        expyTableViewViewController.token = token
+//        expyTableViewViewController.projectController = projectController
+//        expyTableViewViewController.jobSheet = jobSheet
+//        expyTableViewViewController.token = token
         navigationController?.pushViewController(expyTableViewViewController, animated: true)
     }
     

@@ -9,6 +9,7 @@
 import Foundation
 
 struct ProjectRepresentation: Codable {
+    
     let id: Int
     var name: String?
     var jobSheets: [JobSheetRepresentation]?

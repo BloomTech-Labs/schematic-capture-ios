@@ -71,9 +71,6 @@ class ExpyTableViewController: UIViewController {
         expandableTableView.reloadData()
         
         navigationItem.rightBarButtonItems = [pdfBarButtonItem]
-        
-        
-        
     }
     
     

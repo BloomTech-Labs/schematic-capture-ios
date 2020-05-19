@@ -81,8 +81,18 @@ class ProjectController {
             
             do {
                 let projects = try decoder.decode([ProjectRepresentation].self, from: data)
-                print("PROJECTS: \(projects)")
                 completion(.success(projects))
+
+//                for var project in projects {
+//                    // Get jobsheets for each project
+//                    var finalProjects = projects
+//                    self.getJobSheets(with: project.id, token: token, completion: { (result) in
+//                        if let jobsheets = try? result.get() as? [JobSheetRepresentation] {
+//                            project.jobSheets?.append(contentsOf: jobsheets)
+//                            finalProjects.append(project)
+//                        }
+//                    })
+//                }
             } catch {
                 print("Error decoding a projects: \(error)")
                 completion(.failure(.badDecode))

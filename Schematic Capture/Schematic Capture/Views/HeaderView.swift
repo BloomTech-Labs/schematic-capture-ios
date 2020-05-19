@@ -13,8 +13,8 @@ enum ViewTypes: String {
     case clients
     case projects
     case jobsheets
-    case jobsheetDetails
     case components
+    case componentDetails
 }
 
 
@@ -51,11 +51,8 @@ class HeaderView: UIView {
         secondaryLabel.textAlignment = .center
         secondaryLabel.textColor = .systemGray2
         
-        let date = CachedDateFormattingHelper.shared.formatTodayDate()
-        secondaryLabel.text = date
         addSubview(secondaryLabel)
         
-            
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchBarStyle = .minimal
         addSubview(searchBar)
@@ -66,7 +63,6 @@ class HeaderView: UIView {
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         titleLabel.textColor = .systemGray
         addSubview(titleLabel)
-        
         
         
         NSLayoutConstraint.activate([
@@ -89,24 +85,25 @@ class HeaderView: UIView {
         switch viewTypes {
         case .clients:
             searchBar.isHidden = true
-            updateViews("Welcome back \(value.first ?? "")", value.last ?? "")
+            let date = CachedDateFormattingHelper.shared.formatTodayDate()
+            updateViews("Welcome back \(value.first ?? "")", date, value.last ?? "")
         case .projects:
-            searchBar.isHidden = true
-            updateViews(value.first ?? "", value.last ?? "")
+            searchBar.isHidden = true            
+            updateViews(value.first ?? "", value[1], value.last ?? "")
         case .jobsheets:
-            searchBar.isHidden = true
-            updateViews(value.first ?? "", value.last ?? "")
-        case .jobsheetDetails:
-            searchBar.isHidden = true
-            updateViews(value.first ?? "", value.last ?? "")
+//            searchBar.isHidden = true
+            updateViews(value.first ?? "", "", value.last ?? "")
         case .components:
-            updateViews(value.first ?? "", value.last ?? "")
+            updateViews(value.first ?? "", "", value.last ?? "")
+        case .componentDetails:
+            break
         }
     }
     
-    func updateViews(_ value: String, _ title: String) {
+    func updateViews(_ value: String, _ secondValue: String, _ title: String) {
         label.text = value
         titleLabel.text = title
+        secondaryLabel.text = secondValue
         searchBar.placeholder = "Search for \(title)"
     }
 }

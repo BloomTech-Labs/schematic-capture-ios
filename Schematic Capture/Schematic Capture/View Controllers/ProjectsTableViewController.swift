@@ -30,7 +30,6 @@ class ProjectsTableViewController: UITableViewController {
     var client: Client? {
         didSet {
             fetchProjects()
-            headerView.setup(viewTypes: .projects, value: [client!.companyName ?? "", "Projects"])
         }
     }
    
@@ -74,18 +73,14 @@ class ProjectsTableViewController: UITableViewController {
         guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getProjects(with: id, token: token, completion: { result in
             if let projects = try? result.get() as? [ProjectRepresentation] {
-                print("PROJECTS: \(projects)")
                 self.projects = projects
-                
                 DispatchQueue.main.async {
+                    let incompletedProjectCount = projects.filter({!$0.completed!}).count
+                    let totalCount = projects.count
+                    self.headerView.setup(viewTypes: .projects, value: [self.client!.companyName ?? "", "Incomplete (\(incompletedProjectCount)/\(totalCount))", "Projects",])
                     self.tableView.reloadData()
+                    self.indicator.stopAnimating()
                 }
-                
-                self.projectController?.getJobSheets(with: 1, token: (self.token ?? UserDefaults.standard.string(forKey: .token)) ?? "", completion: { (result) in
-                    if let jobsheet = try?  result.get() as? [JobSheet] {
-                        print(jobsheet)
-                    }
-                })
             }
         })
     }
@@ -97,15 +92,11 @@ class ProjectsTableViewController: UITableViewController {
 extension ProjectsTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
-        //return fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return projects.count
-       // return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     
