@@ -16,6 +16,7 @@ class HeaderView: UIView {
     
     var label = UILabel()
     var secondaryLabel = UILabel()
+    var thirdLabel = UILabel()
     var titleLabel = UILabel()
     var searchBar = UISearchBar()
     
@@ -32,16 +33,20 @@ class HeaderView: UIView {
     
     func setupViews() {
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 3
-        label.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         label.textAlignment = .center
         label.textColor = .label
+        label.adjustsFontSizeToFitWidth = true
         addSubview(label)
         
+        thirdLabel.translatesAutoresizingMaskIntoConstraints = false
+        thirdLabel.font = UIFont.systemFont(ofSize: 20)
+        thirdLabel.textAlignment = .center
+        thirdLabel.textColor = .label
+        addSubview(thirdLabel)
+        
         secondaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        secondaryLabel.sizeToFit()
-        secondaryLabel.numberOfLines = 3
-        secondaryLabel.font = UIFont.systemFont(ofSize: 17)
+        secondaryLabel.font = UIFont.systemFont(ofSize: 16)
         secondaryLabel.textAlignment = .center
         secondaryLabel.textColor = .systemGray2
         addSubview(secondaryLabel)
@@ -51,7 +56,7 @@ class HeaderView: UIView {
         searchBar.returnKeyType = .done
         searchBar.delegate = self
         searchBar.isHidden = true
-        addSubview(searchBar)
+        //addSubview(searchBar)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Clients"
@@ -65,21 +70,21 @@ class HeaderView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = 8.0
         stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(thirdLabel)
         stackView.addArrangedSubview(secondaryLabel)
+        stackView.addArrangedSubview(searchBar)
+        stackView.setCustomSpacing(16, after: secondaryLabel)
         
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-
-            titleLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -32.0),
-            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
-            titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8.0),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8.0),
             
-            searchBar.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -16.0),
-            searchBar.widthAnchor.constraint(equalTo: widthAnchor),
-            searchBar.centerXAnchor.constraint(equalTo: centerXAnchor)
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8.0),
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor)
         ])
     }
     
@@ -94,9 +99,10 @@ class HeaderView: UIView {
             updateViews(value.first ?? "", value[1], value.last ?? "")
         case .jobsheets:
             searchBar.isHidden = false
-            updateViews(value.first ?? "", "", value.last ?? "")
+            updateViews(value.first ?? "", value[1], value.last ?? "")
         case .components:
-            updateViews(value.first ?? "", "", value.last ?? "")
+            updateViews(value.first ?? "", value[1], value.last ?? "")
+            thirdLabel.text = "Component list"
         case .componentDetails:
             break
         }

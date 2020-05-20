@@ -29,7 +29,7 @@ class ComponentsTableViewController: UITableViewController {
         didSet {
             fetchComponents()
             guard let name = jobSheet?.name else { return }
-            headerView.setup(viewTypes: .jobsheets, value: [name, "Job Sheets"])
+            headerView.setup(viewTypes: .components, value: [name, "Components"])
         }
     }
     var components = [Component]()
@@ -70,7 +70,7 @@ class ComponentsTableViewController: UITableViewController {
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         headerView.searchDelegate = self
         tableView.tableHeaderView = headerView
-        tableView?.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
+        tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
     }
     
     // MARK: - Functions
@@ -90,16 +90,7 @@ class ComponentsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
-        
-        if headerView.searchBar.text != "" {
-            let component = components[indexPath.row]
-            cell.updateViews(viewTypes: .components, value: component)
-        } else {
-            let component = components[indexPath.row]
-            cell.updateViews(viewTypes: .components, value: component)
-        }
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTableViewCell.id, for: indexPath) as? ComponentTableViewCell else { return UITableViewCell() }
         return cell
     }
     

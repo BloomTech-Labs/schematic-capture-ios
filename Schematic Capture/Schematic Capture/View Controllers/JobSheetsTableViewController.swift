@@ -30,7 +30,7 @@ class JobSheetsTableViewController: UITableViewController {
         didSet {
             fetchJobSheets()
             guard let name = project?.name else { return }
-            headerView.setup(viewTypes: .jobsheets, value: [name, "Job Sheets"])
+            headerView.setup(viewTypes: .jobsheets, value: [name, "Incomolete (1/3)", "Job Sheets"])
         }
     }
     
