@@ -30,3 +30,9 @@ enum ViewTypes: String {
     case components
     case componentDetails
 }
+
+enum Shapes: String {
+    case circle = "circle"
+    case arrow = "arrow.left"
+    case square = "square"
+}

@@ -9,10 +9,17 @@ import UIKit
 
 class AnnotationView: UIView {
     
+    var imageView = UIImageView()
+    
+    var image: UIImage? {
+        didSet {
+            imageView.image = image
+        }
+    }
     
     var shape: Shapes? {
         didSet {
-            
+            // Add selected shape to imageView
         }
     }
 
@@ -27,9 +34,19 @@ class AnnotationView: UIView {
     
     func setupViews() {
         
-        backgroundColor = .darkGray
+        backgroundColor = .black
         translatesAutoresizingMaskIntoConstraints = false
         
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalTo: widthAnchor),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor),
+        ])
     }
 }
 

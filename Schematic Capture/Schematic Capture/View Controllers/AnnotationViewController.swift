@@ -8,15 +8,9 @@
 
 import UIKit
 
-enum Shapes: String {
-    case circle = "circle"
-    case arrow = "arrow.left"
-    case square = "square"
-}
 
 class AnnotationViewController: UIViewController {
     
-    var imageView = UIImageView()
     var annotationView = AnnotationView()
     
     var colors = [UIColor.white, UIColor.black, UIColor.systemBlue, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemOrange, UIColor.systemRed, UIColor.systemPink, UIColor.systemPurple]
@@ -24,16 +18,9 @@ class AnnotationViewController: UIViewController {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let width = 30
-        let cellCount = self.colors.count
-        let totalCellWidth = width * cellCount
-        let totalSpacingWidth = 10 * (cellCount - 1)
-
-        let leftInset = (self.view.frame.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
-        let rightInset = leftInset
-        
+        let width: CGFloat = 30
         layout.itemSize = CGSize(width: width, height: width)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: width, bottom: 0, right: 0)
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 10
         layout.scrollDirection = .horizontal
@@ -47,7 +34,7 @@ class AnnotationViewController: UIViewController {
     
     var image: UIImage? {
         didSet {
-            imageView.image = image
+            annotationView.image = image
         }
     }
     override func viewDidLoad() {
@@ -62,9 +49,7 @@ class AnnotationViewController: UIViewController {
         
         view.backgroundColor = .black
         
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageView)
+        view.addSubview(annotationView)
     
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -101,8 +86,10 @@ class AnnotationViewController: UIViewController {
         self.toolbarItems = items
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -100),
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            
+            annotationView.topAnchor.constraint(equalTo: view.topAnchor),
+            annotationView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            annotationView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -60.0),
             
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0.0),
             collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
@@ -140,5 +127,11 @@ extension AnnotationViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1.0
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+        let color = colors[indexPath.row]
+        self.navigationController?.toolbar.tintColor = color
     }
 }
