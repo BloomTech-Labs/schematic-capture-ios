@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import SDWebImage
+import SwiftyDropbox
 
 class ComponentTableViewCell: UITableViewCell {
 
     var indexLabel = UILabel()
     var nameLabel = UILabel()
     var componentImageView = UIImageView()
+    
+    var projectController = ProjectController()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,7 +51,17 @@ class ComponentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(index: Int, component: ComponentRepresentation) {
-        indexLabel.text = "\(index)"
+    // Do we need index?
+    func updateViews(component: ComponentRepresentation) {
+        indexLabel.text = "\(component.id)"
+        nameLabel.text = component.componentDescription
+        
+        if component.image != nil {
+            //self.componentImageView.image =
+        } else {
+            self.componentImageView.image = UIImage(systemName: "camera")
+        }
+        
+        
     }
 }

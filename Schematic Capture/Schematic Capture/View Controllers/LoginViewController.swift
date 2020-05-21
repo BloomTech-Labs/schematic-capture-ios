@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
     
     // MARK: - UI Elements
@@ -59,7 +60,7 @@ class LoginViewController: UIViewController {
     @objc private func login(_ sender: UIButton) {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
         
-        authController.logIn(username: username, password: password) { result in
+        authController.logIn(username: username, password: password, viewController: self) { result in
             if let result = try? result.get(),
                 let token = result.first as? String,
                 let user = result.last as? User {

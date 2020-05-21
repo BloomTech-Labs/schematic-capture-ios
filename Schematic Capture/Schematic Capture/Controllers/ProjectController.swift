@@ -6,7 +6,7 @@
 //  Copyright © 2020 GIPGIP Studio. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 class ProjectController {
@@ -146,4 +146,47 @@ class ProjectController {
         }.resume()
     }
     
+    func getComponents(with jobSheetID: Int, token: String, completion: @escaping Completion) {
+        var requestUrl = URL(string: Urls.componentsUrl.rawValue)!
+        
+        requestUrl.appendPathComponent("\(jobSheetID)")
+        requestUrl.appendPathComponent("components")
+        
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
+        
+        URLSession.shared.dataTask(with:request) { (data, _, error) in
+            if let error = error {
+                completion(.failure(.serverError(error)))
+            }
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            
+            do {
+                // make sure this JSON is in the format we expect
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                // try to read out a string array
+                print("json:", json)
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+            
+            do {
+                let components = try decoder.decode([ComponentRepresentation].self, from: data)
+                print("COMPONENTS: \(components)")
+                completion(.success(components))
+            } catch {
+                print("Error decoding a components: \(error)")
+                completion(.failure(.badDecode))
+                return
+            }
+        }.resume()
+    }
 }

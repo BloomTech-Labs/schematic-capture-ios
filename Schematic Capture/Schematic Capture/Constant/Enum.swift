@@ -15,13 +15,12 @@ enum Urls: String {
     case clientsUrl = "https://schematiccapture-master.herokuapp.com/api/clients"
     //https://schematiccapture-master.herokuapp.com/api/clients/:id/projects
     case jobSheetsUrl = "https://schematiccapture-master.herokuapp.com/api/projects"
-    case componentsUrl = "https://schematiccapture-master.herokuapp.com/api/jobsheets/id/components"
+    case componentsUrl = "https://schematiccapture-master.herokuapp.com/api/jobsheets"
 }
 
 enum Keys: String {
     case dropbox = "t5i27y2t3fzkiqj"
 }
-
 
 enum ViewTypes: String {
     case clients

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyDropbox
 
 class AuthorizationController {
     
@@ -18,7 +19,7 @@ class AuthorizationController {
     // AuthenticateUser
     /*Authenticate user with username and password. Save user Id to UserDefaults */
     
-    func logIn(username:String, password:String, completion: @escaping Completion) {
+    func logIn(username:String, password:String, viewController: UIViewController, completion: @escaping Completion) {
         //configure request url
         let loggingInUser = User(password:password, username:username)
         var internalBearer:Bearer?
@@ -52,7 +53,15 @@ class AuthorizationController {
                 internalBearer = try decoder.decode(Bearer.self, from: data)
                 let user = try decoder.decode(User.self, from: data)
                 guard let bearer = internalBearer else { return }
-                completion(.success([bearer.token, user]))
+                DispatchQueue.main.async {
+                    DropboxClientsManager.authorizeFromController(UIApplication.shared,
+                                                                  controller: viewController,
+                                                                  openURL: { (url: URL) -> Void in
+                                                                    UIApplication.shared.openURL(url)
+                                                                    completion(.success([bearer.token, user]))
+                    })
+                }
+                
             } catch {
                 NSLog("Error decoding a bearer token: \(error)")
                 completion(.failure(.badDecode))
@@ -63,8 +72,6 @@ class AuthorizationController {
             self.defaults.set(internalBearer?.token, forKey: .token)
         }.resume()
     }
-    
-    
     
     
     

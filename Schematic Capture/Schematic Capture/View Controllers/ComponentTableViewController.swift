@@ -28,6 +28,7 @@ class ComponentsTableViewController: UITableViewController {
     
     var jobSheet: JobSheetRepresentation? {
         didSet {
+            print("JobSheetID: \(jobSheet?.id)")
             fetchComponents()
             guard let name = jobSheet?.name else { return }
             headerView.setup(viewTypes: .components, value: [name, "Components"])
@@ -37,7 +38,7 @@ class ComponentsTableViewController: UITableViewController {
     var filteredComponents = [ComponentRepresentation]()
     
     var imagePicker: ImagePicker!
-
+    
     
     //var pdfBarButtonItem: UIBarButtonItem!
     
@@ -54,7 +55,7 @@ class ComponentsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchComponents()
+        
     }
     
     func setupUI() {
@@ -77,13 +78,25 @@ class ComponentsTableViewController: UITableViewController {
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
-
+        
     }
     
     // MARK: - Functions
     
     private func fetchComponents() {
-        indicator.stopAnimating()
+        guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
+        projectController?.getComponents(with: id, token: token, completion: { (results) in
+            if let components = try? results.get() as? [ComponentRepresentation] {
+                print("COMPONENTS: \(components)")
+                self.components = components
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.indicator.stopAnimating()
+                }
+            }
+        })
+        
     }
     
     // MARK: - Table view data source
@@ -93,22 +106,24 @@ class ComponentsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        8
+        components.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTableViewCell.id, for: indexPath) as? ComponentTableViewCell else { return UITableViewCell() }
+        let component = self.components[indexPath.row]
         cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
+        cell.updateViews(component: component)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let components = self.components[indexPath.row]
-//        let expyTableViewViewController = ComponentsTableViewController()
-//        expyTableViewViewController.projectController = projectController
-//        expyTableViewViewController.jobSheet = jobSheet
-//        expyTableViewViewController.token = token
+        //        let components = self.components[indexPath.row]
+        //        let expyTableViewViewController = ComponentsTableViewController()
+        //        expyTableViewViewController.projectController = projectController
+        //        expyTableViewViewController.jobSheet = jobSheet
+        //        expyTableViewViewController.token = token
         //navigationController?.pushViewController(expyTableViewViewController, animated: true)
     }
     
@@ -144,7 +159,7 @@ extension ComponentsTableViewController: ImagePickerDelegate {
         }
     }
 }
- 
+
 // MARK: - ImageDoneEditingDelegate
 
 extension ComponentsTableViewController: ImageDoneEditingDelegate {
