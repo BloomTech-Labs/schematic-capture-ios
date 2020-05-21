@@ -32,8 +32,11 @@ class ComponentsTableViewController: UITableViewController {
             headerView.setup(viewTypes: .components, value: [name, "Components"])
         }
     }
-    var components = [Component]()
-    var filteredComponents = [Component]()
+    var components = [ComponentRepresentation]()
+    var filteredComponents = [ComponentRepresentation]()
+    
+    var imagePicker: ImagePicker!
+
     
     //var pdfBarButtonItem: UIBarButtonItem!
     
@@ -71,32 +74,39 @@ class ComponentsTableViewController: UITableViewController {
         headerView.searchDelegate = self
         tableView.tableHeaderView = headerView
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
+        
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+
     }
     
     // MARK: - Functions
     
     private func fetchComponents() {
-        
+        indicator.stopAnimating()
     }
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        components.count
+        8
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTableViewCell.id, for: indexPath) as? ComponentTableViewCell else { return UITableViewCell() }
+        
+//        let component = self.components[indexPath.row]
+//        cell.updateViews(index: indexPath.row, component: component)
+        cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let components = self.components[indexPath.row]
+//        let components = self.components[indexPath.row]
 //        let expyTableViewViewController = ComponentsTableViewController()
 //        expyTableViewViewController.projectController = projectController
 //        expyTableViewViewController.jobSheet = jobSheet
@@ -108,12 +118,29 @@ class ComponentsTableViewController: UITableViewController {
         60.0
     }
     
+    
+    @objc func showImagePicker() {
+        self.imagePicker.present(from: view)
+    }
 }
 
 extension ComponentsTableViewController: SearchDelegate {
     func searchDidEnd(didChangeText: String) {
         //self.filteredComponents =  self.components.filter({($0.componentDescription .capitalized.contains(didChangeText.capitalized))}) else { return }
         tableView.reloadData()
+    }
+}
+
+
+extension ComponentsTableViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        if image != nil {
+            let annotationViewController = AnnotationViewController()
+            let navigationController = UINavigationController(rootViewController: annotationViewController)
+            annotationViewController.image = image
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
 }
 
