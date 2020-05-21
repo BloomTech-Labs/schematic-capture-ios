@@ -55,10 +55,9 @@ class ProjectsTableViewController: UITableViewController {
         indicator.layer.position.x = view.layer.position.x
         indicator.startAnimating()
 
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .systemBackground
-        tableView.separatorStyle = .none
-        tableView.addSubview(indicator)
+        tableView?.backgroundColor = .systemBackground
+        tableView?.separatorStyle = .none
+        tableView?.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyDropbox
 
 
 class LoginViewController: UIViewController {
@@ -66,13 +67,16 @@ class LoginViewController: UIViewController {
                 let user = result.last as? User {
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
+                
                 DispatchQueue.main.async {
+                    print("WE ARE HERE")
                     let clientsViewController = ClientsViewController()
                     let navigationController = UINavigationController(rootViewController: clientsViewController)
                     clientsViewController.token = token
                     clientsViewController.user = user
                     navigationController.modalPresentationStyle = .fullScreen
                     self.present(navigationController, animated: true, completion: nil)
+                    
                 }
             }
         }

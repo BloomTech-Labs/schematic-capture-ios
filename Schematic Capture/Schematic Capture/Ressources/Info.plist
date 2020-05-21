@@ -21,10 +21,15 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.okta.dev-833124:/callback</string>
+                <string>db-t5i27y2t3fzkiqj</string>
 			</array>
 		</dict>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>dbapi-8-emm</string>
+            <string>dbapi-2</string>
+    </array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -82,21 +87,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CFBundleURLTypes</key>
-	    <array>
-	        <dict>
-	            <key>CFBundleURLSchemes</key>
-	            <array>
-	                <string>db-t5i27y2t3fzkiqj</string>
-	            </array>
-	            <key>CFBundleURLName</key>
-	            <string></string>
-	        </dict>
-	    </array>
-		<key>LSApplicationQueriesSchemes</key>
-		    <array>
-		        <string>dbapi-8-emm</string>
-		        <string>dbapi-2</string>
-		    </array>
 </dict>
 </plist>

@@ -23,11 +23,11 @@ class AuthorizationController {
         //configure request url
         let loggingInUser = User(password:password, username:username)
         var internalBearer:Bearer?
-
+        
         var request = URLRequest(url: URL(string: Urls.logInUrl.rawValue)!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(loggingInUser)
@@ -45,23 +45,17 @@ class AuthorizationController {
                 completion(.failure(.noData))
                 return
             }
-                        
+            
             let decoder = JSONDecoder()
-
+            
             do {
                 // Get the bearer and the user
                 internalBearer = try decoder.decode(Bearer.self, from: data)
                 let user = try decoder.decode(User.self, from: data)
                 guard let bearer = internalBearer else { return }
                 DispatchQueue.main.async {
-                    DropboxClientsManager.authorizeFromController(UIApplication.shared,
-                                                                  controller: viewController,
-                                                                  openURL: { (url: URL) -> Void in
-                                                                    UIApplication.shared.openURL(url)
-                                                                    completion(.success([bearer.token, user]))
-                    })
+                   completion(.success([bearer.token, user]))
                 }
-                
             } catch {
                 NSLog("Error decoding a bearer token: \(error)")
                 completion(.failure(.badDecode))
