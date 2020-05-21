@@ -119,12 +119,10 @@ class ComponentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //        let components = self.components[indexPath.row]
-        //        let expyTableViewViewController = ComponentsTableViewController()
-        //        expyTableViewViewController.projectController = projectController
-        //        expyTableViewViewController.jobSheet = jobSheet
-        //        expyTableViewViewController.token = token
-        //navigationController?.pushViewController(expyTableViewViewController, animated: true)
+        let component = self.components[indexPath.row]
+        let componentDetailsViewController = ComponentDetailsViewController()
+        componentDetailsViewController.component = component
+        navigationController?.pushViewController(componentDetailsViewController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

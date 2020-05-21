@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 protocol ImageDoneEditingDelegate: AnyObject {
     func ImageDoneEditing(image: UIImage?)
 

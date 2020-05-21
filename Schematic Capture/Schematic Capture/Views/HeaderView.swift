@@ -59,7 +59,6 @@ class HeaderView: UIView {
         //addSubview(searchBar)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Clients"
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         titleLabel.textColor = .systemGray
         addSubview(titleLabel)
@@ -104,7 +103,8 @@ class HeaderView: UIView {
             updateViews(value.first ?? "", value[1], value.last ?? "")
             thirdLabel.text = "Component list"
         case .componentDetails:
-            break
+            searchBar.isHidden = true
+            updateViews(value.first ?? "", value[1], value.last ?? "")
         }
     }
     
