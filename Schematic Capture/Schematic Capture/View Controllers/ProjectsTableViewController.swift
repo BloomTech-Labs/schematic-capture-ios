@@ -57,6 +57,7 @@ class ProjectsTableViewController: UITableViewController {
 
         tableView.separatorStyle = .none
         tableView.backgroundColor = .systemBackground
+        tableView.separatorStyle = .none
         tableView.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)

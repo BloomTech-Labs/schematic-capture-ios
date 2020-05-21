@@ -25,6 +25,7 @@ class ComponentsTableViewController: UITableViewController {
     
     var projectController: ProjectController?
     var token: String?
+    
     var jobSheet: JobSheetRepresentation? {
         didSet {
             fetchComponents()
@@ -97,9 +98,6 @@ class ComponentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTableViewCell.id, for: indexPath) as? ComponentTableViewCell else { return UITableViewCell() }
-        
-//        let component = self.components[indexPath.row]
-//        cell.updateViews(index: indexPath.row, component: component)
         cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
         return cell
     }
@@ -132,15 +130,26 @@ extension ComponentsTableViewController: SearchDelegate {
 }
 
 
+// MARK: - ImagePickerDelegate
+
 extension ComponentsTableViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
         if image != nil {
             let annotationViewController = AnnotationViewController()
+            annotationViewController.imageDoneEditingDelegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
             annotationViewController.image = image
             self.present(navigationController, animated: true, completion: nil)
         }
+    }
+}
+ 
+// MARK: - ImageDoneEditingDelegate
+
+extension ComponentsTableViewController: ImageDoneEditingDelegate {
+    func ImageDoneEditing(image: UIImage?) {
+        
     }
 }
 

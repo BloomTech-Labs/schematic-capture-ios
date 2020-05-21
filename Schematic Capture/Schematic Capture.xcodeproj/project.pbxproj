@@ -32,7 +32,7 @@
 		A665838E23E0E384006073DF /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838D23E0E384006073DF /* Networking.swift */; };
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
 		A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */; };
-		A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */; };
+		A692200123FBB77E0060AD9E /* ComponentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200023FBB77E0060AD9E /* ComponentTableViewController.swift */; };
 		A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */; };
 		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
 		A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */; };
@@ -123,7 +123,7 @@
 		A665838D23E0E384006073DF /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		A665839123E0E5FF006073DF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetsTableViewController.swift; sourceTree = "<group>"; };
-		A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpyTableViewController.swift; sourceTree = "<group>"; };
+		A692200023FBB77E0060AD9E /* ComponentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTableViewController.swift; sourceTree = "<group>"; };
 		A692200B23FDDFBA0060AD9E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		A692200D23FDDFBA0060AD9E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = OnBoardImage.jpeg; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 				6D32F6F0246F2D5400F59FBB /* ClientsViewController.swift */,
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
-				A692200023FBB77E0060AD9E /* ExpyTableViewController.swift */,
+				A692200023FBB77E0060AD9E /* ComponentTableViewController.swift */,
 				6DD4712A2476B65900A89106 /* AnnotationViewController.swift */,
 			);
 			path = "View Controllers";
@@ -671,7 +671,7 @@
 				FBAD0B7F243DA11B00B653BE /* Client.swift in Sources */,
 				A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */,
 				A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */,
-				A692200123FBB77E0060AD9E /* ExpyTableViewController.swift in Sources */,
+				A692200123FBB77E0060AD9E /* ComponentTableViewController.swift in Sources */,
 				6DC49BAC246EE3C8009769E0 /* UserDefault+String.swift in Sources */,
 				6DC49BAA246ECFAA009769E0 /* Enum.swift in Sources */,
 				FBAD0B7D243DA07700B653BE /* TechClient.swift in Sources */,

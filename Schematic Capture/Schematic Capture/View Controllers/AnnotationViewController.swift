@@ -9,7 +9,13 @@
 import UIKit
 
 
+protocol ImageDoneEditingDelegate: AnyObject {
+    func ImageDoneEditing(image: UIImage?)
+
+}
+
 class AnnotationViewController: UIViewController {
+    
     
     var annotationView = AnnotationView()
     
@@ -37,6 +43,9 @@ class AnnotationViewController: UIViewController {
             annotationView.image = image
         }
     }
+    
+    weak var imageDoneEditingDelegate: ImageDoneEditingDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -106,7 +115,9 @@ class AnnotationViewController: UIViewController {
         case 2:
             annotationView.shape = Shapes.square
         case 3:
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            self.navigationController?.dismiss(animated: true, completion: {
+                self.imageDoneEditingDelegate?.ImageDoneEditing(image: self.annotationView.image)
+            })
         default:
             break
         }
