@@ -63,34 +63,40 @@ class AnnotationViewController: UIViewController {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ColorCell")
         view.addSubview(collectionView)
         
-        
         // Toolbar setup
         var items = [UIBarButtonItem]()
         
-        let circleButton = UIBarButtonItem(image: UIImage(systemName: "circle"), style: .done, target: self, action: #selector(action(_:)))
-        circleButton.tag = 0
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(action))
+        cancelButton.tag = 0
         
-        let arrowButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .done, target: self, action: #selector(action(_:)))
-        arrowButton.tag = 1
+        let circleButton = UIBarButtonItem(image: UIImage(systemName: "arrow.uturn.left.circle"), style: .done, target: self, action: #selector(action(_:)))
+        circleButton.tag = 1
         
-        let squareButton = UIBarButtonItem(image: UIImage(systemName: "square"), style: .done, target: self, action: #selector(action(_:)))
-        squareButton.tag = 2
+        let arrowButton = UIBarButtonItem(image: UIImage(systemName: "arrow.uturn.right.circle"), style: .done, target: self, action: #selector(action(_:)))
+        arrowButton.tag = 2
+        
+//        let squareButton = UIBarButtonItem(image: UIImage(systemName: "square"), style: .done, target: self, action: #selector(action(_:)))
+//        squareButton.tag = 3
         
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(action(_:)))
-        doneButton.tag = 3
+        doneButton.tag = 4
         
+        items.append(cancelButton)
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         items.append(circleButton)
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         items.append(arrowButton)
-        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
-        items.append(squareButton)
+//        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
+//        items.append(squareButton)
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         items.append(doneButton)
         
+        self.toolbarItems = items
+
         self.navigationController?.toolbar.barTintColor = .black
         self.navigationController?.toolbar.tintColor = .white
-        self.toolbarItems = items
+        self.navigationController?.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+
         
         NSLayoutConstraint.activate([
             
@@ -107,12 +113,14 @@ class AnnotationViewController: UIViewController {
     @objc func action(_ sender: UIBarButtonItem) {
         switch sender.tag {
         case 0:
-            annotationView.shape = Shapes.circle
+            self.navigationController?.dismiss(animated: true, completion: nil)
         case 1:
-            annotationView.shape = Shapes.arrow
+            annotationView.shape = Shapes.circle
         case 2:
-            annotationView.shape = Shapes.square
+            annotationView.shape = Shapes.arrow
         case 3:
+            annotationView.shape = Shapes.square
+        case 4:
             self.navigationController?.dismiss(animated: true, completion: {
                 self.imageDoneEditingDelegate?.ImageDoneEditing(image: self.annotationView.image)
             })
@@ -141,6 +149,7 @@ extension AnnotationViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         let color = colors[indexPath.row]
-        self.navigationController?.toolbar.tintColor = color
+        annotationView.color = color
+//        self.navigationController?.toolbar.tintColor = color
     }
 }

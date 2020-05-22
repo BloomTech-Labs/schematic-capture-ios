@@ -152,6 +152,7 @@ extension ComponentsTableViewController: ImagePickerDelegate {
             let annotationViewController = AnnotationViewController()
             annotationViewController.imageDoneEditingDelegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
+            navigationController.modalPresentationStyle = .fullScreen
             annotationViewController.image = image
             self.present(navigationController, animated: true, completion: nil)
         }

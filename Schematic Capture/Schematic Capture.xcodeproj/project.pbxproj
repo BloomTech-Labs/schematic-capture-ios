@@ -272,9 +272,9 @@
 				A6F1C9F823EE07A500E0D583 /* ProjectsTableViewController.swift */,
 				A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */,
 				A692200023FBB77E0060AD9E /* ComponentTableViewController.swift */,
+				6DD4712A2476B65900A89106 /* AnnotationViewController.swift */,
 				E1A3868224771FD700AD8FA8 /* ComponentDetailsViewController.swift */,
 				E1A386842477471E00AD8FA8 /* EditCoponentDetailViewController.swift */,
-				6DD4712A2476B65900A89106 /* AnnotationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

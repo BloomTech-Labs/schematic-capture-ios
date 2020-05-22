@@ -12,6 +12,10 @@ class AnnotationView: UIView {
     var imageView = UIImageView()
     var annotateImageView = UIImageView()
     
+    var views = [UIImageView]()
+    
+    var selectedShape: UIImageView?
+    
     var image: UIImage? {
         didSet {
             imageView.image = image
@@ -21,6 +25,14 @@ class AnnotationView: UIView {
     var shape: Shapes? {
         didSet {
             addShape(shape: shape)
+        }
+    }
+    
+    var color: UIColor? {
+        didSet {
+            let currentImage = UIImage(systemName: "circle")!
+            let image = currentImage.withTintColor(color!, renderingMode: .alwaysOriginal)
+            self.selectedShape?.image = image
         }
     }
     
@@ -41,7 +53,6 @@ class AnnotationView: UIView {
         backgroundColor = .black
         translatesAutoresizingMaskIntoConstraints = false
         
-        
         self.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
@@ -54,29 +65,59 @@ class AnnotationView: UIView {
     
     func addShape(shape: Shapes?) {
         
-        let imageView = UIImageView()
-        imageView.tag = 1
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isUserInteractionEnabled = true
-        
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeShape(_:))))
-        imageView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(panGesture:))))
-        imageView.addGestureRecognizer(UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(sender:))))
-        imageView.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:))))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imageView.layer.position.y = layer.position.y
+        imageView.layer.position.x = layer.position.x
 
+        imageView.tag = self.subviews.count + 1
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        imageView.isMultipleTouchEnabled = true
+        
+        
+        let indexTapGesture = UITapGestureRecognizer(target: self, action: #selector(moveToFront(_:)))
+        indexTapGesture.numberOfTapsRequired = 1
+        
+        let removeGesture = UITapGestureRecognizer(target: self, action: #selector(removeShape(_:)))
+        removeGesture.numberOfTapsRequired = 2
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(_:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:)))
+        
+        panGesture.delegate = self
+        rotationGesture.delegate = self
+        pinchGesture.delegate = self
+        
+        imageView.addGestureRecognizer(indexTapGesture)
+        imageView.addGestureRecognizer(removeGesture)
+        imageView.addGestureRecognizer(panGesture)
+        imageView.addGestureRecognizer(rotationGesture)
+        imageView.addGestureRecognizer(pinchGesture)
+        
         imageView.image = UIImage(systemName: shape!.rawValue)
         imageView.isHidden = false
-        addSubview(imageView)
         
-        NSLayoutConstraint.activate([
+        if !self.subviews.contains(imageView) {
+            self.selectedShape = imageView
+            addSubview(imageView)
             
-            imageView.widthAnchor.constraint(equalToConstant: 100),
-            imageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-        ])
+        }
+    }
+    
+    func undo() {
+        
+    }
+    
+    func redo() {
+        
+    }
+    
+    @objc func moveToFront(_ tapGesture: UITapGestureRecognizer) {
+        if let view = self.viewWithTag(tapGesture.view!.tag) {
+            bringSubviewToFront(view)
+        }
     }
     
     @objc func removeShape(_ tapGesture: UITapGestureRecognizer) {
@@ -87,34 +128,29 @@ class AnnotationView: UIView {
         }
     }
     
-    @objc func handlePan(panGesture: UIPanGestureRecognizer!) {
-        
-        if panGesture.state == .began {
-            let locationInView = panGesture.location(in: superview)
-            dragStartPositionRelativeToCenter = CGPoint(x: locationInView.x - center.x, y: locationInView.y - center.y)
-            layer.shadowOffset = CGSize(width: 0, height: 20)
-            layer.shadowOpacity = 0.3
-            layer.shadowRadius = 6
-            return
-        }
-        if panGesture.state == .ended {
-            dragStartPositionRelativeToCenter = nil
-            layer.shadowOffset = CGSize(width: 0, height: 3)
-            layer.shadowOpacity = 0.5
-            layer.shadowRadius = 2
-            return
-        }
-        let locationInView = panGesture.location(in: superview)
-        panGesture.view?.center = CGPoint(x: locationInView.x - self.dragStartPositionRelativeToCenter!.x,
-                                                  y: locationInView.y - self.dragStartPositionRelativeToCenter!.y)
-    }
+   @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
     
-    @objc func handleRotation( sender: UIRotationGestureRecognizer) {
-        let rotation = sender.rotation
-        let imageView = sender.view as! UIImageView
-        let previousTransform = imageView.transform
-        imageView.transform = previousTransform.rotated(by: rotation)
-        sender.rotation = 0
+    switch gestureRecognizer.state  {
+    case .began, .changed:
+         let translation = gestureRecognizer.translation(in: self)
+             // note: 'view' is optional and need to be unwrapped
+             gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
+             gestureRecognizer.setTranslation(CGPoint.zero, in: self)
+    case .ended:
+        if let view = gestureRecognizer.view as? UIImageView {
+             self.selectedShape = view
+             bringSubviewToFront(view)
+        }
+    default:
+        break
+    }
+}
+    
+    @objc func handleRotation(_ sender: UIRotationGestureRecognizer) {
+        if let view = sender.view {
+            view.transform = view.transform.rotated(by: sender.rotation)
+            sender.rotation = 0
+        }
     }
     
     @objc func handlePinch(sender: UIPinchGestureRecognizer) {
@@ -122,6 +158,14 @@ class AnnotationView: UIView {
         let imageView = sender.view as! UIImageView
         imageView.transform = imageView.transform.scaledBy(x: scale, y: scale)
         sender.scale = 1
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension AnnotationView: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
 }
 
