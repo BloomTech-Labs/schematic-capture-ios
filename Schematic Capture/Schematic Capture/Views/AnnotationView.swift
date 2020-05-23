@@ -30,7 +30,7 @@ class AnnotationView: UIView {
     
     var color: UIColor? {
         didSet {
-            let currentImage = UIImage(systemName: "circle")!
+            guard let currentImage = selectedShape?.image else { return }
             let image = currentImage.withTintColor(color!, renderingMode: .alwaysOriginal)
             self.selectedShape?.image = image
         }

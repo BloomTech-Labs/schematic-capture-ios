@@ -35,6 +35,7 @@ class ComponentDetailsViewController: UIViewController {
                 "Notes:" : component?.custom ?? "",
             ]
             self.details = details
+            print(details)
         }
     }
     
@@ -87,8 +88,10 @@ extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSo
         let key = keys[indexPath.row]
         let value = details[key]
         
-        let cell = UITableViewCell()
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        cell.translatesAutoresizingMaskIntoConstraints = false
         cell.textLabel?.text = key
+        print("Value:", value)
         cell.detailTextLabel?.text = value
         return cell
     }
