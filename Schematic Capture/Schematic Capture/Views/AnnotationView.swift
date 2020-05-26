@@ -101,7 +101,6 @@ class AnnotationView: UIView {
         if !self.subviews.contains(imageView) {
             self.selectedShape = imageView
             addSubview(imageView)
-            
         }
     }
     

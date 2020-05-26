@@ -58,6 +58,8 @@ class ClientsViewController: UIViewController {
         self.title = "Schematic Capture"
         view.backgroundColor = .systemBackground
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(goToSettings))
+        
         indicator.layer.position.y = view.layer.position.y
         indicator.layer.position.x = view.layer.position.x
         
@@ -89,6 +91,10 @@ class ClientsViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc func goToSettings() {
+        navigationController?.pushViewController(SettingsViewController(), animated: true)
     }
 }
 
