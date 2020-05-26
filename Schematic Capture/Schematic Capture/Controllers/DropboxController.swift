@@ -15,18 +15,24 @@ class DropboxController {
     }
     
     func authorizeClient(viewController: UIViewController) {
-        guard client != nil else { return }
-        DropboxClientsManager.authorizeFromController(
-            UIApplication.shared, controller: viewController, openURL: { (url: URL) -> Void in
-        })
+        if client == nil {
+            DropboxClientsManager.authorizeFromController(
+                UIApplication.shared, controller: viewController, openURL: { (url: URL) -> Void in
+            })
+        }
     }
-    
-    typealias Completion = (Result<[Any], NetworkingError>) -> ()
-
     
     func getImage(imageName: String, completion: @escaping (UIImage, NetworkingError) -> ()) {
         // Get Image from dropbox
         
-        
+        // Download to Data
+        client?.files.listFolder(path: "/AlloyTest/").response { response, error in
+            if let response = response {
+                let entries = response.entries
+                print("ENTRIES:", entries)
+            } else if let error = error {
+                print(error)
+            }
+        }
     }
 }

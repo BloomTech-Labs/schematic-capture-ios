@@ -16,7 +16,6 @@ class ComponentTableViewCell: UITableViewCell {
     var nameLabel = UILabel()
     var componentImageView = UIImageView()
     
-    var projectController: ProjectController?
     var dropboxController: DropboxController?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -45,7 +45,7 @@ class ClientsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dropBoxController.authorizeClient(viewController: self)
+        dropboxController.authorizeClient(viewController: self)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
         fetchClients()
     }
