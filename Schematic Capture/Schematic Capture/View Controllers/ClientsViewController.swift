@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyDropbox
+import CoreData
 
 class ClientsViewController: UIViewController {
     
@@ -35,6 +36,23 @@ class ClientsViewController: UIViewController {
             fetchClients()
         }
     }
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Project> = {
+        let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "clientId", ascending: true),
+                                         NSSortDescriptor(key: "name", ascending: true)]
+        
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "clientId", cacheName: nil)
+        
+        frc.delegate = self as! NSFetchedResultsControllerDelegate
+        
+        do {
+            try frc.performFetch() // Fetch the tasks
+        } catch {
+            fatalError("Error performing fetch for frc: \(error)")
+        }
+        return frc
+    }()
     
     // MARK: - View Lifecycle
     
@@ -107,16 +125,16 @@ class ClientsViewController: UIViewController {
 extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return fetchedResultsController.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        clients.count
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell {
-            let client = self.clients[indexPath.row]
+            let client = fetchedResultsController.object(at: indexPath)
             cell.updateViews(viewTypes: .clients, value: client)
             return cell
         }
@@ -136,5 +154,15 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         60.0
+    }
+}
+
+extension ClientsViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 }

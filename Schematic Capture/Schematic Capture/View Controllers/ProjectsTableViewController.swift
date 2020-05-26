@@ -71,7 +71,7 @@ class ProjectsTableViewController: UITableViewController {
     private func fetchProjects() {
         
         guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        projectController?.getProjects(with: id, token: token, completion: { result in
+        projectController?.getProjects(with: Int(id), token: token, completion: { result in
             if let projects = try? result.get() as? [ProjectRepresentation] {
                 self.projects = projects
                 DispatchQueue.main.async {

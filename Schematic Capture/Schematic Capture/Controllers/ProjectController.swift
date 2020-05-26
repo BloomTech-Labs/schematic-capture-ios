@@ -35,8 +35,9 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             do {
-                let clients = try decoder.decode([Client].self, from: data)
+                let clients = try decoder.decode([ClientRepresentation].self, from: data)
                 print(clients)
+                CoreDataStack.shared.save()
                 completion(.success(clients))
             } catch {
                 NSLog("Error decoding a clients: \(error)")

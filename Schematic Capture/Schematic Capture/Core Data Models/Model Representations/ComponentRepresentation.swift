@@ -30,26 +30,4 @@ struct ComponentRepresentation: Codable {
     let jobSheetId: Int
     var photo: PhotoRepresentation?
     
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case componentId
-        case rlCategory
-        case rlNumber
-        case componentDescription = "descriptions"
-        case manufacturer
-        case partNumber
-        case stockCode
-        case electricalAddress
-        case componentApplication
-        case referenceTag
-        case settings
-        case image
-        case resources
-        case cutSheet
-        case maintenanceVideo
-        case storePartNumber
-        case custom
-        case jobSheetId = "jobsheetId"
-        case photo
-    }
 }
