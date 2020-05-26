@@ -20,6 +20,8 @@ class ProjectController {
         }
     }
     
+    var value = [Any]()
+    
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     
     func getClients(token: String?) {
@@ -44,13 +46,14 @@ class ProjectController {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
                 print(clients)
 //                completion(.success(clients))
+                self.saveToPersistence(value: clients)
             } catch {
                 NSLog("Error decoding a clients: \(error)")
 //                completion(.failure(.badDecode))
                 return
             }
-            let context = CoreDataStack.shared.container.newBackgroundContext()
-             CoreDataStack.shared.save(context: context)
+            //let context = CoreDataStack.shared.container.newBackgroundContext()
+            
         }.resume()
     }
     
@@ -80,6 +83,7 @@ class ProjectController {
  
             do {
                 let projects = try decoder.decode([ProjectRepresentation].self, from: data)
+                self.saveToPersistence(value: projects)
                 completion(.success(projects))
             } catch {
                 print("Error decoding a projects: \(error)")
@@ -114,8 +118,9 @@ class ProjectController {
             decoder.dateDecodingStrategy = .iso8601
 
             do {
-                let projects = try decoder.decode([JobSheetRepresentation].self, from: data)
-                completion(.success(projects))
+                let jobSheets = try decoder.decode([JobSheetRepresentation].self, from: data)
+                self.saveToPersistence(value: jobSheets)
+                completion(.success(jobSheets))
             } catch {
                 print("Error decoding a job sheets: \(error)")
                 completion(.failure(.badDecode))
@@ -149,6 +154,7 @@ class ProjectController {
 
             do {
                 let components = try decoder.decode([ComponentRepresentation].self, from: data)
+                self.saveToPersistence(value: components)
                 completion(.success(components))
             } catch {
                 print("Error decoding a components: \(error)")
@@ -156,5 +162,41 @@ class ProjectController {
                 return
             }
         }.resume()
+    }
+    
+    // Persistence file url
+    var fileURL: URL? {
+        let manager = FileManager.default
+        guard let documentDir = manager.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        let fileURL = documentDir.appendingPathComponent("list.plist")
+        return fileURL
+    }
+    
+    // Save to persistence
+    func saveToPersistence<T: Codable>(value: [T]) {
+        guard let url = fileURL else {  return }
+        
+        do {
+            let encoder = PropertyListEncoder()
+            let data = try encoder.encode(value)
+            try data.write(to: url)
+        } catch {
+            print("Error encoding data: \(error)")
+        }
+    }
+    
+    // Load from persistence
+    func loadFromPersistence<T: Codable>(value: T.Type) {
+        guard let url = fileURL else { return }
+        
+        do {
+            let decoder = PropertyListDecoder()
+            let data = try Data(contentsOf: url)
+            print(data)
+            let decodedData = try decoder.decode([T].self, from: data)
+            self.value = decodedData
+        } catch {
+            print("Error decoding data: \(error)")
+        }
     }
 }

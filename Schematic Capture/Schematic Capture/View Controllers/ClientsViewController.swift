@@ -37,22 +37,6 @@ class ClientsViewController: UIViewController {
         }
     }
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Client> = {
-        let fetchRequest: NSFetchRequest<Client> = Client.fetchRequest()
-//        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
-        
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "id", cacheName: nil)
-        
-        frc.delegate = self as NSFetchedResultsControllerDelegate
-        
-        do {
-            try frc.performFetch() // Fetch the tasks
-        } catch {
-            fatalError("Error performing fetch for frc: \(error)")
-        }
-        return frc
-    }()
-    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -68,7 +52,7 @@ class ClientsViewController: UIViewController {
         dropboxController.authorizeClient(viewController: self)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
-//        fetchClients()
+        fetchClients()
     }
     
     // MARK: - Functions
@@ -116,6 +100,8 @@ class ClientsViewController: UIViewController {
 //                }
 //            }
 //        }
+
+        projectController.loadFromPersistence(value: ClientRepresentation.self)
     }
     
     @objc func goToSettings() {
@@ -128,16 +114,16 @@ class ClientsViewController: UIViewController {
 extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return projectController.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell {
-            let client = fetchedResultsController.object(at: indexPath)
+            guard let client = projectController.value[indexPath.row] as? ClientRepresentation else { return UITableViewCell() }
             cell.updateViews(viewTypes: .clients, value: client)
             return cell
         }
