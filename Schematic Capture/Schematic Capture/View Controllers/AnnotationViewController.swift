@@ -111,19 +111,19 @@ class AnnotationViewController: UIViewController {
     }
     
     func captureScreen() {
-        print("full Screenshot")
-        UIGraphicsBeginImageContext(view.bounds.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let sourceImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        UIImageWriteToSavedPhotosAlbum(sourceImage!, nil, nil, nil)
-        //Start partial Screenshot
-        print("partial Screenshot", sourceImage?.size)
-        UIGraphicsBeginImageContext(view.bounds.size)
-        sourceImage?.draw(at: CGPoint(x:-25,y:-100)) //the screenshot starts at -25, -100
-        let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        UIImageWriteToSavedPhotosAlbum(croppedImage!, nil, nil, nil)
+       _ = image(with: annotationView)
+    }
+    
+    func image(with view: UIView) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        if let context = UIGraphicsGetCurrentContext() {
+            view.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+            return image
+        }
+        return nil
     }
     
     @objc func action(_ sender: UIBarButtonItem) {

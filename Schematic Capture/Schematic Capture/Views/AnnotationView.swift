@@ -68,13 +68,12 @@ class AnnotationView: UIView {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.layer.position.y = layer.position.y
         imageView.layer.position.x = layer.position.x
-
+        
         imageView.tag = self.subviews.count + 1
         
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
-        
         
         let indexTapGesture = UITapGestureRecognizer(target: self, action: #selector(moveToFront(_:)))
         indexTapGesture.numberOfTapsRequired = 1
@@ -106,14 +105,6 @@ class AnnotationView: UIView {
         }
     }
     
-    func undo() {
-        
-    }
-    
-    func redo() {
-        
-    }
-    
     @objc func moveToFront(_ tapGesture: UITapGestureRecognizer) {
         if let view = self.viewWithTag(tapGesture.view!.tag) {
             bringSubviewToFront(view)
@@ -123,28 +114,26 @@ class AnnotationView: UIView {
     @objc func removeShape(_ tapGesture: UITapGestureRecognizer) {
         if let viewWithTag = self.viewWithTag(tapGesture.view!.tag) {
             viewWithTag.removeFromSuperview()
-        } else {
-            print("No!")
         }
     }
     
-   @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-    
-    switch gestureRecognizer.state  {
-    case .began, .changed:
-         let translation = gestureRecognizer.translation(in: self)
-             // note: 'view' is optional and need to be unwrapped
-             gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
-             gestureRecognizer.setTranslation(CGPoint.zero, in: self)
-    case .ended:
-        if let view = gestureRecognizer.view as? UIImageView {
-             self.selectedShape = view
-             bringSubviewToFront(view)
+    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+        
+        switch gestureRecognizer.state  {
+        case .began, .changed:
+            let translation = gestureRecognizer.translation(in: self)
+            // note: 'view' is optional and need to be unwrapped
+            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y + translation.y)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self)
+        case .ended:
+            if let view = gestureRecognizer.view as? UIImageView {
+                self.selectedShape = view
+                bringSubviewToFront(view)
+            }
+        default:
+            break
         }
-    default:
-        break
     }
-}
     
     @objc func handleRotation(_ sender: UIRotationGestureRecognizer) {
         if let view = sender.view {
