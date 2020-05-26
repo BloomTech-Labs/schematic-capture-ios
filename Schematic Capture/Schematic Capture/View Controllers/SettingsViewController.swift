@@ -49,8 +49,9 @@ class SettingsViewController: UITableViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let logOut = UIAlertAction(title: "Log Out", style: .default) { (action) in
             UserDefaults.standard.removeObject(forKey: .token)
-            self.modalPresentationStyle = .fullScreen
-            self.present(LoginViewController(), animated: true, completion: nil)
+            let loginViewController = LoginViewController()
+            loginViewController.modalPresentationStyle = .fullScreen
+            self.present(loginViewController, animated: true, completion: nil)
         }
         alert.addAction(cancel)
         alert.addAction(logOut)

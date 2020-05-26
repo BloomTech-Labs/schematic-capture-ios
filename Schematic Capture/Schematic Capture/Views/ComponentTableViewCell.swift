@@ -16,7 +16,8 @@ class ComponentTableViewCell: UITableViewCell {
     var nameLabel = UILabel()
     var componentImageView = UIImageView()
     
-    var projectController = ProjectController()
+    var projectController: ProjectController?
+    var dropboxController: DropboxController?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,12 +57,12 @@ class ComponentTableViewCell: UITableViewCell {
         indexLabel.text = "\(component.id)"
         nameLabel.text = component.componentDescription
         
-        if component.image != nil {
-            //self.componentImageView.image =
+        if let image = component.image {
+            dropboxController?.getImage(imageName: image, completion: { (image, error) in
+                
+            })
         } else {
             self.componentImageView.image = UIImage(systemName: "camera")
         }
-        
-        
     }
 }

@@ -25,6 +25,8 @@ class ProjectsTableViewController: UITableViewController {
     // MARK: - Properties
     
     var projectController: ProjectController?
+    var dropboxController: DropboxController?
+    
     var token: String?
     // The client from the previous ClientsViewController
     var client: Client? {
@@ -116,6 +118,7 @@ extension ProjectsTableViewController {
         let project = self.projects[indexPath.row]
         let jobSheetsTableViewViewController = JobSheetsTableViewController()
         jobSheetsTableViewViewController.projectController = projectController
+        jobSheetsTableViewViewController.dropboxController = dropboxController
         jobSheetsTableViewViewController.project = project
         jobSheetsTableViewViewController.token = token
         navigationController?.pushViewController(jobSheetsTableViewViewController, animated: true)

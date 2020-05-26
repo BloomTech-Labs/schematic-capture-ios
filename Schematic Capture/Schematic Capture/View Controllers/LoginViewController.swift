@@ -61,6 +61,7 @@ class LoginViewController: UIViewController {
     @objc private func login(_ sender: UIButton) {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
         
+
         authController.logIn(username: username, password: password, viewController: self) { result in
             if let result = try? result.get(),
                 let token = result.first as? String,
@@ -68,13 +69,13 @@ class LoginViewController: UIViewController {
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
+                    
                     let clientsViewController = ClientsViewController()
                     let navigationController = UINavigationController(rootViewController: clientsViewController)
                     clientsViewController.token = token
                     clientsViewController.user = user
                     navigationController.modalPresentationStyle = .fullScreen
                     self.present(navigationController, animated: true, completion: nil)
-                    
                 }
             }
         }

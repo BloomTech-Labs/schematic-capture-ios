@@ -24,6 +24,8 @@ class JobSheetsTableViewController: UITableViewController {
     // MARK: - Properties
     
     var projectController: ProjectController?
+    var dropboxController: DropboxController?
+
     var token: String?
     
     var project: ProjectRepresentation? {
@@ -86,9 +88,7 @@ class JobSheetsTableViewController: UITableViewController {
         guard let id = project?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         
         projectController?.getJobSheets(with: Int(id), token: token, completion: { results in
-            
             if let jobSheets = try? results.get() as? [JobSheetRepresentation] {
-                print("JOBSHEETS: \(jobSheets)")
                 self.jobSheets = jobSheets
                 
                 DispatchQueue.main.async {
@@ -120,15 +120,15 @@ class JobSheetsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
-        
         if headerView.searchBar.text != "" {
-            let jobSheet = filteredJobSheets?[indexPath.row]
-            cell.updateViews(viewTypes: .jobsheets, value: jobSheet)
+            if let jobSheet = filteredJobSheets?[indexPath.row] {
+                cell.updateViews(viewTypes: .jobsheets, value: jobSheet)
+            }
         } else {
-            let jobSheet = jobSheets?[indexPath.row]
-            cell.updateViews(viewTypes: .jobsheets, value: jobSheet)
+            if let jobSheet = jobSheets?[indexPath.row] {
+                cell.updateViews(viewTypes: .jobsheets, value: jobSheet)
+            }
         }
-        
         return cell
     }
     
@@ -137,6 +137,7 @@ class JobSheetsTableViewController: UITableViewController {
         let jobSheet = self.jobSheets?[indexPath.row]
         let componentsTableViewViewController = ComponentsTableViewController()
         componentsTableViewViewController.projectController = projectController
+        componentsTableViewViewController.dropboxController = dropboxController
         componentsTableViewViewController.jobSheet = jobSheet
         componentsTableViewViewController.token = token
         navigationController?.pushViewController(componentsTableViewViewController, animated: true)

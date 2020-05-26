@@ -69,30 +69,10 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            
-            do {
-                // make sure this JSON is in the format we expect
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                // try to read out a string array
-                print("json:", json)
-            } catch let error as NSError {
-                print("Failed to load: \(error.localizedDescription)")
-            }
-            
+ 
             do {
                 let projects = try decoder.decode([ProjectRepresentation].self, from: data)
                 completion(.success(projects))
-
-//                for var project in projects {
-//                    // Get jobsheets for each project
-//                    var finalProjects = projects
-//                    self.getJobSheets(with: project.id, token: token, completion: { (result) in
-//                        if let jobsheets = try? result.get() as? [JobSheetRepresentation] {
-//                            project.jobSheets?.append(contentsOf: jobsheets)
-//                            finalProjects.append(project)
-//                        }
-//                    })
-//                }
             } catch {
                 print("Error decoding a projects: \(error)")
                 completion(.failure(.badDecode))
@@ -124,19 +104,9 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            
-            do {
-                // make sure this JSON is in the format we expect
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                // try to read out a string array
-                print("json:", json)
-            } catch let error as NSError {
-                print("Failed to load: \(error.localizedDescription)")
-            }
-            
+
             do {
                 let projects = try decoder.decode([JobSheetRepresentation].self, from: data)
-                print("JOBSHEETS: \(projects)")
                 completion(.success(projects))
             } catch {
                 print("Error decoding a job sheets: \(error)")
@@ -168,19 +138,9 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            
-            do {
-                // make sure this JSON is in the format we expect
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                // try to read out a string array
-                print("json:", json)
-            } catch let error as NSError {
-                print("Failed to load: \(error.localizedDescription)")
-            }
-            
+
             do {
                 let components = try decoder.decode([ComponentRepresentation].self, from: data)
-                print("COMPONENTS: \(components)")
                 completion(.success(components))
             } catch {
                 print("Error decoding a components: \(error)")

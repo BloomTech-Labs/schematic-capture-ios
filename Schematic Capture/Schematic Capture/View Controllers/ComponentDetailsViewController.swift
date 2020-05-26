@@ -7,42 +7,44 @@
 //
 
 import UIKit
+import SwiftyDropbox
 
 class ComponentDetailsViewController: UIViewController {
     
+    // MARK: - UI Elements
+    
     var tableView: UITableView!
     var headerView = HeaderView()
+    
+    lazy var indicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.style = UIActivityIndicatorView.Style.medium
+        view.hidesWhenStopped = true
+        return view
+    }()
+    
+    
+    // MARK: - Properties
     
     var component: ComponentRepresentation? {
         didSet {
             headerView.setup(viewTypes: .componentDetails, value: [
                 (component?.componentDescription ?? ""), "Details", ""
             ])
-            
-            let details: [String : String] = [
-                "Description:" : component?.componentDescription ?? "",
-                "Manufacturer:" : component?.manufacturer ?? "",
-                "Part #:" : component?.partNumber ?? "",
-                "RL Category:" : component?.rlCategory ?? "",
-                "RL Number:" : component?.rlNumber ?? "",
-                "Stock Code:" : component?.stockCode ?? "",
-                "Electrical Address:" : component?.electricalAddress ?? "",
-                "Reference Tag:" : component?.referenceTag ?? "",
-                "Settings:" : component?.settings ?? "",
-                "Resources:" : component?.resources ?? "",
-                "Cutsheet:" : component?.cutSheet ?? "",
-                "Store's Part #:" : component?.storePartNumber ?? "",
-                "Notes:" : component?.custom ?? "",
-            ]
-            self.details = details
-            print(details)
         }
     }
     
     var details = [String : String]()
     
+    // MARK: View Lifecycle
     
-    // Labels
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+    }
+    
+    // MARK: - Functions
+    
     private func setupViews() {
         self.title = "Schematic Capture"
         view.backgroundColor = .systemBackground
@@ -60,17 +62,23 @@ class ComponentDetailsViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    lazy var indicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        view.style = UIActivityIndicatorView.Style.medium
-        view.hidesWhenStopped = true
-        return view
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupViews()
+    func updateViews() {
+        let details: [String : String] = [
+            "Description:" : component?.componentDescription ?? "",
+            "Manufacturer:" : component?.manufacturer ?? "",
+            "Part #:" : component?.partNumber ?? "",
+            "RL Category:" : component?.rlCategory ?? "",
+            "RL Number:" : component?.rlNumber ?? "",
+            "Stock Code:" : component?.stockCode ?? "",
+            "Electrical Address:" : component?.electricalAddress ?? "",
+            "Reference Tag:" : component?.referenceTag ?? "",
+            "Settings:" : component?.settings ?? "",
+            "Resources:" : component?.resources ?? "",
+            "Cutsheet:" : component?.cutSheet ?? "",
+            "Store's Part #:" : component?.storePartNumber ?? "",
+            "Notes:" : component?.custom ?? "",
+        ]
+        self.details = details
     }
 }
 
@@ -91,7 +99,6 @@ extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSo
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         cell.translatesAutoresizingMaskIntoConstraints = false
         cell.textLabel?.text = key
-        print("Value:", value)
         cell.detailTextLabel?.text = value
         return cell
     }
@@ -105,7 +112,7 @@ extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSo
         }
         let key = keys[indexPath.row]
         let value = details[key]
-
+        
         let editCoponentDetailViewController = EditCoponentDetailViewController()
         //editCoponentDetailViewController.value = detail
         navigationController?.pushViewController(editCoponentDetailViewController, animated: true)

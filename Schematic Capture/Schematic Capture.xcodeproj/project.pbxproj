@@ -13,6 +13,7 @@
 		6DB6500424748AEF007C10C6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6500324748AEF007C10C6 /* ImagePicker.swift */; };
 		6DBDA833246F777700CF5136 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBDA832246F777700CF5136 /* DateFormatter.swift */; };
 		6DC036FB247D470E00BB95FF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC036FA247D470E00BB95FF /* SettingsViewController.swift */; };
+		6DC036FD247D722500BB95FF /* DropboxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC036FC247D722500BB95FF /* DropboxController.swift */; };
 		6DC49BAA246ECFAA009769E0 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC49BA9246ECFAA009769E0 /* Enum.swift */; };
 		6DC49BAC246EE3C8009769E0 /* UserDefault+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC49BAB246EE3C8009769E0 /* UserDefault+String.swift */; };
 		6DD471272475E14B00A89106 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD471262475E14B00A89106 /* AnnotationView.swift */; };
@@ -100,6 +101,7 @@
 		6DB6500324748AEF007C10C6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6DBDA832246F777700CF5136 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		6DC036FA247D470E00BB95FF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6DC036FC247D722500BB95FF /* DropboxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxController.swift; sourceTree = "<group>"; };
 		6DC49BA9246ECFAA009769E0 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		6DC49BAB246EE3C8009769E0 /* UserDefault+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+String.swift"; sourceTree = "<group>"; };
 		6DD471262475E14B00A89106 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			children = (
 				A665838823E0E1B2006073DF /* LoginController.swift */,
 				A6F1C9FF23F4A03700E0D583 /* ProjectController.swift */,
+				6DC036FC247D722500BB95FF /* DropboxController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				A6F1CA0723F5C7B200E0D583 /* JobSheetRepresentation.swift in Sources */,
 				A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */,
 				6DD4712B2476B65900A89106 /* AnnotationViewController.swift in Sources */,
+				6DC036FD247D722500BB95FF /* DropboxController.swift in Sources */,
 				A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */,
 				E1A794DB24748874009361B3 /* UITableView+EmptyView.swift in Sources */,
 				A665838E23E0E384006073DF /* Networking.swift in Sources */,

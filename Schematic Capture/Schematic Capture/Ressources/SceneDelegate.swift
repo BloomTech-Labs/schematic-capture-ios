@@ -37,6 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if let authResult = DropboxClientsManager.handleRedirectURL(url) {
+                print("authResult: \(authResult)")
                 switch authResult {
                 case .success:
                     print("Success! User is logged into Dropbox.")

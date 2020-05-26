@@ -28,6 +28,7 @@ class ClientsViewController: UIViewController {
     var user: User?
     var clients = [Client]()
     var projectController = ProjectController()
+    var dropboxController = DropboxController()
     
     var token: String? {
         didSet {
@@ -40,14 +41,11 @@ class ClientsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        // Update the headerView when a user id set
-        headerView.setup(viewTypes: .clients, value: [
-            (user?.firstName ?? ""), "Clients"
-        ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        dropBoxController.authorizeClient(viewController: self)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
         fetchClients()
     }
@@ -59,6 +57,12 @@ class ClientsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(goToSettings))
+        navigationController?.navigationBar.tintColor = .label
+        
+        // Update the headerView when a user id set
+        headerView.setup(viewTypes: .clients, value: [
+            (user?.firstName ?? ""), "Clients"
+        ])
         
         indicator.layer.position.y = view.layer.position.y
         indicator.layer.position.x = view.layer.position.x
@@ -124,6 +128,7 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
         let client = self.clients[indexPath.row]
         let projectsTableViewViewController = ProjectsTableViewController()
         projectsTableViewViewController.projectController = projectController
+        projectsTableViewViewController.dropboxController = dropboxController
         projectsTableViewViewController.client = client
         projectsTableViewViewController.token = token
         navigationController?.pushViewController(projectsTableViewViewController, animated: true)

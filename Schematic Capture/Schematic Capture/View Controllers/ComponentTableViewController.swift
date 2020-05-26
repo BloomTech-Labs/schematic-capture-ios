@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyDropbox
 
 class ComponentsTableViewController: UITableViewController {
     
@@ -24,11 +25,12 @@ class ComponentsTableViewController: UITableViewController {
     // MARK: - Propertiess
     
     var projectController: ProjectController?
+    var dropboxController: DropboxController?
+    
     var token: String?
     
     var jobSheet: JobSheetRepresentation? {
         didSet {
-            print("JobSheetID: \(jobSheet?.id)")
             fetchComponents()
             guard let name = jobSheet?.name else { return }
             headerView.setup(viewTypes: .components, value: [name, "Components"])
@@ -38,7 +40,6 @@ class ComponentsTableViewController: UITableViewController {
     var filteredComponents = [ComponentRepresentation]()
     
     var imagePicker: ImagePicker!
-    
     
     //var pdfBarButtonItem: UIBarButtonItem!
     
@@ -53,10 +54,6 @@ class ComponentsTableViewController: UITableViewController {
         setupUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
     
     func setupUI() {
         view.backgroundColor = .systemBackground
@@ -87,17 +84,15 @@ class ComponentsTableViewController: UITableViewController {
         guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getComponents(with: id, token: token, completion: { (results) in
             if let components = try? results.get() as? [ComponentRepresentation] {
-                print("COMPONENTS: \(components)")
                 self.components = components
-                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()
                 }
             }
         })
-        
     }
+
     
     // MARK: - Table view data source
     
