@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
+    
     static let shared = CoreDataStack()
     
     // Set up a persistent container

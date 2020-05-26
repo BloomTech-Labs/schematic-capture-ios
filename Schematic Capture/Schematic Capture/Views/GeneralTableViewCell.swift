@@ -59,7 +59,7 @@ class GeneralTableViewCell: UITableViewCell {
     func updateViews(viewTypes: ViewTypes, value: Any) {
         switch viewTypes {
             case .clients:
-                guard let client = value as? Client else { return }
+                guard let client = value as? ClientRepresentation else { return }
                 nameLabel.text = client.companyName
             case .projects:
                 guard let project = value as? ProjectRepresentation else { return }

@@ -14,9 +14,15 @@ class ProjectController {
     var bearer: Bearer?
     var user: User?
     
+    var token: String? {
+        didSet {
+            getClients(token: token)
+        }
+    }
+    
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     
-    func getClients(token: String?, completion: @escaping Completion) {
+    func getClients(token: String?) {
         //configure request url
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
         var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
@@ -26,10 +32,10 @@ class ProjectController {
         
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
-                completion(.failure(.serverError(error)))
+//                completion(.failure(.serverError(error)))
             }
             guard let data = data else {
-                completion(.failure(.noData))
+//                completion(.failure(.noData))
                 return
             }
             
@@ -37,13 +43,14 @@ class ProjectController {
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
                 print(clients)
-                CoreDataStack.shared.save()
-                completion(.success(clients))
+//                completion(.success(clients))
             } catch {
                 NSLog("Error decoding a clients: \(error)")
-                completion(.failure(.badDecode))
+//                completion(.failure(.badDecode))
                 return
             }
+            let context = CoreDataStack.shared.container.newBackgroundContext()
+             CoreDataStack.shared.save(context: context)
         }.resume()
     }
     

@@ -37,14 +37,13 @@ class ClientsViewController: UIViewController {
         }
     }
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Project> = {
-        let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "clientId", ascending: true),
-                                         NSSortDescriptor(key: "name", ascending: true)]
+    lazy var fetchedResultsController: NSFetchedResultsController<Client> = {
+        let fetchRequest: NSFetchRequest<Client> = Client.fetchRequest()
+//        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
         
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "clientId", cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "id", cacheName: nil)
         
-        frc.delegate = self as! NSFetchedResultsControllerDelegate
+        frc.delegate = self as NSFetchedResultsControllerDelegate
         
         do {
             try frc.performFetch() // Fetch the tasks
@@ -63,9 +62,13 @@ class ClientsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
+        projectController.token = token
         dropboxController.authorizeClient(viewController: self)
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
-        fetchClients()
+//        fetchClients()
     }
     
     // MARK: - Functions
@@ -104,15 +107,15 @@ class ClientsViewController: UIViewController {
     func fetchClients() {
         // Get the token when the user LogIn or get it from UserDefault.
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        projectController.getClients(token: token) { result in
-            if let clients = try? result.get() as? [Client] {
-                DispatchQueue.main.async {
-                    self.clients = clients
-                    self.tableView.reloadData()
-                    self.indicator.stopAnimating()
-                }
-            }
-        }
+//        projectController.getClients(token: token) { result in
+//            if let clients = try? result.get() as? [Client] {
+//                DispatchQueue.main.async {
+//                    self.clients = clients
+//                    self.tableView.reloadData()
+//                    self.indicator.stopAnimating()
+//                }
+//            }
+//        }
     }
     
     @objc func goToSettings() {

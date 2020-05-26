@@ -9,12 +9,11 @@
 import Foundation
 
 struct ClientRepresentation: Codable {
-    let id:Int
-    let companyName:String?
-    let phone:String?
-    let street:String?
-    let city:String?
-    let state:String?
-    let zip:String?
-
+    let id: Int
+    let companyName: String?
+    let phone: String?
+    let street: String?
+    let city: String?
+    let state: String?
+    let zip: String?
 }

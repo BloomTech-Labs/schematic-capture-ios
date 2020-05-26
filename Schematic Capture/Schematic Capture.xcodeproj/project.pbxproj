@@ -357,8 +357,8 @@
 		A6F1CA0123F4C00500E0D583 /* Model Representations */ = {
 			isa = PBXGroup;
 			children = (
-				A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */,
 				E13A0BA1247D8E7F0079868E /* ClientRepresentation.swift */,
+				A6F1CA0223F4C03600E0D583 /* ComponentRepresentation.swift */,
 				A6F1CA0423F5C71C00E0D583 /* PhotoRepresentation.swift */,
 				A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */,
 				A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */,
