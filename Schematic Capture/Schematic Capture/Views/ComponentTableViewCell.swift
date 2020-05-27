@@ -54,14 +54,18 @@ class ComponentTableViewCell: UITableViewCell {
     // Do we need index?
     func updateViews(component: ComponentRepresentation) {
         indexLabel.text = "\(component.id)"
-        nameLabel.text = component.componentDescription
         
-        if let image = component.image {
-            dropboxController?.getImage(imageName: image, completion: { (image, error) in
-                
-            })
-        } else {
-            self.componentImageView.image = UIImage(systemName: "camera")
-        }
+        print("COMPONENT: \(component.componentDescription)")
+        
+        nameLabel.text = component.componentDescription
+        self.componentImageView.image = UIImage(named: "sample")
+//
+//        if let image = component.image {
+//            dropboxController?.getImage(imageName: image, completion: { (image, error) in
+//
+//            })
+//        } else {
+//            self.componentImageView.image = UIImage(systemName: "camera")
+//        }
     }
 }

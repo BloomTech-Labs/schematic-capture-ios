@@ -31,6 +31,7 @@ class ComponentDetailsViewController: UIViewController {
             headerView.setup(viewTypes: .componentDetails, value: [
                 (component?.componentDescription ?? ""), "Details", ""
             ])
+            updateViews()
         }
     }
     

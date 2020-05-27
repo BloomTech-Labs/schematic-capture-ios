@@ -30,8 +30,8 @@ extension Component {
                                        cutSheet: cutSheet,
                                        maintenanceVideo: maintenanceVideo,
                                        storePartNumber: storePartNumber,
-                                       custom: custom,
-                                       jobSheetId: Int(jobSheetId)
+                                       custom: custom
+//                                       jobSheetId: Int(jobSheetId)
                                        /*photo: photo?.photoRepresentation*/)
     }
     
@@ -53,7 +53,7 @@ extension Component {
                                         maintenanceVideo: String?,
                                         storePartNumber: String?,
                                         custom: String?,
-                                        jobSheetId: Int,
+//                                        jobSheetId: Int,
                                         //photo: Photo?,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
@@ -76,7 +76,7 @@ extension Component {
         self.storePartNumber = storePartNumber
         self.custom = custom
         //self.photo = photo
-        self.jobSheetId = Int32(jobSheetId)
+//        self.jobSheetId = Int32(jobSheetId)
     }
     
     @discardableResult convenience init(componentRepresentation: ComponentRepresentation, context: NSManagedObjectContext) {
@@ -99,7 +99,7 @@ extension Component {
                   maintenanceVideo: componentRepresentation.maintenanceVideo,
                   storePartNumber: componentRepresentation.storePartNumber,
                   custom: componentRepresentation.custom,
-                  jobSheetId: componentRepresentation.jobSheetId,
+//                  jobSheetId: componentRepresentation.jobSheetId,
                   //photo: componentRepresentation.photo != nil ? Photo(photoRepresentation: componentRepresentation.photo!, context: context) : nil,
                   context: context)
     }

@@ -14,17 +14,11 @@ class ProjectController {
     var bearer: Bearer?
     var user: User?
     
-    var token: String? {
-        didSet {
-            getClients(token: token)
-        }
-    }
-    
     var value = [Any]()
     
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     
-    func getClients(token: String?) {
+    func getClients(token: String?, completion: @escaping Completion) {
         //configure request url
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
         var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
@@ -34,26 +28,23 @@ class ProjectController {
         
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
-//                completion(.failure(.serverError(error)))
+                completion(.failure(.serverError(error)))
             }
             guard let data = data else {
-//                completion(.failure(.noData))
+                completion(.failure(.noData))
                 return
             }
             
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
-                print(clients)
-//                completion(.success(clients))
                 self.saveToPersistence(value: clients)
+                completion(.success(clients))
             } catch {
                 NSLog("Error decoding a clients: \(error)")
-//                completion(.failure(.badDecode))
+                completion(.failure(.badDecode))
                 return
             }
-            //let context = CoreDataStack.shared.container.newBackgroundContext()
-            
         }.resume()
     }
     
@@ -80,9 +71,23 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
+            
+            
+            do {
+               // make sure this JSON is in the format we expect
+               if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                   // try to read out a string array
+                   print("JSON: \(json)")
+               }
+            } catch let error as NSError {
+               print("Failed to load: \(error.localizedDescription)")
+            }
+            
+            
  
             do {
                 let projects = try decoder.decode([ProjectRepresentation].self, from: data)
+               
                 self.saveToPersistence(value: projects)
                 completion(.success(projects))
             } catch {
@@ -154,6 +159,7 @@ class ProjectController {
 
             do {
                 let components = try decoder.decode([ComponentRepresentation].self, from: data)
+                print("COMPONENTS: ", components)
                 self.saveToPersistence(value: components)
                 completion(.success(components))
             } catch {
@@ -186,17 +192,16 @@ class ProjectController {
     }
     
     // Load from persistence
-    func loadFromPersistence<T: Codable>(value: T.Type) {
-        guard let url = fileURL else { return }
-        
+    func loadFromPersistence<T: Codable>(value: T.Type) -> [T]? {
+        guard let url = fileURL else { return nil }
         do {
             let decoder = PropertyListDecoder()
             let data = try Data(contentsOf: url)
-            print(data)
             let decodedData = try decoder.decode([T].self, from: data)
-            self.value = decodedData
+            return decodedData
         } catch {
             print("Error decoding data: \(error)")
+            return nil
         }
     }
 }

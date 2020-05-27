@@ -27,7 +27,7 @@ class ClientsViewController: UIViewController {
     // MARK: - Properties
     
     var user: User?
-    var clients = [Client]()
+    var clients = [ClientRepresentation]()
     var projectController = ProjectController()
     var dropboxController = DropboxController()
     
@@ -46,11 +46,7 @@ class ClientsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        projectController.token = token
         dropboxController.authorizeClient(viewController: self)
-        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
         fetchClients()
     }
@@ -91,17 +87,28 @@ class ClientsViewController: UIViewController {
     func fetchClients() {
         // Get the token when the user LogIn or get it from UserDefault.
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
-//        projectController.getClients(token: token) { result in
-//            if let clients = try? result.get() as? [Client] {
-//                DispatchQueue.main.async {
-//                    self.clients = clients
-//                    self.tableView.reloadData()
-//                    self.indicator.stopAnimating()
-//                }
-//            }
-//        }
-
-        projectController.loadFromPersistence(value: ClientRepresentation.self)
+        projectController.getClients(token: token) { result in
+            
+            do {
+                if let clients = try result.get() as? [ClientRepresentation] {
+                    
+                    print("CONNECTION AVAILABLE")
+                    DispatchQueue.main.async {
+                        self.clients = clients
+                        self.tableView.reloadData()
+                        self.indicator.stopAnimating()
+                    }
+                }
+            } catch {
+                print("ERROR IN CONTROLLER: ", error)
+                let clients = self.projectController.loadFromPersistence(value: ClientRepresentation.self)
+                self.clients = clients!
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.indicator.stopAnimating()
+                }
+            }
+        }
     }
     
     @objc func goToSettings() {
@@ -118,12 +125,12 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return projectController.value.count
+        return clients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell {
-            guard let client = projectController.value[indexPath.row] as? ClientRepresentation else { return UITableViewCell() }
+            let client = clients[indexPath.row]
             cell.updateViews(viewTypes: .clients, value: client)
             return cell
         }

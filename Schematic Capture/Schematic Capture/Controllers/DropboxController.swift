@@ -24,9 +24,8 @@ class DropboxController {
     
     func getImage(imageName: String, completion: @escaping (UIImage, NetworkingError) -> ()) {
         // Get Image from dropbox
-        
         // Download to Data
-        client?.files.listFolder(path: "/AlloyTest/").response { response, error in
+        client?.files.listFolder(path: "/AlloyTest").response { response, error in
             if let response = response {
                 let entries = response.entries
                 print("ENTRIES:", entries)

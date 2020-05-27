@@ -84,6 +84,7 @@ class ComponentsTableViewController: UITableViewController {
         guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getComponents(with: id, token: token, completion: { (results) in
             if let components = try? results.get() as? [ComponentRepresentation] {
+                print("COMPONENTS IN VIEWCONTROLLER: ", components) 
                 self.components = components
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

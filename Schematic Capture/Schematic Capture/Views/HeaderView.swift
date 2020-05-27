@@ -33,7 +33,7 @@ class HeaderView: UIView {
     
     func setupViews() {
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 26, weight: .medium)
         label.textAlignment = .center
         label.textColor = .label
         label.adjustsFontSizeToFitWidth = true

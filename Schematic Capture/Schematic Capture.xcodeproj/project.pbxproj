@@ -35,7 +35,6 @@
 		A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665839123E0E5FF006073DF /* LoginViewController.swift */; };
 		A6921FFD23FB57620060AD9E /* JobSheetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6921FFC23FB57620060AD9E /* JobSheetsTableViewController.swift */; };
 		A692200123FBB77E0060AD9E /* ComponentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692200023FBB77E0060AD9E /* ComponentTableViewController.swift */; };
-		A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */; };
 		A6F1C9CE23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */; };
 		A6F1C9E923ECCD5900E0D583 /* Component+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */; };
 		A6F1C9EB23ECD14700E0D583 /* Photo+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */; };
@@ -131,7 +130,6 @@
 		A692200023FBB77E0060AD9E /* ComponentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTableViewController.swift; sourceTree = "<group>"; };
 		A692200B23FDDFBA0060AD9E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		A692200D23FDDFBA0060AD9E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = OnBoardImage.jpeg; sourceTree = "<group>"; };
 		A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture.xcdatamodel"; sourceTree = "<group>"; };
 		A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Convenience.swift"; sourceTree = "<group>"; };
 		A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+Convenience.swift"; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 		A665835323DAB508006073DF /* Schematic Capture */ = {
 			isa = PBXGroup;
 			children = (
-				A6F01A52240EC5B10015031B /* OnBoardImage.jpeg */,
 				E134756E246F016500B5C791 /* Extension */,
 				6DC49BA8246ECF9D009769E0 /* Constant */,
 				A6613BF823E89DDE004A11B2 /* Ressources */,
@@ -521,7 +518,6 @@
 				A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */,
 				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
 				6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */,
-				A6F01A53240EC5B10015031B /* OnBoardImage.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

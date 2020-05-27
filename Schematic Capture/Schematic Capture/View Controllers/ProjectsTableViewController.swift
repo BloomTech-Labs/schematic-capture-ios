@@ -9,10 +9,11 @@
 import UIKit
 import CoreData
 
-class ProjectsTableViewController: UITableViewController {
+class ProjectsTableViewController: UIViewController {
     
     // MARK: - UI Elements
     
+    var tableView: UITableView!
     var headerView = HeaderView()
     
     lazy var indicator: UIActivityIndicatorView = {
@@ -29,7 +30,7 @@ class ProjectsTableViewController: UITableViewController {
     
     var token: String?
     // The client from the previous ClientsViewController
-    var client: Client? {
+    var client: ClientRepresentation? {
         didSet {
             fetchProjects()
         }
@@ -57,13 +58,17 @@ class ProjectsTableViewController: UITableViewController {
         indicator.layer.position.x = view.layer.position.x
         indicator.startAnimating()
 
-        tableView?.backgroundColor = .systemBackground
-        tableView?.separatorStyle = .none
-        tableView?.addSubview(indicator)
+        tableView = UITableView(frame: view.frame, style: .grouped)
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        view.addSubview(tableView)
+        tableView.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView
-        tableView?.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
+        tableView.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
     }
     
     // MARK: - Functions
@@ -89,13 +94,13 @@ class ProjectsTableViewController: UITableViewController {
 
 // MARK: - Table view data source
 
-extension ProjectsTableViewController {
+extension ProjectsTableViewController: UITableViewDelegate, UITableViewDataSource {
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if projects.count == 0 {
             tableView.setEmptyView(title: "You don't have any projects.", message: "You'll find your assigned projects here.")
             return 0
@@ -106,14 +111,14 @@ extension ProjectsTableViewController {
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell else { return UITableViewCell() }
         let project = self.projects[indexPath.row]
         cell.updateViews(viewTypes: .projects, value: project)
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let project = self.projects[indexPath.row]
         let jobSheetsTableViewViewController = JobSheetsTableViewController()
@@ -124,7 +129,7 @@ extension ProjectsTableViewController {
         navigationController?.pushViewController(jobSheetsTableViewViewController, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
 }
