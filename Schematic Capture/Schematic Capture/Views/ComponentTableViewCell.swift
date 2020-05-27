@@ -37,13 +37,15 @@ class ComponentTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             indexLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             indexLabel.heightAnchor.constraint(equalTo: heightAnchor),
-            nameLabel.leftAnchor.constraint(equalTo: indexLabel.rightAnchor, constant: 24.0),
+            nameLabel.leftAnchor.constraint(equalTo: indexLabel.rightAnchor, constant: 16.0),
             nameLabel.heightAnchor.constraint(equalTo: heightAnchor),
-
+            
             componentImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16.0),
             componentImageView.heightAnchor.constraint(equalToConstant: 30.0),
             componentImageView.widthAnchor.constraint(equalToConstant: 30.0),
-            componentImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            componentImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            nameLabel.rightAnchor.constraint(equalTo: componentImageView.leftAnchor, constant: -8.0)
         ])
     }
     
@@ -55,17 +57,11 @@ class ComponentTableViewCell: UITableViewCell {
     func updateViews(component: ComponentRepresentation) {
         indexLabel.text = "\(component.id)"
         
-        print("COMPONENT: \(component.componentDescription)")
+        print("COMPONENT DESCRIPTION: \(String(describing: component.componentApplication))")
         
-        nameLabel.text = component.componentDescription
-        self.componentImageView.image = UIImage(named: "sample")
-//
-//        if let image = component.image {
-//            dropboxController?.getImage(imageName: image, completion: { (image, error) in
-//
-//            })
-//        } else {
-//            self.componentImageView.image = UIImage(systemName: "camera")
-//        }
+        nameLabel.text = component.componentApplication
+        guard let image = component.image else { return }
+            print("IMAGE:", image)
+        self.componentImageView.sd_setImage(with: URL(string: image), completed: .none)
     }
 }

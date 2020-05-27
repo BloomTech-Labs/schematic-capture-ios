@@ -46,7 +46,7 @@ class ClientsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dropboxController.authorizeClient(viewController: self)
+        //dropboxController.authorizeClient(viewController: self)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
         fetchClients()
     }
@@ -101,8 +101,8 @@ class ClientsViewController: UIViewController {
                 }
             } catch {
                 print("ERROR IN CONTROLLER: ", error)
-                let clients = self.projectController.loadFromPersistence(value: ClientRepresentation.self)
-                self.clients = clients!
+                guard let clients = self.projectController.loadFromPersistence(value: ClientRepresentation.self) else { return }
+                self.clients = clients
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()

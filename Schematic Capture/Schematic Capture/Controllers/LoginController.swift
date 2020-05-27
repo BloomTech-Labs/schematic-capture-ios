@@ -53,6 +53,7 @@ class AuthorizationController {
                 internalBearer = try decoder.decode(Bearer.self, from: data)
                 let user = try decoder.decode(User.self, from: data)
                 guard let bearer = internalBearer else { return }
+                print(internalBearer)
                 DispatchQueue.main.async {
                    completion(.success([bearer.token, user]))
                 }

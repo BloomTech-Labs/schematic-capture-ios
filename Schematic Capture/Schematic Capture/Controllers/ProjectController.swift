@@ -38,6 +38,7 @@ class ProjectController {
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
+                print("CLIENTS:", clients)
                 self.saveToPersistence(value: clients)
                 completion(.success(clients))
             } catch {
@@ -158,6 +159,12 @@ class ProjectController {
             decoder.dateDecodingStrategy = .iso8601
 
             do {
+                
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    // try to read out a string array
+                    print("JSON COMPONENTS: \(json)")
+                }
+                
                 let components = try decoder.decode([ComponentRepresentation].self, from: data)
                 print("COMPONENTS: ", components)
                 self.saveToPersistence(value: components)

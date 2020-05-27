@@ -100,6 +100,7 @@ class HeaderView: UIView {
             searchBar.isHidden = false
             updateViews(value.first ?? "", value[1], value.last ?? "")
         case .components:
+            searchBar.isHidden = false
             updateViews(value.first ?? "", value[1], value.last ?? "")
             thirdLabel.text = "Component list"
         case .componentDetails:

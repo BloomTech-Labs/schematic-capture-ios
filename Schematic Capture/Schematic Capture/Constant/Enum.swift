@@ -11,11 +11,10 @@ import Foundation
 
 // Urls for all Heroku operations
 enum Urls: String {
-    case logInUrl = "https://schematiccapture-master.herokuapp.com/api/auth/login"
-    case clientsUrl = "https://schematiccapture-master.herokuapp.com/api/clients"
-    //https://schematiccapture-master.herokuapp.com/api/clients/:id/projects
-    case jobSheetsUrl = "https://schematiccapture-master.herokuapp.com/api/projects"
-    case componentsUrl = "https://schematiccapture-master.herokuapp.com/api/jobsheets"
+    case logInUrl = "https://schematic-capture.herokuapp.com/api/auth/login"
+    case clientsUrl = "https://schematic-capture.herokuapp.com/api/clients"
+    case jobSheetsUrl = "https://schematic-capture.herokuapp.com/api/projects"
+    case componentsUrl = "https://schematic-capture.herokuapp.com/api/jobsheets"
 }
 
 enum Keys: String {

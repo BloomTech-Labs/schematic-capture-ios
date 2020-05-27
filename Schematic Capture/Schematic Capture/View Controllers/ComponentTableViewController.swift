@@ -32,12 +32,10 @@ class ComponentsTableViewController: UITableViewController {
     var jobSheet: JobSheetRepresentation? {
         didSet {
             fetchComponents()
-            guard let name = jobSheet?.name else { return }
-            headerView.setup(viewTypes: .components, value: [name, "Components"])
         }
     }
     var components = [ComponentRepresentation]()
-    var filteredComponents = [ComponentRepresentation]()
+    var filteredComponents: [ComponentRepresentation]?
     
     var imagePicker: ImagePicker!
     
@@ -87,13 +85,17 @@ class ComponentsTableViewController: UITableViewController {
                 print("COMPONENTS IN VIEWCONTROLLER: ", components) 
                 self.components = components
                 DispatchQueue.main.async {
+                    let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
+                    let totalCount = components.count
+                    guard let name = self.jobSheet?.name else { return }
+                    self.headerView.setup(viewTypes: .components, value: [name, "Incomplete (\(incompletedComponentsCount)/\(totalCount))", "Components",])
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()
                 }
             }
         })
     }
-
+    
     
     // MARK: - Table view data source
     
@@ -102,15 +104,29 @@ class ComponentsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        components.count
+        if headerView.searchBar.text != "" {
+            return filteredComponents?.count ?? 0
+        } else if components.count == 0 {
+            tableView.setEmptyView(title: "You don't have any job sheets.", message: "You'll find your assigned job sheets here.")
+            return 0
+        } else {
+            tableView.restore()
+            return components.count ?? 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTableViewCell.id, for: indexPath) as? ComponentTableViewCell else { return UITableViewCell() }
+        if headerView.searchBar.text != "" {
+            if let component = filteredComponents?[indexPath.row] {
+                cell.updateViews(component: component)
+            }
+        } else {
+            let component = components[indexPath.row]
+            cell.updateViews(component: component)
+        }
         cell.dropboxController = dropboxController
-        let component = self.components[indexPath.row]
         cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
-        cell.updateViews(component: component)
         return cell
     }
     
@@ -131,14 +147,6 @@ class ComponentsTableViewController: UITableViewController {
         self.imagePicker.present(from: view)
     }
 }
-
-extension ComponentsTableViewController: SearchDelegate {
-    func searchDidEnd(didChangeText: String) {
-        //self.filteredComponents =  self.components.filter({($0.componentDescription .capitalized.contains(didChangeText.capitalized))}) else { return }
-        tableView.reloadData()
-    }
-}
-
 
 // MARK: - ImagePickerDelegate
 
@@ -161,6 +169,14 @@ extension ComponentsTableViewController: ImagePickerDelegate {
 extension ComponentsTableViewController: ImageDoneEditingDelegate {
     func ImageDoneEditing(image: UIImage?) {
         
+    }
+}
+
+extension ComponentsTableViewController: SearchDelegate {
+    func searchDidEnd(didChangeText: String) {
+        
+        self.filteredComponents = components.filter({($0.componentApplication!.capitalized.contains(didChangeText.capitalized))})
+        tableView.reloadData()
     }
 }
 
