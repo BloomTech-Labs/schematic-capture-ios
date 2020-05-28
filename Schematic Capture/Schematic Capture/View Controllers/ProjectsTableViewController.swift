@@ -59,22 +59,21 @@ class ProjectsTableViewController: UIViewController {
         indicator.startAnimating()
 
         tableView = UITableView(frame: view.frame, style: .grouped)
-        tableView.backgroundColor = .systemBackground
-        tableView.separatorStyle = .none
+        tableView.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
         tableView.delegate = self
         tableView.dataSource = self
-        view.addSubview(tableView)
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorStyle = .none
         tableView.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView
-        tableView.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
+        view.addSubview(tableView)
     }
     
     // MARK: - Functions
     
     private func fetchProjects() {
-        
         guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getProjects(with: Int(id), token: token, completion: { result in
             if let projects = try? result.get() as? [ProjectRepresentation] {

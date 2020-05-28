@@ -111,7 +111,7 @@ class ComponentsTableViewController: UITableViewController {
             return 0
         } else {
             tableView.restore()
-            return components.count ?? 0
+            return components.count
         }
     }
     
@@ -167,8 +167,14 @@ extension ComponentsTableViewController: ImagePickerDelegate {
 // MARK: - ImageDoneEditingDelegate
 
 extension ComponentsTableViewController: ImageDoneEditingDelegate {
+    
     func ImageDoneEditing(image: UIImage?) {
+        guard let imageData = image?.jpegData(compressionQuality: 1) else { return }
         
+        if let indexPath = tableView.indexPathForSelectedRow, let client = dropboxController?.client {
+            let component = self.components[indexPath.row]
+            client.files.upload(path: "", input: imageData)
+        }
     }
 }
 

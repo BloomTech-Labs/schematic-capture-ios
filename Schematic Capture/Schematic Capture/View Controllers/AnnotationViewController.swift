@@ -17,6 +17,8 @@ class AnnotationViewController: UIViewController {
     
     var annotationView = AnnotationView()
     
+    var component: Component?
+    
     var colors = [UIColor.white, UIColor.black, UIColor.systemBlue, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemOrange, UIColor.systemRed, UIColor.systemPink, UIColor.systemPurple]
     
     

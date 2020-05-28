@@ -26,10 +26,10 @@ class ClientsViewController: UIViewController {
     
     // MARK: - Properties
     
-    var user: User?
-    var clients = [ClientRepresentation]()
     var projectController = ProjectController()
     var dropboxController = DropboxController()
+    
+    var user: User?
     
     var token: String? {
         didSet {
@@ -37,23 +37,25 @@ class ClientsViewController: UIViewController {
         }
     }
     
+    var clients = [ClientRepresentation]()
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //dropboxController.authorizeClient(viewController: self)
+        dropboxController.authorizeClient(viewController: self)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
         fetchClients()
     }
     
     // MARK: - Functions
     
-    private func setupUI() {
+    private func setupViews() {
         self.title = "Schematic Capture"
         view.backgroundColor = .systemBackground
         
@@ -67,7 +69,6 @@ class ClientsViewController: UIViewController {
         
         indicator.layer.position.y = view.layer.position.y
         indicator.layer.position.x = view.layer.position.x
-        
         indicator.startAnimating()
         
         tableView = UITableView(frame: view.frame, style: .grouped)
