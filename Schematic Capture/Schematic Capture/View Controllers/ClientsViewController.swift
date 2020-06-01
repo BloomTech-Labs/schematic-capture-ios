@@ -31,11 +31,7 @@ class ClientsViewController: UIViewController {
     
     var user: User?
     
-    var token: String? {
-        didSet {
-            fetchClients()
-        }
-    }
+    var token: String?
     
     var clients = [ClientRepresentation]()
     
@@ -43,12 +39,12 @@ class ClientsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dropboxController.authorizeClient(viewController: self)
         setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dropboxController.authorizeClient(viewController: self)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
         fetchClients()
     }
@@ -92,8 +88,6 @@ class ClientsViewController: UIViewController {
             
             do {
                 if let clients = try result.get() as? [ClientRepresentation] {
-                    
-                    print("CONNECTION AVAILABLE")
                     DispatchQueue.main.async {
                         self.clients = clients
                         self.tableView.reloadData()

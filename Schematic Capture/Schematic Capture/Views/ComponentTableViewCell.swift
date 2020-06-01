@@ -10,13 +10,16 @@ import UIKit
 import SDWebImage
 import SwiftyDropbox
 
+
 class ComponentTableViewCell: UITableViewCell {
 
     var indexLabel = UILabel()
     var nameLabel = UILabel()
     var componentImageView = UIImageView()
+    var viewController: UIViewController?
     
     var dropboxController: DropboxController?
+    var imagePicker: ImagePicker!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,7 +32,9 @@ class ComponentTableViewCell: UITableViewCell {
         componentImageView.contentMode = .scaleAspectFill
         componentImageView.clipsToBounds = true
         componentImageView.image = UIImage(systemName: "camera")
-        componentImageView.isUserInteractionEnabled = true 
+        componentImageView.isUserInteractionEnabled = true
+                
+        componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
         
         addSubview(indexLabel)
         addSubview(nameLabel)
@@ -53,18 +58,46 @@ class ComponentTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     // Do we need index?
     func updateViews(component: ComponentRepresentation) {
         indexLabel.text = "\(component.id)"
-        
-        print("COMPONENT DESCRIPTION: \(String(describing: component.componentApplication))")
-        
         nameLabel.text = component.componentApplication
         guard let image = component.image else { return }
-            print("IMAGE:", image)
-        
-        self.componentImageView.sd_setImage(with: URL(string: image), completed: .none)
+//        self.componentImageView.sd_setImage(with: URL(string: image), completed: .none)
 
+    }
+    
+    
+    @objc func showImagePicker(sender: UIImageView) {
+        self.imagePicker.present(from: self)
+    }
+}
+
+// MARK: - ImagePickerDelegate
+
+extension ComponentTableViewCell: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        if image != nil {
+            let annotationViewController = AnnotationViewController()
+            annotationViewController.imageDoneEditingDelegate = self
+            let navigationController = UINavigationController(rootViewController: annotationViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            annotationViewController.image = image
+            self.viewController?.present(navigationController, animated: true, completion: nil)
+        }
+    }
+}
+
+
+
+// MARK: - ImageDoneEditingDelegate
+
+extension ComponentTableViewCell: ImageDoneEditingDelegate {
+    
+    func ImageDoneEditing(image: UIImage?) {
+        self.componentImageView.image = image
     }
 }

@@ -49,9 +49,10 @@ class LoginViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Welcome To Schematic Capture"
-        label.font = .systemFont(ofSize: 40)
+        label.font = .systemFont(ofSize: 35)
         label.textAlignment = .center
         label.numberOfLines = 2
+        label.textColor = .lightText
         
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.borderStyle = .roundedRect

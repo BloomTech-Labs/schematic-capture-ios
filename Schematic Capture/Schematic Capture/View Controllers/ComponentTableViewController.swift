@@ -170,17 +170,15 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
     
     func ImageDoneEditing(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: 1) else { return }
-        
         if let indexPath = tableView.indexPathForSelectedRow, let client = dropboxController?.client {
             let component = self.components[indexPath.row]
-            client.files.upload(path: "", input: imageData)
+            client.files.createFolderV2(path: "Test two", autorename: false)
         }
     }
 }
 
 extension ComponentsTableViewController: SearchDelegate {
     func searchDidEnd(didChangeText: String) {
-        
         self.filteredComponents = components.filter({($0.componentApplication!.capitalized.contains(didChangeText.capitalized))})
         tableView.reloadData()
     }
