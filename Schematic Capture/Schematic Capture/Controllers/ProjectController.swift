@@ -38,7 +38,6 @@ class ProjectController {
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
-                print("CLIENTS:", clients)
                 self.saveToPersistence(value: clients)
                 completion(.success(clients))
             } catch {
@@ -166,7 +165,6 @@ class ProjectController {
                 }
                 
                 let components = try decoder.decode([ComponentRepresentation].self, from: data)
-                print("COMPONENTS: ", components)
                 self.saveToPersistence(value: components)
                 completion(.success(components))
             } catch {

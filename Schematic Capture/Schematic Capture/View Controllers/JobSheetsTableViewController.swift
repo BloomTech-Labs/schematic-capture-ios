@@ -46,6 +46,8 @@ class JobSheetsTableViewController: UITableViewController {
     
     var filteredJobSheets: [JobSheetRepresentation]?
     
+    var userPath: [String]?
+
     // MARK: - View Lifecycle
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -54,6 +56,9 @@ class JobSheetsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("PATH", self.userPath)
+        
         setupUI()
     }
     
@@ -140,6 +145,8 @@ class JobSheetsTableViewController: UITableViewController {
         componentsTableViewViewController.dropboxController = dropboxController
         componentsTableViewViewController.jobSheet = jobSheet
         componentsTableViewViewController.token = token
+        componentsTableViewViewController.userPath = self.userPath
+        componentsTableViewViewController.userPath?.append(jobSheet?.name ?? "")
         navigationController?.pushViewController(componentsTableViewViewController, animated: true)
     }
     

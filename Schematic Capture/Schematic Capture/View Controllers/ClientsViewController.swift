@@ -140,6 +140,7 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
         projectsTableViewViewController.dropboxController = dropboxController
         projectsTableViewViewController.client = client
         projectsTableViewViewController.token = token
+        projectsTableViewViewController.userPath.append(client.companyName ?? "")
         navigationController?.pushViewController(projectsTableViewViewController, animated: true)
     }
     

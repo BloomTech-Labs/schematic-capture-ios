@@ -19,4 +19,21 @@ class DropboxController {
             UIApplication.shared, controller: viewController, openURL: { (url: URL) -> Void in
         })
     }
+    
+    
+    func uploadToDrobox(imageData: Data, path: String, imageName: String) {
+        if let client = client {
+            client.files.deleteV2(path: "/\(path)/\(imageName).jpg").response { (result, error) in
+                if let error = error {
+                    print("Error with dropbox:", error)
+                } else {
+                    client.files.upload(path: "/\(path)/\(imageName).jpg", input: imageData).response { (metadata, error) in
+                        if let error = error {
+                            print("Error with dropbox:", error)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

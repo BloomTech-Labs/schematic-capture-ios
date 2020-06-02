@@ -19,6 +19,8 @@ class AnnotationViewController: UIViewController {
     
     var component: Component?
     
+    var annotatedImage: UIImage?
+    
     var colors = [UIColor.white, UIColor.black, UIColor.systemBlue, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemOrange, UIColor.systemRed, UIColor.systemPink, UIColor.systemPurple]
     
     
@@ -44,7 +46,7 @@ class AnnotationViewController: UIViewController {
         }
     }
     
-    weak var imageDoneEditingDelegate: ImageDoneEditingDelegate?
+    weak var delegate: ImageDoneEditingDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +115,7 @@ class AnnotationViewController: UIViewController {
     }
     
     func captureScreen() {
-       _ = image(with: annotationView)
+       annotatedImage = image(with: annotationView)
     }
     
     func image(with view: UIView) -> UIImage? {
@@ -141,8 +143,7 @@ class AnnotationViewController: UIViewController {
             case 4:
                 captureScreen()
                 self.navigationController?.dismiss(animated: true, completion: {
-                    self.imageDoneEditingDelegate?.ImageDoneEditing(image: self.annotationView.image)
-                    
+                    self.delegate?.ImageDoneEditing(image: self.annotatedImage)
                 })
             default:
                 break

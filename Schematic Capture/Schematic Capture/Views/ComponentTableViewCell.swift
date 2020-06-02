@@ -10,6 +10,10 @@ import UIKit
 import SDWebImage
 import SwiftyDropbox
 
+protocol SelectedCellDelegate: NSObject {
+    func selectedCell(cell: ComponentTableViewCell)
+}
+
 
 class ComponentTableViewCell: UITableViewCell {
 
@@ -20,6 +24,8 @@ class ComponentTableViewCell: UITableViewCell {
     
     var dropboxController: DropboxController?
     var imagePicker: ImagePicker!
+    
+    weak var delegate: SelectedCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,7 +40,7 @@ class ComponentTableViewCell: UITableViewCell {
         componentImageView.image = UIImage(systemName: "camera")
         componentImageView.isUserInteractionEnabled = true
                 
-        componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
+//        componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
         
         addSubview(indexLabel)
         addSubview(nameLabel)
@@ -70,9 +76,9 @@ class ComponentTableViewCell: UITableViewCell {
     }
     
     
-    @objc func showImagePicker(sender: UIImageView) {
-        self.imagePicker.present(from: self)
-    }
+//    @objc func showImagePicker(sender: UIImageView) {
+//        self.imagePicker.present(from: self)
+//    }
 }
 
 // MARK: - ImagePickerDelegate
@@ -82,7 +88,7 @@ extension ComponentTableViewCell: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil {
             let annotationViewController = AnnotationViewController()
-            annotationViewController.imageDoneEditingDelegate = self
+            annotationViewController.delegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
             navigationController.modalPresentationStyle = .fullScreen
             annotationViewController.image = image

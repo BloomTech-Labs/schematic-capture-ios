@@ -38,10 +38,13 @@ class ProjectsTableViewController: UIViewController {
    
     var projects = [ProjectRepresentation]()
     
+    var userPath: [String] = []
+
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("PATH: ", userPath)
         setupViews()
     }
     
@@ -125,6 +128,8 @@ extension ProjectsTableViewController: UITableViewDelegate, UITableViewDataSourc
         jobSheetsTableViewViewController.dropboxController = dropboxController
         jobSheetsTableViewViewController.project = project
         jobSheetsTableViewViewController.token = token
+        jobSheetsTableViewViewController.userPath = self.userPath
+        jobSheetsTableViewViewController.userPath?.append(project.name ?? "")
         navigationController?.pushViewController(jobSheetsTableViewViewController, animated: true)
     }
     

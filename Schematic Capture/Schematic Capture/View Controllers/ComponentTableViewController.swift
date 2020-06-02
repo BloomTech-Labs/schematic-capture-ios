@@ -22,6 +22,7 @@ class ComponentsTableViewController: UITableViewController {
         return view
     }()
     
+
     // MARK: - Propertiess
     
     var projectController: ProjectController?
@@ -39,7 +40,8 @@ class ComponentsTableViewController: UITableViewController {
     
     var imagePicker: ImagePicker!
     
-    //var pdfBarButtonItem: UIBarButtonItem!
+    var userPath: [String]?
+    
     
     // MARK: - View Lifecycle
     
@@ -73,7 +75,6 @@ class ComponentsTableViewController: UITableViewController {
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
-        
     }
     
     // MARK: - Functions
@@ -82,7 +83,6 @@ class ComponentsTableViewController: UITableViewController {
         guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getComponents(with: id, token: token, completion: { (results) in
             if let components = try? results.get() as? [ComponentRepresentation] {
-                print("COMPONENTS IN VIEWCONTROLLER: ", components) 
                 self.components = components
                 DispatchQueue.main.async {
                     let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
@@ -95,7 +95,6 @@ class ComponentsTableViewController: UITableViewController {
             }
         })
     }
-    
     
     // MARK: - Table view data source
     
@@ -126,7 +125,7 @@ class ComponentsTableViewController: UITableViewController {
             cell.updateViews(component: component)
         }
         cell.dropboxController = dropboxController
-        cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
+        cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker(sender:))))
         return cell
     }
     
@@ -143,7 +142,7 @@ class ComponentsTableViewController: UITableViewController {
     }
     
     
-    @objc func showImagePicker() {
+    @objc func showImagePicker(sender: UIImageView) {
         self.imagePicker.present(from: view)
     }
 }
@@ -152,10 +151,15 @@ class ComponentsTableViewController: UITableViewController {
 
 extension ComponentsTableViewController: ImagePickerDelegate {
     
+    // Unannotated image
     func didSelect(image: UIImage?) {
         if image != nil {
+            guard let imageData = image?.jpegData(compressionQuality: 1), let path = self.userPath?.joined(separator: "/") else { return }
+            dropboxController?.deleteImage(path: path, imageName: "normal", completion: {_ in
+                self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "normal")
+            })
             let annotationViewController = AnnotationViewController()
-            annotationViewController.imageDoneEditingDelegate = self
+            annotationViewController.delegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
             navigationController.modalPresentationStyle = .fullScreen
             annotationViewController.image = image
@@ -168,12 +172,14 @@ extension ComponentsTableViewController: ImagePickerDelegate {
 
 extension ComponentsTableViewController: ImageDoneEditingDelegate {
     
+    // Annotated Image
     func ImageDoneEditing(image: UIImage?) {
-        guard let imageData = image?.jpegData(compressionQuality: 1) else { return }
-        if let indexPath = tableView.indexPathForSelectedRow, let client = dropboxController?.client {
-            let component = self.components[indexPath.row]
-            client.files.createFolderV2(path: "Test two", autorename: false)
-        }
+        guard let imageData = image?.jpegData(compressionQuality: 1), let path = self.userPath?.joined(separator: "/") else { return }
+        //dropboxController?
+        
+        //deleteImage(path: path, imageName: "annotated", completion: {_ in
+            //self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "annotated")
+        //})
     }
 }
 
@@ -183,17 +189,3 @@ extension ComponentsTableViewController: SearchDelegate {
         tableView.reloadData()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
