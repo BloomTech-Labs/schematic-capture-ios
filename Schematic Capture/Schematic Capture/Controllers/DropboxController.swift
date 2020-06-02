@@ -36,4 +36,22 @@ class DropboxController {
             }
         }
     }
+    
+    func getImage(path: String) {
+        client?.files.download(path: "/Apps/Schematic Capture/7hjX1pHD1FN0ZaGStGde71uiGYa2.jpg")
+            .response { response, error in
+                if let response = response {
+                    let responseMetadata = response.0
+                    print(responseMetadata)
+                    let fileContents = response.1
+                    print(fileContents)
+                } else if let error = error {
+                    print("Error downloading the image from DropBox", error)
+                }
+        }
+        .progress { progressData in
+            print(progressData)
+        }
+    }
+    
 }

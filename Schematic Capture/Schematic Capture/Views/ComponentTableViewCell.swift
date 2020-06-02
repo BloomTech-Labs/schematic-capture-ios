@@ -27,6 +27,8 @@ class ComponentTableViewCell: UITableViewCell {
     
     weak var delegate: SelectedCellDelegate?
     
+    var userPath: [String]?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -70,7 +72,8 @@ class ComponentTableViewCell: UITableViewCell {
     func updateViews(component: ComponentRepresentation) {
         indexLabel.text = "\(component.id)"
         nameLabel.text = component.componentApplication
-        guard let image = component.image else { return }
+        guard let image = component.image, let path = self.userPath?.joined(separator: "/") else { return }
+        dropboxController?.getImage(path: path)
 //        self.componentImageView.sd_setImage(with: URL(string: image), completed: .none)
 
     }

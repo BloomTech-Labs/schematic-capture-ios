@@ -40,7 +40,11 @@ class ComponentsTableViewController: UITableViewController {
     
     var imagePicker: ImagePicker!
     
-    var userPath: [String]?
+    var userPath: [String]? {
+        didSet {
+            print(userPath)
+        }
+    }
     
     // MARK: - View Lifecycle
     
@@ -124,6 +128,7 @@ class ComponentsTableViewController: UITableViewController {
             cell.updateViews(component: component)
         }
         cell.dropboxController = dropboxController
+        cell.userPath = userPath
         cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker(sender:))))
         return cell
     }
@@ -172,7 +177,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
     // Annotated Image
     func ImageDoneEditing(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: 1), let path = self.userPath?.joined(separator: "/") else { return }
-        self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "normal")
+        self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "annotated")
     }
 }
 
