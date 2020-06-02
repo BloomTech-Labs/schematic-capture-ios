@@ -23,22 +23,25 @@ class AnnotationViewController: UIViewController {
     
     var colors = [UIColor.white, UIColor.black, UIColor.systemBlue, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemOrange, UIColor.systemRed, UIColor.systemPink, UIColor.systemPurple]
     
-    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let width: CGFloat = 30
         layout.itemSize = CGSize(width: width, height: width)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: width, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 10
+        //layout.sectionInset = UIEdgeInsets(top: 0, left: width, bottom: 0, right: 0)
+        //layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 5
         layout.scrollDirection = .horizontal
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.showsHorizontalScrollIndicator = false
+        view.isScrollEnabled = true
         self.view.addSubview(view)
         return view
     }()
     
+    var collectionViewWidth: CGFloat {
+        return CGFloat(colors.count * 30 + (colors.count + 1) * 5)
+    }
     
     var image: UIImage? {
         didSet {
@@ -46,13 +49,7 @@ class AnnotationViewController: UIViewController {
         }
     }
     
-    
-    override var shouldAutorotate: Bool {
-        return true
-    }
-    
     weak var delegate: ImageDoneEditingDelegate?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +68,7 @@ class AnnotationViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ColorCell")
+        collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
         
         // Toolbar setup
@@ -102,7 +100,6 @@ class AnnotationViewController: UIViewController {
         items.append(doneButton)
         
         self.toolbarItems = items
-        
         self.navigationController?.toolbar.barTintColor = .black
         self.navigationController?.toolbar.tintColor = .white        
         
@@ -110,19 +107,15 @@ class AnnotationViewController: UIViewController {
             
             annotationView.topAnchor.constraint(equalTo: view.topAnchor),
             annotationView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            annotationView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -60.0),
+            annotationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0.0),
             
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0.0),
-            collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 60.0),
+            collectionView.widthAnchor.constraint(equalToConstant: collectionViewWidth),
+            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 46.0),
         ])
-
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
     }
-    
-    
-    
+
     func captureScreen() {
        annotatedImage = image(with: annotationView)
     }

@@ -55,6 +55,8 @@ class ProjectController {
         requestUrl.appendPathComponent("\(id)")
         requestUrl.appendPathComponent("projects")
         
+        print("REQUEST URL:", requestUrl)
+        
         var request = URLRequest(url: requestUrl)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
@@ -72,17 +74,16 @@ class ProjectController {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             
-            
-            do {
-               // make sure this JSON is in the format we expect
-               if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                   // try to read out a string array
-                   print("JSON: \(json)")
-               }
-            } catch let error as NSError {
-               print("Failed to load: \(error.localizedDescription)")
-            }
-            
+//            do {
+//               // make sure this JSON is in the format we expect
+//               if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+//                   // try to read out a string array
+//                   print("JSON: \(json)")
+//               }
+//            } catch let error as NSError {
+//               print("Failed to load: \(error.localizedDescription)")
+//            }
+//
             
  
             do {
