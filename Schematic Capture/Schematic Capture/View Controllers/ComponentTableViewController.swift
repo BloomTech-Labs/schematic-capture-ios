@@ -42,7 +42,6 @@ class ComponentsTableViewController: UITableViewController {
     
     var userPath: [String]?
     
-    
     // MARK: - View Lifecycle
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,9 +72,9 @@ class ComponentsTableViewController: UITableViewController {
         headerView.searchDelegate = self
         tableView.tableHeaderView = headerView
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
-        
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
+
     
     // MARK: - Functions
     
@@ -155,9 +154,7 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil {
             guard let imageData = image?.jpegData(compressionQuality: 1), let path = self.userPath?.joined(separator: "/") else { return }
-            dropboxController?.deleteImage(path: path, imageName: "normal", completion: {_ in
-                self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "normal")
-            })
+            self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "normal")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
@@ -175,11 +172,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
     // Annotated Image
     func ImageDoneEditing(image: UIImage?) {
         guard let imageData = image?.jpegData(compressionQuality: 1), let path = self.userPath?.joined(separator: "/") else { return }
-        //dropboxController?
-        
-        //deleteImage(path: path, imageName: "annotated", completion: {_ in
-            //self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "annotated")
-        //})
+        self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "normal")
     }
 }
 

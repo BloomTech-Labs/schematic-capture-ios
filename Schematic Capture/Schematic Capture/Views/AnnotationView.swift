@@ -55,7 +55,7 @@ class AnnotationView: UIView {
         
         self.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalTo: widthAnchor),

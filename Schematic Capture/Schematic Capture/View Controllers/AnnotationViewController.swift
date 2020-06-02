@@ -46,7 +46,13 @@ class AnnotationViewController: UIViewController {
         }
     }
     
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
     weak var delegate: ImageDoneEditingDelegate?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,9 +104,7 @@ class AnnotationViewController: UIViewController {
         self.toolbarItems = items
         
         self.navigationController?.toolbar.barTintColor = .black
-        self.navigationController?.toolbar.tintColor = .white
-        self.navigationController?.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-        
+        self.navigationController?.toolbar.tintColor = .white        
         
         NSLayoutConstraint.activate([
             
@@ -112,7 +116,12 @@ class AnnotationViewController: UIViewController {
             collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 60.0),
         ])
+
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
     }
+    
+    
     
     func captureScreen() {
        annotatedImage = image(with: annotationView)
