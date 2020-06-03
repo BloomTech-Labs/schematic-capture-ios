@@ -176,6 +176,22 @@ class ProjectController {
         }.resume()
     }
     
+    
+    func update<T: Codable>(row: Int, value: T) {
+        // Remove new component from array
+        
+        var value: [T] = self.value
+        
+        self.value.remove(at: row)
+        // Add new component to array
+        self.value.insert(value, at: row)
+        // Save to persistence
+        self.saveToPersistence(value: value)
+    }
+    
+    
+    
+    
     // Persistence file url
     var fileURL: URL? {
         let manager = FileManager.default

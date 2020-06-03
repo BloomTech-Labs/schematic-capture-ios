@@ -42,7 +42,7 @@ class ComponentTableViewCell: UITableViewCell {
         componentImageView.image = UIImage(systemName: "camera")
         componentImageView.isUserInteractionEnabled = true
                 
-//        componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
+        componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewTapped)))
         
         addSubview(indexLabel)
         addSubview(nameLabel)
@@ -74,14 +74,12 @@ class ComponentTableViewCell: UITableViewCell {
         nameLabel.text = component.componentApplication
         guard let image = component.image, let path = self.userPath?.joined(separator: "/") else { return }
         dropboxController?.getImage(path: path)
-//        self.componentImageView.sd_setImage(with: URL(string: image), completed: .none)
-
     }
     
     
-//    @objc func showImagePicker(sender: UIImageView) {
-//        self.imagePicker.present(from: self)
-//    }
+    @objc func imageViewTapped(sender: UIImageView) {
+        delegate?.selectedCell(cell: self)
+    }
 }
 
 // MARK: - ImagePickerDelegate

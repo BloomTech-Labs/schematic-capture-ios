@@ -22,7 +22,7 @@ class ComponentsTableViewController: UITableViewController {
         return view
     }()
     
-
+    
     // MARK: - Propertiess
     
     var projectController: ProjectController?
@@ -78,7 +78,7 @@ class ComponentsTableViewController: UITableViewController {
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
-
+    
     
     // MARK: - Functions
     
@@ -129,7 +129,7 @@ class ComponentsTableViewController: UITableViewController {
         }
         cell.dropboxController = dropboxController
         cell.userPath = userPath
-        cell.componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker(sender:))))
+        cell.delegate = self
         return cell
     }
     
@@ -144,11 +144,6 @@ class ComponentsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         60.0
     }
-    
-    
-    @objc func showImagePicker(sender: UIImageView) {
-        self.imagePicker.present(from: view)
-    }
 }
 
 // MARK: - ImagePickerDelegate
@@ -158,8 +153,10 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     // Unannotated image
     func didSelect(image: UIImage?) {
         if image != nil {
-            guard let imageData = image?.jpegData(compressionQuality: 1), let path = self.userPath?.joined(separator: "/") else { return }
-            self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "normal")
+            guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow, let path = self.userPath else { return }
+            let component = self.components[componentRow]
+
+            self.dropboxController?.updateDrobox(imageData: imageData, path: path, componentId: component.id, imageName: "normal")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
@@ -176,8 +173,26 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
     
     // Annotated Image
     func ImageDoneEditing(image: UIImage?) {
-        guard let imageData = image?.jpegData(compressionQuality: 1), let path = self.userPath?.joined(separator: "/") else { return }
-        self.dropboxController?.uploadToDrobox(imageData: imageData, path: path, imageName: "annotated")
+        
+        guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow, let path = self.userPath else { return }
+        let component = self.components[componentRow]
+        
+        if let cell = tableView.cellForRow(at: IndexPath(row: componentRow, section: 0)) as? ComponentTableViewCell {
+            cell.componentImageView.image = image
+        }
+        
+        // Save new annotation to persistence
+        
+        
+        self.dropboxController?.updateDrobox(imageData: imageData, path: path, componentId: component.id, imageName: "annotated")
+    }
+}
+
+extension ComponentsTableViewController: SelectedCellDelegate {
+    func selectedCell(cell: ComponentTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        dropboxController?.selectedComponentRow = indexPath.row
+        self.imagePicker.present(from: view)
     }
 }
 
