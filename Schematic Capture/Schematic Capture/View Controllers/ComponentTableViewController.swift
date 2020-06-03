@@ -155,8 +155,7 @@ extension ComponentsTableViewController: ImagePickerDelegate {
         if image != nil {
             guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow, let path = self.userPath else { return }
             let component = self.components[componentRow]
-
-            self.dropboxController?.updateDrobox(imageData: imageData, path: path, componentId: component.id, imageName: "normal")
+            self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: component.id, imageName: "normal")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
@@ -173,18 +172,19 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
     
     // Annotated Image
     func ImageDoneEditing(image: UIImage?) {
+        guard let imageData = image?.jpegData(compressionQuality: 1),
+            let componentRow = dropboxController?.selectedComponentRow,
+            let path = self.userPath else { return }
         
-        guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow, let path = self.userPath else { return }
-        let component = self.components[componentRow]
+        var component = self.components[componentRow]
         
-        if let cell = tableView.cellForRow(at: IndexPath(row: componentRow, section: 0)) as? ComponentTableViewCell {
-            cell.componentImageView.image = image
-        }
-        
-        // Save new annotation to persistence
-        
-        
-        self.dropboxController?.updateDrobox(imageData: imageData, path: path, componentId: component.id, imageName: "annotated")
+        component.imageData = imageData
+    
+        self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: component.id, imageName: "annotated")
+        self.components.remove(at: componentRow)
+        self.components.insert(component, at: componentRow)
+        self.tableView.reloadData()
+        self.projectController?.saveToPersistence(value: self.components)
     }
 }
 

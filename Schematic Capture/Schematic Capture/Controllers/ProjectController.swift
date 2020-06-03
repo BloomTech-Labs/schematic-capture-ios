@@ -14,8 +14,6 @@ class ProjectController {
     var bearer: Bearer?
     var user: User?
     
-    var value = [Any]()
-    
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     
     func getClients(token: String?, completion: @escaping Completion) {
@@ -74,21 +72,20 @@ class ProjectController {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             
-//            do {
-//               // make sure this JSON is in the format we expect
-//               if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-//                   // try to read out a string array
-//                   print("JSON: \(json)")
-//               }
-//            } catch let error as NSError {
-//               print("Failed to load: \(error.localizedDescription)")
-//            }
-//
+            //            do {
+            //               // make sure this JSON is in the format we expect
+            //               if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+            //                   // try to read out a string array
+            //                   print("JSON: \(json)")
+            //               }
+            //            } catch let error as NSError {
+            //               print("Failed to load: \(error.localizedDescription)")
+            //            }
+            //
             
- 
             do {
                 let projects = try decoder.decode([ProjectRepresentation].self, from: data)
-               
+                
                 self.saveToPersistence(value: projects)
                 completion(.success(projects))
             } catch {
@@ -122,7 +119,7 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-
+            
             do {
                 let jobSheets = try decoder.decode([JobSheetRepresentation].self, from: data)
                 self.saveToPersistence(value: jobSheets)
@@ -157,7 +154,7 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-
+            
             do {
                 
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
@@ -175,22 +172,6 @@ class ProjectController {
             }
         }.resume()
     }
-    
-    
-    func update<T: Codable>(row: Int, value: T) {
-        // Remove new component from array
-        
-        var value: [T] = self.value
-        
-        self.value.remove(at: row)
-        // Add new component to array
-        self.value.insert(value, at: row)
-        // Save to persistence
-        self.saveToPersistence(value: value)
-    }
-    
-    
-    
     
     // Persistence file url
     var fileURL: URL? {

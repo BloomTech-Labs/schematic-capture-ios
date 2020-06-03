@@ -29,5 +29,6 @@ struct ComponentRepresentation: Codable {
     var custom: String?
 //    let jobSheetId: Int
     var photo: PhotoRepresentation?
+    var imageData: Data?
     
 }

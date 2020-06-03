@@ -67,15 +67,13 @@ class ComponentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     // Do we need index?
     func updateViews(component: ComponentRepresentation) {
         indexLabel.text = "\(component.id)"
-        nameLabel.text = component.componentApplication
-        guard let image = component.image, let path = self.userPath?.joined(separator: "/") else { return }
-        dropboxController?.getImage(path: path)
+        nameLabel.text = component.componentDescription
+        guard let imageData = component.imageData else { return }
+        componentImageView.image = UIImage(data: imageData)
     }
-    
     
     @objc func imageViewTapped(sender: UIImageView) {
         delegate?.selectedCell(cell: self)
@@ -97,8 +95,6 @@ extension ComponentTableViewCell: ImagePickerDelegate {
         }
     }
 }
-
-
 
 // MARK: - ImageDoneEditingDelegate
 

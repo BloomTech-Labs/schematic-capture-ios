@@ -14,7 +14,6 @@ class DropboxController {
         return DropboxClientsManager.authorizedClient
     }
     
-    
     var selectedComponentRow: Int {
         get {
             let row = UserDefaults.standard.integer(forKey: .componentRow)
@@ -34,9 +33,18 @@ class DropboxController {
         })
     }
     
+    func uploadToDropbox(imageData: Data, path: String, imageName: String) {
+        if let client = client {
+            client.files.upload(path: "/\(path)/\(imageName).jpg", input: imageData).response { (metadata, error) in
+                if let error = error {
+                    print("Error with dropbox:", error)
+                }
+            }
+            
+        }
+    }
     
-    func updateDrobox(imageData: Data, path: [String], componentId: Int, imageName: String) {
-        
+    func updateDropbox(imageData: Data, path: [String], componentId: Int, imageName: String) {
         var pathWithId = path
         pathWithId.append("\(componentId)")
         let fullpath = pathWithId.joined(separator: "/")
@@ -51,35 +59,6 @@ class DropboxController {
                     self.uploadToDropbox(imageData: imageData, path: fullpath, imageName: imageName)
                 }
             }
-        }
-    }
-    
-    func uploadToDropbox(imageData: Data, path: String, imageName: String) {
-        if let client = client {
-            client.files.upload(path: "/\(path)/\(imageName).jpg", input: imageData).response { (metadata, error) in
-                if let error = error {
-                    print("Error with dropbox:", error)
-                }
-            }
-        }
-    }
-    
-    func deleteFromDropbox() { }
-    
-    func getImage(path: String) {
-        client?.files.download(path: "/Apps/Schematic Capture/7hjX1pHD1FN0ZaGStGde71uiGYa2.jpg")
-            .response { response, error in
-                if let response = response {
-                    let responseMetadata = response.0
-                    print(responseMetadata)
-                    let fileContents = response.1
-                    print(fileContents)
-                } else if let error = error {
-                    print("Error downloading the image from DropBox", error)
-                }
-        }
-        .progress { progressData in
-            print(progressData)
         }
     }
     

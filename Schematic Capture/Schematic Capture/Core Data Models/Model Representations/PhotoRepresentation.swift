@@ -11,9 +11,4 @@ import Foundation
 struct PhotoRepresentation: Codable {
     var name: String
     var imageData: Data
-    
-    private enum CodingKeys: String, CodingKey {
-        case name
-        case imageData
-    }
 }

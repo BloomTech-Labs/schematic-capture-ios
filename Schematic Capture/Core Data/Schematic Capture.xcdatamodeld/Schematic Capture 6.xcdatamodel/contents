@@ -52,10 +52,10 @@
         <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
+        <element name="Client" positionX="-135" positionY="378" width="128" height="148"/>
         <element name="Component" positionX="1.90625" positionY="223.30078125" width="128" height="328"/>
         <element name="JobSheet" positionX="-193.85546875" positionY="447.04296875" width="128" height="178"/>
         <element name="Photo" positionX="-1.5390625" positionY="555.26953125" width="128" height="73"/>
         <element name="Project" positionX="-270.75" positionY="291.8984375" width="128" height="103"/>
-        <element name="Client" positionX="-135" positionY="378" width="128" height="148"/>
     </elements>
 </model>
