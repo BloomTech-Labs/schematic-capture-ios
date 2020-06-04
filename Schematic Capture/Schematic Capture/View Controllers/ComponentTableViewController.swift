@@ -82,12 +82,11 @@ class ComponentsTableViewController: UITableViewController {
     
     private func fetchComponents() {
         guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        projectController?.getComponents(with: id, token: token, completion: { (results) in
-            
+        projectController?.getComponents(with: id, token: token, completion: { results in
             do {
                 if let components = try results.get() as? [ComponentRepresentation] {
-                    self.components = components
                     DispatchQueue.main.async {
+                        self.components = components
                         let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
                         let totalCount = components.count
                         guard let name = self.jobSheet?.name else { return }

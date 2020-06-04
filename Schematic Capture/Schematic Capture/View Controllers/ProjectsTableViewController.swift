@@ -35,11 +35,11 @@ class ProjectsTableViewController: UIViewController {
             fetchProjects()
         }
     }
-   
+    
     var projects = [ProjectRepresentation]()
     
     var userPath: [String] = []
-
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -56,11 +56,11 @@ class ProjectsTableViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = .systemBackground
-                
+        
         indicator.layer.position.y = view.layer.position.y
         indicator.layer.position.x = view.layer.position.x
         indicator.startAnimating()
-
+        
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
         tableView.delegate = self
@@ -79,12 +79,23 @@ class ProjectsTableViewController: UIViewController {
     private func fetchProjects() {
         guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getProjects(with: Int(id), token: token, completion: { result in
-            if let projects = try? result.get() as? [ProjectRepresentation] {
+            do {
+                if let projects = try result.get() as? [ProjectRepresentation] {
+                    DispatchQueue.main.async {
+                        self.projects = projects
+                        let incompletedProjectCount = projects.filter({!$0.completed!}).count
+                        let totalCount = projects.count
+                        self.headerView.setup(viewTypes: .projects, value: [self.client!.companyName ?? "", "Incomplete (\(incompletedProjectCount)/\(totalCount))", "Projects",])
+                        self.tableView.reloadData()
+                        self.indicator.stopAnimating()
+                    }
+                }
+            } catch {
+                print("ERROR IN CONTROLLER: ", error)
+                guard let projects = self.projectController?.loadFromPersistence(value: ProjectRepresentation.self) else { return }
                 self.projects = projects
+                print("PROJECTS:", projects)
                 DispatchQueue.main.async {
-                    let incompletedProjectCount = projects.filter({!$0.completed!}).count
-                    let totalCount = projects.count
-                    self.headerView.setup(viewTypes: .projects, value: [self.client!.companyName ?? "", "Incomplete (\(incompletedProjectCount)/\(totalCount))", "Projects",])
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()
                 }
@@ -92,7 +103,6 @@ class ProjectsTableViewController: UIViewController {
         })
     }
 }
-
 
 // MARK: - Table view data source
 
