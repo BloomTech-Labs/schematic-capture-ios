@@ -85,7 +85,6 @@ class ClientsViewController: UIViewController {
         // Get the token when the user LogIn or get it from UserDefault.
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController.getClients(token: token) { result in
-            
             do {
                 if let clients = try result.get() as? [ClientRepresentation] {
                     DispatchQueue.main.async {

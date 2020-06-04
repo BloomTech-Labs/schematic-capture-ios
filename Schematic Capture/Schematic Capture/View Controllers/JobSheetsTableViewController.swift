@@ -93,9 +93,18 @@ class JobSheetsTableViewController: UITableViewController {
         guard let id = project?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         
         projectController?.getJobSheets(with: Int(id), token: token, completion: { results in
-            if let jobSheets = try? results.get() as? [JobSheetRepresentation] {
+            do {
+                if let jobSheets = try results.get() as? [JobSheetRepresentation] {
+                    DispatchQueue.main.async {
+                        self.jobSheets = jobSheets
+                        self.tableView.reloadData()
+                        self.indicator.stopAnimating()
+                    }
+                }
+            } catch {
+                print("ERROR IN CONTROLLER: ", error)
+                guard let jobSheets = self.projectController?.loadFromPersistence(value: JobSheetRepresentation.self) else { return }
                 self.jobSheets = jobSheets
-                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()
