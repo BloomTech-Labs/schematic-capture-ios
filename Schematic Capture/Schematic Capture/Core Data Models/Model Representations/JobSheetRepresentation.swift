@@ -11,7 +11,6 @@ import Foundation
 struct JobSheetRepresentation: Codable {
     let id: Int
     var name: String
-    var components: [ComponentRepresentation]?
     var schematicData: Data?
     var schematicName: String?
     var updatedAt: String
@@ -19,17 +18,5 @@ struct JobSheetRepresentation: Codable {
     let projectId: Int
     var userEmail:String?
     var completed:Bool
-    
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case components
-        case schematicData
-        case schematicName
-        case updatedAt
-        case status
-        case projectId
-        case userEmail
-        case completed 
-    }
+    var components: [ComponentRepresentation]?
 }

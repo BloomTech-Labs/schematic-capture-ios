@@ -17,7 +17,7 @@ extension Component {
                                        componentId: componentId,
                                        rlCategory: rlCategory,
                                        rlNumber: rlNumber,
-                                       componentDescription: componentDescription,
+                                       descriptions: descriptions,
                                        manufacturer: manufacturer,
                                        partNumber: partNumber,
                                        stockCode: stockCode,
@@ -39,7 +39,7 @@ extension Component {
                                         componentId: String?,
                                         rlCategory: String?,
                                         rlNumber: String?,
-                                        componentDescription: String?,
+                                        descriptions: String?,
                                         manufacturer: String?,
                                         partNumber: String?,
                                         stockCode: String?,
@@ -61,7 +61,7 @@ extension Component {
         self.componentId = componentId
         self.rlCategory = rlCategory
         self.rlNumber = rlNumber
-        self.componentDescription = componentDescription
+        self.descriptions = descriptions
         self.manufacturer = manufacturer
         self.partNumber = partNumber
         self.stockCode = stockCode
@@ -85,7 +85,7 @@ extension Component {
                   componentId: componentRepresentation.componentId,
                   rlCategory: componentRepresentation.rlCategory,
                   rlNumber: componentRepresentation.rlNumber,
-                  componentDescription: componentRepresentation.componentDescription,
+                  descriptions: componentRepresentation.descriptions,
                   manufacturer: componentRepresentation.manufacturer,
                   partNumber: componentRepresentation.partNumber,
                   stockCode: componentRepresentation.stockCode,

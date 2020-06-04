@@ -16,15 +16,5 @@ struct ClientRepresentation: Codable {
     let city: String?
     let state: String?
     let zip: String?
-    
-    private enum CodingKeys:String, CodingKey {
-        case id
-        case companyName
-        case phone
-        case street
-        case city
-        case state
-        case zip
-    }
-    
+    var projects: [ProjectRepresentation]?
 }

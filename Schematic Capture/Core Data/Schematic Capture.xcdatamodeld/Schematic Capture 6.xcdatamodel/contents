@@ -11,10 +11,10 @@
     </entity>
     <entity name="Component" representedClassName="Component" syncable="YES" codeGenerationType="class">
         <attribute name="componentApplication" optional="YES" attributeType="String"/>
-        <attribute name="componentDescription" optional="YES" attributeType="String"/>
         <attribute name="componentId" optional="YES" attributeType="String"/>
         <attribute name="custom" optional="YES" attributeType="String"/>
         <attribute name="cutSheet" optional="YES" attributeType="String"/>
+        <attribute name="descriptions" optional="YES" attributeType="String"/>
         <attribute name="electricalAddress" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="image" optional="YES" attributeType="String"/>

@@ -13,6 +13,43 @@ class ProjectController {
     
     var bearer: Bearer?
     var user: User?
+    var token: String? {
+        didSet {
+            getClients(token: token!) { result in
+                if let clients = try? result.get() as? [ClientRepresentation] {
+                    self.clients = clients
+                }
+            }
+        }
+    }
+    
+    var clients: [ClientRepresentation]? {
+        didSet {
+            guard let token = token else { return }
+            for var client in clients! {
+                getProjects(with: client.id, token: token) { result in
+                    if let projects = try? result.get() as? [ProjectRepresentation] {
+                        client.projects = projects
+                        for var project in projects {
+                            self.getJobSheets(with: project.id, token: token) { result in
+                                if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
+                                    project.jobSheets = jobSheets
+                                    for var jobSheet in jobSheets {
+                                        self.getComponents(with: jobSheet.id, token: token) { result in
+                                            if let components = try? result.get() as? [ComponentRepresentation] {
+                                                jobSheet.components = components
+                                                print(jobSheet.components)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     

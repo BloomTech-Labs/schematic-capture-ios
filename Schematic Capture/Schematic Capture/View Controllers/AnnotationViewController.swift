@@ -10,7 +10,6 @@ import UIKit
 
 protocol ImageDoneEditingDelegate: AnyObject {
     func ImageDoneEditing(image: UIImage?)
-    
 }
 
 class AnnotationViewController: UIViewController {
@@ -18,7 +17,11 @@ class AnnotationViewController: UIViewController {
     var annotationView = AnnotationView()
     
     var component: Component?
-    
+    var image: UIImage? {
+        didSet {
+            annotationView.image = image
+        }
+    }
     var annotatedImage: UIImage?
     
     var colors = [UIColor.white, UIColor.black, UIColor.systemBlue, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemOrange, UIColor.systemRed, UIColor.systemPink, UIColor.systemPurple]
@@ -43,12 +46,6 @@ class AnnotationViewController: UIViewController {
         return CGFloat(colors.count * 30 + (colors.count + 1) * 5)
     }
     
-    var image: UIImage? {
-        didSet {
-            annotationView.image = image
-        }
-    }
-    
     weak var delegate: ImageDoneEditingDelegate?
     
     override func viewDidLoad() {
@@ -62,7 +59,6 @@ class AnnotationViewController: UIViewController {
         self.navigationController?.setToolbarHidden(false, animated: false)
         
         view.backgroundColor = .black
-        
         view.addSubview(annotationView)
         
         collectionView.dataSource = self
@@ -104,7 +100,6 @@ class AnnotationViewController: UIViewController {
         self.navigationController?.toolbar.tintColor = .white        
         
         NSLayoutConstraint.activate([
-            
             annotationView.topAnchor.constraint(equalTo: view.topAnchor),
             annotationView.widthAnchor.constraint(equalTo: view.widthAnchor),
             annotationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0.0),
@@ -154,7 +149,6 @@ class AnnotationViewController: UIViewController {
 }
 
 extension AnnotationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors.count
     }
@@ -173,6 +167,6 @@ extension AnnotationViewController: UICollectionViewDelegate, UICollectionViewDa
         collectionView.deselectItem(at: indexPath, animated: false)
         let color = colors[indexPath.row]
         annotationView.color = color
-        //        self.navigationController?.toolbar.tintColor = color
+        //self.navigationController?.toolbar.tintColor = color
     }
 }

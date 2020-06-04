@@ -13,7 +13,7 @@ struct ComponentRepresentation: Codable {
     let componentId: String?
     var rlCategory: String?
     var rlNumber: String?
-    var componentDescription: String?
+    var descriptions: String?
     var manufacturer: String?
     var partNumber: String?
     var stockCode: String?

@@ -29,7 +29,7 @@ class ComponentDetailsViewController: UIViewController {
     var component: ComponentRepresentation? {
         didSet {
             headerView.setup(viewTypes: .componentDetails, value: [
-                (component?.componentDescription ?? ""), "Details", ""
+                (component?.descriptions ?? ""), "Details", ""
             ])
             updateViews()
         }
@@ -66,7 +66,7 @@ class ComponentDetailsViewController: UIViewController {
     
     func updateViews() {
         let details: [String : String] = [
-            "Description:" : component?.componentDescription ?? "",
+            "Description:" : component?.descriptions ?? "",
             "Manufacturer:" : component?.manufacturer ?? "",
             "Part #:" : component?.partNumber ?? "",
             "RL Category:" : component?.rlCategory ?? "",
