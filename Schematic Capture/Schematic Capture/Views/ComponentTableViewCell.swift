@@ -14,9 +14,8 @@ protocol SelectedCellDelegate: NSObject {
     func selectedCell(cell: ComponentTableViewCell)
 }
 
-
 class ComponentTableViewCell: UITableViewCell {
-
+    
     var indexLabel = UILabel()
     var nameLabel = UILabel()
     var componentImageView = UIImageView()
@@ -36,12 +35,13 @@ class ComponentTableViewCell: UITableViewCell {
         indexLabel.text = "1"
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.text = "Electric motor"
+        
         componentImageView.translatesAutoresizingMaskIntoConstraints = false
         componentImageView.contentMode = .scaleAspectFill
         componentImageView.clipsToBounds = true
         componentImageView.image = UIImage(systemName: "camera")
         componentImageView.isUserInteractionEnabled = true
-                
+        
         componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewTapped)))
         
         addSubview(indexLabel)
@@ -66,11 +66,12 @@ class ComponentTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // Do we need index?
     func updateViews(component: ComponentRepresentation) {
+        print("COMPONENT:", component)
         indexLabel.text = "\(component.id)"
-        nameLabel.text = component.componentDescription
+        nameLabel.text = component.descriptions
         guard let imageData = component.imageData else { return }
         componentImageView.image = UIImage(data: imageData)
     }

@@ -51,7 +51,7 @@ class DropboxController {
         print("PATH: \(fullpath)")
         
         if let client = client {
-            client.files.deleteV2(path: "/\(path)/\(imageName).jpg").response { (result, error) in
+            client.files.deleteV2(path: "/\(fullpath)/\(imageName).jpg").response { (result, error) in
                 if let error = error {
                     print("Error with dropbox:", error)
                     self.uploadToDropbox(imageData: imageData, path: fullpath, imageName: imageName)

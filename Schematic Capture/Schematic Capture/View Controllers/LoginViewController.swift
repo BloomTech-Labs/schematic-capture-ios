@@ -122,6 +122,10 @@ class LoginViewController: UIViewController {
                     let navigationController = UINavigationController(rootViewController: clientsViewController)
                     clientsViewController.token = token
                     clientsViewController.user = user
+                    
+                    let projectController = ProjectController()
+                    projectController.token = token
+                    
                     navigationController.modalPresentationStyle = .fullScreen
                     self.present(navigationController, animated: true, completion: nil)
                 }

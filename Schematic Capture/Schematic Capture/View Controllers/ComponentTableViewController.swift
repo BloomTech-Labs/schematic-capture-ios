@@ -22,7 +22,6 @@ class ComponentsTableViewController: UITableViewController {
         return view
     }()
     
-    
     // MARK: - Propertiess
     
     var projectController: ProjectController?
@@ -57,7 +56,6 @@ class ComponentsTableViewController: UITableViewController {
         setupUI()
     }
     
-    
     func setupUI() {
         view.backgroundColor = .systemBackground
         
@@ -76,22 +74,32 @@ class ComponentsTableViewController: UITableViewController {
         headerView.searchDelegate = self
         tableView.tableHeaderView = headerView
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
+        
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
-    
     
     // MARK: - Functions
     
     private func fetchComponents() {
         guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getComponents(with: id, token: token, completion: { (results) in
-            if let components = try? results.get() as? [ComponentRepresentation] {
+            
+            do {
+                if let components = try results.get() as? [ComponentRepresentation] {
+                    self.components = components
+                    DispatchQueue.main.async {
+                        let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
+                        let totalCount = components.count
+                        guard let name = self.jobSheet?.name else { return }
+                        self.headerView.setup(viewTypes: .components, value: [name, "Incomplete (\(incompletedComponentsCount)/\(totalCount))", "Components",])
+                        self.tableView.reloadData()
+                        self.indicator.stopAnimating()
+                    }
+                }
+            } catch {
+                guard let components = self.projectController?.loadFromPersistence(value: ComponentRepresentation.self) else { return }
                 self.components = components
                 DispatchQueue.main.async {
-                    let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
-                    let totalCount = components.count
-                    guard let name = self.jobSheet?.name else { return }
-                    self.headerView.setup(viewTypes: .components, value: [name, "Incomplete (\(incompletedComponentsCount)/\(totalCount))", "Components",])
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()
                 }
@@ -179,7 +187,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         var component = self.components[componentRow]
         
         component.imageData = imageData
-    
+        
         self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: component.id, imageName: "annotated")
         self.components.remove(at: componentRow)
         self.components.insert(component, at: componentRow)

@@ -42,7 +42,6 @@ class EditCoponentDetailViewController: UIViewController {
         ])
     }
     
-
     /*
     // MARK: - Navigation
 
