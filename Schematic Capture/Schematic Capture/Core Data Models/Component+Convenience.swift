@@ -12,9 +12,8 @@ import CoreData
 extension Component {
     
     var componentRepresentation: ComponentRepresentation? {
-        
         return ComponentRepresentation(id: Int(id),
-                                       componentId: componentId,
+                                       componentId: componentId, 
                                        rlCategory: rlCategory,
                                        rlNumber: rlNumber,
                                        descriptions: descriptions,
