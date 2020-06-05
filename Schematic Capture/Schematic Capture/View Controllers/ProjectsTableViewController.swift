@@ -44,7 +44,6 @@ class ProjectsTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("PATH: ", userPath)
         setupViews()
     }
     
@@ -94,7 +93,6 @@ class ProjectsTableViewController: UIViewController {
                 print("ERROR IN CONTROLLER: ", error)
                 guard let projects = self.projectController?.loadFromPersistence(value: ProjectRepresentation.self) else { return }
                 self.projects = projects
-                print("PROJECTS:", projects)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()

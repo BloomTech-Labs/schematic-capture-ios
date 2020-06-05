@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
         let bundle = Bundle.main
         let path = bundle.path(forResource: "LoginVideo", ofType: "mp4")!
         let theURL = URL.init(fileURLWithPath: path)
-        print(theURL)
+
         player = AVPlayer(url: theURL)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspectFill

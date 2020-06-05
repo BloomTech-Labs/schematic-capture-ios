@@ -38,7 +38,6 @@ class ProjectController {
                                         self.getComponents(with: jobSheet.id, token: token) { result in
                                             if let components = try? result.get() as? [ComponentRepresentation] {
                                                 jobSheet.components = components
-                                                print(jobSheet.components)
                                             }
                                         }
                                     }
@@ -90,8 +89,6 @@ class ProjectController {
         requestUrl.appendPathComponent("\(id)")
         requestUrl.appendPathComponent("projects")
         
-        print("REQUEST URL:", requestUrl)
-        
         var request = URLRequest(url: requestUrl)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
@@ -108,18 +105,6 @@ class ProjectController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            
-            //            do {
-            //               // make sure this JSON is in the format we expect
-            //               if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            //                   // try to read out a string array
-            //                   print("JSON: \(json)")
-            //               }
-            //            } catch let error as NSError {
-            //               print("Failed to load: \(error.localizedDescription)")
-            //            }
-            //
-            
             do {
                 let projects = try decoder.decode([ProjectRepresentation].self, from: data)
                 
@@ -193,12 +178,6 @@ class ProjectController {
             decoder.dateDecodingStrategy = .iso8601
             
             do {
-                
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    // try to read out a string array
-                    print("JSON COMPONENTS: \(json)")
-                }
-                
                 let components = try decoder.decode([ComponentRepresentation].self, from: data)
                 self.saveToPersistence(value: components)
                 completion(.success(components))
@@ -226,6 +205,7 @@ class ProjectController {
             let encoder = PropertyListEncoder()
             let data = try encoder.encode(value)
             try data.write(to: url)
+            print("SAVED")
         } catch {
             print("Error encoding data: \(error)")
         }

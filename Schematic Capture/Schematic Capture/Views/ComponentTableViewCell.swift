@@ -72,8 +72,10 @@ class ComponentTableViewCell: UITableViewCell {
         print("COMPONENT:", component)
         indexLabel.text = "\(component.id)"
         nameLabel.text = component.descriptions
-        guard let imageData = component.imageData else { return }
-        componentImageView.image = UIImage(data: imageData)
+        if let imageData = component.imageData {
+            print("IMAGEDATA CELL:", imageData)
+            componentImageView.image = UIImage(data: imageData)
+        }
     }
     
     @objc func imageViewTapped(sender: UIImageView) {

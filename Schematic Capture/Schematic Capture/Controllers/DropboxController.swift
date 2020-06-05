@@ -48,7 +48,6 @@ class DropboxController {
         var pathWithId = path
         pathWithId.append("\(componentId)")
         let fullpath = pathWithId.joined(separator: "/")
-        print("PATH: \(fullpath)")
         
         if let client = client {
             client.files.deleteV2(path: "/\(fullpath)/\(imageName).jpg").response { (result, error) in
