@@ -57,8 +57,6 @@ class JobSheetsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("PATH", self.userPath)
-        
         setupUI()
     }
     

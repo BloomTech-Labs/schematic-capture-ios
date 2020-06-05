@@ -39,11 +39,7 @@ class ComponentsTableViewController: UITableViewController {
     
     var imagePicker: ImagePicker!
     
-    var userPath: [String]? {
-        didSet {
-            print(userPath)
-        }
-    }
+    var userPath: [String]?
     
     // MARK: - View Lifecycle
     
@@ -84,24 +80,31 @@ class ComponentsTableViewController: UITableViewController {
         guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
         projectController?.getComponents(with: id, token: token, completion: { results in
             do {
-                if let components = try results.get() as? [ComponentRepresentation] {
-                    DispatchQueue.main.async {
-                        self.components = components
-                        let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
-                        let totalCount = components.count
-                        guard let name = self.jobSheet?.name else { return }
-                        self.headerView.setup(viewTypes: .components, value: [name, "Incomplete (\(incompletedComponentsCount)/\(totalCount))", "Components",])
-                        self.tableView.reloadData()
-                        self.indicator.stopAnimating()
-                    }
-                }
-            } catch {
                 guard let components = self.projectController?.loadFromPersistence(value: ComponentRepresentation.self) else { return }
                 self.components = components
+                print("FETCHED COMPONENTS", components)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.indicator.stopAnimating()
                 }
+//                if let components = try results.get() as? [ComponentRepresentation] {
+//                    DispatchQueue.main.async {
+//                        self.components = components
+//                        let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
+//                        let totalCount = components.count
+//                        guard let name = self.jobSheet?.name else { return }
+//                        self.headerView.setup(viewTypes: .components, value: [name, "Incomplete (\(incompletedComponentsCount)/\(totalCount))", "Components",])
+//                        self.tableView.reloadData()
+//                        self.indicator.stopAnimating()
+//                    }
+//                }
+//            } catch {
+//                guard let components = self.projectController?.loadFromPersistence(value: ComponentRepresentation.self) else { return }
+//                self.components = components
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                    self.indicator.stopAnimating()
+//                }
             }
         })
     }
@@ -191,6 +194,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         self.components.remove(at: componentRow)
         self.components.insert(component, at: componentRow)
         self.tableView.reloadData()
+        print("Components AFTER ANN:", components)
         self.projectController?.saveToPersistence(value: self.components)
     }
 }

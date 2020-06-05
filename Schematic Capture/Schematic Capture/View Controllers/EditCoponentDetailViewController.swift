@@ -10,11 +10,7 @@ import UIKit
 
 class EditCoponentDetailViewController: UIViewController {
     
-    var value: String? {
-        didSet {
-            print(value)
-        }
-    }
+    var value: String?
     
     var textView = UITextView()
 
