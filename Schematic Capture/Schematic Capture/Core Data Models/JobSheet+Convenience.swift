@@ -78,7 +78,7 @@ extension JobSheet {
                   status: JobSheetStatus(rawValue: jobSheetRepresentation.status) ?? JobSheetStatus.incomplete,
                   projectId: jobSheetRepresentation.projectId,
                   userEmail: jobSheetRepresentation.userEmail ?? "",
-                  completed: nil,
+                  completed: 1,
                   context: context)
         
     }
