@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct ProjectRepresentation: Codable {
     let id: Int

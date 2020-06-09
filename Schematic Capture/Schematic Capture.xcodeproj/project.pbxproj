@@ -148,6 +148,8 @@
 		A6F1CA0623F5C7B200E0D583 /* JobSheetRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSheetRepresentation.swift; sourceTree = "<group>"; };
 		A6F1CA0823F5C89C00E0D583 /* ProjectRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRepresentation.swift; sourceTree = "<group>"; };
 		C9F9E1DD0A42106CD119635F /* Pods-Schematic CaptureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.debug.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E121E3BA248FE66D003914AE /* Schematic Capture 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 11.xcdatamodel"; sourceTree = "<group>"; };
+		E121E3BB248FF99D003914AE /* Schematic Capture 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 12.xcdatamodel"; sourceTree = "<group>"; };
 		E134756F246F02E300B5C791 /* UIView+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+String.swift"; sourceTree = "<group>"; };
 		E13A0BA1247D8E7F0079868E /* ClientRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientRepresentation.swift; sourceTree = "<group>"; };
 		E13A0BA3247D8F6A0079868E /* Client+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Convenience.swift"; sourceTree = "<group>"; };
@@ -1037,6 +1039,8 @@
 		A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				E121E3BB248FF99D003914AE /* Schematic Capture 12.xcdatamodel */,
+				E121E3BA248FE66D003914AE /* Schematic Capture 11.xcdatamodel */,
 				6DAF6CDD248AEEA20009846E /* Schematic Capture 10.xcdatamodel */,
 				6DAF6CDC248AED0D0009846E /* Schematic Capture 9.xcdatamodel */,
 				6DAF6CDB248AEA720009846E /* Schematic Capture 8.xcdatamodel */,
@@ -1048,7 +1052,7 @@
 				FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */,
 				A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */,
 			);
-			currentVersion = 6DAF6CDD248AEEA20009846E /* Schematic Capture 10.xcdatamodel */;
+			currentVersion = E121E3BB248FF99D003914AE /* Schematic Capture 12.xcdatamodel */;
 			path = "Schematic Capture.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

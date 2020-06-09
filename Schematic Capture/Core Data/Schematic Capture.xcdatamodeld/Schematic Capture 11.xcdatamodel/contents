@@ -43,7 +43,7 @@
         <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="String"/>
         <attribute name="userEmail" optional="YES" attributeType="String"/>
-        <relationship name="components" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Component" inverseName="jobsheet" inverseEntity="Component"/>
+        <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="jobsheet" inverseEntity="Component"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="jobsheets" inverseEntity="Project"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">

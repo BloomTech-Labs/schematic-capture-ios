@@ -109,7 +109,9 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let client = self.fetchedResultsController.object(at: indexPath)
         let projectsTableViewViewController = ProjectsTableViewController()
-//        projectsTableViewViewController.projects = client
+        if let projects = client.projects?.array as? [ProjectRepresentation] {
+            projectsTableViewViewController.projects = projects
+        }
         projectsTableViewViewController.dropboxController = dropboxController
         projectsTableViewViewController.token = token
         projectsTableViewViewController.userPath.append(client.companyName ?? "")

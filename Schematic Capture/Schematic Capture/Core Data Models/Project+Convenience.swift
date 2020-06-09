@@ -21,7 +21,9 @@ extension Project {
     }
     // Projects convenience init itself
     
-    @discardableResult convenience init(id: Int, name: String, jobSheets: [JobSheetRepresentation]?, clientId: Int,
+    @discardableResult convenience init(id: Int, name: String,
+                                        jobSheets: [JobSheetRepresentation]?,
+                                        clientId: Int,
                                         completed:Bool,
                                         context: NSManagedObjectContext) {
         self.init(context: context)

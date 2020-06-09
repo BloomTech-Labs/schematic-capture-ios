@@ -8,7 +8,7 @@
         <attribute name="state" optional="YES" attributeType="String"/>
         <attribute name="street" optional="YES" attributeType="String"/>
         <attribute name="zip" optional="YES" attributeType="String"/>
-        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="client" inverseEntity="Project"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Project" inverseName="client" inverseEntity="Project"/>
     </entity>
     <entity name="Component" representedClassName="Component" syncable="YES" codeGenerationType="class">
         <attribute name="componentApplication" optional="YES" attributeType="String"/>
@@ -43,7 +43,7 @@
         <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="String"/>
         <attribute name="userEmail" optional="YES" attributeType="String"/>
-        <relationship name="components" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Component" inverseName="jobsheet" inverseEntity="Component"/>
+        <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Component" inverseName="jobsheet" inverseEntity="Component"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="jobsheets" inverseEntity="Project"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
@@ -56,7 +56,7 @@
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="projects" inverseEntity="Client"/>
-        <relationship name="jobsheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="project" inverseEntity="JobSheet"/>
+        <relationship name="jobsheets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="JobSheet" inverseName="project" inverseEntity="JobSheet"/>
     </entity>
     <elements>
         <element name="Client" positionX="-73.51953125" positionY="219.16015625" width="128" height="163"/>
