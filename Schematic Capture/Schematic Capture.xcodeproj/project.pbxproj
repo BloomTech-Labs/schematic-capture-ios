@@ -97,6 +97,10 @@
 		6D32F6F2246F30F100F59FBB /* GeneralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTableViewCell.swift; sourceTree = "<group>"; };
 		6D443000246DD876008C8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D443008246DDC18008C8EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DAF6CDA248AE8350009846E /* Schematic Capture 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 7.xcdatamodel"; sourceTree = "<group>"; };
+		6DAF6CDB248AEA720009846E /* Schematic Capture 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 8.xcdatamodel"; sourceTree = "<group>"; };
+		6DAF6CDC248AED0D0009846E /* Schematic Capture 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 9.xcdatamodel"; sourceTree = "<group>"; };
+		6DAF6CDD248AEEA20009846E /* Schematic Capture 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 10.xcdatamodel"; sourceTree = "<group>"; };
 		6DB6500324748AEF007C10C6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6DBDA832246F777700CF5136 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		6DC036FA247D470E00BB95FF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -332,11 +336,11 @@
 		A6F1C9E723ECCD4800E0D583 /* Core Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */,
 				E13A0BA3247D8F6A0079868E /* Client+Convenience.swift */,
-				A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */,
-				A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */,
 				A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */,
+				A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */,
+				A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */,
+				A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */,
 				A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */,
 				A6F1CA0123F4C00500E0D583 /* Model Representations */,
 			);
@@ -1033,6 +1037,10 @@
 		A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6DAF6CDD248AEEA20009846E /* Schematic Capture 10.xcdatamodel */,
+				6DAF6CDC248AED0D0009846E /* Schematic Capture 9.xcdatamodel */,
+				6DAF6CDB248AEA720009846E /* Schematic Capture 8.xcdatamodel */,
+				6DAF6CDA248AE8350009846E /* Schematic Capture 7.xcdatamodel */,
 				FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */,
 				FBAD0B83243E7C4700B653BE /* Schematic Capture 5.xcdatamodel */,
 				FBAD0B82243E7A1000B653BE /* Schematic Capture 4.xcdatamodel */,
@@ -1040,7 +1048,7 @@
 				FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */,
 				A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */,
 			);
-			currentVersion = FBAD0B84243E859500B653BE /* Schematic Capture 6.xcdatamodel */;
+			currentVersion = 6DAF6CDD248AEEA20009846E /* Schematic Capture 10.xcdatamodel */;
 			path = "Schematic Capture.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

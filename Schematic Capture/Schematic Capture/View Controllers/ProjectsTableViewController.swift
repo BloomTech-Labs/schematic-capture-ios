@@ -30,11 +30,6 @@ class ProjectsTableViewController: UIViewController {
     
     var token: String?
     // The client from the previous ClientsViewController
-    var client: ClientRepresentation? {
-        didSet {
-            fetchProjects()
-        }
-    }
     
     var projects = [ProjectRepresentation]()
     
@@ -50,7 +45,6 @@ class ProjectsTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Projects", style: .plain, target: nil, action: nil)
-        fetchProjects()
     }
     
     private func setupViews() {
@@ -72,34 +66,7 @@ class ProjectsTableViewController: UIViewController {
         tableView.tableHeaderView = headerView
         view.addSubview(tableView)
     }
-    
-    // MARK: - Functions
-    
-    private func fetchProjects() {
-        guard let id = client?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        projectController?.getProjects(with: Int(id), token: token, completion: { result in
-            do {
-                if let projects = try result.get() as? [ProjectRepresentation] {
-                    DispatchQueue.main.async {
-                        self.projects = projects
-                        let incompletedProjectCount = projects.filter({!$0.completed!}).count
-                        let totalCount = projects.count
-                        self.headerView.setup(viewTypes: .projects, value: [self.client!.companyName ?? "", "Incomplete (\(incompletedProjectCount)/\(totalCount))", "Projects",])
-                        self.tableView.reloadData()
-                        self.indicator.stopAnimating()
-                    }
-                }
-            } catch {
-                print("ERROR IN CONTROLLER: ", error)
-                guard let projects = self.projectController?.loadFromPersistence(value: ProjectRepresentation.self) else { return }
-                self.projects = projects
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.indicator.stopAnimating()
-                }
-            }
-        })
-    }
+
 }
 
 // MARK: - Table view data source
@@ -134,7 +101,7 @@ extension ProjectsTableViewController: UITableViewDelegate, UITableViewDataSourc
         let jobSheetsTableViewViewController = JobSheetsTableViewController()
         jobSheetsTableViewViewController.projectController = projectController
         jobSheetsTableViewViewController.dropboxController = dropboxController
-        jobSheetsTableViewViewController.project = project
+//        jobSheetsTableViewViewController.project = project
         jobSheetsTableViewViewController.token = token
         jobSheetsTableViewViewController.userPath = self.userPath
         jobSheetsTableViewViewController.userPath?.append(project.name ?? "")

@@ -56,7 +56,7 @@
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="projects" inverseEntity="Client"/>
-        <relationship name="jobsheets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="project" inverseEntity="JobSheet"/>
+        <relationship name="jobsheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="project" inverseEntity="JobSheet"/>
     </entity>
     <elements>
         <element name="Client" positionX="-135" positionY="378" width="128" height="163"/>

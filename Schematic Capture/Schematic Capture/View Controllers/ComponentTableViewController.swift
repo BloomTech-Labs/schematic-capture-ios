@@ -195,7 +195,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         self.components.insert(component, at: componentRow)
         self.tableView.reloadData()
         print("Components AFTER ANN:", components)
-        self.projectController?.saveToPersistence(value: self.components)
+        self.projectController?.saveToPersistence()
     }
 }
 

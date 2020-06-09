@@ -17,23 +17,27 @@ class ClientsViewController: UIViewController {
     var tableView: UITableView!
     var headerView = HeaderView()
     
-    lazy var indicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        view.style = UIActivityIndicatorView.Style.medium
-        view.hidesWhenStopped = true
-        return view
-    }()
-    
     // MARK: - Properties
     
     var projectController = ProjectController()
     var dropboxController = DropboxController()
     
     var user: User?
-    
     var token: String?
     
-    var clients = [ClientRepresentation]()
+    lazy var fetchedResultsController: NSFetchedResultsController<Client> = {
+        let fetchRequest: NSFetchRequest<Client> = Client.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
+        
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            fatalError("Error performing fetch for frc: \(error)")
+        }
+        return frc
+    }()
     
     // MARK: - View Lifecycle
     
@@ -46,12 +50,12 @@ class ClientsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Clients", style: .plain, target: nil, action: nil)
-        fetchClients()
     }
     
     // MARK: - Functions
     
     private func setupViews() {
+        
         self.title = "Schematic Capture"
         view.backgroundColor = .systemBackground
         
@@ -63,46 +67,16 @@ class ClientsViewController: UIViewController {
             (user?.firstName ?? ""), "Clients"
         ])
         
-        indicator.layer.position.y = view.layer.position.y
-        indicator.layer.position.x = view.layer.position.x
-        indicator.startAnimating()
-        
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = .systemBackground
-        tableView.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView
         view.addSubview(tableView)
-    }
-    
-    
-    func fetchClients() {
-        // Get the token when the user LogIn or get it from UserDefault.
-        guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        projectController.getClients(token: token) { result in
-            do {
-                if let clients = try result.get() as? [ClientRepresentation] {
-                    DispatchQueue.main.async {
-                        self.clients = clients
-                        self.tableView.reloadData()
-                        self.indicator.stopAnimating()
-                    }
-                }
-            } catch {
-                print("ERROR IN CONTROLLER: ", error)
-                guard let clients = self.projectController.loadFromPersistence(value: ClientRepresentation.self) else { return }
-                self.clients = clients
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.indicator.stopAnimating()
-                }
-            }
-        }
     }
     
     @objc func goToSettings() {
@@ -115,16 +89,16 @@ class ClientsViewController: UIViewController {
 extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return fetchedResultsController.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clients.count
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: GeneralTableViewCell.id, for: indexPath) as? GeneralTableViewCell {
-            let client = clients[indexPath.row]
+            let client = fetchedResultsController.object(at: indexPath)
             cell.updateViews(viewTypes: .clients, value: client)
             return cell
         }
@@ -133,11 +107,10 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let client = self.clients[indexPath.row]
+        let client = self.fetchedResultsController.object(at: indexPath)
         let projectsTableViewViewController = ProjectsTableViewController()
-        projectsTableViewViewController.projectController = projectController
+//        projectsTableViewViewController.projects = client
         projectsTableViewViewController.dropboxController = dropboxController
-        projectsTableViewViewController.client = client
         projectsTableViewViewController.token = token
         projectsTableViewViewController.userPath.append(client.companyName ?? "")
         navigationController?.pushViewController(projectsTableViewViewController, animated: true)
@@ -148,7 +121,10 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - NSFetchedResultsControllerDelegate
+
 extension ClientsViewController: NSFetchedResultsControllerDelegate {
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
@@ -156,4 +132,38 @@ extension ClientsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
+    
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        let indexSet = IndexSet(integer: sectionIndex)
+        switch type {
+        case .insert:
+            tableView.insertSections(indexSet, with: .automatic)
+        case .delete:
+            tableView.deleteSections(indexSet, with: .automatic)
+        default:
+            return
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .move:
+            guard let indexPath    = indexPath,
+                let newIndexPath = newIndexPath else { return }
+            tableView.moveRow(at: indexPath, to: newIndexPath)
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
+        }
+    }
 }
+

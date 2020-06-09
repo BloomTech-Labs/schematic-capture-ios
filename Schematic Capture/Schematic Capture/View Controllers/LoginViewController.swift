@@ -34,6 +34,18 @@ class LoginViewController: UIViewController {
         setupViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        player?.play()
+        paused = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        player?.pause()
+        paused = true
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupConstraints()
@@ -42,7 +54,7 @@ class LoginViewController: UIViewController {
     // MARK: - Functions
     
     private func setupViews() {
-        //self.title = "Log In"
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         view.backgroundColor = .clear
@@ -86,7 +98,7 @@ class LoginViewController: UIViewController {
         let bundle = Bundle.main
         let path = bundle.path(forResource: "LoginVideo", ofType: "mp4")!
         let theURL = URL.init(fileURLWithPath: path)
-
+        
         player = AVPlayer(url: theURL)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspectFill
@@ -122,9 +134,6 @@ class LoginViewController: UIViewController {
                     let navigationController = UINavigationController(rootViewController: clientsViewController)
                     clientsViewController.token = token
                     clientsViewController.user = user
-                    
-                    let projectController = ProjectController()
-                    projectController.token = token
                     
                     navigationController.modalPresentationStyle = .fullScreen
                     self.present(navigationController, animated: true, completion: nil)
@@ -171,18 +180,6 @@ class LoginViewController: UIViewController {
     @objc func playerItemDidReachEnd(notification: Notification) {
         let playerItem: AVPlayerItem = notification.object as! AVPlayerItem
         playerItem.seek(to: .zero, completionHandler: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        player?.play()
-        paused = false
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        player?.pause()
-        paused = true
     }
 }
 

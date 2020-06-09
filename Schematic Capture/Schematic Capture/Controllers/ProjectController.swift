@@ -13,46 +13,14 @@ class ProjectController {
     
     var bearer: Bearer?
     var user: User?
-    var token: String? {
-        didSet {
-            getClients(token: token!) { result in
-                if let clients = try? result.get() as? [ClientRepresentation] {
-                    self.clients = clients
-                }
-            }
-        }
-    }
     
-    var clients: [ClientRepresentation]? {
-        didSet {
-            guard let token = token else { return }
-            for var client in clients! {
-                getProjects(with: client.id, token: token) { result in
-                    if let projects = try? result.get() as? [ProjectRepresentation] {
-                        client.projects = projects
-                        for var project in projects {
-                            self.getJobSheets(with: project.id, token: token) { result in
-                                if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
-                                    project.jobSheets = jobSheets
-                                    for var jobSheet in jobSheets {
-                                        self.getComponents(with: jobSheet.id, token: token) { result in
-                                            if let components = try? result.get() as? [ComponentRepresentation] {
-                                                jobSheet.components = components
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    init() {
+        getClients(token: nil)
     }
     
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     
-    func getClients(token: String?, completion: @escaping Completion) {
+    func getClients(token: String?) {
         //configure request url
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
         var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
@@ -60,23 +28,45 @@ class ProjectController {
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
         request.setValue("Bearer \(token)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
         
+        let context = CoreDataStack.shared.mainContext
+        
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
-                completion(.failure(.serverError(error)))
+               NSLog("Error with urlsession, \(error)")
             }
             guard let data = data else {
-                completion(.failure(.noData))
                 return
             }
             
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
-                self.saveToPersistence(value: clients)
-                completion(.success(clients))
+                for var client in clients {
+                    self.getProjects(with: client.id, token: token) { result in
+                        if let projects = try? result.get() as? [ProjectRepresentation] {
+                            client.projects = projects
+                            for var project in projects {
+                                Project(projectRepresentation: project, context: context)
+                                self.getJobSheets(with: project.id, token: token) { result in
+                                    if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
+                                        project.jobsheets = jobSheets
+                                        for var jobSheet in jobSheets {
+                                            self.getComponents(with: jobSheet.id, token: token) { result in
+                                                if let components = try? result.get() as? [ComponentRepresentation] {
+                                                    jobSheet.components = components
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // Save to CoreData
+                    Client(clientRepresentation: client, context: CoreDataStack.shared.mainContext)
+                }
             } catch {
                 NSLog("Error decoding a clients: \(error)")
-                completion(.failure(.badDecode))
                 return
             }
         }.resume()
@@ -108,7 +98,7 @@ class ProjectController {
             do {
                 let projects = try decoder.decode([ProjectRepresentation].self, from: data)
                 
-                self.saveToPersistence(value: projects)
+                self.saveToPersistence()
                 completion(.success(projects))
             } catch {
                 print("Error decoding a projects: \(error)")
@@ -144,7 +134,7 @@ class ProjectController {
             
             do {
                 let jobSheets = try decoder.decode([JobSheetRepresentation].self, from: data)
-                self.saveToPersistence(value: jobSheets)
+                self.saveToPersistence()
                 completion(.success(jobSheets))
             } catch {
                 print("Error decoding a job sheets: \(error)")
@@ -179,7 +169,7 @@ class ProjectController {
             
             do {
                 let components = try decoder.decode([ComponentRepresentation].self, from: data)
-                self.saveToPersistence(value: components)
+                self.saveToPersistence()
                 completion(.success(components))
             } catch {
                 print("Error decoding a components: \(error)")
@@ -198,17 +188,13 @@ class ProjectController {
     }
     
     // Save to persistence
-    func saveToPersistence<T: Codable>(value: [T]) {
-        guard let url = fileURL else {  return }
-        
-        do {
-            let encoder = PropertyListEncoder()
-            let data = try encoder.encode(value)
-            try data.write(to: url)
-            print("SAVED")
-        } catch {
-            print("Error encoding data: \(error)")
-        }
+    func saveToPersistence() {
+        CoreDataStack.shared.save()
+    }
+    
+    func delete(entrie: ComponentRepresentation) {
+//        CoreDataStack.shared.mainContext.delete(entrie)
+        saveToPersistence()
     }
     
     // Load from persistence

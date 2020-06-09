@@ -56,12 +56,12 @@
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="projects" inverseEntity="Client"/>
-        <relationship name="jobsheets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="project" inverseEntity="JobSheet"/>
+        <relationship name="jobsheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobSheet" inverseName="project" inverseEntity="JobSheet"/>
     </entity>
     <elements>
-        <element name="Client" positionX="-135" positionY="378" width="128" height="163"/>
-        <element name="Component" positionX="1.90625" positionY="223.30078125" width="128" height="358"/>
-        <element name="JobSheet" positionX="-193.85546875" positionY="447.04296875" width="128" height="208"/>
+        <element name="Client" positionX="-73.51953125" positionY="219.16015625" width="128" height="163"/>
+        <element name="Component" positionX="169.4140625" positionY="166.52734375" width="128" height="358"/>
+        <element name="JobSheet" positionX="-289.515625" positionY="505.63671875" width="128" height="208"/>
         <element name="Photo" positionX="-1.5390625" positionY="555.26953125" width="128" height="73"/>
         <element name="Project" positionX="-270.75" positionY="291.8984375" width="128" height="133"/>
     </elements>
