@@ -111,6 +111,7 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
         let projectsTableViewViewController = ProjectsTableViewController()
         if let projects = client.projects?.array as? [ProjectRepresentation] {
             projectsTableViewViewController.projects = projects
+            print("PROJECTS COUNT:", projects.count)
         }
         projectsTableViewViewController.dropboxController = dropboxController
         projectsTableViewViewController.token = token

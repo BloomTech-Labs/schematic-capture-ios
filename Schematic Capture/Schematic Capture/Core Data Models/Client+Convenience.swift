@@ -54,7 +54,7 @@ extension Client {
                   city: clientRepresentation.city,
                   state: clientRepresentation.state,
                   zip: clientRepresentation.zip,
-                  projects: NSOrderedSet(array: clientRepresentation.projects!) ,
+                  projects: NSOrderedSet(array: clientRepresentation.projects ?? [ProjectRepresentation]()),
                   context: context)
     }
 }

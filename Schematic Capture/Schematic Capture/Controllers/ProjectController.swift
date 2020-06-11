@@ -38,6 +38,8 @@ class ProjectController {
                 return
             }
             
+            print("CLIENTS:", data)
+            
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
@@ -45,6 +47,8 @@ class ProjectController {
                     self.getProjects(with: client.id, token: token) { result in
                         if let projects = try? result.get() as? [ProjectRepresentation] {
                             client.projects = projects
+                            print("PROJECTS:", client.projects)
+                            Client(clientRepresentation: client, context: CoreDataStack.shared.mainContext)
                             for var project in projects {
                                 Project(projectRepresentation: project, context: context)
                                 self.getJobSheets(with: project.id, token: token) { result in
@@ -63,7 +67,7 @@ class ProjectController {
                         }
                     }
                     // Save to CoreData
-                    Client(clientRepresentation: client, context: CoreDataStack.shared.mainContext)
+                    
                 }
             } catch {
                 NSLog("Error decoding a clients: \(error)")
