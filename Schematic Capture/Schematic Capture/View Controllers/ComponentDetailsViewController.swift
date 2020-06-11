@@ -26,7 +26,7 @@ class ComponentDetailsViewController: UIViewController {
     
     // MARK: - Properties
     
-    var component: ComponentRepresentation? {
+    var component: Component? {
         didSet {
             headerView.setup(viewTypes: .componentDetails, value: [
                 (component?.descriptions ?? ""), "Details", ""

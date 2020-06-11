@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
     
     var authController = AuthorizationController()
     var dropboxController = DropboxController()
+    var projectContoller = ProjectController()
     
     // MARK: - View Lifecycle
     
@@ -34,7 +35,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
-
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -125,13 +126,12 @@ class LoginViewController: UIViewController {
         
         
         authController.logIn(username: username, password: password, viewController: self) { result in
-            if let result = try? result.get(),
-                let token = result.first as? String,
-                let user = result.last as? User {
+            if let result = try? result.get() {
+                guard let _ = result.last as? User else { return }
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: NSNotification.Name("test"), object: self, userInfo: ["viewController": self])
+                    NotificationCenter.default.post(name: .dropboxLogin, object: self, userInfo: ["viewController": self])
                 }
             }
         }

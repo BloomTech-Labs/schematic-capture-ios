@@ -27,8 +27,15 @@ struct ComponentRepresentation: Codable {
     var maintenanceVideo: String?
     var storePartNumber: String?
     var custom: String?
-//    let jobSheetId: Int
     var photo: PhotoRepresentation?
     var imageData: Data?
     
 }
+
+
+extension ComponentRepresentation: Equatable {
+    static func == (lhs: ComponentRepresentation, rhs: ComponentRepresentation) -> Bool {
+        lhs.id != rhs.id
+    }
+}
+

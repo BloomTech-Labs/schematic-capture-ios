@@ -1,5 +1,5 @@
 //
-//  ClientsViewController.swift
+//  ClientsTableViewController.swift
 //  Schematic Capture
 //
 //  Created by Kerby Jean on 5/15/20.
@@ -10,7 +10,7 @@ import UIKit
 import SwiftyDropbox
 import CoreData
 
-class ClientsViewController: UIViewController {
+class ClientsTableViewController: UIViewController {
     
     // MARK: - UI Elements
     
@@ -19,7 +19,6 @@ class ClientsViewController: UIViewController {
     
     // MARK: - Properties
     
-    var projectController = ProjectController()
     var dropboxController: DropboxController?
     
     var user: User?
@@ -28,7 +27,6 @@ class ClientsViewController: UIViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Client> = {
         let fetchRequest: NSFetchRequest<Client> = Client.fetchRequest()
         fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
-        
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
         do {
@@ -85,7 +83,7 @@ class ClientsViewController: UIViewController {
 
 // MARK: TableView Delegate/Datasource
 
-extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
+extension ClientsTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
@@ -108,12 +106,8 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let client = self.fetchedResultsController.object(at: indexPath)
         let projectsTableViewViewController = ProjectsTableViewController()
-        if let projects = client.projects?.array as? [ProjectRepresentation] {
-            projectsTableViewViewController.projects = projects
-            print("PROJECTS COUNT:", projects.count)
-        }
+        projectsTableViewViewController.clientId = Int(client.id)
         projectsTableViewViewController.dropboxController = dropboxController
-        projectsTableViewViewController.token = token
         projectsTableViewViewController.userPath.append(client.companyName ?? "")
         navigationController?.pushViewController(projectsTableViewViewController, animated: true)
     }
@@ -125,7 +119,7 @@ extension ClientsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - NSFetchedResultsControllerDelegate
 
-extension ClientsViewController: NSFetchedResultsControllerDelegate {
+extension ClientsTableViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -134,7 +128,6 @@ extension ClientsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-    
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         let indexSet = IndexSet(integer: sectionIndex)

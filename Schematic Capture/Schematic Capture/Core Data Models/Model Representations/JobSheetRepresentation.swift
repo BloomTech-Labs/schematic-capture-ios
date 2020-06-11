@@ -20,3 +20,12 @@ struct JobSheetRepresentation: Codable {
     var completed:Bool
     var components: [ComponentRepresentation]?
 }
+
+
+
+extension JobSheetRepresentation: Equatable {
+    static func == (lhs: JobSheetRepresentation, rhs: JobSheetRepresentation) -> Bool {
+        lhs.id != rhs.id
+    }
+}
+

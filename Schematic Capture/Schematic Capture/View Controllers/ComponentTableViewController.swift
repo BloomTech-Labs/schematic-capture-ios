@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import SwiftyDropbox
 
 class ComponentsTableViewController: UITableViewController {
@@ -14,32 +15,32 @@ class ComponentsTableViewController: UITableViewController {
     // MARK: - UI Elements
     
     var headerView = HeaderView()
-    
-    lazy var indicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        view.style = UIActivityIndicatorView.Style.medium
-        view.hidesWhenStopped = true
-        return view
-    }()
-    
+
     // MARK: - Propertiess
     
-    var projectController: ProjectController?
     var dropboxController: DropboxController?
+        
+    var jobSheet: JobSheetRepresentation?
     
-    var token: String?
-    
-    var jobSheet: JobSheetRepresentation? {
-        didSet {
-            fetchComponents()
-        }
-    }
-    var components = [ComponentRepresentation]()
-    var filteredComponents: [ComponentRepresentation]?
+    var filteredComponents: [Component]?
     
     var imagePicker: ImagePicker!
     
     var userPath: [String]?
+    
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Component> = {
+        let fetchRequest: NSFetchRequest<Component> = Component.fetchRequest()
+        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            fatalError("Error performing fetch for frc: \(error)")
+        }
+        return frc
+    }()
     
     // MARK: - View Lifecycle
     
@@ -54,17 +55,12 @@ class ComponentsTableViewController: UITableViewController {
     
     func setupUI() {
         view.backgroundColor = .systemBackground
-        
-        indicator.layer.position.y = view.layer.position.y
-        indicator.layer.position.x = view.layer.position.x
-        indicator.startAnimating()
-        
+
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = .systemBackground
-        tableView.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         headerView.searchDelegate = self
@@ -74,41 +70,6 @@ class ComponentsTableViewController: UITableViewController {
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
-    // MARK: - Functions
-    
-    private func fetchComponents() {
-        guard let id = jobSheet?.id, let token = self.token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        projectController?.getComponents(with: id, token: token, completion: { results in
-            do {
-                guard let components = self.projectController?.loadFromPersistence(value: ComponentRepresentation.self) else { return }
-                self.components = components
-                print("FETCHED COMPONENTS", components)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.indicator.stopAnimating()
-                }
-//                if let components = try results.get() as? [ComponentRepresentation] {
-//                    DispatchQueue.main.async {
-//                        self.components = components
-//                        let incompletedComponentsCount = components.filter({!($0.image != nil)}).count
-//                        let totalCount = components.count
-//                        guard let name = self.jobSheet?.name else { return }
-//                        self.headerView.setup(viewTypes: .components, value: [name, "Incomplete (\(incompletedComponentsCount)/\(totalCount))", "Components",])
-//                        self.tableView.reloadData()
-//                        self.indicator.stopAnimating()
-//                    }
-//                }
-//            } catch {
-//                guard let components = self.projectController?.loadFromPersistence(value: ComponentRepresentation.self) else { return }
-//                self.components = components
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                    self.indicator.stopAnimating()
-//                }
-            }
-        })
-    }
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,14 +77,16 @@ class ComponentsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let count = fetchedResultsController.sections?[section].numberOfObjects ?? 0
+
         if headerView.searchBar.text != "" {
             return filteredComponents?.count ?? 0
-        } else if components.count == 0 {
+        } else if count == 0 {
             tableView.setEmptyView(title: "You don't have any job sheets.", message: "You'll find your assigned job sheets here.")
             return 0
         } else {
             tableView.restore()
-            return components.count
+            return count
         }
     }
     
@@ -134,7 +97,7 @@ class ComponentsTableViewController: UITableViewController {
                 cell.updateViews(component: component)
             }
         } else {
-            let component = components[indexPath.row]
+            let component = fetchedResultsController.object(at: indexPath)
             cell.updateViews(component: component)
         }
         cell.dropboxController = dropboxController
@@ -145,7 +108,7 @@ class ComponentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let component = self.components[indexPath.row]
+        let component = fetchedResultsController.object(at: indexPath)
         let componentDetailsViewController = ComponentDetailsViewController()
         componentDetailsViewController.component = component
         navigationController?.pushViewController(componentDetailsViewController, animated: true)
@@ -164,8 +127,8 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil {
             guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow, let path = self.userPath else { return }
-            let component = self.components[componentRow]
-            self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: component.id, imageName: "normal")
+            let component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 1))
+            self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: Int(component.id), imageName: "normal")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self
             let navigationController = UINavigationController(rootViewController: annotationViewController)
@@ -186,18 +149,72 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
             let componentRow = dropboxController?.selectedComponentRow,
             let path = self.userPath else { return }
         
-        var component = self.components[componentRow]
-        
+        var component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 1))
+
         component.imageData = imageData
         
-        self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: component.id, imageName: "annotated")
-        self.components.remove(at: componentRow)
-        self.components.insert(component, at: componentRow)
-        self.tableView.reloadData()
-        print("Components AFTER ANN:", components)
-        self.projectController?.saveToPersistence()
+        
+//        CoreDataStack.shared.mainContext.dele
+        
+//        self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: component.id, imageName: "annotated")
+//
+//
+//        CoreDataStack.shared.container.
+//
+//        fetchedResultsController.fetchedObjects?.remove(at: componentRow)
+
+//        self.components.insert(component, at: componentRow)
+//        self.tableView.reloadData()
+//        print("Components AFTER ANN:", components)
+        // Save to coredata
     }
 }
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension ComponentsTableViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        let indexSet = IndexSet(integer: sectionIndex)
+        switch type {
+        case .insert:
+            tableView.insertSections(indexSet, with: .automatic)
+        case .delete:
+            tableView.deleteSections(indexSet, with: .automatic)
+        default:
+            return
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .move:
+            guard let indexPath    = indexPath,
+                let newIndexPath = newIndexPath else { return }
+            tableView.moveRow(at: indexPath, to: newIndexPath)
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
+        }
+    }
+}
+
 
 extension ComponentsTableViewController: SelectedCellDelegate {
     func selectedCell(cell: ComponentTableViewCell) {
@@ -209,7 +226,7 @@ extension ComponentsTableViewController: SelectedCellDelegate {
 
 extension ComponentsTableViewController: SearchDelegate {
     func searchDidEnd(didChangeText: String) {
-        self.filteredComponents = components.filter({($0.componentApplication!.capitalized.contains(didChangeText.capitalized))})
+//        self.filteredComponents = components.filter({($0.componentApplication!.capitalized.contains(didChangeText.capitalized))})
         tableView.reloadData()
     }
 }

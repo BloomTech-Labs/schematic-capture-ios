@@ -21,7 +21,6 @@ struct ClientRepresentation: Codable {
 }
 
 extension ClientRepresentation: Equatable {
-    
     static func == (lhs: ClientRepresentation, rhs: ClientRepresentation) -> Bool {
         lhs.id != rhs.id
     }

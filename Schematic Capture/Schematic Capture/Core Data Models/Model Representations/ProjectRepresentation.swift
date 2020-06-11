@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreData
 
 struct ProjectRepresentation: Codable {
     let id: Int
@@ -24,3 +23,12 @@ struct ProjectRepresentation: Codable {
         case completed
     }
 }
+
+
+
+extension ProjectRepresentation: Equatable {
+    static func == (lhs: ProjectRepresentation, rhs: ProjectRepresentation) -> Bool {
+        lhs.id != rhs.id
+    }
+}
+

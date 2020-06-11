@@ -37,9 +37,7 @@ class ProjectController {
             guard let data = data else {
                 return
             }
-            
-            print("CLIENTS:", data)
-            
+                    
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
@@ -47,13 +45,13 @@ class ProjectController {
                     self.getProjects(with: client.id, token: token) { result in
                         if let projects = try? result.get() as? [ProjectRepresentation] {
                             client.projects = projects
-                            print("PROJECTS:", client.projects)
                             for var project in projects {
                                 Project(projectRepresentation: project, context: context)
                                 self.getJobSheets(with: project.id, token: token) { result in
                                     if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
                                         project.jobsheets = jobSheets
                                         for var jobSheet in jobSheets {
+                                            JobSheet(jobSheetRepresentation: jobSheet, context: context)
                                             self.getComponents(with: jobSheet.id, token: token) { result in
                                                 if let components = try? result.get() as? [ComponentRepresentation] {
                                                     jobSheet.components = components
