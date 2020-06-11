@@ -30,6 +30,8 @@ class DropboxController {
     func authorizeClient(viewController: UIViewController) {
         DropboxClientsManager.authorizeFromController(
             UIApplication.shared, controller: viewController, openURL: { (url: URL) -> Void in
+                
+            print("DROP BOX DONE")
         })
     }
     

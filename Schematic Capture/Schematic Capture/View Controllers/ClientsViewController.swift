@@ -20,7 +20,7 @@ class ClientsViewController: UIViewController {
     // MARK: - Properties
     
     var projectController = ProjectController()
-    var dropboxController = DropboxController()
+    var dropboxController: DropboxController?
     
     var user: User?
     var token: String?
@@ -43,7 +43,6 @@ class ClientsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dropboxController.authorizeClient(viewController: self)
         setupViews()
     }
     

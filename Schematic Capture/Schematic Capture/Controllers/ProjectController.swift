@@ -48,7 +48,6 @@ class ProjectController {
                         if let projects = try? result.get() as? [ProjectRepresentation] {
                             client.projects = projects
                             print("PROJECTS:", client.projects)
-                            Client(clientRepresentation: client, context: CoreDataStack.shared.mainContext)
                             for var project in projects {
                                 Project(projectRepresentation: project, context: context)
                                 self.getJobSheets(with: project.id, token: token) { result in
@@ -67,6 +66,7 @@ class ProjectController {
                         }
                     }
                     // Save to CoreData
+                    Client(clientRepresentation: client, context: CoreDataStack.shared.mainContext)
                     
                 }
             } catch {

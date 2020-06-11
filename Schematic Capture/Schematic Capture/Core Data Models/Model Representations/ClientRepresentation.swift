@@ -9,6 +9,7 @@
 import Foundation
 
 struct ClientRepresentation: Codable {
+    
     let id: Int
     let companyName: String?
     let phone: String?
@@ -17,4 +18,11 @@ struct ClientRepresentation: Codable {
     let state: String?
     let zip: String?
     var projects: [ProjectRepresentation]?
+}
+
+extension ClientRepresentation: Equatable {
+    
+    static func == (lhs: ClientRepresentation, rhs: ClientRepresentation) -> Bool {
+        lhs.id != rhs.id
+    }
 }

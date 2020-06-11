@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     
     var authController = AuthorizationController()
+    var dropboxController = DropboxController()
     
     // MARK: - View Lifecycle
     
@@ -33,6 +34,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
     }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -129,14 +131,7 @@ class LoginViewController: UIViewController {
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
-                    
-                    let clientsViewController = ClientsViewController()
-                    let navigationController = UINavigationController(rootViewController: clientsViewController)
-                    clientsViewController.token = token
-                    clientsViewController.user = user
-                    
-                    navigationController.modalPresentationStyle = .fullScreen
-                    self.present(navigationController, animated: true, completion: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("test"), object: self, userInfo: ["viewController": self])
                 }
             }
         }

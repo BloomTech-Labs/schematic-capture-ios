@@ -12,26 +12,38 @@ import SwiftyDropbox
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
+    var dropboxController = DropboxController()
+
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         setupRootViewController()
+        NotificationCenter.default.addObserver(self, selector: #selector(dropboxAuthorization(notification:)), name: Notification.Name("test"), object: nil)
         guard let _ = (scene as? UIWindowScene) else { return }
     }
     
-    func setupRootViewController() {
-        if let _ = UserDefaults.standard.string(forKey: .token) {
-            let navigationController = UINavigationController(rootViewController: ClientsViewController())
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
-        } else {
-            let navigationController = UINavigationController(rootViewController: LoginViewController())
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
+    @objc func dropboxAuthorization(notification: Notification) {
+        if let info = notification.userInfo {
+            if let viewController = info["viewController"] as? UIViewController {
+                self.dropboxController.authorizeClient(viewController: viewController)
+            }
         }
+    }
+    
+    func setupRootViewController() {
+        let navigationController = UINavigationController(rootViewController: LoginViewController())
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    func setupClientsViewController() {
+        let clientsTableViewController = ClientsViewController()
+        clientsTableViewController.dropboxController = dropboxController
+        let navigationController = UINavigationController(rootViewController: clientsTableViewController)
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -41,6 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 switch authResult {
                 case .success:
                     print("Success! User is logged into Dropbox.")
+                    setupClientsViewController()
                 case .cancel:
                     print("Authorization flow was manually canceled by user!")
                 case .error(_, let description):
