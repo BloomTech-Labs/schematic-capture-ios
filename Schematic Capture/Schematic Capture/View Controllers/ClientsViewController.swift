@@ -20,6 +20,7 @@ class ClientsTableViewController: UIViewController {
     // MARK: - Properties
     
     var dropboxController: DropboxController?
+    var projectController = ProjectController()
     
     var user: User?
     var token: String?
@@ -90,6 +91,7 @@ extension ClientsTableViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(fetchedResultsController.sections?[section].numberOfObjects ?? 0)
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     

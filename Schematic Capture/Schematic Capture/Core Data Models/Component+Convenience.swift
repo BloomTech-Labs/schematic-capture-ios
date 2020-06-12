@@ -25,14 +25,14 @@ extension Component {
                                        componentApplication: componentApplication,
                                        referenceTag: referenceTag,
                                        settings: settings,
-                                       image: image,
                                        resources: resources,
                                        cutSheet: cutSheet,
                                        maintenanceVideo: maintenanceVideo,
                                        storePartNumber: storePartNumber,
-                                       custom: custom
-//                                       jobSheetId: Int(jobSheetId)
-                                       /*photo: photo?.photoRepresentation*/)
+                                       custom: custom,
+                                       imageData: imageData,
+                                       image: image,
+                                       jobSheetId: Int(jobSheetId))
     }
     
     @discardableResult convenience init(id: Int,
@@ -47,14 +47,14 @@ extension Component {
                                         componentApplication: String?,
                                         referenceTag: String?,
                                         settings: String?,
-                                        image: String?,
                                         resources: String?,
                                         cutSheet: String?,
                                         maintenanceVideo: String?,
                                         storePartNumber: String?,
                                         custom: String?,
-//                                        jobSheetId: Int,
-                                        //photo: Photo?,
+                                        imageData: Data?,
+                                        image: String?,
+                                        jobSheetId: Int,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
@@ -69,14 +69,14 @@ extension Component {
         self.componentApplication = componentApplication
         self.referenceTag = referenceTag
         self.settings = settings
-        self.image = image
         self.resources = resources
         self.cutSheet = cutSheet
         self.maintenanceVideo = maintenanceVideo
         self.storePartNumber = storePartNumber
         self.custom = custom
-        //self.photo = photo
-//        self.jobSheetId = Int32(jobSheetId)
+        self.imageData = imageData
+        self.image = image
+        self.jobSheetId = Int32(jobSheetId)
     }
     
     @discardableResult convenience init(componentRepresentation: ComponentRepresentation, context: NSManagedObjectContext) {
@@ -93,14 +93,14 @@ extension Component {
                   componentApplication: componentRepresentation.componentApplication,
                   referenceTag: componentRepresentation.referenceTag,
                   settings: componentRepresentation.settings,
-                  image: componentRepresentation.image,
                   resources: componentRepresentation.resources,
                   cutSheet: componentRepresentation.cutSheet,
                   maintenanceVideo: componentRepresentation.maintenanceVideo,
                   storePartNumber: componentRepresentation.storePartNumber,
                   custom: componentRepresentation.custom,
-//                  jobSheetId: componentRepresentation.jobSheetId,
-                  //photo: componentRepresentation.photo != nil ? Photo(photoRepresentation: componentRepresentation.photo!, context: context) : nil,
+                  imageData: componentRepresentation.imageData,
+                  image: componentRepresentation.image,
+                  jobSheetId: componentRepresentation.jobSheetId ?? 0,
                   context: context)
     }
 }

@@ -113,7 +113,8 @@ class JobSheetsTableViewController: UITableViewController {
         let jobSheet = fetchedResultsController.object(at: indexPath)
         let componentsTableViewViewController = ComponentsTableViewController()
         componentsTableViewViewController.dropboxController = dropboxController
-//        componentsTableViewViewController.userPath = self.userPath
+        componentsTableViewViewController.jobSheet = jobSheet
+        componentsTableViewViewController.userPath = self.userPath
         componentsTableViewViewController.userPath?.append(jobSheet.name ?? "")
         navigationController?.pushViewController(componentsTableViewViewController, animated: true)
     }

@@ -20,7 +20,7 @@ class ComponentsTableViewController: UITableViewController {
     
     var dropboxController: DropboxController?
         
-    var jobSheet: JobSheetRepresentation?
+    var jobSheet: JobSheet?
     
     var filteredComponents: [Component]?
     
@@ -28,9 +28,9 @@ class ComponentsTableViewController: UITableViewController {
     
     var userPath: [String]?
     
-    
     lazy var fetchedResultsController: NSFetchedResultsController<Component> = {
         let fetchRequest: NSFetchRequest<Component> = Component.fetchRequest()
+        //fetchRequest.predicate = NSPredicate(format: "jobSheetId = %@", "\(self.jobSheet!.id)")
         fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
@@ -73,7 +73,7 @@ class ComponentsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,7 +82,7 @@ class ComponentsTableViewController: UITableViewController {
         if headerView.searchBar.text != "" {
             return filteredComponents?.count ?? 0
         } else if count == 0 {
-            tableView.setEmptyView(title: "You don't have any job sheets.", message: "You'll find your assigned job sheets here.")
+            tableView.setEmptyView(title: "You don't have any components.", message: "You'll find the components here.")
             return 0
         } else {
             tableView.restore()
@@ -127,7 +127,8 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil {
             guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow, let path = self.userPath else { return }
-            let component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 1))
+            print(componentRow)
+            let component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 0))
             self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: Int(component.id), imageName: "normal")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self
@@ -149,24 +150,10 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
             let componentRow = dropboxController?.selectedComponentRow,
             let path = self.userPath else { return }
         
-        var component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 1))
+        var component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 0))
 
         component.imageData = imageData
-        
-        
-//        CoreDataStack.shared.mainContext.dele
-        
-//        self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: component.id, imageName: "annotated")
-//
-//
-//        CoreDataStack.shared.container.
-//
-//        fetchedResultsController.fetchedObjects?.remove(at: componentRow)
-
-//        self.components.insert(component, at: componentRow)
-//        self.tableView.reloadData()
-//        print("Components AFTER ANN:", components)
-        // Save to coredata
+        CoreDataStack.shared.save()
     }
 }
 
@@ -215,7 +202,6 @@ extension ComponentsTableViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
-
 extension ComponentsTableViewController: SelectedCellDelegate {
     func selectedCell(cell: ComponentTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
@@ -226,7 +212,7 @@ extension ComponentsTableViewController: SelectedCellDelegate {
 
 extension ComponentsTableViewController: SearchDelegate {
     func searchDidEnd(didChangeText: String) {
-//        self.filteredComponents = components.filter({($0.componentApplication!.capitalized.contains(didChangeText.capitalized))})
+        //self.filteredComponents = components.filter({($0.componentApplication!.capitalized.contains(didChangeText.capitalized))})
         tableView.reloadData()
     }
 }

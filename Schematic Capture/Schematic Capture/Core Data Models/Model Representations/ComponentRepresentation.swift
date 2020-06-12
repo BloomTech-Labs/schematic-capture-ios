@@ -21,15 +21,14 @@ struct ComponentRepresentation: Codable {
     var componentApplication: String?
     var referenceTag: String?
     var settings: String?
-    var image: String?
     var resources: String?
     var cutSheet: String?
     var maintenanceVideo: String?
     var storePartNumber: String?
     var custom: String?
-    var photo: PhotoRepresentation?
     var imageData: Data?
-    
+    var image: String?
+    var jobSheetId: Int?
 }
 
 

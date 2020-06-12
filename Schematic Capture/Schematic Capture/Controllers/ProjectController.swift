@@ -39,25 +39,39 @@ class ProjectController {
             guard let data = data else {
                 return
             }
+            
+            print("CLIENTS DATA:", data)
                     
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
                 for var client in clients {
+                    if self.checkIfItemExist(id: client.id, entityName: .client) == false {
+                        Client(clientRepresentation: client, context: context)
+                    }
                     self.getProjects(with: client.id, token: token) { result in
                         if let projects = try? result.get() as? [ProjectRepresentation] {
                             client.projects = projects
                             for var project in projects {
-                                Project(projectRepresentation: project, context: context)
+                                if self.checkIfItemExist(id: project.id, entityName: .project) == false {
+                                    Project(projectRepresentation: project, context: context)
+                                }
                                 self.getJobSheets(with: project.id, token: token) { result in
                                     if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
                                         project.jobsheets = jobSheets
                                         print("JOBSHEETS: \(jobSheets.first)")
                                         for var jobSheet in jobSheets {
-                                            JobSheet(jobSheetRepresentation: jobSheet, context: context)
+                                            if self.checkIfItemExist(id: jobSheet.id, entityName: .jobSheet) == false {
+                                                JobSheet(jobSheetRepresentation: jobSheet, context: context)
+                                            }
                                             self.getComponents(with: jobSheet.id, token: token) { result in
                                                 if let components = try? result.get() as? [ComponentRepresentation] {
                                                     jobSheet.components = components
+                                                    for component in components {
+                                                        if self.checkIfItemExist(id: component.id, entityName: .component) == false {
+                                                            Component(componentRepresentation: component, context: context)
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -66,8 +80,6 @@ class ProjectController {
                             }
                         }
                     }
-                    // Save to CoreData
-                    Client(clientRepresentation: client, context: CoreDataStack.shared.mainContext)
                 }
             } catch {
                 NSLog("Error decoding a clients: \(error)")
@@ -212,6 +224,25 @@ class ProjectController {
         } catch {
             print("Error decoding data: \(error)")
             return nil
+        }
+    }
+    
+    func checkIfItemExist(id: Int, entityName: EntityNames) -> Bool {
+        let managedContext = CoreDataStack.shared.mainContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName.rawValue)
+        fetchRequest.fetchLimit =  1
+        fetchRequest.predicate = NSPredicate(format: "id == %d" ,id)
+        
+        do {
+            let count = try managedContext.count(for: fetchRequest)
+            if count > 0 {
+                return true
+            }else {
+                return false
+            }
+        }catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return false
         }
     }
 }
