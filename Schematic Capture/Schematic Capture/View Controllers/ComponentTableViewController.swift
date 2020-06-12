@@ -30,7 +30,7 @@ class ComponentsTableViewController: UITableViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController<Component> = {
         let fetchRequest: NSFetchRequest<Component> = Component.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "jobSheetId = %@", "\(self.jobSheet!.id)")
+        //fetchRequest.predicate = NSPredicate(format: "jobSheetId = %@", "\(self.jobSheet!.id)")
         fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
@@ -127,7 +127,8 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil {
             guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow, let path = self.userPath else { return }
-            let component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 1))
+            print(componentRow)
+            let component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 0))
             self.dropboxController?.updateDropbox(imageData: imageData, path: path, componentId: Int(component.id), imageName: "normal")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self
@@ -149,7 +150,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
             let componentRow = dropboxController?.selectedComponentRow,
             let path = self.userPath else { return }
         
-        var component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 1))
+        var component = fetchedResultsController.object(at: IndexPath(row: componentRow, section: 0))
 
         component.imageData = imageData
         CoreDataStack.shared.save()

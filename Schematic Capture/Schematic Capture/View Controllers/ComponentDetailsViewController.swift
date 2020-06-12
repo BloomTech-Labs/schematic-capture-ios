@@ -35,7 +35,6 @@ class ComponentDetailsViewController: UIViewController {
         }
     }
     
-    
     var details = [String : String]()
     
     // MARK: View Lifecycle
