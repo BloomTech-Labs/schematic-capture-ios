@@ -37,6 +37,8 @@ class ProjectController {
             guard let data = data else {
                 return
             }
+            
+            print("CLIENTS DATA:", data)
                     
             let decoder = JSONDecoder()
             do {
@@ -55,6 +57,10 @@ class ProjectController {
                                             self.getComponents(with: jobSheet.id, token: token) { result in
                                                 if let components = try? result.get() as? [ComponentRepresentation] {
                                                     jobSheet.components = components
+                                                    print(components)
+                                                    for component in components {
+                                                        Component(componentRepresentation: component, context: context)
+                                                    }
                                                 }
                                             }
                                         }

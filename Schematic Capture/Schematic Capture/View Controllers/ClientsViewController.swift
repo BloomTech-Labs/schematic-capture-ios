@@ -90,6 +90,7 @@ extension ClientsTableViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(fetchedResultsController.sections?[section].numberOfObjects ?? 0)
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
