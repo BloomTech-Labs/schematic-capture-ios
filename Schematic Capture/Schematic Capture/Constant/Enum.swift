@@ -34,3 +34,10 @@ enum Shapes: String {
     case arrow = "arrow.left"
     case square = "square"
 }
+
+enum EntityNames: String {
+    case client = "Client"
+    case project = "Project"
+    case jobSheet = "JobSheet"
+    case component = "Component"
+}

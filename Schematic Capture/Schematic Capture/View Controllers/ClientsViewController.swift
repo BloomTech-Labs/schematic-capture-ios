@@ -20,6 +20,7 @@ class ClientsTableViewController: UIViewController {
     // MARK: - Properties
     
     var dropboxController: DropboxController?
+    var projectController = ProjectController()
     
     var user: User?
     var token: String?
