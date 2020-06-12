@@ -175,6 +175,7 @@ class LoginViewController: UIViewController {
     @objc func playerItemDidReachEnd(notification: Notification) {
         let playerItem: AVPlayerItem = notification.object as! AVPlayerItem
         playerItem.seek(to: .zero, completionHandler: nil)
-    }
+    }   
 }
+
 
