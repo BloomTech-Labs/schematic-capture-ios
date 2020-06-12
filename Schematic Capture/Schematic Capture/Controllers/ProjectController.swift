@@ -228,7 +228,7 @@ class ProjectController {
     
     func checkIfItemExist(id: Int, entityName: EntityNames) -> Bool {
         let managedContext = CoreDataStack.shared.mainContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName.rawValue)
         fetchRequest.fetchLimit =  1
         fetchRequest.predicate = NSPredicate(format: "id == %d" ,id)
         
