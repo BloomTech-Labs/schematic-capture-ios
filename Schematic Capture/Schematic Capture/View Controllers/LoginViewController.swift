@@ -115,10 +115,7 @@ class LoginViewController: UIViewController {
         shadowView.alpha = 0.95
         view.insertSubview(shadowView, at: 0)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(playerItemDidReachEnd(notification:)),
-                                               name: .AVPlayerItemDidPlayToEndTime,
-                                               object: player.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(notification:)), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
     }
     
     @objc private func login(_ sender: UIButton) {

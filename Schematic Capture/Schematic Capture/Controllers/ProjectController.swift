@@ -13,7 +13,7 @@ class ProjectController {
     
     var bearer: Bearer?
     var user: User?
-    
+
     init() {
         getClients(token: nil)
     }
@@ -29,6 +29,8 @@ class ProjectController {
         request.setValue("Bearer \(token)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
         
         let context = CoreDataStack.shared.mainContext
+        context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
+
         
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
@@ -50,6 +52,7 @@ class ProjectController {
                                 self.getJobSheets(with: project.id, token: token) { result in
                                     if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
                                         project.jobsheets = jobSheets
+                                        print("JOBSHEETS: \(jobSheets.first)")
                                         for var jobSheet in jobSheets {
                                             JobSheet(jobSheetRepresentation: jobSheet, context: context)
                                             self.getComponents(with: jobSheet.id, token: token) { result in
@@ -65,7 +68,6 @@ class ProjectController {
                     }
                     // Save to CoreData
                     Client(clientRepresentation: client, context: CoreDataStack.shared.mainContext)
-                    
                 }
             } catch {
                 NSLog("Error decoding a clients: \(error)")

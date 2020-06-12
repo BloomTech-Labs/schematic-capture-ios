@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import SwiftyDropbox
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -27,7 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @objc func dropboxAuthorization(notification: Notification) {
         if let info = notification.userInfo {
             if let viewController = info["viewController"] as? UIViewController {
-                self.dropboxController.authorizeClient(viewController: viewController)
+                setupClientsViewController()
+//                self.dropboxController.authorizeClient(viewController: viewController)
             }
         }
     }
@@ -39,12 +41,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func setupClientsViewController() {
-        let clientsTableViewController = ClientsTableViewController()
-        clientsTableViewController.dropboxController = dropboxController
+        let navigationController = UINavigationController()
+
+        let model = Model<Client>()
+        let clientsTableViewController = GenericTableViewController(model: model, parentId: nil, title: "Clients", configure: { (cell, client) in
+            cell.textLabel?.text = client.companyName
+        }) { (client) in
+//            navigationController.push
+        }
+        clientsTableViewController.title = "Client"
+        navigationController.viewControllers = [clientsTableViewController]
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    func setupProjectsViewController() {
+        let model = Model<Project>()
+        let clientsTableViewController = GenericTableViewController(model: model, parentId: nil, title: "Projects", configure: { (cell, client) in
+            cell.textLabel?.text = client.name
+        }) { (project) in
+            print("Client name: \(project.name)")
+        }
+        clientsTableViewController.title = "Client"
         let navigationController = UINavigationController(rootViewController: clientsTableViewController)
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
+    
+    
+    
+    
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
