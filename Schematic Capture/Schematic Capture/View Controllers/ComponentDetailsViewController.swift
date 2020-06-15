@@ -28,9 +28,6 @@ class ComponentDetailsViewController: UIViewController {
     
     var component: Component? {
         didSet {
-            headerView.setup(viewTypes: .componentDetails, value: [
-                (component?.descriptions ?? ""), "Details", ""
-            ])
             updateViews()
         }
     }

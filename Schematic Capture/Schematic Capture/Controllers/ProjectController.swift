@@ -59,7 +59,6 @@ class ProjectController {
                                 self.getJobSheets(with: project.id, token: token) { result in
                                     if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
                                         project.jobsheets = jobSheets
-                                        print("JOBSHEETS: \(jobSheets.first)")
                                         for var jobSheet in jobSheets {
                                             if self.checkIfItemExist(id: jobSheet.id, entityName: .jobSheet) == false {
                                                 JobSheet(jobSheetRepresentation: jobSheet, context: context)

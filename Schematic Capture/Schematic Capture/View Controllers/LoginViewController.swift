@@ -121,7 +121,6 @@ class LoginViewController: UIViewController {
     @objc private func login(_ sender: UIButton) {
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
         
-        
         authController.logIn(username: username, password: password, viewController: self) { result in
             if let result = try? result.get() {
                 guard let _ = result.last as? User else { return }

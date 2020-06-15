@@ -30,8 +30,6 @@ class AnnotationViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let width: CGFloat = 30
         layout.itemSize = CGSize(width: width, height: width)
-        //layout.sectionInset = UIEdgeInsets(top: 0, left: width, bottom: 0, right: 0)
-        //layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 5
         layout.scrollDirection = .horizontal
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -63,7 +61,7 @@ class AnnotationViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ColorCell")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.id)
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
         
@@ -148,13 +146,16 @@ class AnnotationViewController: UIViewController {
     }
 }
 
+
+// MARK: - UICollectionViewDelegate
+
 extension AnnotationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.id, for: indexPath)
         let color = colors[indexPath.row]
         cell.backgroundColor = color
         cell.layer.cornerRadius = cell.frame.size.width/2
@@ -167,6 +168,5 @@ extension AnnotationViewController: UICollectionViewDelegate, UICollectionViewDa
         collectionView.deselectItem(at: indexPath, animated: false)
         let color = colors[indexPath.row]
         annotationView.color = color
-        //self.navigationController?.toolbar.tintColor = color
     }
 }

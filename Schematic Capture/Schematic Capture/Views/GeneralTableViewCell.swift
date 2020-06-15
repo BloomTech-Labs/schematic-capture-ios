@@ -1,8 +1,8 @@
 //
-//  ClientTableViewCell.swift
+//  GeneralTableViewCell.swift
 //  Schematic Capture
 //
-//  Created by Kerby Jean on 5/15/20.
+//  Created by Kerby Jean on 6/12/20.
 //  Copyright © 2020 GIPGIP Studio. All rights reserved.
 //
 
@@ -10,83 +10,98 @@ import UIKit
 
 class GeneralTableViewCell: UITableViewCell {
     
-    let nameLabel = UILabel()
-    var numberOfJobSheetLabel = UILabel()
-    var statusLabel = UILabel()
+    
+    var stackView = UIStackView()
+    var firstLabel = UILabel()
+    var secondLabel = UILabel()
+    var thirdLabel = UILabel()
+    var fourthLabel = UILabel()
+    var regularImageView = UIImageView()
+    
+    var views = [UIView]()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
-        addContraints()
+        
+        firstLabel.textColor = .label
+        firstLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        
+        let regularFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+        secondLabel.textColor = .label
+        secondLabel.font = regularFont
+        
+        thirdLabel.textColor = .label
+        thirdLabel.font = regularFont
+        
+        fourthLabel.textColor = .label
+        fourthLabel.font = regularFont
+        
+        regularImageView.contentMode = .scaleAspectFit
+        regularImageView.backgroundColor = .red
+        
+        
+        views = [firstLabel, secondLabel, thirdLabel, fourthLabel, regularImageView]
+        
+        stackView = UIStackView(arrangedSubviews: views)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
+            stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -40.0),
+            stackView.heightAnchor.constraint(equalTo: heightAnchor),
+            
+            
+        ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
-        nameLabel.textColor = .label
-        nameLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.adjustsFontSizeToFitWidth = true
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        statusLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        statusLabel.textAlignment = .center
-        statusLabel.clipsToBounds = true
-        
-        addSubview(nameLabel)
-        addSubview(numberOfJobSheetLabel)
-        addSubview(statusLabel)
-    }
-    
-    private func addContraints() {
-        NSLayoutConstraint.activate([
-            nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
-            nameLabel.heightAnchor.constraint(equalTo: heightAnchor),
-            
-            statusLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16.0),
-            statusLabel.heightAnchor.constraint(equalTo: heightAnchor, constant: -24.0),
-            statusLabel.widthAnchor.constraint(equalToConstant: 100),
-            statusLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
-            nameLabel.rightAnchor.constraint(equalTo: statusLabel.leftAnchor, constant: -16.0)
-        ])
-        statusLabel.layer.cornerRadius = 18.0
-    }
-    
-    func updateViews(viewTypes: ViewTypes, value: Any) {
-        switch viewTypes {
-            case .clients:
-                guard let client = value as? Client else { return }
-                nameLabel.text = client.companyName
-            case .projects:
-                guard let project = value as? Project else { return }
-                nameLabel.text = project.name
-                
-                if !project.completed {
-                    statusLabel.backgroundColor = UIColor(red: 250.0/255.0, green: 86.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-                    statusLabel.textColor = .white
-                    statusLabel.text = "Incomplete"
-                } else {
-                    statusLabel.textColor = .systemGray
+    func configure(entityName: EntityNames, value: Any) {
+        switch entityName {
+        case .client:
+            guard let client = value as? Client else { return }
+            firstLabel.text = client.companyName
+            secondLabel.text = "\(client.projects!.count) projects"
+            regularImageView.image = UIImage(systemName: "envelope")
+            self.stackView.removeArrangedSubview(thirdLabel)
+            self.stackView.removeArrangedSubview(fourthLabel)
+        case .project:
+            guard let project = value as? Project else { return }
+            firstLabel.textColor = .systemBlue
+            firstLabel.text = project.name
+            if project.completed == true {
+                secondLabel.text = "Completed"
+            } else {
+                secondLabel.text = "Incompleted"
             }
-            case .jobsheets:
-                guard let jobsheet = value as? JobSheet else { return }
-                nameLabel.text = jobsheet.name
-//                if !jobsheet.completed {
-//                    statusLabel.backgroundColor = UIColor(red: 250.0/255.0, green: 86.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-//                    statusLabel.textColor = .white
-//                    statusLabel.text = "Incomplete"
-//                } else {
-//                    statusLabel.textColor = .systemGray
-//            }
-            case .components:
-                guard let component = value as? Component else { return }
-                nameLabel.text = component.componentApplication
-            case .componentDetails:
-                break
+            thirdLabel.text = "Kerby Jean"
+            fourthLabel.text = "6/3/2020"
+            
+            self.stackView.removeArrangedSubview(regularImageView)
+        case .jobSheet:
+            guard let jobsheet = value as? JobSheet else { return }
+            firstLabel.textColor = .systemBlue
+            firstLabel.text = jobsheet.name
+            secondLabel.text = "Kerby"
+            thirdLabel.text = "Speed control"
+            fourthLabel.text = "15 Parts"
+            self.stackView.removeArrangedSubview(regularImageView)
+
+        case .component:
+            guard let component = value as? Component else { return }
+            firstLabel.textColor = .systemBlue
+            firstLabel.text = component.componentApplication
+            secondLabel.text = "Kerby"
+            thirdLabel.text = "Speed control"
+            fourthLabel.text = "15 Parts"
+            self.stackView.removeArrangedSubview(regularImageView)
         }
     }
-    
 }

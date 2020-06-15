@@ -21,14 +21,6 @@ enum Keys: String {
     case dropbox = "t5i27y2t3fzkiqj"
 }
 
-enum ViewTypes: String {
-    case clients
-    case projects
-    case jobsheets
-    case components
-    case componentDetails
-}
-
 enum Shapes: String {
     case circle = "circle"
     case arrow = "arrow.left"

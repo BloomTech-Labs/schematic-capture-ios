@@ -15,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var dropboxController = DropboxController()
     
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -26,9 +27,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     @objc func dropboxAuthorization(notification: Notification) {
         if let info = notification.userInfo {
-            if let viewController = info["viewController"] as? UIViewController {
-                setupClientsViewController()
-//                self.dropboxController.authorizeClient(viewController: viewController)
+            if let _ = info["viewController"] as? UIViewController {
+                setupViewControllers()
+                // self.dropboxController.authorizeClient(viewController: viewController)
             }
         }
     }
@@ -39,55 +40,62 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
     }
     
-    func setupClientsViewController() {
+    func setupViewControllers() {
+        
         let navigationController = UINavigationController()
+        navigationController.navigationBar.tintColor = .label
+        
+        // Setup ClientsTableViewController
+        let clientsTableViewController = GenericTableViewController(model: Model<Client>(), title: "Clients", configure: {
+            (clientCell, client) in
+            clientCell.configure(entityName: .client, value: client)
+        }) { _ in
+            // Setup ProjectsTableViewController
+            let projectsTableViewController = GenericTableViewController(model: Model<Project>(), title: "Projects", configure: { (projectCell, project) in
+                projectCell.configure(entityName: .project, value: project)
+            }) { project in
+                // Setup JobsheetsTableViewController
+                let jobsheetsTableViewController = GenericTableViewController(model: Model<JobSheet>(), title: project.name ?? "Jobsheet", configure: { (jobsheetCell, jobsheet) in
+                    
+                    jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
+                    }) { _ in
+                     // Setup ComponentsTableViewController
+                        let componentsTableViewController = GenericTableViewController(model:  Model<JobSheet>(), title: "", configure: { (cell, components) in
+                            
+                        }) { (component) in
+                            // Setup DetailstableViewController
+                        }
+                        
+                    navigationController.pushViewController(componentsTableViewController, animated: true)
 
-        let model = Model<Client>()
-        let clientsTableViewController = GenericTableViewController(model: model, parentId: nil, title: "Clients", configure: { (cell, client) in
-            cell.textLabel?.text = client.companyName
-        }) { (client) in
-//            navigationController.push
+                }
+                navigationController.pushViewController(jobsheetsTableViewController, animated: true)
+            }
+            navigationController.pushViewController(projectsTableViewController, animated: true)
         }
-        clientsTableViewController.title = "Client"
+        
         navigationController.viewControllers = [clientsTableViewController]
+        clientsTableViewController.title = "Schematic Capture"
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
-    
-    func setupProjectsViewController() {
-        let model = Model<Project>()
-        let clientsTableViewController = GenericTableViewController(model: model, parentId: nil, title: "Projects", configure: { (cell, client) in
-            cell.textLabel?.text = client.name
-        }) { (project) in
-            print("Client name: \(project.name)")
-        }
-        clientsTableViewController.title = "Client"
-        let navigationController = UINavigationController(rootViewController: clientsTableViewController)
-        self.window?.rootViewController = navigationController
-        self.window?.makeKeyAndVisible()
-    }
-    
-    
-    
-    
-    
+
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if let authResult = DropboxClientsManager.handleRedirectURL(url) {
-                print("authResult: \(authResult)")
                 switch authResult {
                 case .success:
-                    print("Success! User is logged into Dropbox.")
-                    setupClientsViewController()
+                    NSLog("Success! User is logged into Dropbox.")
+                    setupViewControllers()
                 case .cancel:
-                    print("Authorization flow was manually canceled by user!")
+                    NSLog("Authorization flow was manually canceled by user!")
                 case .error(_, let description):
-                    print("Error: \(description)")
+                    NSLog("Error: \(description)")
                 }
             }
         }
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -115,7 +123,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-    
-    
 }
 

@@ -9,6 +9,8 @@ import UIKit
 
 class AnnotationView: UIView {
     
+    
+    // The imageView that contain the image for annotation
     var imageView = UIImageView()
     var annotateImageView = UIImageView()
     

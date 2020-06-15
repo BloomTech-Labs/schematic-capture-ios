@@ -69,7 +69,6 @@ class ComponentTableViewCell: UITableViewCell {
     
     // Do we need index?
     func updateViews(component: Component) {
-        print("COMPONENT:", component)
         indexLabel.text = "\(component.id)"
         nameLabel.text = component.descriptions
         if let imageData = component.imageData {

@@ -87,28 +87,6 @@ class HeaderView: UIView {
         ])
     }
     
-    func setup(viewTypes: ViewTypes, value: [String]) {
-        switch viewTypes {
-        case .clients:
-            searchBar.isHidden = true
-            let date = CachedDateFormattingHelper.shared.formatTodayDate()
-            updateViews("Welcome back \(value.first ?? "")", date, value.last ?? "")
-        case .projects:
-            searchBar.isHidden = true            
-            updateViews(value.first ?? "", value[1], value.last ?? "")
-        case .jobsheets:
-            searchBar.isHidden = false
-            updateViews(value.first ?? "", value[1], value.last ?? "")
-        case .components:
-            searchBar.isHidden = false
-            updateViews(value.first ?? "", value[1], value.last ?? "")
-            thirdLabel.text = "Component list"
-        case .componentDetails:
-            searchBar.isHidden = true
-            updateViews(value.first ?? "", value[1], value.last ?? "")
-        }
-    }
-    
     func updateViews(_ value: String, _ secondValue: String, _ title: String) {
         label.text = value
         titleLabel.text = title

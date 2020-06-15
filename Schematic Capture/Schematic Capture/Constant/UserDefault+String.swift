@@ -11,4 +11,5 @@ import Foundation
 extension String {
     static let token = "UserId"
     static let componentRow = "SelectedComponentRow"
+    static let selectedRow = "SelectedRow"
 }

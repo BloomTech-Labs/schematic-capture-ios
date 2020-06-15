@@ -9,37 +9,66 @@
 import UIKit
 import CoreData
 
-class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UITableViewController, NSFetchedResultsControllerDelegate {
+class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    // MARK: - Properties
+    
+    // The configuration of the cell, it return a cell and a value
     var configure: (Cell, T) -> Void
+    
+    /* Triggered when a cell is selected in any instance
+     of this TableView Controller */
     var selectHandler: (T) -> Void
+    
+    /* The model is a generic coredata model,
+     created in order to pass diffirent types of model*/
     var model: Model<T>!
+    
+    /* The headerView of the tableView*/
     let headerView = HeaderView()
+    
+    // MARK: - Initializers
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(model: Model<T>, parentId: String?, title: String, configure: @escaping (Cell, T) -> Void, selectHandler: @escaping (T) -> Void) {
+    init(model: Model<T>, title: String, configure: @escaping (Cell, T) -> Void, selectHandler: @escaping (T) -> Void) {
         
         self.configure = configure
         self.selectHandler = selectHandler
         self.model = model
-
+        
         super.init(style: .plain)
-        self.title = title
+        setupViews(title: title)
+    }
+    
+    // MARK: - Functions
+    
+    private func setupViews(title: String) {
+        
+        self.view.backgroundColor = .systemBackground
+        
         model.fetchedResultscontroller.delegate = self
-        model.predicate = "\("clientId = %@", "\(parentId)")"
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
         headerView.label.text = title
         tableView.tableHeaderView = headerView
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(goToSettings))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSettings))
+        let menuButtons = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(goToSettings))
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSettings))
         
-        self.tableView.register(Cell.self, forCellReuseIdentifier: "Cell")
+        navigationItem.rightBarButtonItems = [menuButtons, searchButton]
+        self.tableView.register(Cell.self, forCellReuseIdentifier: Cell.id)
     }
+    
+    
+    @objc private func goToSettings() {
+        let settingsViewController = SettingsViewController()
+        navigationController?.pushViewController(settingsViewController, animated: true)
+    }
+    
+    // MARK: - Table View Delegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return model?.fetchedResultscontroller.sections?.count ?? 0
@@ -50,7 +79,8 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.id, for: indexPath) as! Cell
+        cell.accessoryType = .disclosureIndicator
         let item =  (model?.fetchedResultscontroller.object(at: indexPath))!
         configure(cell, item)
         return cell
@@ -58,9 +88,16 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        UserDefaults.standard.set(indexPath.row + 1, forKey: .selectedRow)
         let item = (model?.fetchedResultscontroller.object(at: indexPath))!
         selectHandler(item)
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
+    }
+    
+    // MARK: - NSFetchedResultsControllerDelegate
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -101,35 +138,4 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
             fatalError()
         }
     }
-    
-    @objc private func goToSettings() {
-        let settingsViewController = SettingsViewController()
-        navigationController?.pushViewController(settingsViewController, animated: true)
-    }
-}
-
-class Model<T> where T: NSManagedObject {
-    
-    var predicate: String?
-    fileprivate var context: NSManagedObjectContext!
-    
-    fileprivate lazy var fetchedResultscontroller: NSFetchedResultsController<T> = { [weak self] in
-        guard let this = self else {
-            fatalError("lazy property has been called after object has been descructed")
-        }
-        guard let request = T.fetchRequest() as? NSFetchRequest<T> else {
-            fatalError("Can't set up NSFetchRequest")
-        }
-        
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        request.predicate = NSPredicate(format: self?.predicate ?? "")
-
-        let frc = NSFetchedResultsController<T>(fetchRequest: request, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
-        do {
-            try frc.performFetch()
-        } catch {
-            fatalError("Error performing fetch for frc: \(error)")
-        }
-        return frc
-    }()
 }

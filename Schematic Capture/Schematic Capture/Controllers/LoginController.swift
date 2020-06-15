@@ -17,7 +17,7 @@ class AuthorizationController {
     typealias Completion = (Result<[Any], NetworkingError>) -> ()
     
     // AuthenticateUser
-    /*Authenticate user with username and password. Save user Id to UserDefaults */
+    /*Authenticate user with username and password. Save user Id to UserDefaults*/
     
     func logIn(username:String, password:String, viewController: UIViewController, completion: @escaping Completion) {
         //configure request url
@@ -67,8 +67,6 @@ class AuthorizationController {
         }.resume()
     }
     
-    
-    
     // Password recovery
     /*Starts a new password recovery transaction for a given user and issues a that
      can be used to reset a user's password*/
@@ -77,8 +75,4 @@ class AuthorizationController {
     
     // Handle status
     /*Handle current status in order to proceed with the initiated flow*/
-    
-    
-    
-    
 }
