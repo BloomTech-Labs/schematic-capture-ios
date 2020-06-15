@@ -45,20 +45,18 @@ class ProjectController {
             let decoder = JSONDecoder()
             do {
                 let clients = try decoder.decode([ClientRepresentation].self, from: data)
-                for var client in clients {
+                for client in clients {
                     if self.checkIfItemExist(id: client.id, entityName: .client) == false {
                         Client(clientRepresentation: client, context: context)
                     }
                     self.getProjects(with: client.id, token: token) { result in
                         if let projects = try? result.get() as? [ProjectRepresentation] {
-                            client.projects = projects
-                            for var project in projects {
+                            for project in projects {
                                 if self.checkIfItemExist(id: project.id, entityName: .project) == false {
                                     Project(projectRepresentation: project, context: context)
                                 }
                                 self.getJobSheets(with: project.id, token: token) { result in
                                     if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
-                                        project.jobsheets = jobSheets
                                         for var jobSheet in jobSheets {
                                             if self.checkIfItemExist(id: jobSheet.id, entityName: .jobSheet) == false {
                                                 JobSheet(jobSheetRepresentation: jobSheet, context: context)

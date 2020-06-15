@@ -68,7 +68,7 @@ class GeneralTableViewCell: UITableViewCell {
         case .client:
             guard let client = value as? Client else { return }
             firstLabel.text = client.companyName
-            secondLabel.text = "\(client.projects!.count) projects"
+            secondLabel.text = "\(client.projects) projects"
             regularImageView.image = UIImage(systemName: "envelope")
             self.stackView.removeArrangedSubview(thirdLabel)
             self.stackView.removeArrangedSubview(fourthLabel)

@@ -60,14 +60,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
                     }) { _ in
                      // Setup ComponentsTableViewController
-                        let componentsTableViewController = GenericTableViewController(model:  Model<JobSheet>(), title: "", configure: { (cell, components) in
+                        let componentsTableViewController = GenericTableViewController(model:  Model<JobSheet>(), title: "Client", configure: { (cell, components) in
                             
                         }) { (component) in
                             // Setup DetailstableViewController
                         }
-                        
                     navigationController.pushViewController(componentsTableViewController, animated: true)
-
                 }
                 navigationController.pushViewController(jobsheetsTableViewController, animated: true)
             }

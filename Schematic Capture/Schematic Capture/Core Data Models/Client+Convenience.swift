@@ -20,8 +20,8 @@ extension Client {
                                     city: city,
                                     state: state,
                                     zip: zip,
-                                    projects: projects?.array as? [ProjectRepresentation])
-        
+                                    projects: projects,
+                                    completed: completed)
     }
     
     @discardableResult convenience init(id: Int,
@@ -31,7 +31,8 @@ extension Client {
                             city: String?,
                             state: String?,
                             zip: String?,
-                            projects: NSOrderedSet,
+                            completed: Bool?,
+                            projects: String?,
                             context: NSManagedObjectContext) {
         
         self.init(context: context)
@@ -42,6 +43,7 @@ extension Client {
         self.city = city
         self.state = state
         self.zip = zip
+        self.completed = completed ?? false
         self.projects = projects
     }
     
@@ -54,7 +56,8 @@ extension Client {
                   city: clientRepresentation.city,
                   state: clientRepresentation.state,
                   zip: clientRepresentation.zip,
-                  projects: NSOrderedSet(array: clientRepresentation.projects ?? [ProjectRepresentation]()),
+                  completed: clientRepresentation.completed,
+                  projects: clientRepresentation.projects,
                   context: context)
     }
 }

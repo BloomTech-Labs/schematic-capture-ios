@@ -6,11 +6,11 @@
         <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
-        <attribute name="projectsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="projects" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="state" optional="YES" attributeType="String"/>
         <attribute name="street" optional="YES" attributeType="String"/>
         <attribute name="zip" optional="YES" attributeType="String"/>
-        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Project" inverseName="client" inverseEntity="Project"/>
+        <relationship name="projectsArr" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Project" inverseName="client" inverseEntity="Project"/>
     </entity>
     <entity name="Component" representedClassName="Component" syncable="YES" codeGenerationType="class">
         <attribute name="componentApplication" optional="YES" attributeType="String"/>
@@ -57,7 +57,7 @@
         <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
-        <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="projects" inverseEntity="Client"/>
+        <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="projectsArr" inverseEntity="Client"/>
         <relationship name="jobsheets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="JobSheet" inverseName="project" inverseEntity="JobSheet"/>
     </entity>
     <elements>

@@ -155,6 +155,13 @@
 		E1A3868224771FD700AD8FA8 /* ComponentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailsViewController.swift; sourceTree = "<group>"; };
 		E1A386842477471E00AD8FA8 /* EditCoponentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCoponentDetailViewController.swift; sourceTree = "<group>"; };
 		E1A794DA24748874009361B3 /* UITableView+EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+EmptyView.swift"; sourceTree = "<group>"; };
+		E1A8A5532497E84D0004B783 /* Schematic Capture 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 13.xcdatamodel"; sourceTree = "<group>"; };
+		E1A8A5542497E89C0004B783 /* Schematic Capture 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 14.xcdatamodel"; sourceTree = "<group>"; };
+		E1A8A5552497E9330004B783 /* Schematic Capture 15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 15.xcdatamodel"; sourceTree = "<group>"; };
+		E1E8FDA32497EAFB002CDAF4 /* Schematic Capture 16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 16.xcdatamodel"; sourceTree = "<group>"; };
+		E1E8FDA42497EB6E002CDAF4 /* Schematic Capture 17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 17.xcdatamodel"; sourceTree = "<group>"; };
+		E1E8FDA52497ED81002CDAF4 /* Schematic Capture 18.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 18.xcdatamodel"; sourceTree = "<group>"; };
+		E1E8FDA62497ED94002CDAF4 /* Schematic Capture 19.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 19.xcdatamodel"; sourceTree = "<group>"; };
 		F89DB6AB1AE322DC29913FCD /* Pods-Schematic Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic Capture.debug.xcconfig"; path = "Target Support Files/Pods-Schematic Capture/Pods-Schematic Capture.debug.xcconfig"; sourceTree = "<group>"; };
 		FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 2.xcdatamodel"; sourceTree = "<group>"; };
 		FBAD0B7B243D9B7800B653BE /* Schematic Capture 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -1035,6 +1042,13 @@
 		A6F1C9CC23ECB23B00E0D583 /* Schematic Capture.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				E1E8FDA62497ED94002CDAF4 /* Schematic Capture 19.xcdatamodel */,
+				E1E8FDA52497ED81002CDAF4 /* Schematic Capture 18.xcdatamodel */,
+				E1E8FDA42497EB6E002CDAF4 /* Schematic Capture 17.xcdatamodel */,
+				E1E8FDA32497EAFB002CDAF4 /* Schematic Capture 16.xcdatamodel */,
+				E1A8A5552497E9330004B783 /* Schematic Capture 15.xcdatamodel */,
+				E1A8A5542497E89C0004B783 /* Schematic Capture 14.xcdatamodel */,
+				E1A8A5532497E84D0004B783 /* Schematic Capture 13.xcdatamodel */,
 				E121E3BB248FF99D003914AE /* Schematic Capture 12.xcdatamodel */,
 				E121E3BA248FE66D003914AE /* Schematic Capture 11.xcdatamodel */,
 				6DAF6CDD248AEEA20009846E /* Schematic Capture 10.xcdatamodel */,
@@ -1048,7 +1062,7 @@
 				FBAD0B7A243D906500B653BE /* Schematic Capture 2.xcdatamodel */,
 				A6F1C9CD23ECB23B00E0D583 /* Schematic Capture.xcdatamodel */,
 			);
-			currentVersion = E121E3BB248FF99D003914AE /* Schematic Capture 12.xcdatamodel */;
+			currentVersion = E1E8FDA62497ED94002CDAF4 /* Schematic Capture 19.xcdatamodel */;
 			path = "Schematic Capture.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

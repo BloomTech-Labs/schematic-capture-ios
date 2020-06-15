@@ -18,7 +18,7 @@ class Model<T> where T: NSManagedObject {
             fatalError("lazy property has been called after object has been descructed")
         }
         
-        guard let request = T.fetchRequest() as? NSFetchRequest<T> else {
+        guard let request = NSFetchRequest<T>(entityName: "Client") as? NSFetchRequest else {
             fatalError("Can't set up NSFetchRequest")
         }
         
