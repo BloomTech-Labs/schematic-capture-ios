@@ -38,9 +38,10 @@ class GeneralTableViewCell: UITableViewCell {
         
         regularImageView.contentMode = .scaleAspectFit
         regularImageView.backgroundColor = .red
+        regularImageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(regularImageView)
         
-        
-        views = [firstLabel, secondLabel, thirdLabel, fourthLabel, regularImageView]
+        views = [firstLabel, secondLabel, thirdLabel, fourthLabel]
         
         stackView = UIStackView(arrangedSubviews: views)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,11 +52,15 @@ class GeneralTableViewCell: UITableViewCell {
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
+            regularImageView.heightAnchor.constraint(equalToConstant: 40),
+            regularImageView.widthAnchor.constraint(equalToConstant: 40),
+            regularImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            regularImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            
             stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -40.0),
+            stackView.rightAnchor.constraint(equalTo: regularImageView.leftAnchor, constant: -8.0),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
-            
-            
+        
         ])
     }
     
@@ -70,9 +75,9 @@ class GeneralTableViewCell: UITableViewCell {
             guard let client = value as? Client else { return }
             firstLabel.text = client.companyName
             secondLabel.text = "\(client.projects!.count) projects"
-            regularImageView.image = UIImage(systemName: "envelope")
             self.stackView.removeArrangedSubview(thirdLabel)
             self.stackView.removeArrangedSubview(fourthLabel)
+            regularImageView.isHidden = true
         case .project:
             guard let project = value as? Project else { return }
             firstLabel.textColor = .systemBlue
@@ -84,8 +89,7 @@ class GeneralTableViewCell: UITableViewCell {
             }
             thirdLabel.text = "Kerby Jean"
             fourthLabel.text = "6/3/2020"
-            
-            self.stackView.removeArrangedSubview(regularImageView)
+            regularImageView.isHidden = true
         case .jobSheet:
             guard let jobsheet = value as? JobSheet else { return }
             firstLabel.textColor = .systemBlue
@@ -93,8 +97,7 @@ class GeneralTableViewCell: UITableViewCell {
             secondLabel.text = "Kerby"
             thirdLabel.text = "Speed control"
             fourthLabel.text = "15 Parts"
-            self.stackView.removeArrangedSubview(regularImageView)
-
+            regularImageView.isHidden = true
         case .component:
             guard let component = value as? Component else { return }
             print("PROJECT IS BEING CONFIGURE: ", component.componentApplication)
@@ -103,7 +106,7 @@ class GeneralTableViewCell: UITableViewCell {
             secondLabel.text = "Kerby"
             thirdLabel.text = "Speed control"
             fourthLabel.text = "15 Parts"
-            self.stackView.removeArrangedSubview(regularImageView)
+            regularImageView.isHidden = false
         }
     }
 }
