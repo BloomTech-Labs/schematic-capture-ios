@@ -17,7 +17,8 @@ struct ClientRepresentation: Codable {
     let city: String?
     let state: String?
     let zip: String?
-    var projects: [ProjectRepresentation]?
+    let projects: String?
+   // var projectsArr: [ProjectRepresentation]?
 }
 
 extension ClientRepresentation: Equatable {

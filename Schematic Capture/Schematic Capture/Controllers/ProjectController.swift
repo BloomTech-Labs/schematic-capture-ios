@@ -28,10 +28,6 @@ class ProjectController {
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
         request.setValue("Bearer \(token)", forHTTPHeaderField: HeaderNames.authorization.rawValue)
         
-        let context = CoreDataStack.shared.mainContext
-        context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
-
-        
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
                NSLog("Error with urlsession, \(error)")
@@ -44,33 +40,53 @@ class ProjectController {
                     
             let decoder = JSONDecoder()
             do {
-                let clients = try decoder.decode([ClientRepresentation].self, from: data)
-                for var client in clients {
-                    if self.checkIfItemExist(id: client.id, entityName: .client) == false {
-                        Client(clientRepresentation: client, context: context)
-                    }
-                    self.getProjects(with: client.id, token: token) { result in
-                        if let projects = try? result.get() as? [ProjectRepresentation] {
-                            client.projects = projects
-                            for var project in projects {
-                                if self.checkIfItemExist(id: project.id, entityName: .project) == false {
-                                    Project(projectRepresentation: project, context: context)
-                                }
-                                self.getJobSheets(with: project.id, token: token) { result in
-                                    if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
-                                        project.jobsheets = jobSheets
-                                        for var jobSheet in jobSheets {
-                                            if self.checkIfItemExist(id: jobSheet.id, entityName: .jobSheet) == false {
-                                                JobSheet(jobSheetRepresentation: jobSheet, context: context)
-                                            }
-                                            self.getComponents(with: jobSheet.id, token: token) { result in
-                                                if let components = try? result.get() as? [ComponentRepresentation] {
-                                                    jobSheet.components = components
-                                                    for component in components {
-                                                        if self.checkIfItemExist(id: component.id, entityName: .component) == false {
-                                                            Component(componentRepresentation: component, context: context)
-                                                        }
-                                                    }
+
+                if let clients = try decoder.decode([ClientRepresentation].self, from: data) as? [ClientRepresentation] {
+                    self.saveData(clients: clients, token: token)
+                    print("ARRAY OF CLIENTS: ", clients)
+                } else {
+                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                    let clients = try decoder.decode(ClientRepresentation.self, from: jsonData)
+                    print("DICT OF CLIENTS: ", clients)
+                    //self.saveData(clients: clients)
+                }
+
+            } catch {
+                NSLog("Error decoding a clients: \(error)")
+                return
+            }
+        }.resume()
+    }
+    
+    
+    func saveData(clients: [ClientRepresentation], token: String) {
+        
+        let context = CoreDataStack.shared.mainContext
+        context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
+        
+        for var client in clients {
+            if self.checkIfItemExist(id: client.id, entityName: .client) == false {
+                Client(clientRepresentation: client, context: context)
+            }
+            self.getProjects(with: client.id, token: token) { result in
+                if let projects = try? result.get() as? [ProjectRepresentation] {
+                    for var project in projects {
+                        if self.checkIfItemExist(id: project.id, entityName: .project) == false {
+                            Project(projectRepresentation: project, context: context)
+                        }
+                        self.getJobSheets(with: project.id, token: token) { result in
+                            if let jobSheets = try? result.get() as? [JobSheetRepresentation] {
+                                project.jobsheets = jobSheets
+                                for var jobSheet in jobSheets {
+                                    if self.checkIfItemExist(id: jobSheet.id, entityName: .jobSheet) == false {
+                                        JobSheet(jobSheetRepresentation: jobSheet, context: context)
+                                    }
+                                    self.getComponents(with: jobSheet.id, token: token) { result in
+                                        if let components = try? result.get() as? [ComponentRepresentation] {
+                                            jobSheet.components = components
+                                            for component in components {
+                                                if self.checkIfItemExist(id: component.id, entityName: .component) == false {
+                                                    Component(componentRepresentation: component, context: context)
                                                 }
                                             }
                                         }
@@ -80,11 +96,8 @@ class ProjectController {
                         }
                     }
                 }
-            } catch {
-                NSLog("Error decoding a clients: \(error)")
-                return
             }
-        }.resume()
+        }
     }
     
     func getProjects(with id: Int, token: String, completion: @escaping Completion) {

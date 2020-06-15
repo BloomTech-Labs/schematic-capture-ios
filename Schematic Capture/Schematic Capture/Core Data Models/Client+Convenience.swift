@@ -20,7 +20,7 @@ extension Client {
                                     city: city,
                                     state: state,
                                     zip: zip,
-                                    projects: projects?.array as? [ProjectRepresentation])
+                                    projects: projects)
         
     }
     
@@ -31,7 +31,7 @@ extension Client {
                             city: String?,
                             state: String?,
                             zip: String?,
-                            projects: NSOrderedSet,
+                            projects: String,
                             context: NSManagedObjectContext) {
         
         self.init(context: context)
@@ -54,7 +54,7 @@ extension Client {
                   city: clientRepresentation.city,
                   state: clientRepresentation.state,
                   zip: clientRepresentation.zip,
-                  projects: NSOrderedSet(array: clientRepresentation.projects ?? [ProjectRepresentation]()),
+                  projects: clientRepresentation.projects ?? "0",
                   context: context)
     }
 }

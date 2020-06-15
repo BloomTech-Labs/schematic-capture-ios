@@ -18,6 +18,8 @@ class Model<T> where T: NSManagedObject {
             fatalError("lazy property has been called after object has been descructed")
         }
         
+//        let fetchRequest = NSFetchRequest(entityName: "")
+        
         guard let request = T.fetchRequest() as? NSFetchRequest<T> else {
             fatalError("Can't set up NSFetchRequest")
         }
@@ -29,7 +31,7 @@ class Model<T> where T: NSManagedObject {
             case EntityNames.jobSheet.rawValue:
                 request.predicate = NSPredicate(format: "projectId = %@", "\(parentId)")
             case EntityNames.component.rawValue:
-                request.predicate = NSPredicate(format: "jobsheetId = %@", "\(parentId)")
+                request.predicate = NSPredicate(format: "jobSheetId = %@", "\(parentId)")
             default:
                 break
             }

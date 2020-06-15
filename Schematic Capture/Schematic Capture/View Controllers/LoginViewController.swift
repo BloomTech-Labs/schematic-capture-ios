@@ -123,9 +123,10 @@ class LoginViewController: UIViewController {
         
         authController.logIn(username: username, password: password, viewController: self) { result in
             if let result = try? result.get() {
-                guard let _ = result.last as? User else { return }
+                guard let token = result.first as? String, let _ = result.last as? User else { return }
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
+                self.projectContoller.getClients(token: token)
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .dropboxLogin, object: self, userInfo: ["viewController": self])
                 }

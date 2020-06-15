@@ -64,6 +64,7 @@ class GeneralTableViewCell: UITableViewCell {
     }
     
     func configure(entityName: EntityNames, value: Any) {
+        print("CONFIGURE!")
         switch entityName {
         case .client:
             guard let client = value as? Client else { return }
@@ -96,6 +97,7 @@ class GeneralTableViewCell: UITableViewCell {
 
         case .component:
             guard let component = value as? Component else { return }
+            print("PROJECT IS BEING CONFIGURE: ", component.componentApplication)
             firstLabel.textColor = .systemBlue
             firstLabel.text = component.componentApplication
             secondLabel.text = "Kerby"

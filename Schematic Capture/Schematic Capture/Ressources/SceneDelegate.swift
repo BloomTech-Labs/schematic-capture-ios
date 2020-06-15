@@ -15,7 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var dropboxController = DropboxController()
     
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -28,7 +27,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @objc func dropboxAuthorization(notification: Notification) {
         if let info = notification.userInfo {
             if let _ = info["viewController"] as? UIViewController {
-                setupViewControllers()
+                let deadlineTime = DispatchTime.now() + .seconds(5)
+                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                    print("LOGIN TAPPED")
+                    self.setupViewControllers()
+                }
                 // self.dropboxController.authorizeClient(viewController: viewController)
             }
         }
@@ -44,26 +47,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController()
         navigationController.navigationBar.tintColor = .label
+
         
         // Setup ClientsTableViewController
         let clientsTableViewController = GenericTableViewController(model: Model<Client>(), title: "Clients", configure: {
             (clientCell, client) in
             clientCell.configure(entityName: .client, value: client)
-        }) { _ in
+        }) { client in
             // Setup ProjectsTableViewController
+            
             let projectsTableViewController = GenericTableViewController(model: Model<Project>(), title: "Projects", configure: { (projectCell, project) in
                 projectCell.configure(entityName: .project, value: project)
             }) { project in
                 // Setup JobsheetsTableViewController
                 let jobsheetsTableViewController = GenericTableViewController(model: Model<JobSheet>(), title: project.name ?? "Jobsheet", configure: { (jobsheetCell, jobsheet) in
-                    
                     jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
-                    }) { _ in
+                    }) { jobsheet in
+                    print("JOBSHEET SELECTED: ", jobsheet.id)
                      // Setup ComponentsTableViewController
-                        let componentsTableViewController = GenericTableViewController(model:  Model<JobSheet>(), title: "", configure: { (cell, components) in
+                        let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: "Components", configure: { (componentCell, component) in
+                            print("COMPONENT: ", component)
                             
-                        }) { (component) in
-                            // Setup DetailstableViewController
+                        componentCell.configure(entityName: .component, value: component)
+                            
+                        }) { _ in
+                            
+                            
                         }
                         
                     navigationController.pushViewController(componentsTableViewController, animated: true)

@@ -88,6 +88,13 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        if model.fetchedResultscontroller.fetchRequest.entityName == "JobSheet" {
+            print("MODEL IS Jobsheet ")
+        }
+        
+        
         UserDefaults.standard.set(indexPath.row + 1, forKey: .selectedRow)
         let item = (model?.fetchedResultscontroller.object(at: indexPath))!
         selectHandler(item)
