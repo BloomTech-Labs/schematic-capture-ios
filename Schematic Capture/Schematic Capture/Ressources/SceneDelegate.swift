@@ -27,11 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @objc func dropboxAuthorization(notification: Notification) {
         if let info = notification.userInfo {
             if let _ = info["viewController"] as? UIViewController {
-                let deadlineTime = DispatchTime.now() + .seconds(5)
-                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                    print("LOGIN TAPPED")
-                    self.setupViewControllers()
-                }
+                print("LOGIN TAPPED")
+                self.setupViewControllers()
                 // self.dropboxController.authorizeClient(viewController: viewController)
             }
         }

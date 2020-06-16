@@ -10,7 +10,6 @@ import UIKit
 
 class GeneralTableViewCell: UITableViewCell {
     
-    
     var stackView = UIStackView()
     var firstLabel = UILabel()
     var secondLabel = UILabel()
@@ -25,6 +24,7 @@ class GeneralTableViewCell: UITableViewCell {
         
         firstLabel.textColor = .label
         firstLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        firstLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let regularFont = UIFont.systemFont(ofSize: 13, weight: .regular)
         secondLabel.textColor = .label
@@ -35,27 +35,34 @@ class GeneralTableViewCell: UITableViewCell {
         
         fourthLabel.textColor = .label
         fourthLabel.font = regularFont
+        fourthLabel.textAlignment = .right
+        fourthLabel.translatesAutoresizingMaskIntoConstraints = false
         
         regularImageView.contentMode = .scaleAspectFit
-        regularImageView.backgroundColor = .red
+        regularImageView.image = UIImage(systemName: "envelope")
         regularImageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(regularImageView)
         
-        views = [firstLabel, secondLabel, thirdLabel, fourthLabel]
+        views = [firstLabel, secondLabel, thirdLabel, fourthLabel, regularImageView]
         
         stackView = UIStackView(arrangedSubviews: views)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.spacing = 10
+        stackView.isLayoutMarginsRelativeArrangement = true
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            regularImageView.heightAnchor.constraint(equalToConstant: 40),
-            regularImageView.widthAnchor.constraint(equalToConstant: 40),
+            
+            firstLabel.widthAnchor.constraint(equalToConstant: 100.0),
+            
+            regularImageView.heightAnchor.constraint(equalToConstant: 32.0),
+            regularImageView.widthAnchor.constraint(equalToConstant: 32.0),
             regularImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            regularImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            regularImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -32.0),
+            
+            fourthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -32.0),
             
             stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             stackView.rightAnchor.constraint(equalTo: regularImageView.leftAnchor, constant: -8.0),
@@ -77,7 +84,6 @@ class GeneralTableViewCell: UITableViewCell {
             secondLabel.text = "\(client.projects!.count) projects"
             self.stackView.removeArrangedSubview(thirdLabel)
             self.stackView.removeArrangedSubview(fourthLabel)
-            regularImageView.isHidden = true
         case .project:
             guard let project = value as? Project else { return }
             firstLabel.textColor = .systemBlue
@@ -89,7 +95,7 @@ class GeneralTableViewCell: UITableViewCell {
             }
             thirdLabel.text = "Kerby Jean"
             fourthLabel.text = "6/3/2020"
-            regularImageView.isHidden = true
+            self.regularImageView.isHidden = true
         case .jobSheet:
             guard let jobsheet = value as? JobSheet else { return }
             firstLabel.textColor = .systemBlue
