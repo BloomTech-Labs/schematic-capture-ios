@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import SDWebImage
+
+protocol SelectedCellDelegate: NSObject {
+    func selectedCell(cell: GeneralTableViewCell)
+}
 
 class GeneralTableViewCell: UITableViewCell {
     
@@ -17,19 +22,21 @@ class GeneralTableViewCell: UITableViewCell {
     var fourthLabel = UILabel()
     var regularImageView = UIImageView()
     var indexLabel = UILabel()
-    
     var views = [UIView]()
+    
+    var imagePicker: ImagePicker!
+    weak var delegate: SelectedCellDelegate?
+    
+    var viewController: UIViewController?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         indexLabel.textColor = .label
         indexLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        indexLabel.backgroundColor = .red
         
         firstLabel.textColor = .label
         firstLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        firstLabel.backgroundColor = .red
         
         let regularFont = UIFont.systemFont(ofSize: 13, weight: .regular)
         secondLabel.textColor = .label
@@ -43,9 +50,9 @@ class GeneralTableViewCell: UITableViewCell {
         fourthLabel.font = regularFont
         
         regularImageView.contentMode = .scaleAspectFit
-        regularImageView.backgroundColor = .red
-//        regularImageView.translatesAutoresizingMaskIntoConstraints = false
-//        addSubview(regularImageView)
+        regularImageView.image = UIImage(systemName: "camera")
+        regularImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewTapped)))
+        regularImageView.isUserInteractionEnabled = true
         
         views = [indexLabel, firstLabel, secondLabel, thirdLabel, fourthLabel, regularImageView]
         
@@ -58,17 +65,16 @@ class GeneralTableViewCell: UITableViewCell {
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
+            indexLabel.widthAnchor.constraint(equalToConstant: 20),
             firstLabel.widthAnchor.constraint(equalToConstant: 96),
             
             regularImageView.heightAnchor.constraint(equalToConstant: 40),
             regularImageView.widthAnchor.constraint(equalToConstant: 40),
             regularImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            //regularImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             
             stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -40.0),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
-        
         ])
     }
     
@@ -77,45 +83,71 @@ class GeneralTableViewCell: UITableViewCell {
     }
     
     func configure(entityName: EntityNames, value: Any) {
-        print("CONFIGURE!")
         switch entityName {
-        case .client:
-            guard let client = value as? Client else { return }
-            firstLabel.text = client.companyName
-            fourthLabel.text = "\(client.projects!.count) projects"
-            regularImageView.isHidden = true
-            indexLabel.isHidden = true
-        case .project:
-            guard let project = value as? Project else { return }
-            firstLabel.textColor = .systemBlue
-            firstLabel.text = project.name
-            if project.completed == true {
-                secondLabel.text = "Completed"
-            } else {
-                secondLabel.text = "Incompleted"
-            }
-            thirdLabel.text = "Kerby Jeanjeanje"
-            fourthLabel.text = "6/3/2020"
-            regularImageView.isHidden = true
-            indexLabel.isHidden = true
-        case .jobSheet:
-            guard let jobsheet = value as? JobSheet else { return }
-            firstLabel.textColor = .systemBlue
-            firstLabel.text = jobsheet.name
-            secondLabel.text = "Kerby Jeanjeanje"
-            thirdLabel.text = "Speed control"
-            fourthLabel.text = "15"
-            regularImageView.isHidden = true
-            indexLabel.isHidden = true
-        case .component:
-            guard let component = value as? Component else { return }
-            print("PROJECT IS BEING CONFIGURE: ", component.componentApplication)
-            indexLabel.text = String(component.id)
-            firstLabel.textColor = .systemBlue
-            firstLabel.text = component.descriptions
-            secondLabel.text = "15"
-            thirdLabel.text = "Speed control"
-            regularImageView.isHidden = false
+            case .client:
+                guard let client = value as? Client else { return }
+                firstLabel.text = client.companyName
+                fourthLabel.text = "\(client.projects!.count) projects"
+                regularImageView.isHidden = true
+                indexLabel.isHidden = true
+            case .project:
+                guard let project = value as? Project else { return }
+                firstLabel.textColor = .systemBlue
+                firstLabel.text = project.name
+                if project.completed == true {
+                    secondLabel.text = "Completed"
+                } else {
+                    secondLabel.text = "Incompleted"
+                }
+                thirdLabel.text = "Kerby Jeanjeanje"
+                fourthLabel.text = "6/3/2020"
+                regularImageView.isHidden = true
+                indexLabel.isHidden = true
+            case .jobSheet:
+                guard let jobsheet = value as? JobSheet else { return }
+                firstLabel.textColor = .systemBlue
+                firstLabel.text = jobsheet.name
+                secondLabel.text = "Kerby Jeanjeanje"
+                thirdLabel.text = "Speed control"
+                fourthLabel.text = "15"
+                regularImageView.isHidden = true
+                indexLabel.isHidden = true
+            case .component:
+                guard let component = value as? Component else { return }
+                print("PROJECT IS BEING CONFIGURE: ", component.componentApplication ?? "")
+                indexLabel.text = String(component.id)
+                firstLabel.textColor = .systemBlue
+                firstLabel.text = component.descriptions
+                secondLabel.text = "15"
+                thirdLabel.text = "Speed control"
+                regularImageView.isHidden = false
         }
+    }
+    
+    @objc func imageViewTapped(sender: UIImageView) {
+        delegate?.selectedCell(cell: self)
+    }
+}
+
+// MARK: - ImagePickerDelegate
+extension GeneralTableViewCell: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        if image != nil {
+            let annotationViewController = AnnotationViewController()
+            annotationViewController.delegate = self
+            let navigationController = UINavigationController(rootViewController: annotationViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            annotationViewController.image = image
+            self.viewController?.present(navigationController, animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: - ImageDoneEditingDelegate
+extension GeneralTableViewCell: ImageDoneEditingDelegate {
+    
+    func ImageDoneEditing(image: UIImage?) {
+        self.regularImageView.image = image
     }
 }
