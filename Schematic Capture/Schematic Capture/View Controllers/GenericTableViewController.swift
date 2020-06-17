@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>: UITableViewController, NSFetchedResultsControllerDelegate {
+class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
     // MARK: - Properties
     
@@ -26,6 +26,11 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
     
     /* The headerView of the tableView*/
     let headerView = HeaderView()
+    let searchBar = UISearchBar()
+    
+    let settingsButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(settingsTapped))
+    let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
+    //let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector())
     
     // MARK: - Initializers
     
@@ -51,21 +56,32 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
         
         model.fetchedResultscontroller.delegate = self
         
+        searchBar.showsCancelButton = true
+        searchBar.delegate = self
+        
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
         headerView.label.text = title
         tableView.tableHeaderView = headerView
         
-        let menuButtons = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(goToSettings))
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(goToSettings))
-        
-        navigationItem.rightBarButtonItems = [menuButtons, searchButton]
+        navigationItem.rightBarButtonItems = [settingsButton, searchButton]
         self.tableView.register(Cell.self, forCellReuseIdentifier: Cell.id)
     }
     
     
-    @objc private func goToSettings() {
+    @objc private func settingsTapped() {
         let settingsViewController = SettingsViewController()
         navigationController?.pushViewController(settingsViewController, animated: true)
+    }
+    
+    @objc func searchTapped() {
+        self.navigationItem.rightBarButtonItems = []
+        //self.navigationItem.rightBarButtonItem = cancelButton
+        self.navigationItem.titleView = searchBar
+        self.searchBar.sizeToFit()
+        let deadline = DispatchTime.now() + .milliseconds(5)
+        DispatchQueue.main.asyncAfter(deadline: deadline) {
+            self.searchBar.becomeFirstResponder()
+        }
     }
     
     // MARK: - Table View Delegate
@@ -150,5 +166,13 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
         @unknown default:
             fatalError()
         }
+    }
+}
+
+extension GenericTableViewController: SearchDelegate {
+    func searchDidEnd(didChangeText: String) {
+        
+        navigationItem.rightBarButtonItems = [settingsButton, searchButton]
+        tableView.reloadData()
     }
 }

@@ -10,18 +10,22 @@ import UIKit
 
 class GeneralTableViewCell: UITableViewCell {
     
-    
     var stackView = UIStackView()
     var firstLabel = UILabel()
     var secondLabel = UILabel()
     var thirdLabel = UILabel()
     var fourthLabel = UILabel()
     var regularImageView = UIImageView()
+    var indexLabel = UILabel()
     
     var views = [UIView]()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        indexLabel.textColor = .label
+        indexLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        indexLabel.backgroundColor = .red
         
         firstLabel.textColor = .label
         firstLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -40,10 +44,10 @@ class GeneralTableViewCell: UITableViewCell {
         
         regularImageView.contentMode = .scaleAspectFit
         regularImageView.backgroundColor = .red
-        regularImageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(regularImageView)
+//        regularImageView.translatesAutoresizingMaskIntoConstraints = false
+//        addSubview(regularImageView)
         
-        views = [firstLabel, secondLabel, thirdLabel, fourthLabel]
+        views = [indexLabel, firstLabel, secondLabel, thirdLabel, fourthLabel, regularImageView]
         
         stackView = UIStackView(arrangedSubviews: views)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,13 +58,12 @@ class GeneralTableViewCell: UITableViewCell {
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            
-            firstLabel.widthAnchor.constraint(equalToConstant: 100),
+            firstLabel.widthAnchor.constraint(equalToConstant: 96),
             
             regularImageView.heightAnchor.constraint(equalToConstant: 40),
             regularImageView.widthAnchor.constraint(equalToConstant: 40),
             regularImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            regularImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            //regularImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             
             stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -40.0),
@@ -79,10 +82,9 @@ class GeneralTableViewCell: UITableViewCell {
         case .client:
             guard let client = value as? Client else { return }
             firstLabel.text = client.companyName
-            thirdLabel.text = "\(client.projects!.count) projects"
-            //self.stackView.removeArrangedSubview(thirdLabel)
-            //self.stackView.removeArrangedSubview(fourthLabel)
+            fourthLabel.text = "\(client.projects!.count) projects"
             regularImageView.isHidden = true
+            indexLabel.isHidden = true
         case .project:
             guard let project = value as? Project else { return }
             firstLabel.textColor = .systemBlue
@@ -95,22 +97,24 @@ class GeneralTableViewCell: UITableViewCell {
             thirdLabel.text = "Kerby Jeanjeanje"
             fourthLabel.text = "6/3/2020"
             regularImageView.isHidden = true
+            indexLabel.isHidden = true
         case .jobSheet:
             guard let jobsheet = value as? JobSheet else { return }
             firstLabel.textColor = .systemBlue
             firstLabel.text = jobsheet.name
             secondLabel.text = "Kerby Jeanjeanje"
             thirdLabel.text = "Speed control"
-            fourthLabel.text = "15 Parts"
+            fourthLabel.text = "15"
             regularImageView.isHidden = true
+            indexLabel.isHidden = true
         case .component:
             guard let component = value as? Component else { return }
             print("PROJECT IS BEING CONFIGURE: ", component.componentApplication)
+            indexLabel.text = String(component.id)
             firstLabel.textColor = .systemBlue
-            firstLabel.text = String(component.id)
-            secondLabel.text = component.custom
+            firstLabel.text = component.descriptions
+            secondLabel.text = "15"
             thirdLabel.text = "Speed control"
-            fourthLabel.text = "15 Parts"
             regularImageView.isHidden = false
         }
     }
