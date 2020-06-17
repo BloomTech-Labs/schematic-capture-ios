@@ -92,12 +92,18 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
         
         if model.fetchedResultscontroller.fetchRequest.entityName == "JobSheet" {
             print("MODEL IS Jobsheet ")
+            let item = model.fetchedResultscontroller.object(at: indexPath)
+            let jobsheet = item as! JobSheet
+            UserDefaults.standard.set(jobsheet.id, forKey: .selectedRow)
+            selectHandler(item)
+        } else {
+            //le itemId = model.fetchedResultscontroller.object(at: indexPath.row)
+            UserDefaults.standard.set(indexPath.row + 1, forKey: .selectedRow)
+            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+            selectHandler(item)
         }
-        
-        
-        UserDefaults.standard.set(indexPath.row + 1, forKey: .selectedRow)
-        let item = (model?.fetchedResultscontroller.object(at: indexPath))!
-        selectHandler(item)
+        print("INDEX PATH:", indexPath.row)
+
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

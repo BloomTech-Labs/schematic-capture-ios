@@ -82,6 +82,7 @@ class ProjectController {
                                         JobSheet(jobSheetRepresentation: jobSheet, context: context)
                                     }
                                     self.getComponents(with: jobSheet.id, token: token) { result in
+                                        print("COMOONENTS:", result)
                                         if let components = try? result.get() as? [ComponentRepresentation] {
                                             jobSheet.components = components
                                             for component in components {
