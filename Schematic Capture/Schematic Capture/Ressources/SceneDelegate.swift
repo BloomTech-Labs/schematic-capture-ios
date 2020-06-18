@@ -70,21 +70,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let jobsheetsTableViewController = GenericTableViewController(model: Model<JobSheet>(), title: project.name ?? EntityNames.jobSheet.rawValue, configure: { (jobsheetCell, jobsheet) in
                     
                     jobsheetCell.textLabel?.text = "\(jobsheet.name ?? "")"
-                    jobsheetCell.detailTextLabel?.text = "\(jobsheet. ?? "")"
-
-
+                    if jobsheet.completed == 0 {
+                        jobsheetCell.detailTextLabel?.text  = "Complete"
+                    } else {
+                        jobsheetCell.detailTextLabel?.text  = "Incomplete"
+                    }
+                    
                     //jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
                 }) { jobsheet in
                     // Setup ComponentsTableViewController
                     let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: EntityNames.component.rawValue, configure: { (componentCell, component) in
-                       // componentCell.configure(entityName: .component, value: component)
+                        // componentCell.configure(entityName: .component, value: component)
                     }) { _ in }
                     navigationController.pushViewController(componentsTableViewController, animated: true)
                 }
                 
                 let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.gray]
                 let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.darkText]
-
+                
                 let attributedString = NSMutableAttributedString(string: "Assigned to you for ", attributes: attrs1)
                 let attributedString1 = NSMutableAttributedString(string: project.name ?? "", attributes:attrs2)
                 let attributedString2 = NSMutableAttributedString(string: " on ", attributes: attrs1)
