@@ -10,10 +10,6 @@ import UIKit
 import SDWebImage
 import SwiftyDropbox
 
-protocol SelectedCellDelegate: NSObject {
-    func selectedCell(cell: ComponentTableViewCell)
-}
-
 class ComponentTableViewCell: UITableViewCell {
     
     var indexLabel = UILabel()
@@ -78,7 +74,7 @@ class ComponentTableViewCell: UITableViewCell {
     }
     
     @objc func imageViewTapped(sender: UIImageView) {
-        delegate?.selectedCell(cell: self)
+        //delegate?.selectedCell(cell: self)
     }
 }
 

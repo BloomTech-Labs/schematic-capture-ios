@@ -98,24 +98,24 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         
         //let theURL = Bundle.main.url(forResource:"LoginVideo/", withExtension: "mp4")
-        let bundle = Bundle.main
-        let path = bundle.path(forResource: "LoginVideo", ofType: "mp4")!
-        let theURL = URL.init(fileURLWithPath: path)
+//        let bundle = Bundle.main
+//        let path = bundle.path(forResource: "LoginVideo", ofType: "mp4")!
+//        let theURL = URL.init(fileURLWithPath: path)
         
-        player = AVPlayer(url: theURL)
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = .resizeAspectFill
-        player.volume = 0
-        player.actionAtItemEnd = .none
-        
-        playerLayer.frame = view.layer.bounds
-        view.layer.insertSublayer(playerLayer, at: 0)
-        let shadowView = UIView(frame: view.bounds)
-        shadowView.backgroundColor = .black
-        shadowView.alpha = 0.95
-        view.insertSubview(shadowView, at: 0)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(notification:)), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+//        player = AVPlayer(url: theURL)
+//        playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.videoGravity = .resizeAspectFill
+//        player.volume = 0
+//        player.actionAtItemEnd = .none
+//        
+//        playerLayer.frame = view.layer.bounds
+//        view.layer.insertSublayer(playerLayer, at: 0)
+//        let shadowView = UIView(frame: view.bounds)
+//        shadowView.backgroundColor = .black
+//        shadowView.alpha = 0.95
+//        view.insertSubview(shadowView, at: 0)
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(notification:)), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
     }
     
     @objc private func login(_ sender: UIButton) {

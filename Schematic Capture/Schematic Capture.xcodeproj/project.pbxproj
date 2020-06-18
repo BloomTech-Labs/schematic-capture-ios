@@ -50,7 +50,6 @@
 		E1347570246F02E300B5C791 /* UIView+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134756F246F02E300B5C791 /* UIView+String.swift */; };
 		E13A0BA2247D8E7F0079868E /* ClientRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13A0BA1247D8E7F0079868E /* ClientRepresentation.swift */; };
 		E13A0BA4247D8F6A0079868E /* Client+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13A0BA3247D8F6A0079868E /* Client+Convenience.swift */; };
-		E157984D24806BE40023483E /* LoginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E157984C24806BE40023483E /* LoginVideo.mp4 */; };
 		E1A3868324771FD700AD8FA8 /* ComponentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A3868224771FD700AD8FA8 /* ComponentDetailsViewController.swift */; };
 		E1A386852477471E00AD8FA8 /* EditCoponentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A386842477471E00AD8FA8 /* EditCoponentDetailViewController.swift */; };
 		E1A794DB24748874009361B3 /* UITableView+EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A794DA24748874009361B3 /* UITableView+EmptyView.swift */; };
@@ -153,7 +152,6 @@
 		E134756F246F02E300B5C791 /* UIView+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+String.swift"; sourceTree = "<group>"; };
 		E13A0BA1247D8E7F0079868E /* ClientRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientRepresentation.swift; sourceTree = "<group>"; };
 		E13A0BA3247D8F6A0079868E /* Client+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Convenience.swift"; sourceTree = "<group>"; };
-		E157984C24806BE40023483E /* LoginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginVideo.mp4; sourceTree = "<group>"; };
 		E1A3868224771FD700AD8FA8 /* ComponentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDetailsViewController.swift; sourceTree = "<group>"; };
 		E1A386842477471E00AD8FA8 /* EditCoponentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCoponentDetailViewController.swift; sourceTree = "<group>"; };
 		E1A794DA24748874009361B3 /* UITableView+EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+EmptyView.swift"; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 				A665835423DAB508006073DF /* AppDelegate.swift */,
 				A665835623DAB508006073DF /* SceneDelegate.swift */,
 				6D443000246DD876008C8EE1 /* Assets.xcassets */,
-				E157984C24806BE40023483E /* LoginVideo.mp4 */,
 				6D443008246DDC18008C8EE1 /* Info.plist */,
 			);
 			path = Ressources;
@@ -525,7 +522,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6613BFA23E8BFC0004A11B2 /* Main.storyboard in Resources */,
-				E157984D24806BE40023483E /* LoginVideo.mp4 in Resources */,
 				A6613BFB23E8BFC2004A11B2 /* LaunchScreen.storyboard in Resources */,
 				6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */,
 			);
