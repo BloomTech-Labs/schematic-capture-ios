@@ -70,7 +70,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let jobsheetsTableViewController = GenericTableViewController(model: Model<JobSheet>(), title: project.name ?? EntityNames.jobSheet.rawValue, configure: { (jobsheetCell, jobsheet) in
                     
                     jobsheetCell.textLabel?.text = "\(jobsheet.name ?? "")"
-                    if jobsheet.completed == 0 {
+                    if jobsheet.completed == true {
                         jobsheetCell.detailTextLabel?.text  = "Complete"
                     } else {
                         jobsheetCell.detailTextLabel?.text  = "Incomplete"

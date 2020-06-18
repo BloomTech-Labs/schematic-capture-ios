@@ -80,7 +80,6 @@ class ProjectController {
                                     }
                                     self.getComponents(with: jobSheet.id, token: token) { result in
                                         if let components = try? result.get() as? [ComponentRepresentation] {
-                                            print("COMPONENTS: ", components)
                                             jobSheet.components = components
                                             for component in components {
                                                 if self.checkIfItemExist(id: component.id, entityName: .component) == false {
