@@ -118,7 +118,7 @@ class GeneralTableViewCell: UITableViewCell {
            } else {
              secondLabel.text = "Incompleted"
            }
-           thirdLabel.text = "Kerby Jeanjeanje"
+           thirdLabel.text = "Kerby. J"
            fourthLabel.text = "6/3/2020"
            regularImageView.isHidden = true
            indexLabel.isHidden = true

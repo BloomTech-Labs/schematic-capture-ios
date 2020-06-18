@@ -14,6 +14,8 @@ protocol SearchDelegate: AnyObject {
 
 class HeaderView: UIView {
     
+    var titleView = TitleView()
+    
     var label = UILabel()
     var secondaryLabel = UILabel()
     var thirdLabel = UILabel()
@@ -32,6 +34,7 @@ class HeaderView: UIView {
     }
     
     func setupViews() {
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 26, weight: .medium)
         label.textAlignment = .center
@@ -45,45 +48,30 @@ class HeaderView: UIView {
         thirdLabel.textColor = .label
         addSubview(thirdLabel)
         
-        secondaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        secondaryLabel.font = UIFont.systemFont(ofSize: 16)
+        secondaryLabel.font = UIFont.systemFont(ofSize: 13)
         secondaryLabel.textAlignment = .center
-        secondaryLabel.textColor = .systemGray2
+        secondaryLabel.textColor = .systemGray
+        secondaryLabel.sizeToFit()
         addSubview(secondaryLabel)
         
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.searchBarStyle = .minimal
-        searchBar.returnKeyType = .done
-        searchBar.delegate = self
-        searchBar.isHidden = true
-        //addSubview(searchBar)
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        titleLabel.textColor = .systemGray
-        addSubview(titleLabel)
-        
-        let stackView = UIStackView()
+        let stackView = UIStackView(arrangedSubviews: [label, secondaryLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
+        stackView.spacing = 20
         stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 8.0
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(thirdLabel)
-        stackView.addArrangedSubview(secondaryLabel)
-        stackView.addArrangedSubview(searchBar)
-        stackView.setCustomSpacing(16, after: secondaryLabel)
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+//        addSubview(titleView)
         
         NSLayoutConstraint.activate([
+            
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8.0),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8.0),
-            
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8.0),
-            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
-            titleLabel.widthAnchor.constraint(equalTo: widthAnchor)
+
+//            titleView.widthAnchor.constraint(equalTo: widthAnchor),
+//            titleView.heightAnchor.constraint(equalToConstant: 50),
+//            titleView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

@@ -27,7 +27,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     @objc func dropboxAuthorization(notification: Notification) {
         if let info = notification.userInfo {
             if let _ = info["viewController"] as? UIViewController {
-                print("LOGIN TAPPED")
                 self.setupViewControllers()
                 // self.dropboxController.authorizeClient(viewController: viewController)
             }
@@ -41,40 +40,60 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func setupViewControllers() {
-        
         let navigationController = UINavigationController()
         navigationController.navigationBar.tintColor = .label
-
-        
         // Setup ClientsTableViewController
-        let clientsTableViewController = GenericTableViewController(model: Model<Client>(), title: "Clients", configure: {
-            (clientCell, client) in
-            clientCell.configure(entityName: .client, value: client)
+        let clientsTableViewController = GenericTableViewController(model: Model<Client>(), title: EntityNames.client.rawValue, configure: { (clientCell, client) in
+            
+            clientCell.textLabel?.text = client.companyName
+            if let projects = Int(client.projects ?? "0") {
+                if  projects > 1 {
+                    clientCell.detailTextLabel?.text = "\(client.projects ?? "0") projects"
+                } else {
+                    clientCell.detailTextLabel?.text = " \(client.projects ?? "0") project"
+                }
+            }
+            
+            //clientCell.configure(entityName: .client, value: client)
         }) { client in
             // Setup ProjectsTableViewController
-            
-            let projectsTableViewController = GenericTableViewController(model: Model<Project>(), title: "Projects", configure: { (projectCell, project) in
-                projectCell.configure(entityName: .project, value: project)
+            let projectsTableViewController = GenericTableViewController(model: Model<Project>(), title: EntityNames.project.rawValue, configure: { (projectCell, project) in
+                //projectCell.configure(entityName: .project, value: project)
+                projectCell.textLabel?.text = project.name
+                if project.completed == true {
+                    projectCell.detailTextLabel?.text  = "Assigned on 1/4/2020 - Complete"
+                } else {
+                    projectCell.detailTextLabel?.text  = "Assigned on 1/4/2020 - Incomplete"
+                }
             }) { project in
                 // Setup JobsheetsTableViewController
-                let jobsheetsTableViewController = GenericTableViewController(model: Model<JobSheet>(), title: project.name ?? "Jobsheet", configure: { (jobsheetCell, jobsheet) in
-                    jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
-                    }) { jobsheet in
-                    print("JOBSHEET SELECTED: ", jobsheet.id)
-                     // Setup ComponentsTableViewController
-                        let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: "Components", configure: { (componentCell, component) in
-                            print("COMPONENT: ", component)
-                            
-                        componentCell.configure(entityName: .component, value: component)
-                            
-                        }) { _ in
-                            
-                            
-                        }
-                        
-                    navigationController.pushViewController(componentsTableViewController, animated: true)
+                let jobsheetsTableViewController = GenericTableViewController(model: Model<JobSheet>(), title: project.name ?? EntityNames.jobSheet.rawValue, configure: { (jobsheetCell, jobsheet) in
+                    
+                    jobsheetCell.textLabel?.text = "\(jobsheet.name ?? "")"
+                    jobsheetCell.detailTextLabel?.text = "\(jobsheet. ?? "")"
 
+
+                    //jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
+                }) { jobsheet in
+                    // Setup ComponentsTableViewController
+                    let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: EntityNames.component.rawValue, configure: { (componentCell, component) in
+                       // componentCell.configure(entityName: .component, value: component)
+                    }) { _ in }
+                    navigationController.pushViewController(componentsTableViewController, animated: true)
                 }
+                
+                let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.gray]
+                let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.darkText]
+
+                let attributedString = NSMutableAttributedString(string: "Assigned to you for ", attributes: attrs1)
+                let attributedString1 = NSMutableAttributedString(string: project.name ?? "", attributes:attrs2)
+                let attributedString2 = NSMutableAttributedString(string: " on ", attributes: attrs1)
+                attributedString.append(attributedString1)
+                attributedString.append(attributedString2)
+                let attributedString3 = NSMutableAttributedString(string:"10/6/2020", attributes:attrs2)
+                attributedString.append(attributedString3)
+                
+                jobsheetsTableViewController.headerView.secondaryLabel.attributedText = attributedString
                 navigationController.pushViewController(jobsheetsTableViewController, animated: true)
             }
             navigationController.pushViewController(projectsTableViewController, animated: true)
@@ -85,7 +104,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
-
+    
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if let authResult = DropboxClientsManager.handleRedirectURL(url) {

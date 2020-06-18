@@ -35,15 +35,12 @@ class ProjectController {
             guard let data = data else {
                 return
             }
-            
-            print("CLIENTS DATA:", data)
                     
             let decoder = JSONDecoder()
             do {
 
                 if let clients = try decoder.decode([ClientRepresentation].self, from: data) as? [ClientRepresentation] {
                     self.saveData(clients: clients, token: token)
-                    print("ARRAY OF CLIENTS: ", clients)
                 } else {
                     let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
                     let clients = try decoder.decode(ClientRepresentation.self, from: jsonData)
@@ -82,8 +79,8 @@ class ProjectController {
                                         JobSheet(jobSheetRepresentation: jobSheet, context: context)
                                     }
                                     self.getComponents(with: jobSheet.id, token: token) { result in
-                                        print("COMOONENTS:", result)
                                         if let components = try? result.get() as? [ComponentRepresentation] {
+                                            print("COMPONENTS: ", components)
                                             jobSheet.components = components
                                             for component in components {
                                                 if self.checkIfItemExist(id: component.id, entityName: .component) == false {

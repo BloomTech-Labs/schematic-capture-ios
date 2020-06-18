@@ -31,7 +31,6 @@ class Model<T> where T: NSManagedObject {
             case EntityNames.jobSheet.rawValue:
                 request.predicate = NSPredicate(format: "projectId = %@", "\(parentId)")
             case EntityNames.component.rawValue:
-                print("PARENT ID: ", parentId)
                 request.predicate = NSPredicate(format: "jobsheetId = %@", "\(parentId)")
             default:
                 break
