@@ -32,7 +32,7 @@ extension Component {
                                        custom: custom,
                                        imageData: imageData,
                                        image: image,
-                                       jobSheetId: Int(jobSheetId))
+                                       jobsheetId: Int(jobsheetId))
     }
     
     @discardableResult convenience init(id: Int,
@@ -54,7 +54,7 @@ extension Component {
                                         custom: String?,
                                         imageData: Data?,
                                         image: String?,
-                                        jobSheetId: Int,
+                                        jobsheetId: Int,
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
@@ -76,7 +76,7 @@ extension Component {
         self.custom = custom
         self.imageData = imageData
         self.image = image
-        self.jobSheetId = Int32(jobSheetId)
+        self.jobsheetId = Int32(jobsheetId)
     }
     
     @discardableResult convenience init(componentRepresentation: ComponentRepresentation, context: NSManagedObjectContext) {
@@ -100,7 +100,7 @@ extension Component {
                   custom: componentRepresentation.custom,
                   imageData: componentRepresentation.imageData,
                   image: componentRepresentation.image,
-                  jobSheetId: componentRepresentation.jobSheetId ?? 0,
+                  jobsheetId: componentRepresentation.jobsheetId ?? 0,
                   context: context)
     }
 }
