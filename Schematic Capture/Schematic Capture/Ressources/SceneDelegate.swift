@@ -26,9 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     @objc func dropboxAuthorization(notification: Notification) {
         if let info = notification.userInfo {
-            if let _ = info["viewController"] as? UIViewController {
-                self.setupViewControllers()
-                // self.dropboxController.authorizeClient(viewController: viewController)
+            if let viewController = info["viewController"] as? UIViewController {
+                 self.dropboxController.authorizeClient(viewController: viewController)
             }
         }
     }
@@ -44,49 +43,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.navigationBar.tintColor = .label
         // Setup ClientsTableViewController
         let clientsTableViewController = GenericTableViewController(model: Model<Client>(), title: EntityNames.client.rawValue, configure: { (clientCell, client) in
-            
-            clientCell.textLabel?.text = client.companyName
-            if let projects = Int(client.projects ?? "0") {
-                if  projects > 1 {
-                    clientCell.detailTextLabel?.text = "\(client.projects ?? "0") projects"
-                } else {
-                    clientCell.detailTextLabel?.text = " \(client.projects ?? "0") project"
-                }
-            }
-            
-            //clientCell.configure(entityName: .client, value: client)
+            clientCell.configure(entityName: .client, value: client)
         }) { client in
+            self.dropboxController.path.append(client.companyName ?? "")
+              UserDefaults.standard.set(client.id, forKey: .selectedRow)
             // Setup ProjectsTableViewController
             let projectsTableViewController = GenericTableViewController(model: Model<Project>(), title: EntityNames.project.rawValue, configure: { (projectCell, project) in
-                //projectCell.configure(entityName: .project, value: project)
-                projectCell.textLabel?.text = project.name
-                if project.completed == true {
-                    projectCell.detailTextLabel?.text  = "Assigned on 1/4/2020 - Complete"
-                } else {
-                    projectCell.detailTextLabel?.text  = "Assigned on 1/4/2020 - Incomplete"
-                }
+                projectCell.configure(entityName: .project, value: project)
             }) { project in
+                self.dropboxController.path.append(project.name ?? "")
+                UserDefaults.standard.set(project.id, forKey: .selectedRow)
                 // Setup JobsheetsTableViewController
                 let jobsheetsTableViewController = GenericTableViewController(model: Model<JobSheet>(), title: project.name ?? EntityNames.jobSheet.rawValue, configure: { (jobsheetCell, jobsheet) in
-                    
-                    jobsheetCell.textLabel?.text = "\(jobsheet.name ?? "")"
-                    if jobsheet.completed == 0 {
-                        jobsheetCell.detailTextLabel?.text  = "Complete"
-                    } else {
-                        jobsheetCell.detailTextLabel?.text  = "Incomplete"
-                    }
-                    
-                    //jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
+                    jobsheetCell.configure(entityName: .jobSheet, value: jobsheet)
                 }) { jobsheet in
-                    // Setup ComponentsTableViewController
-                    let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: EntityNames.component.rawValue, configure: { (componentCell, component) in
-                        // componentCell.configure(entityName: .component, value: component)
-                    }) { _ in }
-                    navigationController.pushViewController(componentsTableViewController, animated: true)
+                    
+                    self.dropboxController.path.append(jobsheet.name ?? "")
+                    UserDefaults.standard.set(jobsheet.id, forKey: .selectedRow)
+
+//                    // Setup ComponentsTableViewController
+//                    let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: EntityNames.component.rawValue, configure: { (componentCell, component) in
+//                         componentCell.configure(entityName: .component, value: component)
+//
+//
+//                        UserDefaults.standard.set(component.componentId, forKey: .selectedRow)
+//
+//                    }) { component in
+//
+//                        UserDefaults.standard.set(component.componentId, forKey: .selectedRow)
+//
+//                    }
+//                    componentsTableViewController.dropboxController = self.dropboxController
+//                    navigationController.pushViewController(componentsTableViewController, animated: true)
                 }
-                
-                let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.gray]
-                let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.darkText]
+   
+                jobsheetsTableViewController.dropboxController = self.dropboxController
+
+                let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.systemGray]
+                let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.label]
                 
                 let attributedString = NSMutableAttributedString(string: "Assigned to you for ", attributes: attrs1)
                 let attributedString1 = NSMutableAttributedString(string: project.name ?? "", attributes:attrs2)
@@ -99,11 +93,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 jobsheetsTableViewController.headerView.secondaryLabel.attributedText = attributedString
                 navigationController.pushViewController(jobsheetsTableViewController, animated: true)
             }
+            
+            projectsTableViewController.dropboxController = self.dropboxController
             navigationController.pushViewController(projectsTableViewController, animated: true)
         }
         
         navigationController.viewControllers = [clientsTableViewController]
         clientsTableViewController.title = "Schematic Capture"
+        clientsTableViewController.dropboxController = dropboxController
+        
+        
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }

@@ -30,8 +30,7 @@ extension JobSheet {
         
         return JobSheetRepresentation(id: Int(id),
                                       name: name,
-                                      schematicData: schematicData,
-                                      schematicName: schematicName,
+                                      schematic: schematic,
                                       updatedAt: updatedAt,
                                       status: status,
                                       projectId: Int(projectId),
@@ -43,42 +42,41 @@ extension JobSheet {
     @discardableResult convenience init(id: Int,
                                         name: String,
                                         components: [Component]?,
-                                        schematicData: Data?,
-                                        schematicName: String?,
+                                        schematic: String?,
                                         updatedAt: String,
                                         status: JobSheetStatus,
                                         projectId: Int,
                                         userEmail:String,
-                                        completed:Int,
+                                        completed: Bool,
                                         
                                         context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = Int32(id)
         self.name = name
         self.components = components != nil ? NSOrderedSet(array: components!) : nil
-        self.schematicData = schematicData
-        self.schematicName = schematicName
+        self.schematic = schematic
         self.updatedAt = updatedAt
         self.status = status.rawValue
         self.projectId = Int32(projectId)
         self.userEmail = userEmail
-        self.completed = Int32(completed)
+        self.completed = completed
     }
     
     @discardableResult convenience init(jobSheetRepresentation: JobSheetRepresentation, context: NSManagedObjectContext) {
         
         let components = jobSheetRepresentation.components != nil ? jobSheetRepresentation.components!.map { Component(componentRepresentation: $0, context: context) } : nil
         
+        
+        
         self.init(id: jobSheetRepresentation.id,
                   name: jobSheetRepresentation.name,
                   components: components,
-                  schematicData: jobSheetRepresentation.schematicData,
-                  schematicName: jobSheetRepresentation.schematicName,
+                  schematic: jobSheetRepresentation.schematic,
                   updatedAt: jobSheetRepresentation.updatedAt,
                   status: JobSheetStatus(rawValue: jobSheetRepresentation.status) ?? JobSheetStatus.incomplete,
                   projectId: jobSheetRepresentation.projectId,
                   userEmail: jobSheetRepresentation.userEmail ?? "",
-                  completed: 1,
+                  completed: false,
                   context: context)
         
     }

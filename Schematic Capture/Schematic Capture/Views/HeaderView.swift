@@ -15,12 +15,14 @@ protocol SearchDelegate: AnyObject {
 class HeaderView: UIView {
     
     var titleView = TitleView()
-    
     var label = UILabel()
     var secondaryLabel = UILabel()
     var thirdLabel = UILabel()
     var titleLabel = UILabel()
     var searchBar = UISearchBar()
+    
+    var imageView = UIImageView()
+    
     
     weak var searchDelegate: SearchDelegate?
     
@@ -61,17 +63,20 @@ class HeaderView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
-//        addSubview(titleView)
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true 
+        addSubview(imageView)
         
         NSLayoutConstraint.activate([
             
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8.0),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8.0),
-
-//            titleView.widthAnchor.constraint(equalTo: widthAnchor),
-//            titleView.heightAnchor.constraint(equalToConstant: 50),
-//            titleView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            
+            imageView.widthAnchor.constraint(equalTo: widthAnchor),
+            imageView.heightAnchor.constraint(equalTo: heightAnchor, constant: -24.0)
         ])
     }
     

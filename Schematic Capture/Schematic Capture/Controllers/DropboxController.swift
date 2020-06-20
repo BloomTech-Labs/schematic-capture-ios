@@ -10,6 +10,8 @@ import SwiftyDropbox
 
 class DropboxController {
     
+    var path = [String]()
+    
     var client: DropboxClient? {
         return DropboxClientsManager.authorizedClient
     }
@@ -31,7 +33,6 @@ class DropboxController {
         DropboxClientsManager.authorizeFromController(
             UIApplication.shared, controller: viewController, openURL: { (url: URL) -> Void in
                 
-            print("DROP BOX DONE")
         })
     }
     
@@ -46,11 +47,8 @@ class DropboxController {
         }
     }
     
-    func updateDropbox(imageData: Data, path: [String], componentId: Int, imageName: String) {
-        var pathWithId = path
-        pathWithId.append("\(componentId)")
-        let fullpath = pathWithId.joined(separator: "/")
-        
+    func updateDropbox(imageData: Data, path: [String], imageName: String) {
+        let fullpath = path.joined(separator: "/")
         if let client = client {
             client.files.deleteV2(path: "/\(fullpath)/\(imageName).jpg").response { (result, error) in
                 if let error = error {

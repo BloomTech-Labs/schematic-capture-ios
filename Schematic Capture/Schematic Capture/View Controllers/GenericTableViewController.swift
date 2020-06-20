@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
+class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
     // MARK: - Properties
     
@@ -34,7 +34,7 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
     
     var imagePicker: ImagePicker!
     
-    let dropboxController = DropboxController()
+    var dropboxController: DropboxController?
     let projectController = ProjectController()
     
     // MARK: - Initializers
@@ -53,6 +53,13 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
         setupViews(title: title, model: model)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (self.isMovingFromParent) {
+            self.dropboxController?.path.removeLast()
+        }
+    }
+    
     // MARK: - Functions
     
     private func setupViews(title: String, model: Model<T>) {
@@ -63,6 +70,8 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
         
         model.fetchedResultscontroller.delegate = self
         
+//        imagePicker = ImagePicker(presentationController: self, delegate: self)
+        
         searchBar.showsCancelButton = true
         searchBar.delegate = self
         
@@ -71,19 +80,35 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
         
         tableView.tableHeaderView = headerView
         
+        var infoButton = UIBarButtonItem()
+        
+        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
+            infoButton = UIBarButtonItem(image: UIImage(systemName: "folder"), style: .plain, target: self, action: #selector(showSchematicVC))
+        }
+        
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(settingsTapped))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
         
-        self.rightBarButtonItems = [settingsButton, searchButton]
+        self.rightBarButtonItems = [settingsButton, infoButton, searchButton]
         navigationItem.rightBarButtonItems = self.rightBarButtonItems
         self.tableView.register(Cell.self, forCellReuseIdentifier: Cell.id)
     }
-    
-    
+
     @objc private func settingsTapped() {
         let settingsViewController = SettingsViewController()
         navigationController?.pushViewController(settingsViewController, animated: true)
     }
+    
+    @objc private func showSchematicVC() {
+        
+        let schematicViewController = SchematicViewController()
+        let jobsheet = self.model.fetchedResultscontroller.fetchedObjects?.first as! JobSheet
+        schematicViewController.jobSheet = jobsheet
+        let navigationController  = UINavigationController(rootViewController: schematicViewController)
+        self.navigationController?.present(navigationController, animated: true)
+    }
+    
+    
     
     @objc func searchTapped() {
         self.navigationItem.rightBarButtonItems = []
@@ -96,6 +121,10 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
         }
     }
     
+    @objc func imageViewTapped(sender: UIImageView) {
+        self.imagePicker.present(from: sender)
+    }
+    
     // MARK: - Table View Delegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -106,19 +135,18 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
         if searchBar.text != "" {
             return items.count
         } else {
-            tableView.restore()
             return model?.fetchedResultscontroller.sections?[section].numberOfObjects ?? 0
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: Cell.id) as! Cell
-        cell.accessoryType = .disclosureIndicator
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.id, for: indexPath) as! Cell
+        cell.regularImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewTapped)))
         if searchBar.text != "" {
             let item = items[indexPath.row]
             self.configure(cell, item)
         } else {
-            let item =  (model?.fetchedResultscontroller.object(at: indexPath))!
+            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
             configure(cell, item)
         }
         return cell
@@ -126,26 +154,27 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+        selectHandler(item)
         
-        if model.fetchedResultscontroller.fetchRequest.entityName == "JobSheet" {
-            let item = model.fetchedResultscontroller.object(at: indexPath)
-            let jobsheet = item as! JobSheet
-            UserDefaults.standard.set(jobsheet.id, forKey: .selectedRow)
-            selectHandler(item)
-        } else if model.fetchedResultscontroller.fetchRequest.entityName == "Component"  {
-            UserDefaults.standard.set(indexPath.row + 1, forKey: .selectedRow)
+        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
             let item = (model?.fetchedResultscontroller.object(at: indexPath))!
-            self.showComponentAlert(component: item as! Component)
-        } else {
-            UserDefaults.standard.set(indexPath.row + 1, forKey: .selectedRow)
-            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+            let viewController = ComponentsTableViewController()
+            if let jobsheet = item as? JobSheet {
+                viewController.jobSheet = jobsheet
+            }
+            
             selectHandler(item)
+//            let navigationController = UINavigationController(rootViewController: ComponentsTableViewController)
+            viewController.dropboxController = self.dropboxController
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
+    
     
     // MARK: - NSFetchedResultsControllerDelegate
     
@@ -201,7 +230,6 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //navigationItem.rightBarButtonItems = rightBarButtonItems
         tableView.reloadData()
-        print(searchText)
         guard let results = model.fetchedResultscontroller.fetchedObjects else { return }
         var searchedItems: [T] = []
         switch model.fetchedResultscontroller.fetchRequest.entityName {
@@ -222,68 +250,58 @@ class GenericTableViewController<T: NSManagedObject, Cell: UITableViewCell>: UIT
         items = searchedItems
         tableView.reloadData()
     }
-    
-    private func showComponentAlert(component: Component) {
-        
-        let alert = UIAlertController(title: "Component \(component.id)", message: nil, preferredStyle: .actionSheet)
-        
-        let textView = UITextView()
-        textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        let controller = UIViewController()
-        
-        textView.frame = controller.view.frame
-        textView.font = UIFont.systemFont(ofSize: 15)
-        textView.text = "Description: \(component.componentApplication ?? "") \n \nManufacturer: \(component.manufacturer ?? "") \nPart #: \(component.partNumber ?? "")\n \nRL Category: \(component.rlCategory ?? "")\n \nRL Number: \(component.rlNumber ?? "")\n \nStock Code: \(component.stockCode ?? "")\n \nElectrical address: \(component.electricalAddress ?? "")\n \nComponent Application: \(component.componentApplication ?? "")"
-        controller.view.addSubview(textView)
-        
-        alert.setValue(controller, forKey: "contentViewController")
-        let height: NSLayoutConstraint = NSLayoutConstraint(item: alert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height * 0.8)
-        alert.view.addConstraint(height)
-        
-        alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { action in
-            // Go to editViewController
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {
-            action in
-                 // Called when user taps outside
-        }))
-
-        present(alert, animated: true, completion: nil)
-    }
 }
 
-extension GenericTableViewController: ImagePickerDelegate, ImageDoneEditingDelegate {
+//extension GenericTableViewController: ImagePickerDelegate, ImageDoneEditingDelegate {
+    
+    // Annotated image
+//    func ImageDoneEditing(image: UIImage?) {
+//        guard let imageData = image?.jpegData(compressionQuality: 1), let dropboxController = self.dropboxController else { return }
+//        let componentRow = dropboxController.selectedComponentRow
+//
+//
+//        let componentId = UserDefaults.standard.string(forKey: .selectedRow)
+//                   if let components = model.fetchedResultscontroller.fetchedObjects as? [Component] {
+//                       let component = components.filter({$0.componentId == componentId}).first
+//
+//                        component.imageData = imageData
+//                        guard let id = Int(component.componentId ?? ""), var path = self.dropboxController?.path else { return }
+//                        path.append("Annotated")
+//                        dropboxController.updateDropbox(imageData: imageData, path: path, imageName: "\(id)")
+//                        self.projectController.saveToPersistence()
+//                        self.tableView.reloadData()
+//        }
+//
+//    }
     
     
-    func ImageDoneEditing(image: UIImage?) {
-        let componentRow = dropboxController.selectedComponentRow
-        guard let imageData = image?.jpegData(compressionQuality: 1), let component = (model?.fetchedResultscontroller.object(at: IndexPath(row: componentRow, section: 0))) as? Component else { return }
-        component.imageData = imageData
-        
-        guard let id = Int(component.componentId ?? "") else { return }
-        self.dropboxController.updateDropbox(imageData: imageData, path: [""], componentId: id, imageName: "annotated")
-        self.projectController.saveToPersistence()
-        self.tableView.reloadData()
-    }
-    
-    
-    // Unannotated image
-    func didSelect(image: UIImage?) {
-        if image != nil {
-            guard let imageData = image?.jpegData(compressionQuality: 1) else { return }
-            let componentRow = dropboxController.selectedComponentRow
-            let component = (model?.fetchedResultscontroller.object(at: IndexPath(row: componentRow, section: 0))) as? Component
-            guard let id = Int(component?.componentId ?? "") else { return }
-            
-            self.dropboxController.updateDropbox(imageData: imageData, path: [""], componentId: id, imageName: "normal")
-            let annotationViewController = AnnotationViewController()
-            annotationViewController.delegate = self as ImageDoneEditingDelegate
-            let navigationController = UINavigationController(rootViewController: annotationViewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            annotationViewController.image = image
-            self.present(navigationController, animated: true, completion: nil)
-        }
-    }
-}
+//    // Unannotated image
+//    func didSelect(image: UIImage?) {
+//
+//        print("DID SELECTED")
+//
+//
+//
+//        if image != nil {
+//            guard let imageData = image?.jpegData(compressionQuality: 1), let dropboxController = self.dropboxController else { return }
+//            let componentId = UserDefaults.standard.string(forKey: .selectedRow)
+//
+//
+//            if let components = model.fetchedResultscontroller.fetchedObjects as? [Component] {
+//
+//                let component = components.filter({$0.componentId == componentId}).first
+//
+//
+//                guard let id = component?.id, var path = self.dropboxController?.path else { return }
+//                path.append("Normal")
+//                dropboxController.updateDropbox(imageData: imageData, path: path, imageName: "\(id)")
+//                let annotationViewController = AnnotationViewController()
+//                annotationViewController.delegate = self as ImageDoneEditingDelegate
+//                let navigationController = UINavigationController(rootViewController: annotationViewController)
+//                navigationController.modalPresentationStyle = .fullScreen
+//                annotationViewController.image = image
+//                self.present(navigationController, animated: true, completion: nil)
+//            }
+//        }
+//    }
+//}

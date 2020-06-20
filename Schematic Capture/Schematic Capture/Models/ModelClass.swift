@@ -17,24 +17,21 @@ class Model<T> where T: NSManagedObject {
         guard let self = self else {
             fatalError("lazy property has been called after object has been descructed")
         }
-        
-//        let fetchRequest = NSFetchRequest(entityName: "")
-        
+                
         guard let request = T.fetchRequest() as? NSFetchRequest<T> else {
             fatalError("Can't set up NSFetchRequest")
         }
         
-        if let parentId = UserDefaults.standard.value(forKey: .selectedRow) as? Int {
-            switch request.entityName {
-            case EntityNames.project.rawValue:
-                request.predicate = NSPredicate(format: "clientId = %@", "\(parentId)")
-            case EntityNames.jobSheet.rawValue:
-                request.predicate = NSPredicate(format: "projectId = %@", "\(parentId)")
-            case EntityNames.component.rawValue:
-                request.predicate = NSPredicate(format: "jobsheetId = %@", "\(parentId)")
-            default:
-                break
-            }
+        let parentId = UserDefaults.standard.integer(forKey: .selectedRow)
+        switch request.entityName {
+        case EntityNames.project.rawValue:
+            request.predicate = NSPredicate(format: "clientId = %@", "\(parentId)")
+        case EntityNames.jobSheet.rawValue:
+            request.predicate = NSPredicate(format: "projectId = %@", "\(parentId)")
+        case EntityNames.component.rawValue:
+            request.predicate = NSPredicate(format: "jobsheetId = %@", "\(parentId)")
+        default:
+            break
         }
         
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
@@ -46,5 +43,5 @@ class Model<T> where T: NSManagedObject {
             fatalError("Error performing fetch for frc: \(error)")
         }
         return frc
-        }()
+    }()
 }

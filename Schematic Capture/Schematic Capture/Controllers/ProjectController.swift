@@ -44,7 +44,6 @@ class ProjectController {
                 } else {
                     let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
                     let clients = try decoder.decode(ClientRepresentation.self, from: jsonData)
-                    print("DICT OF CLIENTS: ", clients)
                     //self.saveData(clients: clients)
                 }
 
@@ -80,7 +79,6 @@ class ProjectController {
                                     }
                                     self.getComponents(with: jobSheet.id, token: token) { result in
                                         if let components = try? result.get() as? [ComponentRepresentation] {
-                                            print("COMPONENTS: ", components)
                                             jobSheet.components = components
                                             for component in components {
                                                 if self.checkIfItemExist(id: component.id, entityName: .component) == false {
@@ -203,6 +201,42 @@ class ProjectController {
                 return
             }
         }.resume()
+    }
+    
+    func updateComponent(component: Component) {
+        
+//        var request = URLRequest(url: URL(string: Urls.logInUrl.rawValue)!)
+//        request.httpMethod = "POST"
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        
+//        let jsonEncoder = JSONEncoder()
+//        do {
+//            let jsonData = try jsonEncoder.encode(loggingInUser)
+//            request.httpBody = jsonData
+//        } catch {
+//            NSLog("Error encoding user in LogIn: \(error)")
+//            completion(.failure(.badDecode))
+//            return
+//        }
+//        URLSession.shared.dataTask(with:request) { (data, _, error) in
+//            if let error = error {
+//                completion(.failure(.serverError(error)))
+//            }
+//            guard let data = data else {
+//                completion(.failure(.noData))
+//                return
+//            }
+//            
+//            let decoder = JSONDecoder()
+//            
+//            do {
+//               
+//            } catch {
+//                NSLog("Error decoding a bearer token: \(error)")
+//                return
+//            }
+//        }.resume()
+        
     }
     
     // Persistence file url

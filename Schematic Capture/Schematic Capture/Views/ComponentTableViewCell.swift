@@ -28,18 +28,15 @@ class ComponentTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         indexLabel.translatesAutoresizingMaskIntoConstraints = false
-        indexLabel.text = "1"
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = "Electric motor"
+        nameLabel.textAlignment = .left
         
         componentImageView.translatesAutoresizingMaskIntoConstraints = false
         componentImageView.contentMode = .scaleAspectFill
         componentImageView.clipsToBounds = true
         componentImageView.image = UIImage(systemName: "camera")
         componentImageView.isUserInteractionEnabled = true
-        
-        componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewTapped)))
-        
+                
         addSubview(indexLabel)
         addSubview(nameLabel)
         addSubview(componentImageView)
@@ -47,7 +44,8 @@ class ComponentTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             indexLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             indexLabel.heightAnchor.constraint(equalTo: heightAnchor),
-            nameLabel.leftAnchor.constraint(equalTo: indexLabel.rightAnchor, constant: 16.0),
+            indexLabel.widthAnchor.constraint(equalToConstant: 20),
+            nameLabel.leftAnchor.constraint(equalTo: indexLabel.rightAnchor),
             nameLabel.heightAnchor.constraint(equalTo: heightAnchor),
             
             componentImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16.0),
@@ -63,42 +61,36 @@ class ComponentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // Do we need index?
     func updateViews(component: Component) {
-        indexLabel.text = "\(component.id)"
+        indexLabel.text = "\(component.id)."
         nameLabel.text = component.descriptions
         if let imageData = component.imageData {
-            print("IMAGEDATA CELL:", imageData)
             componentImageView.image = UIImage(data: imageData)
         }
-    }
-    
-    @objc func imageViewTapped(sender: UIImageView) {
-        //delegate?.selectedCell(cell: self)
     }
 }
 
 // MARK: - ImagePickerDelegate
 
-extension ComponentTableViewCell: ImagePickerDelegate {
-    
-    func didSelect(image: UIImage?) {
-        if image != nil {
-            let annotationViewController = AnnotationViewController()
-            annotationViewController.delegate = self
-            let navigationController = UINavigationController(rootViewController: annotationViewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            annotationViewController.image = image
-            self.viewController?.present(navigationController, animated: true, completion: nil)
-        }
-    }
-}
-
-// MARK: - ImageDoneEditingDelegate
-
-extension ComponentTableViewCell: ImageDoneEditingDelegate {
-    
-    func ImageDoneEditing(image: UIImage?) {
-        self.componentImageView.image = image
-    }
-}
+//extension ComponentTableViewCell: ImagePickerDelegate {
+//
+//    func didSelect(image: UIImage?) {
+//        if image != nil {
+//            let annotationViewController = AnnotationViewController()
+//            annotationViewController.delegate = self
+//            let navigationController = UINavigationController(rootViewController: annotationViewController)
+//            navigationController.modalPresentationStyle = .fullScreen
+//            annotationViewController.image = image
+//            self.viewController?.present(navigationController, animated: true, completion: nil)
+//        }
+//    }
+//}
+//
+//// MARK: - ImageDoneEditingDelegate
+//
+//extension ComponentTableViewCell: ImageDoneEditingDelegate {
+//
+//    func ImageDoneEditing(image: UIImage?) {
+//        self.componentImageView.image = image
+//    }
+//}

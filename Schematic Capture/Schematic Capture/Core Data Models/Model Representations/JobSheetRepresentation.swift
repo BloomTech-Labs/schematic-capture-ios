@@ -11,13 +11,12 @@ import Foundation
 struct JobSheetRepresentation: Codable {
     let id: Int
     var name: String
-    var schematicData: Data?
-    var schematicName: String?
+    var schematic: String?
     var updatedAt: String
     var status: String
     let projectId: Int
     var userEmail:String?
-    var completed:Bool
+    var completed: Bool
     var components: [ComponentRepresentation]?
 }
 

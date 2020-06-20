@@ -16,14 +16,6 @@ class ComponentDetailsViewController: UIViewController {
     var tableView: UITableView!
     var headerView = HeaderView()
     
-    lazy var indicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        view.style = UIActivityIndicatorView.Style.medium
-        view.hidesWhenStopped = true
-        return view
-    }()
-    
-    
     // MARK: - Properties
     
     var component: Component? {
@@ -44,8 +36,10 @@ class ComponentDetailsViewController: UIViewController {
     // MARK: - Functions
     
     private func setupViews() {
-        self.title = "Schematic Capture"
+        self.title = "Component \(component?.id ?? 0)"
         view.backgroundColor = .systemBackground
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(handleClose))
         
         tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.register(GeneralTableViewCell.self, forCellReuseIdentifier: GeneralTableViewCell.id)
@@ -53,15 +47,15 @@ class ComponentDetailsViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = .systemBackground
-        tableView.addSubview(indicator)
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250)
         tableView.tableHeaderView = headerView
+//        headerView.imageView.image = UIImage(named: "image")
         view.addSubview(tableView)
     }
     
     func updateViews() {
-        let details: [String : String] = [
+        details = [
             "Description:" : component?.descriptions ?? "",
             "Manufacturer:" : component?.manufacturer ?? "",
             "Part #:" : component?.partNumber ?? "",
@@ -76,11 +70,22 @@ class ComponentDetailsViewController: UIViewController {
             "Store's Part #:" : component?.storePartNumber ?? "",
             "Notes:" : component?.custom ?? "",
         ]
-        self.details = details
+    }
+    
+    
+    @objc func handleClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleComponentEditing() {
+//        let viewController = ComponentViewController()
+//        viewController.details = self.details
+//        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
 extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return details.count
     }
@@ -95,24 +100,12 @@ extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSo
         let value = details[key]
         
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        cell.translatesAutoresizingMaskIntoConstraints = false
         cell.textLabel?.text = key
         cell.detailTextLabel?.text = value
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        var keys:[String] {
-            get{
-                return Array(details.keys)
-            }
-        }
-        let key = keys[indexPath.row]
-        let value = details[key]
         
-        let editCoponentDetailViewController = EditCoponentDetailViewController()
-        //editCoponentDetailViewController.value = detail
-        navigationController?.pushViewController(editCoponentDetailViewController, animated: true)
     }
 }
