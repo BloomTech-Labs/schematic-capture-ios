@@ -37,6 +37,7 @@ class AuthorizationController {
             completion(.failure(.badDecode))
             return
         }
+        
         URLSession.shared.dataTask(with:request) { (data, _, error) in
             if let error = error {
                 completion(.failure(.serverError(error)))
@@ -53,9 +54,7 @@ class AuthorizationController {
                 internalBearer = try decoder.decode(Bearer.self, from: data)
                 let user = try decoder.decode(User.self, from: data)
                 guard let bearer = internalBearer else { return }
-                DispatchQueue.main.async {
-                   completion(.success([bearer.token, user]))
-                }
+                completion(.success([bearer.token, user]))
             } catch {
                 NSLog("Error decoding a bearer token: \(error)")
                 completion(.failure(.badDecode))

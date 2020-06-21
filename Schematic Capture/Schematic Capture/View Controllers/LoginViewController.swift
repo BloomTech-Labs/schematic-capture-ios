@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     
     let emailTextField = UITextField()
     let passwordTextField = UITextField()
-    let loginButton = UIButton()
+    let loginButton = LoadingButton()
     let label = UILabel()
     
     var player: AVPlayer!
@@ -39,14 +39,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        player?.play()
-        paused = false
+//        player?.play()
+//        paused = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        player?.pause()
-        paused = true
+//        player?.pause()
+//        paused = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,7 +86,6 @@ class LoginViewController: UIViewController {
         loginButton.layer.borderWidth = 1
         loginButton.setTitleColor(.systemRed, for: .normal)
         loginButton.layer.borderColor = UIColor.white.cgColor
-        loginButton.alpha = 0.7
         
         /// Email and password are for testing purposes
         emailTextField.text = "bob_johnson@lambdaschool.com"
@@ -118,17 +117,34 @@ class LoginViewController: UIViewController {
 //        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(notification:)), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
     }
     
-    @objc private func login(_ sender: UIButton) {
+    @objc func login(_ sender: UIButton) {
+        
+        print("BUTTON TAPPED")
+        
+        self.loginButton.showLoading()
+        
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
+        
+        print("\(username), \(password)")
         
         authController.logIn(username: username, password: password, viewController: self) { result in
             if let result = try? result.get() {
-                guard let token = result.first as? String, let _ = result.last as? User else { return }
+                guard let token = result.first as? String else { return }
+                
+                print("TOKEN: ", token)
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 self.projectContoller.getClients(token: token)
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .dropboxLogin, object: self, userInfo: ["viewController": self])
+                    self.loginButton.hideLoading()
+                    
+                    if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+                        sceneDelegate.dropboxController.authorizeClient(viewController: self)
+                    }
+                    
+                    
+                    
+                   // NotificationCenter.default.post(name: .dropboxLogin, object: self, userInfo: ["viewController": self])
                 }
             }
         }

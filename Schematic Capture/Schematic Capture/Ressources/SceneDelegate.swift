@@ -20,17 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         setupRootViewController()
-        NotificationCenter.default.addObserver(self, selector: #selector(dropboxAuthorization(notification:)), name: .dropboxLogin, object: nil)
         guard let _ = (scene as? UIWindowScene) else { return }
     }
     
-    @objc func dropboxAuthorization(notification: Notification) {
-        if let info = notification.userInfo {
-            if let viewController = info["viewController"] as? UIViewController {
-                 self.dropboxController.authorizeClient(viewController: viewController)
-            }
-        }
-    }
     
     func setupRootViewController() {
         let navigationController = UINavigationController(rootViewController: LoginViewController())
@@ -60,21 +52,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     
                     self.dropboxController.path.append(jobsheet.name ?? "")
                     UserDefaults.standard.set(jobsheet.id, forKey: .selectedRow)
-
-//                    // Setup ComponentsTableViewController
-//                    let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: EntityNames.component.rawValue, configure: { (componentCell, component) in
-//                         componentCell.configure(entityName: .component, value: component)
-//
-//
-//                        UserDefaults.standard.set(component.componentId, forKey: .selectedRow)
-//
-//                    }) { component in
-//
-//                        UserDefaults.standard.set(component.componentId, forKey: .selectedRow)
-//
-//                    }
-//                    componentsTableViewController.dropboxController = self.dropboxController
-//                    navigationController.pushViewController(componentsTableViewController, animated: true)
                 }
    
                 jobsheetsTableViewController.dropboxController = self.dropboxController

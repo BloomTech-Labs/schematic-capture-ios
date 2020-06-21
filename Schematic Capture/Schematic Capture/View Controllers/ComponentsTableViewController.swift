@@ -1,5 +1,5 @@
 //
-//  EditCoponentDetailViewController.swift
+//  ComponentsTableViewController.swift
 //  Schematic Capture
 //
 //  Created by Ufuk Türközü on 22.05.20.
@@ -25,7 +25,7 @@ class ComponentsTableViewController: UITableViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController<Component> = {
         let fetchRequest: NSFetchRequest<Component> = Component.fetchRequest()
-        fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "id", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "jobsheetId = %@", "\(jobSheet!.id)")
         
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -166,10 +166,9 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
             var path = dropboxController?.path else { return }
         let component = self.fetchedResultsController.object(at: IndexPath(row: componentRow, section: 0))
         path.append("Annotated")
-        component.imageData = imageData
         self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.id)")
-        CoreDataStack.shared.save()
-        tableView.reloadData()
+        component.imageData = imageData
+        CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
     }
 }
 

@@ -15,7 +15,10 @@ class ProjectController {
     var user: User?
 
     init() {
-        getClients(token: nil)
+        
+        DispatchQueue.global(qos: .background).async {
+            self.getClients(token: nil)
+        }
     }
     
     typealias Completion = (Result<Any, NetworkingError>) -> ()
