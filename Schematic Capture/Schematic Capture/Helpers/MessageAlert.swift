@@ -252,7 +252,7 @@ public class GSMessage: NSObject {
     public private(set) var padding: UIEdgeInsets = .init(top: 10, left: 30, bottom: 10, right: 30)
     public private(set) var position: GSMessagePosition = .top
     public private(set) var textAlignment: GSMessageTextAlignment = .center
-    public private(set) var textColor: UIColor = .white
+    public private(set) var textColor: UIColor = .systemBlue
     public private(set) var textNumberOfLines: Int = 1
     
     public var messageWidth: CGFloat {

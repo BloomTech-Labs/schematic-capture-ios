@@ -83,8 +83,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 switch authResult {
                 case .success:
                     NSLog("Success! User is logged into Dropbox.")
-                    setupViewControllers()
                     monitorNetwork()
+                    setupViewControllers()
                 case .cancel:
                     NSLog("Authorization flow was manually canceled by user!")
                 case .error(_, let description):
