@@ -52,6 +52,10 @@ class GeneralTableViewCell: UITableViewCell {
     }
     
     func configure(entityName: EntityNames, value: Any) {
+        
+        detailTextLabel?.font = UIFont.systemFont(ofSize: 14)
+        textLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+
         switch entityName {
         case .client:
             guard let client = value as? Client else { return }

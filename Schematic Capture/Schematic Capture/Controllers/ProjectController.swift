@@ -15,10 +15,7 @@ class ProjectController {
     var user: User?
 
     init() {
-        
-        DispatchQueue.global(qos: .background).async {
-            self.getClients(token: nil)
-        }
+
     }
     
     typealias Completion = (Result<Any, NetworkingError>) -> ()
@@ -26,6 +23,11 @@ class ProjectController {
     func getClients(token: String?) {
         //configure request url
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
+        
+        print("GET CLIENTS")
+        
+        
+        
         var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)

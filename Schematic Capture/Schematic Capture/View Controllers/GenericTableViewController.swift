@@ -70,8 +70,6 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
         
         model.fetchedResultscontroller.delegate = self
         
-//        imagePicker = ImagePicker(presentationController: self, delegate: self)
-        
         searchBar.showsCancelButton = true
         searchBar.delegate = self
         
@@ -80,16 +78,22 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
         
         tableView.tableHeaderView = headerView
         
-        var infoButton = UIBarButtonItem()
         
-        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
-            infoButton = UIBarButtonItem(image: UIImage(systemName: "folder"), style: .plain, target: self, action: #selector(showSchematicVC))
+        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.client.rawValue {
+            let date = CachedDateFormattingHelper.shared.formatTodayDate()
+            headerView.secondaryLabel.text = date
         }
-        
+                
+        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
+            headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
+            headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
+            headerView.showSchematicButton()
+        }
+
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(settingsTapped))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
         
-        self.rightBarButtonItems = [settingsButton, infoButton, searchButton]
+        self.rightBarButtonItems = [settingsButton, searchButton]
         navigationItem.rightBarButtonItems = self.rightBarButtonItems
         self.tableView.register(Cell.self, forCellReuseIdentifier: Cell.id)
     }
@@ -100,12 +104,11 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
     }
     
     @objc private func showSchematicVC() {
-        
         let schematicViewController = SchematicViewController()
         let jobsheet = self.model.fetchedResultscontroller.fetchedObjects?.first as! JobSheet
         schematicViewController.jobSheet = jobsheet
-        let navigationController  = UINavigationController(rootViewController: schematicViewController)
-        self.navigationController?.present(navigationController, animated: true)
+        let navigationController = UINavigationController(rootViewController: schematicViewController)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     
@@ -154,8 +157,6 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let item = (model?.fetchedResultscontroller.object(at: indexPath))!
-        selectHandler(item)
         
         if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
             let item = (model?.fetchedResultscontroller.object(at: indexPath))!
@@ -163,19 +164,19 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
             if let jobsheet = item as? JobSheet {
                 viewController.jobSheet = jobsheet
             }
-            
             selectHandler(item)
-//            let navigationController = UINavigationController(rootViewController: ComponentsTableViewController)
             viewController.dropboxController = self.dropboxController
             self.navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+            selectHandler(item)
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
+        return 90.0
     }
-    
-    
+
     // MARK: - NSFetchedResultsControllerDelegate
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

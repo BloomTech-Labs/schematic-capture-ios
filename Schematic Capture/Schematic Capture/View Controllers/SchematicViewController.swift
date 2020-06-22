@@ -26,13 +26,16 @@ class SchematicViewController: UIViewController {
             self.setUpViews()
         }
     }
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         self.title = "Schematic"
         view.backgroundColor = .systemBackground
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        
         view.addSubview(imageView)
         
         imageView.frame = view.frame
@@ -44,6 +47,10 @@ class SchematicViewController: UIViewController {
         indicator.startAnimating()
         
         view.addSubview(indicator)
+    }
+    
+    @objc func handleDone() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     

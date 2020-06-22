@@ -32,15 +32,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func setupViewControllers() {
         let navigationController = UINavigationController()
+//        navigationController.navigationBar.large
         navigationController.navigationBar.tintColor = .label
         // Setup ClientsTableViewController
-        let clientsTableViewController = GenericTableViewController(model: Model<Client>(), title: EntityNames.client.rawValue, configure: { (clientCell, client) in
+        let clientsTableViewController = GenericTableViewController(model: Model<Client>(), title: "Clients", configure: { (clientCell, client) in
             clientCell.configure(entityName: .client, value: client)
         }) { client in
             self.dropboxController.path.append(client.companyName ?? "")
               UserDefaults.standard.set(client.id, forKey: .selectedRow)
             // Setup ProjectsTableViewController
-            let projectsTableViewController = GenericTableViewController(model: Model<Project>(), title: EntityNames.project.rawValue, configure: { (projectCell, project) in
+            let projectsTableViewController = GenericTableViewController(model: Model<Project>(), title: "Projects", configure: { (projectCell, project) in
                 projectCell.configure(entityName: .project, value: project)
             }) { project in
                 self.dropboxController.path.append(project.name ?? "")
@@ -51,23 +52,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }) { jobsheet in
                     
                     self.dropboxController.path.append(jobsheet.name ?? "")
+                    
+                    print("SCENE PATH: ",  self.dropboxController.path)
+                    
                     UserDefaults.standard.set(jobsheet.id, forKey: .selectedRow)
                 }
    
+                jobsheetsTableViewController.title = "Jobsheets"
                 jobsheetsTableViewController.dropboxController = self.dropboxController
 
-                let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.systemGray]
-                let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.label]
-                
-                let attributedString = NSMutableAttributedString(string: "Assigned to you for ", attributes: attrs1)
-                let attributedString1 = NSMutableAttributedString(string: project.name ?? "", attributes:attrs2)
-                let attributedString2 = NSMutableAttributedString(string: " on ", attributes: attrs1)
-                attributedString.append(attributedString1)
-                attributedString.append(attributedString2)
-                let attributedString3 = NSMutableAttributedString(string:"10/6/2020", attributes:attrs2)
-                attributedString.append(attributedString3)
-                
-                jobsheetsTableViewController.headerView.secondaryLabel.attributedText = attributedString
+//                let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.systemGray]
+//                let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.label]
+//                
+//                let attributedString = NSMutableAttributedString(string: "Assigned to you for ", attributes: attrs1)
+//                let attributedString1 = NSMutableAttributedString(string: project.name ?? "", attributes:attrs2)
+//                let attributedString2 = NSMutableAttributedString(string: " on ", attributes: attrs1)
+//                attributedString.append(attributedString1)
+//                attributedString.append(attributedString2)
+//                let attributedString3 = NSMutableAttributedString(string:"10/6/2020", attributes:attrs2)
+//                attributedString.append(attributedString3)
+//                
+//                jobsheetsTableViewController.headerView.secondaryLabel.attributedText = attributedString
                 navigationController.pushViewController(jobsheetsTableViewController, animated: true)
             }
             
@@ -76,7 +81,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         navigationController.viewControllers = [clientsTableViewController]
-        clientsTableViewController.title = "Schematic Capture"
         clientsTableViewController.dropboxController = dropboxController
         
         

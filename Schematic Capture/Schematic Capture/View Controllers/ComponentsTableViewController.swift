@@ -38,20 +38,23 @@ class ComponentsTableViewController: UITableViewController {
         return frc
     }()
     
-    
     var filteredComponents: [Component]?
     
     var imagePicker: ImagePicker!
     var userPath: [String]?
     
     // MARK: - View Lifecycle
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        headerView.searchBar.resignFirstResponder()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (self.isMovingFromParent) {
+            self.dropboxController?.path.removeLast()
+        }
     }
     
     func setupUI() {
@@ -79,6 +82,13 @@ class ComponentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTableViewCell.id, for: indexPath) as? ComponentTableViewCell else { return UITableViewCell() }
+        
+        cell.selecteImageViewAction = { sender in
+            UserDefaults.standard.set(indexPath.row, forKey: .selectedRow)
+            self.imagePicker.present(from: self.view)
+        }
+
+        cell.accessoryType = .disclosureIndicator
         let component = fetchedResultsController.object(at: indexPath)
         cell.updateViews(component: component)
         return cell
@@ -93,7 +103,12 @@ class ComponentsTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! ComponentTableViewCell
         let component = self.fetchedResultsController.object(at: indexPath)
         dropboxController?.selectedComponentRow = indexPath.row
-        self.showAlert(component: component, image: cell.componentImageView.image)
+        
+        let componentDetailsViewController = ComponentDetailsViewController()
+        componentDetailsViewController.image = cell.componentImageView.image
+        componentDetailsViewController.component = component
+           
+        self.navigationController?.pushViewController(componentDetailsViewController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -131,14 +146,11 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     // Unannotated image
     func didSelect(image: UIImage?) {
         if image != nil {
-            
-            guard let imageData = image?.jpegData(compressionQuality: 1), let componentRow = dropboxController?.selectedComponentRow else { return }
-            
+            let indexPath = UserDefaults.standard.integer(forKey: .selectedRow)
+            guard let imageData = image?.jpegData(compressionQuality: 1) else { return }
             var path = dropboxController?.path
-            
-            let component = self.fetchedResultsController.object(at: IndexPath(row: componentRow, section: 0))
+            let component = self.fetchedResultsController.object(at: IndexPath(row: indexPath, section: 0))
             path?.append("Normal")
-        
             dropboxController?.updateDropbox(imageData: imageData, path: path!, imageName: "\(component.id)")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self as ImageDoneEditingDelegate
@@ -151,36 +163,21 @@ extension ComponentsTableViewController: ImagePickerDelegate {
 }
 
 
-
-
-
-
-
 // MARK: - ImageDoneEditingDelegate
 extension ComponentsTableViewController: ImageDoneEditingDelegate {
     
     // Annotated Image
     func ImageDoneEditing(image: UIImage?) {
-        guard let imageData = image?.jpegData(compressionQuality: 1),
-            let componentRow = dropboxController?.selectedComponentRow,
-            var path = dropboxController?.path else { return }
-        let component = self.fetchedResultsController.object(at: IndexPath(row: componentRow, section: 0))
+        let row = UserDefaults.standard.integer(forKey: .selectedRow)
+        guard let imageData = image?.jpegData(compressionQuality: 1), var path = dropboxController?.path else { return }
         path.append("Annotated")
+        let component = self.fetchedResultsController.object(at: IndexPath(row: row, section: 0))
         self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.id)")
+        
         component.imageData = imageData
-        CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
+        CoreDataStack.shared.save()
     }
 }
-
-
-extension ComponentsTableViewController: SelectedCellDelegate {
-    func selectedCell(cell: GeneralTableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        dropboxController?.selectedComponentRow = indexPath.row
-        self.imagePicker.present(from: view)
-    }
-}
-
 
 extension ComponentsTableViewController: SearchDelegate {
     func searchDidEnd(didChangeText: String) {

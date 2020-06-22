@@ -13,7 +13,6 @@ class EditComponentTableViewCell: UITableViewCell {
     var titleLabel = UILabel()
     var textField = UITextField()
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -27,11 +26,12 @@ class EditComponentTableViewCell: UITableViewCell {
     private func setupViews() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        titleLabel.textColor = .label
+        titleLabel.textColor = .systemGray
         addSubview(titleLabel)
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Enter value"
+        textField.textColor = .label
         addSubview(textField)
         
         NSLayoutConstraint.activate([
@@ -45,6 +45,7 @@ class EditComponentTableViewCell: UITableViewCell {
     }
     
     func updateViews(title: String, value: String) {
+        
         titleLabel.text = title
         textField.text = value
     }

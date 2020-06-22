@@ -32,22 +32,22 @@ class DropboxController {
     func authorizeClient(viewController: UIViewController) {
         DropboxClientsManager.authorizeFromController(
             UIApplication.shared, controller: viewController, openURL: { (url: URL) -> Void in
-                
         })
     }
     
     func uploadToDropbox(imageData: Data, path: String, imageName: String) {
+        
         if let client = client {
             client.files.upload(path: "/\(path)/\(imageName).jpg", input: imageData).response { (metadata, error) in
                 if let error = error {
                     print("Error uploading with dropbox:", error)
                 }
             }
-            
         }
     }
     
     func updateDropbox(imageData: Data, path: [String], imageName: String) {
+        print("DROPBOX")
         let fullpath = path.joined(separator: "/")
         if let client = client {
             client.files.deleteV2(path: "/\(fullpath)/\(imageName).jpg").response { (result, error) in

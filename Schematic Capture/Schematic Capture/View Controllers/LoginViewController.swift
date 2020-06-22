@@ -131,14 +131,16 @@ class LoginViewController: UIViewController {
             if let result = try? result.get() {
                 guard let token = result.first as? String else { return }
                 
+                self.projectContoller.getClients(token: token)
+
                 print("TOKEN: ", token)
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
-                self.projectContoller.getClients(token: token)
                 DispatchQueue.main.async {
                     self.loginButton.hideLoading()
                     
                     if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+                        print("schene delegate")
                         sceneDelegate.dropboxController.authorizeClient(viewController: self)
                     }
                     

@@ -39,9 +39,11 @@ class AuthorizationController {
         }
         
         URLSession.shared.dataTask(with:request) { (data, _, error) in
+            
             if let error = error {
                 completion(.failure(.serverError(error)))
             }
+            
             guard let data = data else {
                 completion(.failure(.noData))
                 return

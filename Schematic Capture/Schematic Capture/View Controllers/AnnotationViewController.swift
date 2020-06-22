@@ -108,10 +108,6 @@ class AnnotationViewController: UIViewController {
             collectionView.heightAnchor.constraint(equalToConstant: 46.0),
         ])
     }
-
-    func captureScreen() {
-       annotatedImage = image(with: annotationView)
-    }
     
     func image(with view: UIView) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
@@ -119,7 +115,6 @@ class AnnotationViewController: UIViewController {
         if let context = UIGraphicsGetCurrentContext() {
             view.layer.render(in: context)
             let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
             return image
         }
         return nil
@@ -136,9 +131,8 @@ class AnnotationViewController: UIViewController {
             case 3:
                 annotationView.shape = Shapes.square
             case 4:
-                captureScreen()
                 self.navigationController?.dismiss(animated: true, completion: {
-                    self.delegate?.ImageDoneEditing(image: self.annotatedImage)
+                    self.delegate?.ImageDoneEditing(image: self.image(with: self.annotationView))
                 })
             default:
                 break

@@ -14,15 +14,10 @@ protocol SearchDelegate: AnyObject {
 
 class HeaderView: UIView {
     
-    var titleView = TitleView()
     var label = UILabel()
     var secondaryLabel = UILabel()
-    var thirdLabel = UILabel()
-    var titleLabel = UILabel()
-    var searchBar = UISearchBar()
-    
     var imageView = UIImageView()
-    
+    var button = UIButton()
     
     weak var searchDelegate: SearchDelegate?
     
@@ -43,62 +38,42 @@ class HeaderView: UIView {
         label.textColor = .label
         label.adjustsFontSizeToFitWidth = true
         addSubview(label)
-        
-        thirdLabel.translatesAutoresizingMaskIntoConstraints = false
-        thirdLabel.font = UIFont.systemFont(ofSize: 20)
-        thirdLabel.textAlignment = .center
-        thirdLabel.textColor = .label
-        addSubview(thirdLabel)
-        
-        secondaryLabel.font = UIFont.systemFont(ofSize: 13)
-        secondaryLabel.textAlignment = .center
+
+        secondaryLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         secondaryLabel.textColor = .systemGray
-        secondaryLabel.sizeToFit()
-        addSubview(secondaryLabel)
+        secondaryLabel.isUserInteractionEnabled = true
         
-        let stackView = UIStackView(arrangedSubviews: [label, secondaryLabel])
+        button.setImage(UIImage(systemName: "arrow.up.right"), for: .normal)
+        button.isHidden = true
+        addSubview(button)
+                
+        let stackView = UIStackView(arrangedSubviews: [secondaryLabel, button])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
-        stackView.spacing = 20
-        stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
         
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true 
-        addSubview(imageView)
-        
         NSLayoutConstraint.activate([
             
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8.0),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8.0),
+            label.widthAnchor.constraint(equalTo: widthAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            imageView.widthAnchor.constraint(equalTo: widthAnchor),
-            imageView.heightAnchor.constraint(equalTo: heightAnchor, constant: -24.0)
+            stackView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16.0),
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
     
     func updateViews(_ value: String, _ secondValue: String, _ title: String) {
         label.text = value
-        titleLabel.text = title
         secondaryLabel.text = secondValue
-        searchBar.placeholder = "Search for \(title)"
-    }
-}
-
-
-
-// MARK: - UISearchBarDelegate
-extension HeaderView: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchDelegate?.searchDidEnd(didChangeText: searchText)
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+    func showSchematicButton()  {
+        secondaryLabel.text = "View Schematic"
+        secondaryLabel.isHidden = false
+        secondaryLabel.textColor = .systemBlue
+        button.isHidden = false
     }
-    
 }
