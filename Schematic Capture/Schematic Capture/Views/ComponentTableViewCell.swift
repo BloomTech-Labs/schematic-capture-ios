@@ -19,11 +19,6 @@ class ComponentTableViewCell: UITableViewCell {
     
     var selecteImageViewAction: ((Any) -> Void)?
     
-    
-    
-    
-    
-    
     var dropboxController: DropboxController?
     var imagePicker: ImagePicker!
     

@@ -16,26 +16,27 @@ class  TextFieldTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        label.text = "test"
-        addSubview(label)
+        let views = [label, textField]
+        let stackView = UIStackView(arrangedSubviews: views)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        addSubview(stackView)
         
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.textColor = .systemGray
+        
         textField.placeholder = "Enter value"
+        textField.textColor = .label
         textField.textAlignment = .right
         
-        addSubview(textField)
-        
         NSLayoutConstraint.activate([
-        
-            label.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
-            label.heightAnchor.constraint(equalTo: heightAnchor),
-            
-            // Change widht
-            textField.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 16.0),
-            textField.widthAnchor.constraint(equalTo: widthAnchor, constant: -(label.frame.size.width + 30)),
-            textField.heightAnchor.constraint(equalTo: heightAnchor)
+            stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+            stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
+            stackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor),
+            stackView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor)
         ])
     }
     

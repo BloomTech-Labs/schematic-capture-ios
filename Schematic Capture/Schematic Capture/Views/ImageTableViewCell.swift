@@ -14,11 +14,15 @@ class ImageTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        if imageView?.image == UIImage(systemName: "camera") {
+            
+        }
+        
         addSubview(componentImageView)
         componentImageView.translatesAutoresizingMaskIntoConstraints = false
         componentImageView.contentMode = .scaleAspectFill
-        componentImageView.clipsToBounds = true 
-        componentImageView.image = UIImage(named: "image")
+        componentImageView.clipsToBounds = true
         
         NSLayoutConstraint.activate([
             componentImageView.widthAnchor.constraint(equalTo: widthAnchor),

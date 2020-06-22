@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D03D6CD249C0D5F008B5FA3 /* EditComponentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D03D6CC249C0D5F008B5FA3 /* EditComponentTableViewCell.swift */; };
 		6D03D6CF249D810E008B5FA3 /* SchematicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D03D6CE249D810E008B5FA3 /* SchematicViewController.swift */; };
 		6D03D6D4249EE927008B5FA3 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D03D6D3249EE926008B5FA3 /* LoadingButton.swift */; };
 		6D17295A249454C3000B77BA /* GeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D172959249454C3000B77BA /* GeneralTableViewCell.swift */; };
@@ -98,7 +97,6 @@
 		4DBCB2AD64144D00159EEDF4 /* Pods_Schematic_Capture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_Capture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C9F0C4E76F3C58107BC14BD /* Pods-Schematic CaptureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Schematic CaptureTests.release.xcconfig"; path = "Target Support Files/Pods-Schematic CaptureTests/Pods-Schematic CaptureTests.release.xcconfig"; sourceTree = "<group>"; };
 		69D35217379C6756E5F92DF3 /* Pods_Schematic_CaptureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Schematic_CaptureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D03D6CC249C0D5F008B5FA3 /* EditComponentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditComponentTableViewCell.swift; sourceTree = "<group>"; };
 		6D03D6CE249D810E008B5FA3 /* SchematicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchematicViewController.swift; sourceTree = "<group>"; };
 		6D03D6D0249D833D008B5FA3 /* Schematic Capture 17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 17.xcdatamodel"; sourceTree = "<group>"; };
 		6D03D6D1249D845D008B5FA3 /* Schematic Capture 18.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 18.xcdatamodel"; sourceTree = "<group>"; };
@@ -372,7 +370,6 @@
 				6DF9395B246F7C0600D8927E /* HeaderView.swift */,
 				6DD471262475E14B00A89106 /* AnnotationView.swift */,
 				6D172959249454C3000B77BA /* GeneralTableViewCell.swift */,
-				6D03D6CC249C0D5F008B5FA3 /* EditComponentTableViewCell.swift */,
 				6D03D6D3249EE926008B5FA3 /* LoadingButton.swift */,
 				6D6D15E2249F0EA0006A0A9B /* ClientCell.swift */,
 				6D6D15E424A05871006A0A9B /* ImageTableViewCell.swift */,
@@ -720,7 +717,6 @@
 				A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */,
 				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
 				A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */,
-				6D03D6CD249C0D5F008B5FA3 /* EditComponentTableViewCell.swift in Sources */,
 				E13A0BA4247D8F6A0079868E /* Client+Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
