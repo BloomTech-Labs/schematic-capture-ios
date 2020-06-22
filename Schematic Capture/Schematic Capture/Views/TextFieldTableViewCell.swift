@@ -32,8 +32,9 @@ class  TextFieldTableViewCell: UITableViewCell {
             label.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             label.heightAnchor.constraint(equalTo: heightAnchor),
             
+            // Change widht
             textField.leftAnchor.constraint(equalTo: label.rightAnchor, constant: 16.0),
-            textField.widthAnchor.constraint(equalTo: widthAnchor, constant: -label.frame.size.width),
+            textField.widthAnchor.constraint(equalTo: widthAnchor, constant: -(label.frame.size.width + 30)),
             textField.heightAnchor.constraint(equalTo: heightAnchor)
         ])
     }

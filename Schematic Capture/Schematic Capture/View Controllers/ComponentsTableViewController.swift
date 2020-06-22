@@ -172,10 +172,14 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         guard let imageData = image?.jpegData(compressionQuality: 1), var path = dropboxController?.path else { return }
         path.append("Annotated")
         let component = self.fetchedResultsController.object(at: IndexPath(row: row, section: 0))
-        self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.id)")
-        
-        component.imageData = imageData
-        CoreDataStack.shared.save()
+        DispatchQueue.global(qos: .background).async {
+            self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.id)")
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                component.imageData = imageData
+                CoreDataStack.shared.save()
+            }
+        }
     }
 }
 
@@ -186,10 +190,10 @@ extension ComponentsTableViewController: SearchDelegate {
     }
 }
 
+// MARK: - NSFetchedResultsControllerDelegate
+
 extension ComponentsTableViewController: NSFetchedResultsControllerDelegate {
-    
-    // MARK: - NSFetchedResultsControllerDelegate
-    
+        
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }

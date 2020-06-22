@@ -92,12 +92,13 @@ extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
-            let label = UILabel(frame: CGRect(x: 16, y: 0, width: 0, height: 0))
-            label.sizeToFit()
-            label.backgroundColor = .red
+            
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 90))
+            let label = UILabel(frame: CGRect(x: 16, y: 0, width: 100, height: 0))
             label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
             label.text = "Information"
-            return label
+            view.addSubview(label)
+            return view
         }
         return nil
     }
@@ -112,7 +113,6 @@ extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         var keys:[String] {
             get{
                 return Array(details.keys)
@@ -120,14 +120,12 @@ extension ComponentDetailsViewController: UITableViewDelegate, UITableViewDataSo
         }
         let key = keys[indexPath.row]
         let value = details[key]
-        
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.id, for: indexPath) as! ImageTableViewCell
             cell.selectionStyle = .none
             cell.componentImageView.image = self.image
             return cell
         } else {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.id, for: indexPath) as! TextFieldTableViewCell
             cell.updateViews(title: key, value: value)
             cell.selectionStyle = .none

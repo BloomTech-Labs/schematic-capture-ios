@@ -47,7 +47,6 @@ class DropboxController {
     }
     
     func updateDropbox(imageData: Data, path: [String], imageName: String) {
-        print("DROPBOX")
         let fullpath = path.joined(separator: "/")
         if let client = client {
             client.files.deleteV2(path: "/\(fullpath)/\(imageName).jpg").response { (result, error) in
