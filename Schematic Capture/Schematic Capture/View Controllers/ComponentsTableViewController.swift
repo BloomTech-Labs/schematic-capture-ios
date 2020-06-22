@@ -94,10 +94,6 @@ class ComponentsTableViewController: UITableViewController {
         return cell
     }
     
-    @objc func imageViewTapped(sender: UIImageView) {
-      
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath) as! ComponentTableViewCell
@@ -105,7 +101,13 @@ class ComponentsTableViewController: UITableViewController {
         dropboxController?.selectedComponentRow = indexPath.row
         
         let componentDetailsViewController = ComponentDetailsViewController()
-        componentDetailsViewController.image = cell.componentImageView.image
+        if let image = cell.componentImageView.image {
+            if image != UIImage(systemName: "camera") {
+                componentDetailsViewController.image = cell.componentImageView.image
+                
+            }
+        }
+        componentDetailsViewController.dropboxController = dropboxController
         componentDetailsViewController.component = component
            
         self.navigationController?.pushViewController(componentDetailsViewController, animated: true)
@@ -115,30 +117,6 @@ class ComponentsTableViewController: UITableViewController {
         60.0
     }
     
-    @objc func showAlert(component: Component, image: UIImage?) {
-        
-        let alert = UIAlertController(title: "Options", message: nil, preferredStyle: .actionSheet)
-        let annotate = UIAlertAction(title: "Annotate", style: .default) { _ in
-            self.imagePicker.present(from: self.view)
-        }
-        
-        let viewDetails = UIAlertAction(title: "View details", style: .default) { _ in
-            let componentDetailsViewController = ComponentDetailsViewController()
-            componentDetailsViewController.headerView.imageView.image = image
-            componentDetailsViewController.component = component
-    
-            let navigationController = UINavigationController(rootViewController: componentDetailsViewController)
-            self.navigationController?.present(navigationController, animated: true, completion: nil)
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(annotate)
-        alert.addAction(viewDetails)
-        alert.addAction(cancel)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
 }
 // MARK: - ImagePickerDelegate
 extension ComponentsTableViewController: ImagePickerDelegate {
@@ -161,7 +139,6 @@ extension ComponentsTableViewController: ImagePickerDelegate {
         }
     }
 }
-
 
 // MARK: - ImageDoneEditingDelegate
 extension ComponentsTableViewController: ImageDoneEditingDelegate {

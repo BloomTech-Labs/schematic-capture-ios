@@ -87,7 +87,7 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
         if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
             headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
             headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
-            headerView.showSchematicButton()
+            headerView.showButton(text: "View Schematic")
         }
 
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(settingsTapped))
