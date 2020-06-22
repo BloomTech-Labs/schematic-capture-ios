@@ -65,7 +65,8 @@ class ComponentDetailsViewController: UITableViewController {
             headerView.button.addTarget(self, action: #selector(showImagePicker), for: .touchUpInside)
         } else {
             headerView.imageView.image = self.image
-            
+            headerView.imageView.isUserInteractionEnabled = true
+            headerView.imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImageVC)))
         }
         
         editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
@@ -91,6 +92,17 @@ class ComponentDetailsViewController: UITableViewController {
             cell.textField.isUserInteractionEnabled = false
         }
         
+    }
+    
+    @objc func showImageVC() {
+        let imageViewController = UIViewController()
+        let imageView = UIImageView()
+        
+        imageViewController.view.addSubview(imageView)
+        imageView.frame = imageViewController.view.frame
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        navigationController?.pushViewController(imageViewController, animated: true)
     }
     
     func updateViews() {
