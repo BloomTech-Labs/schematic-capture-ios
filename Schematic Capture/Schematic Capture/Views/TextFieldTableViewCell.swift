@@ -11,7 +11,7 @@ import UIKit
 class  TextFieldTableViewCell: UITableViewCell {
     
     let label = UILabel()
-    let textField = UITextField()
+    var textField = UITextField()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -31,6 +31,7 @@ class  TextFieldTableViewCell: UITableViewCell {
         textField.placeholder = "Enter value"
         textField.textColor = .label
         textField.textAlignment = .right
+        textField.isUserInteractionEnabled = false
         
         NSLayoutConstraint.activate([
             stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),

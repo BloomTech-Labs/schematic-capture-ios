@@ -107,6 +107,7 @@ class ComponentsTableViewController: UITableViewController {
                 
             }
         }
+        componentDetailsViewController.projectController = projectController
         componentDetailsViewController.dropboxController = dropboxController
         componentDetailsViewController.component = component
            
