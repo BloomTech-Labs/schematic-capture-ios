@@ -26,8 +26,7 @@ class LoginViewController: UIViewController {
     // MARK: - Properties
     
     var authController = AuthorizationController()
-    var dropboxController = DropboxController()
-    var projectContoller = ProjectController()
+    var projectController: ProjectController?
     
     // MARK: - View Lifecycle
     
@@ -118,35 +117,22 @@ class LoginViewController: UIViewController {
     }
     
     @objc func login(_ sender: UIButton) {
-        
-        print("BUTTON TAPPED")
-        
         self.loginButton.showLoading()
-        
         guard let username = emailTextField.text, let password = passwordTextField.text else { return }
-        
-        print("\(username), \(password)")
-        
         authController.logIn(username: username, password: password, viewController: self) { result in
             if let result = try? result.get() {
-                guard let token = result.first as? String else { return }
+                guard let token = result.first as? String, let user = result.last as? User else { return }
+                self.projectController?.getClients(token: token)
                 
-                self.projectContoller.getClients(token: token)
-
-                print("TOKEN: ", token)
+                print("USER ROLE: ", user.role)
+                
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {
                     self.loginButton.hideLoading()
-                    
                     if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-                        print("schene delegate")
                         sceneDelegate.dropboxController.authorizeClient(viewController: self)
                     }
-                    
-                    
-                    
-                   // NotificationCenter.default.post(name: .dropboxLogin, object: self, userInfo: ["viewController": self])
                 }
             }
         }

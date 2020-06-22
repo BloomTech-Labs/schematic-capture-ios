@@ -14,20 +14,12 @@ class ProjectController {
     var bearer: Bearer?
     var user: User?
 
-    init() {
-
-    }
-    
     typealias Completion = (Result<Any, NetworkingError>) -> ()
     
     func getClients(token: String?) {
         //configure request url
         guard let token = token ?? UserDefaults.standard.string(forKey: .token) else { return }
-        
-        print("GET CLIENTS")
-        
-        
-        
+
         var request = URLRequest(url: URL(string: Urls.clientsUrl.rawValue)!)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: HeaderNames.contentType.rawValue)
@@ -43,14 +35,8 @@ class ProjectController {
                     
             let decoder = JSONDecoder()
             do {
-
-                if let clients = try decoder.decode([ClientRepresentation].self, from: data) as? [ClientRepresentation] {
-                    self.saveData(clients: clients, token: token)
-                } else {
-                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                    let clients = try decoder.decode(ClientRepresentation.self, from: jsonData)
-                    //self.saveData(clients: clients)
-                }
+                let clients = try decoder.decode([ClientRepresentation].self, from: data)
+                self.saveData(clients: clients, token: token)
 
             } catch {
                 NSLog("Error decoding a clients: \(error)")
@@ -61,11 +47,10 @@ class ProjectController {
     
     
     func saveData(clients: [ClientRepresentation], token: String) {
-        
         let context = CoreDataStack.shared.mainContext
         context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
         
-        for var client in clients {
+        for client in clients {
             if self.checkIfItemExist(id: client.id, entityName: .client) == false {
                 Client(clientRepresentation: client, context: context)
             }
@@ -87,6 +72,10 @@ class ProjectController {
                                             jobSheet.components = components
                                             for component in components {
                                                 if self.checkIfItemExist(id: component.id, entityName: .component) == false {
+                                                    // If item exist save
+                                                    Component(componentRepresentation: component, context: context)
+                                                } else {
+                                                    // If item doesn't exist still save
                                                     Component(componentRepresentation: component, context: context)
                                                 }
                                             }
@@ -281,7 +270,6 @@ class ProjectController {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName.rawValue)
         fetchRequest.fetchLimit =  1
         fetchRequest.predicate = NSPredicate(format: "id == %d" ,id)
-        
         do {
             let count = try managedContext.count(for: fetchRequest)
             if count > 0 {

@@ -102,7 +102,6 @@ extension UIView {
     open func hideMessage(animated: Bool = true) {
         installedMessage?.hide(animated: animated)
     }
-    
 }
 
 public class GSMessage: NSObject {
@@ -112,7 +111,7 @@ public class GSMessage: NSObject {
     public static var successBackgroundColor: UIColor = UIColor.systemGreen
     public static var warningBackgroundColor: UIColor = UIColor.systemOrange
     public static var errorBackgroundColor: UIColor = UIColor.systemRed
-    public static var infoBackgroundColor: UIColor = Colors.systemGray3
+    public static var infoBackgroundColor: UIColor = UIColor.clear
     
     public class func showMessageAddedTo(text: String,
                                          type: GSMessageType,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 import CoreData
 import SwiftyDropbox
 
@@ -14,6 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     var dropboxController = DropboxController()
+    var projectController = ProjectController()
+    let monitor = NWPathMonitor()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -25,7 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func setupRootViewController() {
-        let navigationController = UINavigationController(rootViewController: LoginViewController())
+        let viewController = LoginViewController()
+        viewController.projectController = projectController
+        let navigationController = UINavigationController(rootViewController: viewController)
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
@@ -60,30 +65,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    
                 jobsheetsTableViewController.title = "Jobsheets"
                 jobsheetsTableViewController.dropboxController = self.dropboxController
-
-//                let attrs1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.systemGray]
-//                let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.label]
-//                
-//                let attributedString = NSMutableAttributedString(string: "Assigned to you for ", attributes: attrs1)
-//                let attributedString1 = NSMutableAttributedString(string: project.name ?? "", attributes:attrs2)
-//                let attributedString2 = NSMutableAttributedString(string: " on ", attributes: attrs1)
-//                attributedString.append(attributedString1)
-//                attributedString.append(attributedString2)
-//                let attributedString3 = NSMutableAttributedString(string:"10/6/2020", attributes:attrs2)
-//                attributedString.append(attributedString3)
-//                
-//                jobsheetsTableViewController.headerView.secondaryLabel.attributedText = attributedString
                 navigationController.pushViewController(jobsheetsTableViewController, animated: true)
             }
-            
             projectsTableViewController.dropboxController = self.dropboxController
             navigationController.pushViewController(projectsTableViewController, animated: true)
         }
         
         navigationController.viewControllers = [clientsTableViewController]
         clientsTableViewController.dropboxController = dropboxController
-        
-        
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
@@ -95,6 +84,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 case .success:
                     NSLog("Success! User is logged into Dropbox.")
                     setupViewControllers()
+                    monitorNetwork()
                 case .cancel:
                     NSLog("Authorization flow was manually canceled by user!")
                 case .error(_, let description):
@@ -103,6 +93,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
+
+    func monitorNetwork() {
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                let deadlineTime = DispatchTime.now() + .seconds(1)
+                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                    self.window?.rootViewController?.showMessage("Syncing with dropbox...", type: .info)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.window?.rootViewController?.showMessage("No connected", type: .warning)
+                }
+            }
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+    
+    
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

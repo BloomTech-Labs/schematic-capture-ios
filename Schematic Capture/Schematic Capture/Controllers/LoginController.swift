@@ -55,6 +55,7 @@ class AuthorizationController {
                 // Get the bearer and the user
                 internalBearer = try decoder.decode(Bearer.self, from: data)
                 let user = try decoder.decode(User.self, from: data)
+                print("USER: ", user)
                 guard let bearer = internalBearer else { return }
                 completion(.success([bearer.token, user]))
             } catch {
