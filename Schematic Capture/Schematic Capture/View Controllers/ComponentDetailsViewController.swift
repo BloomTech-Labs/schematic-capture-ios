@@ -14,6 +14,10 @@ class ComponentDetailsViewController: UITableViewController {
     // MARK: - UI Elements
     
     var headerView = HeaderView()
+    var editButton: UIBarButtonItem!
+    var saveButton: UIBarButtonItem!
+    
+    var rightBarButtonItems: [UIBarButtonItem] = []
     
     // MARK: - Properties
     
@@ -28,6 +32,8 @@ class ComponentDetailsViewController: UITableViewController {
     var details = [String : String]()
     
     var dropboxController: DropboxController?
+    
+    var projectController: ProjectController?
     
     var imagePicker: ImagePicker!
     
@@ -59,7 +65,44 @@ class ComponentDetailsViewController: UITableViewController {
             headerView.button.addTarget(self, action: #selector(showImagePicker), for: .touchUpInside)
         } else {
             headerView.imageView.image = self.image
+            headerView.imageView.isUserInteractionEnabled = true
+            headerView.imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImageVC)))
         }
+        
+        editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
+        
+        rightBarButtonItems = [editButton]
+        navigationItem.rightBarButtonItems = rightBarButtonItems
+    }
+    
+    @objc func editTapped() {
+        self.navigationItem.rightBarButtonItems = [saveButton]
+        for cell in self.tableView.visibleCells {
+            guard let cell = cell as? TextFieldTableViewCell else { return }
+            cell.textField.isUserInteractionEnabled = true
+            cell.textField.becomeFirstResponder()
+        }
+    }
+    
+    @objc func saveTapped() {
+        self.navigationItem.rightBarButtonItems = [editButton]
+        for cell in self.tableView.visibleCells {
+            guard let cell = cell as? TextFieldTableViewCell else { return }
+            cell.textField.isUserInteractionEnabled = false
+        }
+        
+    }
+    
+    @objc func showImageVC() {
+        let imageViewController = UIViewController()
+        let imageView = UIImageView()
+        
+        imageViewController.view.addSubview(imageView)
+        imageView.frame = imageViewController.view.frame
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        navigationController?.pushViewController(imageViewController, animated: true)
     }
     
     func updateViews() {
