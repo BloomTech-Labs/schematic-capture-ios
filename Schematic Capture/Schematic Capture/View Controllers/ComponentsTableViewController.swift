@@ -19,13 +19,19 @@ class ComponentsTableViewController: UITableViewController {
     // MARK: - Propertiess
     var projectController: ProjectController?
     var dropboxController: DropboxController?
+    var imagePicker: ImagePicker!
+    
     var token: String?
+    
+    var userPath: [String]?
     
     var jobSheet: JobSheet?
     
+    var filteredComponents: [Component]?
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Component> = {
         let fetchRequest: NSFetchRequest<Component> = Component.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "componentId", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "jobsheetId == \(jobSheet!.id)")
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
@@ -36,11 +42,6 @@ class ComponentsTableViewController: UITableViewController {
         }
         return frc
     }()
-    
-    var filteredComponents: [Component]?
-    
-    var imagePicker: ImagePicker!
-    var userPath: [String]?
     
     // MARK: - View Lifecycle
     
@@ -66,13 +67,12 @@ class ComponentsTableViewController: UITableViewController {
         tableView.tableHeaderView = headerView
         headerView.label.text = "Components"
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
-        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        imagePicker = ImagePicker(presentationController: self, delegate: self)
         
         headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
         headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
         headerView.showButton(text: "View Schematic")
     }
-    
     
     @objc private func showSchematicVC() {
         let schematicViewController = SchematicViewController()
@@ -100,14 +100,13 @@ class ComponentsTableViewController: UITableViewController {
     
         cell.accessoryType = .disclosureIndicator
         let component = fetchedResultsController.object(at: indexPath)
-        
         print("COMPONENT: ", component)
         
         cell.selecteImageViewAction = { sender in
             UserDefaults.standard.set(component.componentId, forKey: .selectedRow)
             self.imagePicker.present(from: self.view)
         }
-        
+        cell.componentImageView.image = UIImage(systemName: "camera")
         cell.updateViews(component: component)
         return cell
     }
@@ -132,7 +131,7 @@ class ComponentsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60.0
+        100.0
     }
     
 }
@@ -147,7 +146,7 @@ extension ComponentsTableViewController: ImagePickerDelegate {
             var path = dropboxController?.path
             let component = self.fetchedResultsController.object(at: IndexPath(row: indexPath, section: 0))
             path?.append("Normal")
-            dropboxController?.updateDropbox(imageData: imageData, path: path!, imageName: "\(component.id)")
+            dropboxController?.updateDropbox(imageData: imageData, path: path!, imageName: "\(component.componentId)")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self as ImageDoneEditingDelegate
             let navigationController = UINavigationController(rootViewController: annotationViewController)
@@ -170,7 +169,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         
         print("COMPONENT: ", component)
 
-        self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.id)")
+        self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.componentId)")
         component.imageData = imageData
         CoreDataStack.shared.save()
     }
@@ -178,7 +177,6 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
 
 extension ComponentsTableViewController: SearchDelegate {
     func searchDidEnd(didChangeText: String) {
-        // self.filteredComponents = components.filter({($0.componentApplication!.capitalized.contains(didChangeText.capitalized))})
         tableView.reloadData()
     }
 }
@@ -227,4 +225,3 @@ extension ComponentsTableViewController: NSFetchedResultsControllerDelegate {
         }
     }
 }
-

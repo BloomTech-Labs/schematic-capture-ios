@@ -11,7 +11,7 @@ import WebKit
 
 class SchematicViewController: UIViewController {
     
-    let imageView = WKWebView()
+    let webView = WKWebView()
     
     lazy var indicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -19,7 +19,6 @@ class SchematicViewController: UIViewController {
         view.hidesWhenStopped = true
         return view
     }()
-    
     
     var schematicLink: String? {
         didSet {
@@ -35,11 +34,11 @@ class SchematicViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
         
-        view.addSubview(imageView)
+        view.addSubview(webView)
         
-        imageView.frame = view.frame
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
+        webView.frame = view.frame
+        webView.contentMode = .scaleAspectFill
+        webView.clipsToBounds = true
         
         indicator.layer.position.y = view.layer.position.y
         indicator.layer.position.x = view.layer.position.x
@@ -52,13 +51,12 @@ class SchematicViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    
     func setUpViews() {
         self.indicator.stopAnimating()
 
         let request = URLRequest(url: URL(string: self.schematicLink!)!)
         DispatchQueue.main.async {
-            self.imageView.load(request)
+            self.webView.load(request)
         }
     }
 }
