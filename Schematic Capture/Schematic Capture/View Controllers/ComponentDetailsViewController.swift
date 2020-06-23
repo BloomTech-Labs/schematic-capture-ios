@@ -222,6 +222,7 @@ extension ComponentDetailsViewController: ImageDoneEditingDelegate {
                 self.component?.imageData = imageData
                 self.headerView.imageView.image = image
                 CoreDataStack.shared.save()
+                self.headerView.stackView.isHidden = true
                 self.showMessage("Image successfully saved", type: .info)
             }
         }
