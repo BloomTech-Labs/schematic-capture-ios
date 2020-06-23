@@ -55,7 +55,7 @@ class ComponentDetailsViewController: UITableViewController {
     private func setupViews() {
         
         view.backgroundColor = .systemBackground
-        self.title = "Component \(component?.id ?? 0)"
+        self.title = "Component \(component?.componentId ?? "")"
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
         
