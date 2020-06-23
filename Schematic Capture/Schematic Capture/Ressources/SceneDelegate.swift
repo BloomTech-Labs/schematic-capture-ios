@@ -57,11 +57,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }) { jobsheet in
                     
                     self.dropboxController.path.append(jobsheet.name ?? "")
-                    
-                    print("SCENE PATH: ",  self.dropboxController.path)
-                    
                     UserDefaults.standard.set(jobsheet.id, forKey: .selectedRow)
+                    
+                    let componentsTableViewController = GenericTableViewController(model: Model<Component>(), title: "Components", configure: { (componentCell, component) in
+                        componentCell.configure(entityName: .component, value: component)
+                    }) { component in
+                        UserDefaults.standard.set(component.id, forKey: .selectedRow)
+                    }
+                    navigationController.pushViewController(componentsTableViewController, animated: true)
                 }
+               
    
                 jobsheetsTableViewController.title = "Jobsheets"
                 jobsheetsTableViewController.dropboxController = self.dropboxController

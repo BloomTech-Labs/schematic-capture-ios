@@ -158,19 +158,21 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
-            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
-            let viewController = ComponentsTableViewController()
-            if let jobsheet = item as? JobSheet {
-                viewController.jobSheet = jobsheet
-            }
-            selectHandler(item)
-            viewController.dropboxController = self.dropboxController
-            self.navigationController?.pushViewController(viewController, animated: true)
-        } else {
-            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
-            selectHandler(item)
-        }
+        let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+        selectHandler(item)
+        
+//        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
+//            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+//            let viewController = ComponentsTableViewController()
+//            if let jobsheet = item as? JobSheet {
+//                viewController.jobSheet = jobsheet
+//            }
+//            selectHandler(item)
+//            viewController.dropboxController = self.dropboxController
+//            self.navigationController?.pushViewController(viewController, animated: true)
+//        } else {
+//
+//        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
