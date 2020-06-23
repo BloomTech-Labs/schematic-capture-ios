@@ -48,8 +48,7 @@ class ProjectController {
     
     func saveData(clients: [ClientRepresentation], token: String) {
         let context = CoreDataStack.shared.mainContext
-        context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
-        
+       // context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
         for client in clients {
             if self.checkIfItemExist(id: client.id, entityName: .client) == false {
                 Client(clientRepresentation: client, context: context)
@@ -72,11 +71,10 @@ class ProjectController {
                                             jobSheet.components = components
                                             for component in components {
                                                 if self.checkIfItemExist(id: component.id, entityName: .component) == false {
-                                                    // If item exist save
                                                     Component(componentRepresentation: component, context: context)
                                                 } else {
                                                     // If item doesn't exist still save
-                                                    Component(componentRepresentation: component, context: context)
+                                                   // Component(componentRepresentation: component, context: context)
                                                 }
                                             }
                                         }
@@ -274,7 +272,7 @@ class ProjectController {
             let count = try managedContext.count(for: fetchRequest)
             if count > 0 {
                 return true
-            }else {
+            } else {
                 return false
             }
         }catch let error as NSError {

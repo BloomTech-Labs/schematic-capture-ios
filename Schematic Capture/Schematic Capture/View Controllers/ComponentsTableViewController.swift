@@ -26,8 +26,7 @@ class ComponentsTableViewController: UITableViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Component> = {
         let fetchRequest: NSFetchRequest<Component> = Component.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        fetchRequest.predicate = NSPredicate(format: "jobsheetId = %@", "\(jobSheet!.id)")
-        
+        fetchRequest.predicate = NSPredicate(format: "jobsheetId == \(jobSheet!.id)")
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
         do {
@@ -48,6 +47,10 @@ class ComponentsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -199,7 +202,7 @@ extension ComponentsTableViewController: NSFetchedResultsControllerDelegate {
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         case .delete:
             guard let indexPath = indexPath else { return }
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            //tableView.deleteRows(at: [indexPath], with: .automatic)
         case .move:
             guard let indexPath    = indexPath,
                 let newIndexPath = newIndexPath else { return }

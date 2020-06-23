@@ -123,9 +123,7 @@ class LoginViewController: UIViewController {
             if let result = try? result.get() {
                 guard let token = result.first as? String, let user = result.last as? User else { return }
                 self.projectController?.getClients(token: token)
-                
                 print("USER ROLE: ", user.role)
-                
                 /* Do something with the user? If user is super-admin show problems ViewController first
                  if it's not show camera ViewController? */
                 DispatchQueue.main.async {

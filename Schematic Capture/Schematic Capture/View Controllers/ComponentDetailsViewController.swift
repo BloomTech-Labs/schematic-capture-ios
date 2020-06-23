@@ -9,6 +9,12 @@
 import UIKit
 import SwiftyDropbox
 
+extension String {
+    var lowercasingFirst: String {
+        return prefix(1).lowercased() + dropFirst()
+    }
+}
+
 class ComponentDetailsViewController: UITableViewController {
     
     // MARK: - UI Elements
@@ -71,9 +77,9 @@ class ComponentDetailsViewController: UITableViewController {
         
         editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
-        
         rightBarButtonItems = [editButton]
         navigationItem.rightBarButtonItems = rightBarButtonItems
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
     @objc func editTapped() {
@@ -86,18 +92,29 @@ class ComponentDetailsViewController: UITableViewController {
     }
     
     @objc func saveTapped() {
-        self.navigationItem.rightBarButtonItems = [editButton]
+        self.navigationItem.addActivityIndicator()
         for cell in self.tableView.visibleCells {
             guard let cell = cell as? TextFieldTableViewCell else { return }
             cell.textField.isUserInteractionEnabled = false
+            let values: [String: String] = [cell.label.text!: cell.textField.text ?? ""]
+            for key in values.keys {
+                if let value = values[key] {
+                    let strimmedkey = key.filter { !$0.isWhitespace }.lowercasingFirst
+                    component?.setValue(value, forKey: strimmedkey)
+                    CoreDataStack.shared.save()
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.navigationItem.rightBarButtonItems = [self.editButton]
+                self.showMessage("Details successfully saved", type: .info)
+            }
         }
-        
     }
     
     @objc func showImageVC() {
         let imageViewController = UIViewController()
         let imageView = UIImageView()
-        
         imageViewController.view.addSubview(imageView)
         imageView.frame = imageViewController.view.frame
         imageView.contentMode = .scaleAspectFill
@@ -107,22 +124,21 @@ class ComponentDetailsViewController: UITableViewController {
     
     func updateViews() {
         details = [
-            "Description:" : component?.descriptions ?? "",
-            "Manufacturer:" : component?.manufacturer ?? "",
-            "Part #:" : component?.partNumber ?? "",
-            "RL Category:" : component?.rlCategory ?? "",
-            "RL Number:" : component?.rlNumber ?? "",
-            "Stock Code:" : component?.stockCode ?? "",
-            "Electrical Address:" : component?.electricalAddress ?? "",
-            "Reference Tag:" : component?.referenceTag ?? "",
-            "Settings:" : component?.settings ?? "",
-            "Resources:" : component?.resources ?? "",
-            "Cutsheet:" : component?.cutSheet ?? "",
-            "Store's Part #:" : component?.storePartNumber ?? "",
-            "Notes:" : component?.custom ?? "",
+            "Descriptions" : component?.descriptions ?? "",
+            "Manufacturer" : component?.manufacturer ?? "",
+            "Part Number" : component?.partNumber ?? "",
+            "Rl Category" : component?.rlCategory ?? "",
+            "Rl Number" : component?.rlNumber ?? "",
+            "Stock Code" : component?.stockCode ?? "",
+            "Electrical Address" : component?.electricalAddress ?? "",
+            "Reference Tag" : component?.referenceTag ?? "",
+            "Settings" : component?.settings ?? "",
+            "Resources" : component?.resources ?? "",
+            "Cut Sheet" : component?.cutSheet ?? "",
+            "Store Part Number" : component?.storePartNumber ?? "",
+            "Custom" : component?.custom ?? "",
         ]
     }
-    
     
     @objc func handleClose() {
         self.dismiss(animated: true, completion: nil)
@@ -142,21 +158,6 @@ class ComponentDetailsViewController: UITableViewController {
         return 1
     }
     
-    
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        if section == 1 {
-    //
-    //            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 90))
-    //            let label = UILabel(frame: CGRect(x: 16, y: 0, width: 100, height: 0))
-    //            label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-    //            label.text = "Information"
-    //            view.addSubview(label)
-    //            return view
-    //        }
-    //        return nil
-    //    }
-    
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return details.count
     }
@@ -164,7 +165,7 @@ class ComponentDetailsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var keys:[String] {
-            get{
+            get {
                 return Array(details.keys)
             }
         }
@@ -219,7 +220,9 @@ extension ComponentDetailsViewController: ImageDoneEditingDelegate {
             self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(id)")
             DispatchQueue.main.async {
                 self.component?.imageData = imageData
+                self.headerView.imageView.image = image
                 CoreDataStack.shared.save()
+                self.showMessage("Image successfully saved", type: .info)
             }
         }
     }

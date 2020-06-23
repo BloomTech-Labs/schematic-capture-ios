@@ -18,6 +18,7 @@
 		6D6D15E724A0D6DA006A0A9B /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6D15E624A0D6DA006A0A9B /* TextFieldTableViewCell.swift */; };
 		6D9BC4C12494213C00F1BA9B /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9BC4C02494213C00F1BA9B /* GenericTableViewController.swift */; };
 		6D9F49DC24A1248300DD9714 /* MessageAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F49DB24A1248300DD9714 /* MessageAlert.swift */; };
+		6D9F49DE24A1A2C900DD9714 /* NavigationItem+Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F49DD24A1A2C900DD9714 /* NavigationItem+Indicator.swift */; };
 		6DB6500424748AEF007C10C6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6500324748AEF007C10C6 /* ImagePicker.swift */; };
 		6DBDA833246F777700CF5136 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBDA832246F777700CF5136 /* DateFormatter.swift */; };
 		6DC036FB247D470E00BB95FF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC036FA247D470E00BB95FF /* SettingsViewController.swift */; };
@@ -115,6 +116,7 @@
 		6D6D15E624A0D6DA006A0A9B /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		6D9BC4C02494213C00F1BA9B /* GenericTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewController.swift; sourceTree = "<group>"; };
 		6D9F49DB24A1248300DD9714 /* MessageAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAlert.swift; sourceTree = "<group>"; };
+		6D9F49DD24A1A2C900DD9714 /* NavigationItem+Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationItem+Indicator.swift"; sourceTree = "<group>"; };
 		6DAF6CDA248AE8350009846E /* Schematic Capture 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 7.xcdatamodel"; sourceTree = "<group>"; };
 		6DAF6CDB248AEA720009846E /* Schematic Capture 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 8.xcdatamodel"; sourceTree = "<group>"; };
 		6DAF6CDC248AED0D0009846E /* Schematic Capture 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 9.xcdatamodel"; sourceTree = "<group>"; };
@@ -355,13 +357,13 @@
 		A6F1C9E723ECCD4800E0D583 /* Core Data Models */ = {
 			isa = PBXGroup;
 			children = (
+				A6F1CA0123F4C00500E0D583 /* Model Representations */,
 				E13A0BA3247D8F6A0079868E /* Client+Convenience.swift */,
 				A6F1C9EE23ECD63D00E0D583 /* Project+Convenience.swift */,
 				A6F1C9EC23ECD37D00E0D583 /* JobSheet+Convenience.swift */,
 				A6F1C9E823ECCD5900E0D583 /* Component+Convenience.swift */,
 				A6F1C9EA23ECD14700E0D583 /* Photo+Convenience.swift */,
 				A6F1C9F423EDD9B700E0D583 /* CoreDataStack.swift */,
-				A6F1CA0123F4C00500E0D583 /* Model Representations */,
 			);
 			path = "Core Data Models";
 			sourceTree = "<group>";
@@ -423,6 +425,7 @@
 			children = (
 				E134756F246F02E300B5C791 /* UIView+String.swift */,
 				E1A794DA24748874009361B3 /* UITableView+EmptyView.swift */,
+				6D9F49DD24A1A2C900DD9714 /* NavigationItem+Indicator.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -709,6 +712,7 @@
 				A665835723DAB508006073DF /* SceneDelegate.swift in Sources */,
 				6D6D15E524A05871006A0A9B /* ImageTableViewCell.swift in Sources */,
 				A6F1C9EF23ECD63D00E0D583 /* Project+Convenience.swift in Sources */,
+				6D9F49DE24A1A2C900DD9714 /* NavigationItem+Indicator.swift in Sources */,
 				6DC036FB247D470E00BB95FF /* SettingsViewController.swift in Sources */,
 				6DBDA833246F777700CF5136 /* DateFormatter.swift in Sources */,
 				6DD471292475E17200A89106 /* ComponentTableViewCell.swift in Sources */,
