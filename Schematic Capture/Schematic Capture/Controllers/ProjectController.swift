@@ -48,7 +48,7 @@ class ProjectController {
     
     func saveData(clients: [ClientRepresentation], token: String) {
         let context = CoreDataStack.shared.mainContext
-       // context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
+        context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
         for client in clients {
             if self.checkIfItemExist(id: client.id, entityName: .client) == false {
                 Client(clientRepresentation: client, context: context)
@@ -72,9 +72,6 @@ class ProjectController {
                                             for component in components {
                                                 if self.checkIfItemExist(id: component.id, entityName: .component) == false {
                                                     Component(componentRepresentation: component, context: context)
-                                                } else {
-                                                    // If item doesn't exist still save
-                                                   // Component(componentRepresentation: component, context: context)
                                                 }
                                             }
                                         }
@@ -231,43 +228,17 @@ class ProjectController {
         
     }
     
-    // Persistence file url
-    var fileURL: URL? {
-        let manager = FileManager.default
-        guard let documentDir = manager.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
-        let fileURL = documentDir.appendingPathComponent("list.plist")
-        return fileURL
-    }
-    
     // Save to persistence
     func saveToPersistence() {
         CoreDataStack.shared.save()
     }
-    
-    func delete(entrie: ComponentRepresentation) {
-//        CoreDataStack.shared.mainContext.delete(entrie)
-        saveToPersistence()
-    }
-    
-    // Load from persistence
-    func loadFromPersistence<T: Codable>(value: T.Type) -> [T]? {
-        guard let url = fileURL else { return nil }
-        do {
-            let decoder = PropertyListDecoder()
-            let data = try Data(contentsOf: url)
-            let decodedData = try decoder.decode([T].self, from: data)
-            return decodedData
-        } catch {
-            print("Error decoding data: \(error)")
-            return nil
-        }
-    }
+
     
     func checkIfItemExist(id: Int, entityName: EntityNames) -> Bool {
         let managedContext = CoreDataStack.shared.mainContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName.rawValue)
         fetchRequest.fetchLimit =  1
-        fetchRequest.predicate = NSPredicate(format: "id == %d" ,id)
+        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
         do {
             let count = try managedContext.count(for: fetchRequest)
             if count > 0 {

@@ -25,11 +25,11 @@ class Model<T> where T: NSManagedObject {
         let parentId = UserDefaults.standard.integer(forKey: .selectedRow)
         switch request.entityName {
         case EntityNames.project.rawValue:
-            request.predicate = NSPredicate(format: "clientId = %@", "\(parentId)")
+            request.predicate = NSPredicate(format: "clientId == \(parentId)")
         case EntityNames.jobSheet.rawValue:
-            request.predicate = NSPredicate(format: "projectId = %@", "\(parentId)")
+            request.predicate = NSPredicate(format: "projectId == \(parentId)")
         case EntityNames.component.rawValue:
-            request.predicate = NSPredicate(format: "jobsheetId = %@", "\(parentId)")
+            request.predicate = NSPredicate(format: "jobsheetId == \(parentId)")
         default:
             break
         }

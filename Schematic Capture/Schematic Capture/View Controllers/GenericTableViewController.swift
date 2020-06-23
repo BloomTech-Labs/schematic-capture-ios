@@ -84,11 +84,11 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
             headerView.secondaryLabel.text = date
         }
                 
-        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
-            headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
-            headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
-            headerView.showButton(text: "View Schematic")
-        }
+//        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.component.rawValue {
+//            headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
+//            headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
+//            headerView.showButton(text: "View Schematic")
+//        }
 
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .done, target: self, action: #selector(settingsTapped))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
@@ -103,13 +103,13 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
         navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
-    @objc private func showSchematicVC() {
-        let schematicViewController = SchematicViewController()
-        let jobsheet = self.model.fetchedResultscontroller.fetchedObjects?.first as! JobSheet
-        schematicViewController.jobSheet = jobsheet
-        let navigationController = UINavigationController(rootViewController: schematicViewController)
-        self.present(navigationController, animated: true, completion: nil)
-    }
+//    @objc private func showSchematicVC() {
+//        let schematicViewController = SchematicViewController()
+//        let jobsheet = self.model.fetchedResultscontroller.fetchedObjects?.first as! JobSheet
+//        schematicViewController.jobSheet = jobsheet
+//        let navigationController = UINavigationController(rootViewController: schematicViewController)
+//        self.present(navigationController, animated: true, completion: nil)
+//    }
     
     
     
@@ -158,21 +158,19 @@ class GenericTableViewController<T: NSManagedObject, Cell: GeneralTableViewCell>
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let item = (model?.fetchedResultscontroller.object(at: indexPath))!
-        selectHandler(item)
-        
-//        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
-//            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
-//            let viewController = ComponentsTableViewController()
-//            if let jobsheet = item as? JobSheet {
-//                viewController.jobSheet = jobsheet
-//            }
-//            selectHandler(item)
-//            viewController.dropboxController = self.dropboxController
-//            self.navigationController?.pushViewController(viewController, animated: true)
-//        } else {
-//
-//        }
+        if model.fetchedResultscontroller.fetchRequest.entityName == EntityNames.jobSheet.rawValue {
+            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+            let viewController = ComponentsTableViewController()
+            if let jobsheet = item as? JobSheet {
+                viewController.jobSheet = jobsheet
+            }
+            selectHandler(item)
+            viewController.dropboxController = self.dropboxController
+            self.navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            let item = (model?.fetchedResultscontroller.object(at: indexPath))!
+            selectHandler(item)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

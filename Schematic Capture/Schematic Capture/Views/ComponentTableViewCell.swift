@@ -30,6 +30,7 @@ class ComponentTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         indexLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.textAlignment = .left
         
@@ -49,7 +50,7 @@ class ComponentTableViewCell: UITableViewCell {
             
             indexLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             indexLabel.heightAnchor.constraint(equalTo: heightAnchor),
-            indexLabel.widthAnchor.constraint(equalToConstant: 20),
+            indexLabel.widthAnchor.constraint(equalToConstant: 50),
             nameLabel.leftAnchor.constraint(equalTo: indexLabel.rightAnchor),
             nameLabel.heightAnchor.constraint(equalTo: heightAnchor),
             
@@ -71,7 +72,7 @@ class ComponentTableViewCell: UITableViewCell {
     }
     
     func updateViews(component: Component) {
-        indexLabel.text = "\(component.id)."
+        indexLabel.text = "\(component.componentId ?? "")."
         nameLabel.text = component.descriptions
         if let imageData = component.imageData {
             componentImageView.image = UIImage(data: imageData)

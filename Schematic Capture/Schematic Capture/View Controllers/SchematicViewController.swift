@@ -21,12 +21,11 @@ class SchematicViewController: UIViewController {
     }()
     
     
-    var jobSheet: JobSheet? {
+    var schematicLink: String? {
         didSet {
             self.setUpViews()
         }
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,21 +54,11 @@ class SchematicViewController: UIViewController {
     
     
     func setUpViews() {
-        
-        //    guard let jobSheet = jobSheet else { return }
-        
         self.indicator.stopAnimating()
-        
-        let request = URLRequest(url: URL(string: "https://www.dropbox.com/home/AlloyTest?preview=cnc-machine-component-250x250.jpg")!)
+
+        let request = URLRequest(url: URL(string: self.schematicLink!)!)
         DispatchQueue.main.async {
             self.imageView.load(request)
-
         }
-        //
-        //    if let imageString = jobSheet.schematic {
-        //      print("IMAGEDATA CELL:", imageString)
-        //
-        //      let url = URL(string: "https://images.app.goo.gl/TyoH7zPQu28smGpS8")
-        //    }
     }
 }

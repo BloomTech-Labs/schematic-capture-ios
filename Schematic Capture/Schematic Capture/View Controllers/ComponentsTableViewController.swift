@@ -25,7 +25,7 @@ class ComponentsTableViewController: UITableViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController<Component> = {
         let fetchRequest: NSFetchRequest<Component> = Component.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "componentId", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "jobsheetId == \(jobSheet!.id)")
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
@@ -49,10 +49,6 @@ class ComponentsTableViewController: UITableViewController {
         setupUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if (self.isMovingFromParent) {
@@ -71,6 +67,22 @@ class ComponentsTableViewController: UITableViewController {
         headerView.label.text = "Components"
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        
+        headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
+        headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
+        headerView.showButton(text: "View Schematic")
+    }
+    
+    
+    @objc private func showSchematicVC() {
+        let schematicViewController = SchematicViewController()
+        if let link = jobSheet?.schematic {
+            schematicViewController.schematicLink = link
+            let navigationController = UINavigationController(rootViewController: schematicViewController)
+            self.present(navigationController, animated: true, completion: nil)
+        } else {
+            self.showMessage("There's no schematic for this component", type: .info)
+        }
     }
     
     // MARK: - Table view data source
@@ -85,14 +97,17 @@ class ComponentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTableViewCell.id, for: indexPath) as? ComponentTableViewCell else { return UITableViewCell() }
-        
-        cell.selecteImageViewAction = { sender in
-            UserDefaults.standard.set(indexPath.row, forKey: .selectedRow)
-            self.imagePicker.present(from: self.view)
-        }
-
+    
         cell.accessoryType = .disclosureIndicator
         let component = fetchedResultsController.object(at: indexPath)
+        
+        print("COMPONENT: ", component)
+        
+        cell.selecteImageViewAction = { sender in
+            UserDefaults.standard.set(component.componentId, forKey: .selectedRow)
+            self.imagePicker.present(from: self.view)
+        }
+        
         cell.updateViews(component: component)
         return cell
     }
@@ -107,7 +122,6 @@ class ComponentsTableViewController: UITableViewController {
         if let image = cell.componentImageView.image {
             if image != UIImage(systemName: "camera") {
                 componentDetailsViewController.image = cell.componentImageView.image
-                
             }
         }
         componentDetailsViewController.projectController = projectController
@@ -129,7 +143,7 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         if image != nil {
             let indexPath = UserDefaults.standard.integer(forKey: .selectedRow)
-            guard let imageData = image?.jpegData(compressionQuality: 1) else { return }
+            guard let imageData = image?.pngData() else { return }
             var path = dropboxController?.path
             let component = self.fetchedResultsController.object(at: IndexPath(row: indexPath, section: 0))
             path?.append("Normal")
@@ -150,17 +164,15 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
     // Annotated Image
     func ImageDoneEditing(image: UIImage?) {
         let row = UserDefaults.standard.integer(forKey: .selectedRow)
-        guard let imageData = image?.jpegData(compressionQuality: 1), var path = dropboxController?.path else { return }
+        guard let imageData = image?.pngData(), var path = dropboxController?.path else { return }
         path.append("Annotated")
-        let component = self.fetchedResultsController.object(at: IndexPath(row: row, section: 0))
-        DispatchQueue.global(qos: .background).async {
-            self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.id)")
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                component.imageData = imageData
-                CoreDataStack.shared.save()
-            }
-        }
+        guard let component = self.fetchedResultsController.fetchedObjects?.filter({$0.componentId == String(row)}).first else { return }
+        
+        print("COMPONENT: ", component)
+
+        self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.id)")
+        component.imageData = imageData
+        CoreDataStack.shared.save()
     }
 }
 

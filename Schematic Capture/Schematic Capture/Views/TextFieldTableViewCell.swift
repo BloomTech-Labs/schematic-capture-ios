@@ -47,6 +47,6 @@ class  TextFieldTableViewCell: UITableViewCell {
     
     func updateViews(title: String, value: String?) {
         label.text =  title
-        textField.text = value
+        textField.text = value ?? "--"
     }
 }
