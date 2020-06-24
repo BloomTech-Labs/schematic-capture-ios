@@ -92,8 +92,8 @@ class ComponentTableViewCell: UITableViewCell {
     func updateViews(component: Component) {
         indexLabel.text = "\(component.componentId ?? "-")."
         nameLabel.text = component.descriptions
-        columnALabel.text = "Component #: \(component.componentId ?? "-"))"
-        columnELabel.text = "Manufacturer: \(component.manufacturer ?? "-"))"
+        columnALabel.text = "Component #: \(component.componentId ?? "-")"
+        columnELabel.text = "Manufacturer: \(component.manufacturer ?? "-")"
         columnFLabel.text = "Part #: \(component.partNumber ?? "-")"
         if let imageData = component.imageData {
             componentImageView.image = UIImage(data: imageData)

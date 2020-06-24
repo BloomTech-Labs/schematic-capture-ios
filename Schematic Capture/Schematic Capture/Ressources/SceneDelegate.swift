@@ -100,7 +100,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.window?.rootViewController?.showMessage("No connected", type: .warning)
+                    self.window?.rootViewController?.showMessage("No connected.", type: .warning)
                 }
             }
         }

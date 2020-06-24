@@ -81,7 +81,7 @@ class ComponentsTableViewController: UITableViewController {
             let navigationController = UINavigationController(rootViewController: schematicViewController)
             self.present(navigationController, animated: true, completion: nil)
         } else {
-            self.showMessage("There's no schematic for this component", type: .info)
+            self.showMessage("There's no schematic for this component.", type: .info)
         }
     }
     
@@ -141,12 +141,11 @@ extension ComponentsTableViewController: ImagePickerDelegate {
     // Unannotated image
     func didSelect(image: UIImage?) {
         if image != nil {
-            let indexPath = UserDefaults.standard.integer(forKey: .selectedRow)
-            guard let imageData = image?.pngData() else { return }
-            var path = dropboxController?.path
-            let component = self.fetchedResultsController.object(at: IndexPath(row: indexPath, section: 0))
-            path?.append("Normal")
-            dropboxController?.updateDropbox(imageData: imageData, path: path!, imageName: "\(component.componentId)")
+            let row = UserDefaults.standard.integer(forKey: .selectedRow)
+            guard let imageData = image?.pngData(),  var path = dropboxController?.path else { return }
+            let component = self.fetchedResultsController.object(at: IndexPath(row: row, section: 0))
+            path.append("Normal")
+            dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.componentId ?? "")")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self as ImageDoneEditingDelegate
             let navigationController = UINavigationController(rootViewController: annotationViewController)
@@ -166,10 +165,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         guard let imageData = image?.pngData(), var path = dropboxController?.path else { return }
         path.append("Annotated")
         guard let component = self.fetchedResultsController.fetchedObjects?.filter({$0.componentId == String(row)}).first else { return }
-        
-        print("COMPONENT: ", component)
-
-        self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.componentId)")
+        self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.componentId ?? "")")
         component.imageData = imageData
         CoreDataStack.shared.save()
     }

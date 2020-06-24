@@ -84,15 +84,19 @@ class ComponentDetailsViewController: UITableViewController {
     
     @objc func editTapped() {
         self.navigationItem.rightBarButtonItems = [saveButton]
+        self.headerView.imageView.isHidden = true
+        headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
+        headerView.button.addTarget(self, action: #selector(showImagePicker), for: .touchUpInside)
+        self.headerView.showButton(text: "Change Image")
         for cell in self.tableView.visibleCells {
             guard let cell = cell as? TextFieldTableViewCell else { return }
             cell.textField.isUserInteractionEnabled = true
-            cell.textField.becomeFirstResponder()
         }
     }
     
     @objc func saveTapped() {
         self.navigationItem.addActivityIndicator()
+        self.headerView.imageView.isHidden = false
         for cell in self.tableView.visibleCells {
             guard let cell = cell as? TextFieldTableViewCell else { return }
             cell.textField.isUserInteractionEnabled = false
@@ -107,7 +111,7 @@ class ComponentDetailsViewController: UITableViewController {
             
             DispatchQueue.main.async {
                 self.navigationItem.rightBarButtonItems = [self.editButton]
-                self.showMessage("Details successfully saved", type: .info)
+                self.showMessage("Details successfully saved.", type: .info)
             }
         }
     }
@@ -220,10 +224,11 @@ extension ComponentDetailsViewController: ImageDoneEditingDelegate {
             self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(id)")
             DispatchQueue.main.async {
                 self.component?.imageData = imageData
+                self.headerView.imageView.isHidden = false 
                 self.headerView.imageView.image = image
                 CoreDataStack.shared.save()
                 self.headerView.stackView.isHidden = true
-                self.showMessage("Image successfully saved", type: .info)
+                self.showMessage("Image successfully saved.", type: .info)
             }
         }
     }

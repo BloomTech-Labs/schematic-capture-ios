@@ -32,6 +32,7 @@ class  TextFieldTableViewCell: UITableViewCell {
         textField.textColor = .label
         textField.textAlignment = .right
         textField.isUserInteractionEnabled = false
+        textField.font = UIFont.systemFont(ofSize: 15)
         
         NSLayoutConstraint.activate([
             stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
