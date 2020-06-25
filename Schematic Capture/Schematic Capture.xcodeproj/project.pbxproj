@@ -12,7 +12,6 @@
 		6D17295A249454C3000B77BA /* GeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D172959249454C3000B77BA /* GeneralTableViewCell.swift */; };
 		6D17295E24948257000B77BA /* ModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D17295D24948257000B77BA /* ModelClass.swift */; };
 		6D443001246DD876008C8EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D443000246DD876008C8EE1 /* Assets.xcassets */; };
-		6D6D15E1249F0DC8006A0A9B /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6D15E0249F0DC8006A0A9B /* ClientViewController.swift */; };
 		6D6D15E3249F0EA0006A0A9B /* ClientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6D15E2249F0EA0006A0A9B /* ClientCell.swift */; };
 		6D6D15E524A05871006A0A9B /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6D15E424A05871006A0A9B /* ImageTableViewCell.swift */; };
 		6D6D15E724A0D6DA006A0A9B /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6D15E624A0D6DA006A0A9B /* TextFieldTableViewCell.swift */; };
@@ -37,7 +36,6 @@
 		A665835523DAB508006073DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835423DAB508006073DF /* AppDelegate.swift */; };
 		A665835723DAB508006073DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665835623DAB508006073DF /* SceneDelegate.swift */; };
 		A665836C23DAB50A006073DF /* Schematic_CaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */; };
-		A665838323DFA06C006073DF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838223DFA06C006073DF /* Reachability.swift */; };
 		A665838623DFA50A006073DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838523DFA50A006073DF /* User.swift */; };
 		A665838923E0E1B2006073DF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838823E0E1B2006073DF /* LoginController.swift */; };
 		A665838C23E0E27C006073DF /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665838B23E0E27C006073DF /* Bearer.swift */; };
@@ -110,7 +108,6 @@
 		6D17296024981E56000B77BA /* Schematic Capture 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Schematic Capture 14.xcdatamodel"; sourceTree = "<group>"; };
 		6D443000246DD876008C8EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D443008246DDC18008C8EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6D6D15E0249F0DC8006A0A9B /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		6D6D15E2249F0EA0006A0A9B /* ClientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientCell.swift; sourceTree = "<group>"; };
 		6D6D15E424A05871006A0A9B /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		6D6D15E624A0D6DA006A0A9B /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -146,7 +143,6 @@
 		A665836723DAB50A006073DF /* Schematic CaptureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Schematic CaptureTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A665836B23DAB50A006073DF /* Schematic_CaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schematic_CaptureTests.swift; sourceTree = "<group>"; };
 		A665836D23DAB50A006073DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A665838223DFA06C006073DF /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A665838523DFA50A006073DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A665838823E0E1B2006073DF /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A665838B23E0E27C006073DF /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
@@ -300,7 +296,6 @@
 				E1A3868224771FD700AD8FA8 /* ComponentDetailsViewController.swift */,
 				6DC036FA247D470E00BB95FF /* SettingsViewController.swift */,
 				6D03D6CE249D810E008B5FA3 /* SchematicViewController.swift */,
-				6D6D15E0249F0DC8006A0A9B /* ClientViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -317,7 +312,6 @@
 		A665838423DFA070006073DF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				A665838223DFA06C006073DF /* Reachability.swift */,
 				A665838D23E0E384006073DF /* Networking.swift */,
 				6DBDA832246F777700CF5136 /* DateFormatter.swift */,
 				6DB6500324748AEF007C10C6 /* ImagePicker.swift */,
@@ -705,7 +699,6 @@
 				A6F1CA0023F4A03700E0D583 /* ProjectController.swift in Sources */,
 				6D6D15E724A0D6DA006A0A9B /* TextFieldTableViewCell.swift in Sources */,
 				6D03D6D4249EE927008B5FA3 /* LoadingButton.swift in Sources */,
-				6D6D15E1249F0DC8006A0A9B /* ClientViewController.swift in Sources */,
 				E1A794DB24748874009361B3 /* UITableView+EmptyView.swift in Sources */,
 				A665838E23E0E384006073DF /* Networking.swift in Sources */,
 				A665838C23E0E27C006073DF /* Bearer.swift in Sources */,
@@ -723,7 +716,6 @@
 				6DC49BAC246EE3C8009769E0 /* UserDefault+String.swift in Sources */,
 				6DC49BAA246ECFAA009769E0 /* Enum.swift in Sources */,
 				A6F1CA0923F5C89C00E0D583 /* ProjectRepresentation.swift in Sources */,
-				A665838323DFA06C006073DF /* Reachability.swift in Sources */,
 				A665839223E0E5FF006073DF /* LoginViewController.swift in Sources */,
 				E13A0BA4247D8F6A0079868E /* Client+Convenience.swift in Sources */,
 			);

@@ -9,7 +9,6 @@ import UIKit
 
 class AnnotationView: UIView {
     
-    
     // The imageView that contain the image for annotation
     var imageView = UIImageView()
     var annotateImageView = UIImageView()
@@ -39,7 +38,6 @@ class AnnotationView: UIView {
     }
     
     var dragStartPositionRelativeToCenter : CGPoint?
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -97,7 +95,11 @@ class AnnotationView: UIView {
         imageView.addGestureRecognizer(rotationGesture)
         imageView.addGestureRecognizer(pinchGesture)
         
-        imageView.image = UIImage(systemName: shape!.rawValue)
+        
+        let image = UIImage(systemName: shape!.rawValue)
+        let whiteImage = image?.withTintColor(UIColor.white, renderingMode: .alwaysOriginal)
+        
+        imageView.image = whiteImage
         imageView.isHidden = false
         
         if !self.subviews.contains(imageView) {

@@ -90,13 +90,13 @@ class ComponentDetailsViewController: UITableViewController {
         self.headerView.showButton(text: "Change Image")
         for cell in self.tableView.visibleCells {
             guard let cell = cell as? TextFieldTableViewCell else { return }
+            cell.textField.resignFirstResponder()
             cell.textField.isUserInteractionEnabled = true
         }
     }
     
     @objc func saveTapped() {
         self.navigationItem.addActivityIndicator()
-        self.headerView.imageView.isHidden = false
         for cell in self.tableView.visibleCells {
             guard let cell = cell as? TextFieldTableViewCell else { return }
             cell.textField.isUserInteractionEnabled = false
@@ -224,7 +224,7 @@ extension ComponentDetailsViewController: ImageDoneEditingDelegate {
             self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(id)")
             DispatchQueue.main.async {
                 self.component?.imageData = imageData
-                self.headerView.imageView.isHidden = false 
+                self.headerView.imageView.isHidden = false
                 self.headerView.imageView.image = image
                 CoreDataStack.shared.save()
                 self.headerView.stackView.isHidden = true
