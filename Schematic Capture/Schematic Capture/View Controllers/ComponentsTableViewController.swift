@@ -67,7 +67,11 @@ class ComponentsTableViewController: UITableViewController {
         tableView.tableHeaderView = headerView
         headerView.label.text = "Components"
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
+        
+        
+        
         imagePicker = ImagePicker(presentationController: self, delegate: self)
+  
         
         headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
         headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
@@ -100,7 +104,6 @@ class ComponentsTableViewController: UITableViewController {
     
         cell.accessoryType = .disclosureIndicator
         let component = fetchedResultsController.object(at: indexPath)
-        print("COMPONENT: ", component)
         
         cell.selecteImageViewAction = { sender in
             UserDefaults.standard.set(component.componentId, forKey: .selectedRow)
@@ -143,8 +146,10 @@ extension ComponentsTableViewController: ImagePickerDelegate {
         if image != nil {
             let row = UserDefaults.standard.integer(forKey: .selectedRow)
             guard let imageData = image?.pngData(),  var path = dropboxController?.path else { return }
-            let component = self.fetchedResultsController.object(at: IndexPath(row: row, section: 0))
+            
+            guard let component = self.fetchedResultsController.fetchedObjects?.filter({$0.componentId == String(row)}).first else { return }
             path.append("Normal")
+
             dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.componentId ?? "")")
             let annotationViewController = AnnotationViewController()
             annotationViewController.delegate = self as ImageDoneEditingDelegate
@@ -164,6 +169,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         let row = UserDefaults.standard.integer(forKey: .selectedRow)
         guard let imageData = image?.pngData(), var path = dropboxController?.path else { return }
         path.append("Annotated")
+        
         guard let component = self.fetchedResultsController.fetchedObjects?.filter({$0.componentId == String(row)}).first else { return }
         self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.componentId ?? "")")
         component.imageData = imageData

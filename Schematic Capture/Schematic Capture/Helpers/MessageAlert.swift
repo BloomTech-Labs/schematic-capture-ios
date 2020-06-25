@@ -111,7 +111,7 @@ public class GSMessage: NSObject {
     public static var successBackgroundColor: UIColor = UIColor.systemGreen
     public static var warningBackgroundColor: UIColor = UIColor.systemOrange
     public static var errorBackgroundColor: UIColor = UIColor.systemRed
-    public static var infoBackgroundColor: UIColor = UIColor.white
+    public static var infoBackgroundColor: UIColor = UIColor.systemBackground
     
     public class func showMessageAddedTo(text: String,
                                          type: GSMessageType,

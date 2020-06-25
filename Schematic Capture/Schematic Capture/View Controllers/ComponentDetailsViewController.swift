@@ -84,7 +84,8 @@ class ComponentDetailsViewController: UITableViewController {
     
     @objc func editTapped() {
         self.navigationItem.rightBarButtonItems = [saveButton]
-        self.headerView.imageView.isHidden = true
+        self.headerView.imageView.alpha = 0.3
+        self.headerView.stackView.isHidden = false
         headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showImagePicker)))
         headerView.button.addTarget(self, action: #selector(showImagePicker), for: .touchUpInside)
         self.headerView.showButton(text: "Change Image")
@@ -97,6 +98,8 @@ class ComponentDetailsViewController: UITableViewController {
     
     @objc func saveTapped() {
         self.navigationItem.addActivityIndicator()
+        self.headerView.stackView.isHidden = true
+        self.headerView.imageView.alpha = 1.0
         for cell in self.tableView.visibleCells {
             guard let cell = cell as? TextFieldTableViewCell else { return }
             cell.textField.isUserInteractionEnabled = false
@@ -228,6 +231,7 @@ extension ComponentDetailsViewController: ImageDoneEditingDelegate {
                 self.headerView.imageView.image = image
                 CoreDataStack.shared.save()
                 self.headerView.stackView.isHidden = true
+                self.headerView.imageView.alpha = 1.0
                 self.showMessage("Image successfully saved.", type: .info)
             }
         }
