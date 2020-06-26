@@ -173,6 +173,7 @@ extension ComponentsTableViewController: ImageDoneEditingDelegate {
         guard let component = self.fetchedResultsController.fetchedObjects?.filter({$0.componentId == String(row)}).first else { return }
         self.dropboxController?.updateDropbox(imageData: imageData, path: path, imageName: "\(component.componentId ?? "")")
         component.imageData = imageData
+        self.showMessage("image successfully saved.", type: .info)
         CoreDataStack.shared.save()
     }
 }
