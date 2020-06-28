@@ -67,11 +67,8 @@ class ComponentsTableViewController: UITableViewController {
         tableView.tableHeaderView = headerView
         headerView.label.text = "Components"
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
-        
-        
-        
+ 
         imagePicker = ImagePicker(presentationController: self, delegate: self)
-  
         
         headerView.secondaryLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSchematicVC)))
         headerView.button.addTarget(self, action: #selector(showSchematicVC), for: .touchUpInside)
@@ -156,7 +153,9 @@ extension ComponentsTableViewController: ImagePickerDelegate {
             let navigationController = UINavigationController(rootViewController: annotationViewController)
             navigationController.modalPresentationStyle = .fullScreen
             annotationViewController.image = image
-            self.present(navigationController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(navigationController, animated: true, completion: nil)
+            }
         }
     }
 }
