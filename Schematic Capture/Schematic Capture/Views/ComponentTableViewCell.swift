@@ -17,6 +17,7 @@ class ComponentTableViewCell: UITableViewCell {
     var columnALabel = UILabel()
     var columnELabel = UILabel()
     var columnFLabel = UILabel()
+    var view = UIView()
     var componentImageView = UIImageView()
     
     var viewController: UIViewController?
@@ -50,27 +51,39 @@ class ComponentTableViewCell: UITableViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.textAlignment = .left
         
-        componentImageView.translatesAutoresizingMaskIntoConstraints = false
-        componentImageView.contentMode = .scaleAspectFill
-        componentImageView.clipsToBounds = true
-        componentImageView.image = UIImage(systemName: "camera")
-        componentImageView.isUserInteractionEnabled = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.isUserInteractionEnabled = true
         
-        componentImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageTapped)))
+        componentImageView.translatesAutoresizingMaskIntoConstraints = false
+        componentImageView.contentMode = .scaleAspectFit
+        componentImageView.clipsToBounds = true
+        
+        componentImageView.image = UIImage(systemName: "camera")
+        
+        view.addSubview(componentImageView)
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageTapped)))
                 
+        addSubview(view)
         addSubview(indexLabel)
         addSubview(nameLabel)
-        addSubview(componentImageView)
         
         NSLayoutConstraint.activate([
+            
             indexLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16.0),
             indexLabel.heightAnchor.constraint(equalTo: heightAnchor),
             indexLabel.widthAnchor.constraint(equalToConstant: 50),
             
-            componentImageView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -40),
-            componentImageView.heightAnchor.constraint(equalToConstant: 40),
-            componentImageView.widthAnchor.constraint(equalToConstant: 40),
-            componentImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            view.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -40),
+            view.heightAnchor.constraint(equalToConstant: 80),
+            view.widthAnchor.constraint(equalTo:  view.heightAnchor),
+            view.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            componentImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            componentImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            componentImageView.widthAnchor.constraint(equalToConstant: 50),
+            componentImageView.heightAnchor.constraint(equalToConstant: 50),
             
             nameLabel.rightAnchor.constraint(equalTo: componentImageView.leftAnchor, constant: -8),
             nameLabel.leftAnchor.constraint(equalTo: indexLabel.rightAnchor),
@@ -85,7 +98,7 @@ class ComponentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func handleImageTapped(sender: UIImageView) {
+    @objc func handleImageTapped(sender: UIView) {
         self.selecteImageViewAction?(self)
     }
     
@@ -96,6 +109,7 @@ class ComponentTableViewCell: UITableViewCell {
         columnELabel.text = "Manufacturer: \(component.manufacturer ?? "-")"
         columnFLabel.text = "Part #: \(component.partNumber ?? "-")"
         if let imageData = component.imageData {
+            componentImageView.contentMode = .scaleAspectFill
             componentImageView.image = UIImage(data: imageData)
         }
     }

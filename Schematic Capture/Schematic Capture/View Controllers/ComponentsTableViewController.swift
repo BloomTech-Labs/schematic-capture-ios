@@ -69,7 +69,6 @@ class ComponentsTableViewController: UITableViewController {
         tableView?.register(ComponentTableViewCell.self, forCellReuseIdentifier: ComponentTableViewCell.id)
         
         
-        
         imagePicker = ImagePicker(presentationController: self, delegate: self)
   
         
@@ -156,7 +155,9 @@ extension ComponentsTableViewController: ImagePickerDelegate {
             let navigationController = UINavigationController(rootViewController: annotationViewController)
             navigationController.modalPresentationStyle = .fullScreen
             annotationViewController.image = image
-            self.present(navigationController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(navigationController, animated: true, completion: nil)
+            }
         }
     }
 }

@@ -121,6 +121,7 @@ class ComponentDetailsViewController: UITableViewController {
     
     @objc func showImageVC() {
         let imageViewController = UIViewController()
+        imageViewController.view.backgroundColor = .systemBackground
         let imageView = UIImageView()
         imageViewController.view.addSubview(imageView)
         imageView.frame = imageViewController.view.frame
